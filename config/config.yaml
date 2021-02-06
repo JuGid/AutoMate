@@ -1,0 +1,12 @@
+automate:
+  browser:
+    default: chrome
+  drivers:
+    chrome:
+      driver : /Users/juliengidel/Documents/Scripts/chromedriver
+    firefox:
+      driver: /Users/juliengidel/Documents/Scripts/gueckodriver
+  scenarioFolder: /Users/juliengidel/Documents/Programmation/AutoMate/scenario
+  logs:
+    enable: false
+    folder: /Users/juliengidel/Documents/Programmation/AutoMate/logs

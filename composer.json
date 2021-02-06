@@ -1,0 +1,23 @@
+{
+    "name": "juliengidel/auto-mate",
+    "description": "Automatisation par fichier Yaml",
+    "type": "library",
+    "require": {
+        "php-webdriver/webdriver": "^1.9",
+        "symfony/console": "^5.2",
+        "symfony/yaml": "^5.2",
+        "symfony/config": "^5.2"
+    },
+    "authors": [
+        {
+            "name": "Jugid",
+            "email": "gidjulien@gmail.com"
+        }
+    ],
+    "autoload": {
+     "psr-4": {
+      "Automate\\": "src"
+     },
+     "classmap": ["src"]
+    }
+}
