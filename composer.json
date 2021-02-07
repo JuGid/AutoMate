@@ -6,7 +6,8 @@
         "php-webdriver/webdriver": "^1.9",
         "symfony/console": "^5.2",
         "symfony/yaml": "^5.2",
-        "symfony/config": "^5.2"
+        "symfony/config": "^5.2",
+        "lezhnev74/pasvl": "^0.6.4"
     },
     "authors": [
         {
