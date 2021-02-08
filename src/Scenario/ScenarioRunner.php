@@ -4,6 +4,7 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverManager;
+use Automate\Handler\WindowHandler;
 
 class ScenarioRunner {
   private $configuration;
@@ -29,6 +30,8 @@ class ScenarioRunner {
     }
     $driver = $this->driverManager->getDriver($scenarioBrowser, $this->configuration->getWebdriverFolder($scenarioBrowser));
     
+    WindowHandler::setWindows($driver->getWindowHandles());
+
     $stepTransformer = new StepTransform($driver);
     try {
       foreach($scenario as $step){

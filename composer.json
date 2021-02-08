@@ -1,5 +1,5 @@
 {
-    "name": "juliengidel/auto-mate",
+    "name": "jugid/auto-mate",
     "description": "Automatisation par fichier Yaml",
     "type": "library",
     "require": {

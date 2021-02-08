@@ -9,4 +9,13 @@ scenario:
     - fill:
         id: search
         with: Rap
+    - create: window
+    - select:
+        id: element
+        value/index: fr / 1
+    - deselect:
+        id: element / all
+        value/index: fr / 1
+    #upload file, more wait, reload, iframe, get attribute, screenshot
+
   
