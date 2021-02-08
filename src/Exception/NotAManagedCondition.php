@@ -4,10 +4,10 @@ namespace Automate\Exception;
 
 use Exception;
 
-class NotKnownBrowser extends Exception {
+class NotAManagedCondition extends Exception {
 
-  public function __construct($code = 1, Exception $previous = null) {
-    $this->message = "The browser is unknown. Browser supported actually : chrome.\n";
+  public function __construct(string $type, $code = 3, Exception $previous = null) {
+    $this->message = "This condition [" . $type . "] is not managed. \n";
     parent::__construct($this->message, $code, $previous);
   }
 

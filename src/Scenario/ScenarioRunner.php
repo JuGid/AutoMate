@@ -26,13 +26,15 @@ class ScenarioRunner {
     }
     $stepTransformer = new StepTransform($driver);
 
-    foreach($scenario as $step){
-      $stepTransformer->transform($step);
+    try {
+      foreach($scenario as $step){
+        $stepTransformer->transform($step);
+      }
+    }catch(\Exception $e) {
+      echo $e->getMessage();
     }
+    
 
     //$driver->quit();
-
-    //$driver->get('https://en.wikipedia.org/wiki/Selenium_(software)');
-
   }
 }

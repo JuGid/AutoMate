@@ -17,4 +17,4 @@ use Automate\Driver\DriverManager;
 //$driver = $driverManager->getDriver('chrome');
 
 $scenarioRunner = new ScenarioRunner();
-$scenarioRunner->run('wikipedia', null);
+$scenarioRunner->run('youtube', null);

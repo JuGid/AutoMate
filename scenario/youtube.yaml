@@ -1,0 +1,12 @@
+browser: chrome
+scenario:
+  steps:
+    - go: 'https://youtube.com'
+    - alert: isPresent
+    - alert: dismiss
+    - alert: isPresent
+    - alert: dismiss
+    - fill:
+        id: search
+        with: Rap
+  

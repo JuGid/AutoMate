@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario;
 
-use Facebook\WebDriver\WebDriverBy;
+use Automate\Exception\NotAValidCommand;
 
 class StepTransform {
 
@@ -15,11 +15,12 @@ class StepTransform {
 
     public function transform(array $step) : void{
         $transformerClass = __NAMESPACE__ . '\\Transformer\\' . ucfirst(key($step)) . 'Transformer';
-        $transformer = new $transformerClass();
-        $transformer->process($this->driver, $step);        
+        if(class_exists($transformerClass)) {
+            $transformer = new $transformerClass();
+            $transformer->process($this->driver, $step); 
+        } else {
+            throw new NotAValidCommand(key($step));
+        }
+               
     }
-
-    //public function go(string $adresse) : void {
-    //    $this->driver->get($adresse);
-    //}
 }

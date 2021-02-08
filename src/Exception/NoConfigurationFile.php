@@ -7,7 +7,7 @@ use Exception;
 class NoConfigurationFile extends Exception {
 
   public function __construct($code = 3, Exception $previous = null) {
-    $this->message = 'Please attach a configuration to the DriverManager';
+    $this->message = "Please attach a configuration to the DriverManager\n";
     parent::__construct($this->message, $code, $previous);
   }
 
