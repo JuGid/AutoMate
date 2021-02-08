@@ -7,15 +7,24 @@ use Automate\Exception\NoConfigurationFile;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Configuration\Configuration;
 
+/**
+ * This class is used to get the right Webdriver and process the start of it.
+ */
 class DriverManager {
   private $driver;
-  private $configuration;
+  private $webdriverFolder;
 
-  public function getDriver(string $browser) {
+  /**
+   * @param string $browser The browser which you want the driver
+   * @param string $webdriverFolder The webdriver folder
+   * @return WebDriver The driver to use.
+   */
+  public function getDriver(string $browser, string $webdriverFolder) {
     if($this->configuration == null) {
       throw new NoConfigurationFile();
     }
-
+    $this->webdriverFolder = $webdriverFolder;
+    
     if($browser == 'chrome') {
       $this->getChromeDriver();
     }elseif($browser == 'firefox') {
@@ -29,7 +38,7 @@ class DriverManager {
   }
 
   private function getChromeDriver() {
-    putenv('WEBDRIVER_CHROME_DRIVER=' . $this->configuration->getWebdriverFolder('chrome'));
+    putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
     $this->driver = ChromeDriver::start();
   }
 
@@ -40,9 +49,4 @@ class DriverManager {
   private function getSafariDriver() {
     throw new \Exception("Not implemented driver");
   }
-
-  public function setConfiguration(Configuration $config) : void{
-    $this->configuration = $config;
-  }
-
 }

@@ -7,6 +7,9 @@ use Automate\Scenario\Transformer\Helpers\WebLocator;
 
 class WuntilTransformer extends AbstractTransformer {
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getPattern()
     {
         return [
@@ -20,6 +23,9 @@ class WuntilTransformer extends AbstractTransformer {
             ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function transform() 
     {
         $wuntilKeys = array_keys($this->step['wuntil']);

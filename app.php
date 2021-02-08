@@ -3,18 +3,14 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Automate\Configuration\Configuration;
 use Automate\Scenario\ScenarioRunner;
-use Automate\Driver\DriverManager;
-
-//$config = new Configuration();
-
-//var_dump($config->getLogFolder());
-//var_dump($config->isLogEnable());
-//var_dump($config->getBrowsers());
-
-//$driverManager = new DriverManager();
-//$driver = $driverManager->getDriver('chrome');
 
 $scenarioRunner = new ScenarioRunner();
+
+/**
+ * By default, the config file is in project_dir/config/config.yaml
+ * You can pass a new normed file (see doc) like this :
+ * $scenarioRunner->setConfigurationFile(__DIR__.'/config/config.yaml');
+ */
+
 $scenarioRunner->run('youtube', null);

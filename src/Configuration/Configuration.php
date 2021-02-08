@@ -80,6 +80,12 @@ class Configuration implements ConfigurationInterface {
   public function setConfigurationFile(string $file) : void{
     if(file_exists($file) && pathinfo($file)['extension'] == 'yaml') {
       $this->config_file = $file;
+      
+      $config = $this->getConfigurationArray();
+      $this->scenarioFolder=$config['scenarioFolder'];
+      $this->logs=$config['logs'];
+      $this->drivers=$config['drivers'];
+      $this->default = $config['browser']['default'];
     }
     else {
       throw new NotAConfigFileException();

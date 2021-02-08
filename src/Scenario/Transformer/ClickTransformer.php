@@ -6,6 +6,9 @@ use Automate\Scenario\Transformer\Helpers\WebLocator;
 
 class ClickTransformer extends AbstractTransformer {
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getPattern()
     {
         return [
@@ -15,6 +18,9 @@ class ClickTransformer extends AbstractTransformer {
             ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function transform() 
     {
         $webLocator = WebLocator::get(array_keys($this->step['click'])[0], array_values($this->step['click'])[0]);

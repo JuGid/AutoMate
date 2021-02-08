@@ -39,7 +39,15 @@ abstract class AbstractTransformer {
         return $value;
     }
 
+    /**
+     * Get pattern validation for lezhnev74/pasvl library
+     * @link https://github.com/lezhnev74/pasvl
+     */
     abstract protected function getPattern();
+
+    /**
+     * Transform $this->step into $this->driver actions.
+     */
     abstract protected function transform();
 
 }
