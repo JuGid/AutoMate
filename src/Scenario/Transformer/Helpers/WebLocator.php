@@ -4,6 +4,9 @@ namespace Automate\Scenario\Transformer\Helpers;
 
 use Facebook\WebDriver\WebDriverBy;
 
+/**
+ * WebDriverBy overlay to define the good one from string
+ */
 class WebLocator {
 
     public static function get(string $type, string $element) {

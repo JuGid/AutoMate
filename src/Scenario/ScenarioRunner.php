@@ -38,7 +38,7 @@ class ScenarioRunner {
       echo $e->getMessage();
     }
 
-    //$driver->quit();
+    $driver->quit();
   }
 
   public function setConfigurationFile(string $configFil) {

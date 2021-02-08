@@ -5,6 +5,11 @@ namespace Automate\Scenario\Transformer\Helpers;
 use Automate\Exception\NotAManagedCondition;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
+/**
+ * WebDriverExpectedCondition overlay that defines the good conditions from type.
+ * Warning : Not that much control on that class. Can catch them at a higher level.
+ * @todo add control on values
+ */
 class WebConditions {
 
     public static function get(string $type, string $element = null, string $webLocatorType = null, string $text = null) {
