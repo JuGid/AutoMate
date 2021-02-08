@@ -10,12 +10,28 @@ scenario:
         id: search
         with: Rap
     - create: window
-    - select:
+    - select: #SelectTransformer
         id: element
         value/index: fr / 1
-    - deselect:
-        id: element / all
+    - deselect: #DeselectTransformer
+        type: all/element
+        id: blabla
         value/index: fr / 1
-    #upload file, more wait, reload, iframe, get attribute, screenshot
+    - screenshot:
+        type: 'all' / 'element'
+        id: 'blabla'
+    - frame: #FrameTransformer
+        id: element
+    - reload: 'page'
+    - resize: 
+        type: size
+        width: 10
+        height: 50
+    - get: #GetTransformer
+        id: element
+        what: 'text'
+    - impltm: 10
+    #UploadTransformer
+    #Seperate wait into multiple transformers
 
   

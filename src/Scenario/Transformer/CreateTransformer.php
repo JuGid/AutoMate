@@ -3,7 +3,6 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Handler\WindowHandler;
-use Facebook\WebDriver\WebDriverTargetLocator;
 
 class CreateTransformer extends AbstractTransformer {
 
