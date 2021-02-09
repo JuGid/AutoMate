@@ -19,12 +19,7 @@ class Configuration implements ConfigurationInterface {
 
   public function __construct(string $config_file = __DIR__.'/../../config/config.yaml') {
     $this->setConfigurationFile($config_file);
-    $config = $this->getConfigurationArray();
-
-    $this->scenarioFolder=$config['scenarioFolder'];
-    $this->logs=$config['logs'];
-    $this->drivers=$config['drivers'];
-    $this->default = $config['browser']['default'];
+    $this->load();
   }
 
   public function getConfigTreeBuilder() : TreeBuilder
@@ -80,12 +75,7 @@ class Configuration implements ConfigurationInterface {
   public function setConfigurationFile(string $file) : void{
     if(file_exists($file) && pathinfo($file)['extension'] == 'yaml') {
       $this->config_file = $file;
-      
-      $config = $this->getConfigurationArray();
-      $this->scenarioFolder=$config['scenarioFolder'];
-      $this->logs=$config['logs'];
-      $this->drivers=$config['drivers'];
-      $this->default = $config['browser']['default'];
+      $this->load();
     }
     else {
       throw new NotAConfigFileException();
@@ -117,6 +107,15 @@ class Configuration implements ConfigurationInterface {
       return $this->drivers[$browser]['driver'];
     }
     throw new NotKnownBrowser();
+  }
+
+  private function load() 
+  {
+      $config = $this->getConfigurationArray();
+      $this->scenarioFolder=$config['scenarioFolder'];
+      $this->logs=$config['logs'];
+      $this->drivers=$config['drivers'];
+      $this->default = $config['browser']['default'];
   }
 
 }

@@ -20,5 +20,16 @@
       "Automate\\": "src"
      },
      "classmap": ["src"]
-    }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "scripts": {
+        "all": [
+          "@test"
+        ],
+        "test": [
+          "vendor/bin/phpunit --colors=always"
+        ]
+      }
 }

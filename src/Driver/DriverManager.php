@@ -20,9 +20,6 @@ class DriverManager {
    * @return WebDriver The driver to use.
    */
   public function getDriver(string $browser, string $webdriverFolder) {
-    if($this->configuration == null) {
-      throw new NoConfigurationFile();
-    }
     $this->webdriverFolder = $webdriverFolder;
     
     if($browser == 'chrome') {
