@@ -52,7 +52,7 @@ You can download multiple drivers but :
     			driver : '/AutoMate/chromedriver'
     		firefox:
     			driver: '/AutoMate/gueckodriver'
-    	scenario
+    	scenario:
 	    	folder: '/AutoMate/scenario'
     	logs:
     		enable: false
