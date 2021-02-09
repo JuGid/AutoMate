@@ -52,11 +52,12 @@ You can download multiple drivers but :
     			driver : '/AutoMate/chromedriver'
     		firefox:
     			driver: '/AutoMate/gueckodriver'
-    	scenario:
-	        folder: '/AutoMate/scenario'
+    	scenario
+			folder: '/AutoMate/scenario'
     	logs:
     		enable: false
     		folder: '/AutoMate/logs'
+
 
 **NOTE :** Tests are automatically written in log files folder.
 
