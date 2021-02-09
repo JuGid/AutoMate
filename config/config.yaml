@@ -3,11 +3,11 @@ automate:
     default: chrome
   drivers:
     chrome:
-      driver : '/Users/juliengidel/Documents/Scripts/chromedriver'
+      driver : '/.../chromedriver'
     firefox:
-      driver: '/Users/juliengidel/Documents/Scripts/gueckodriver'
+      driver: '/.../gueckodriver'
   scenario:
-    folder: '/Users/juliengidel/Documents/Programmation/AutoMate/scenario'
+    folder: '/.../scenario'
   logs:
     enable: false
-    folder: '/Users/juliengidel/Documents/Programmation/AutoMate/logs'
+    folder: '/.../logs'
