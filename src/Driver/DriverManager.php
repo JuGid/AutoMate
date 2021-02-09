@@ -2,10 +2,8 @@
 
 namespace Automate\Driver;
 
-use Automate\Exception\NotKnownBrowser;
-use Automate\Exception\NoConfigurationFile;
 use Facebook\WebDriver\Chrome\ChromeDriver;
-use Automate\Configuration\Configuration;
+use Automate\Exception\NotKnownBrowserException;
 
 /**
  * This class is used to get the right Webdriver and process the start of it.
@@ -29,7 +27,7 @@ class DriverManager {
     }elseif($browser == 'safari') {
       $this->getSafariDriver();
     }else {
-      throw new NotKnownBrowser();
+      throw new NotKnownBrowserException();
     }
     return $this->driver;
   }

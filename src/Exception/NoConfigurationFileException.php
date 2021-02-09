@@ -4,10 +4,10 @@ namespace Automate\Exception;
 
 use Exception;
 
-class NotAManagedCondition extends Exception {
+class NoConfigurationFileException extends Exception {
 
-  public function __construct(string $type, $code = 3, Exception $previous = null) {
-    $this->message = "This condition [" . $type . "] is not managed. \n";
+  public function __construct($code = 3, Exception $previous = null) {
+    $this->message = "Please attach a configuration to the DriverManager\n";
     parent::__construct($this->message, $code, $previous);
   }
 

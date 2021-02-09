@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\NotAValidCommand;
+use Automate\Exception\NotAValidCommandException;
 use Facebook\WebDriver\WebDriverDimension;
 
 class ResizeTransformer extends AbstractTransformer {
@@ -34,7 +34,7 @@ class ResizeTransformer extends AbstractTransformer {
             if(isset($array['width']) && isset($array['height'])) {
                 $this->driver->manage()->window()->setSize(new WebDriverDimension(800, 600));
             }else {
-                throw new NotAValidCommand('resize');
+                throw new NotAValidCommandException('resize');
             }
         }
     }

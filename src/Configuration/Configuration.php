@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\NotAConfigFileException;
-use Automate\Exception\NotKnownBrowser;
+use Automate\Exception\NotKnownBrowserException;
 
 class Configuration implements ConfigurationInterface {
 
@@ -109,7 +109,7 @@ class Configuration implements ConfigurationInterface {
     if(isset($this->drivers[$browser]['driver'])) {
       return $this->drivers[$browser]['driver'];
     }
-    throw new NotKnownBrowser();
+    throw new NotKnownBrowserException();
   }
 
   private function load() 

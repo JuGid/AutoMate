@@ -15,7 +15,7 @@ scenario:
     #    id: element
     #    by: value/index
     #    value: fr / 1
-    #- deselect: #DeselectTransformer
+    #- deselect:
     #    id: blabla
     #    by: value/index
     #    value: fr / 1 / (if by value : all) 
@@ -29,7 +29,7 @@ scenario:
     #    type: size
     #    width: 10
     #    height: 50
-    #- get: #GetTransformer
+    #- get:
     #    id: element
     #    what: 'text'
     #    name: variable
@@ -38,7 +38,7 @@ scenario:
     #    id: element
     #    text: equals
     #    value : bonjour
-    #    goto: path
+    #    jump: path
     #    else: continue
     #UploadTransformer
     #Seperate wait into multiple transformers

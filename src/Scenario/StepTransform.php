@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario;
 
-use Automate\Exception\NotAValidCommand;
+use Automate\Exception\NotAValidCommandException;
 
 class StepTransform {
 
@@ -19,7 +19,7 @@ class StepTransform {
             $transformer = new $transformerClass();
             $transformer->process($this->driver, $step); 
         } else {
-            throw new NotAValidCommand(key($step));
+            throw new NotAValidCommandException(key($step));
         }
                
     }

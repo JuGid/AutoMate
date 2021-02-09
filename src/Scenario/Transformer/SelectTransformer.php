@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\NotAValidCommand;
+use Automate\Exception\NotAValidCommandException;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverSelect;
 
@@ -46,7 +46,7 @@ class SelectTransformer extends AbstractTransformer {
                         break;
                 }
             }else {
-                throw new NotAValidCommand('select');
+                throw new NotAValidCommandException('select');
             }
         }
 

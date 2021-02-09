@@ -4,7 +4,7 @@ namespace Automate\Exception;
 
 use Exception;
 
-class NotAValidCommand extends Exception {
+class NotAValidCommandException extends Exception {
 
   public function __construct(string $command, $code = 3, Exception $previous = null) {
     $this->message = "The command [" . $command . "] is not valid. Can see the docs to help.\n";

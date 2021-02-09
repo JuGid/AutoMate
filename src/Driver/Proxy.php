@@ -3,7 +3,7 @@
 namespace Automate\Driver;
 
 /**
- * Not implemented yet. Coming soon
+ * Not implemented yet.
  * @todo User proxy
  */
 class Proxy {
