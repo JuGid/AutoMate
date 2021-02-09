@@ -47,35 +47,18 @@ You can download multiple drivers but :
     	browser:
     		default: chrome
     	drivers:
+	    	# One or more required
     		chrome:
     			driver : '/AutoMate/chromedriver'
     		firefox:
     			driver: '/AutoMate/gueckodriver'
-    	scenarioFolder: '/AutoMate/scenario'
+    	scenario
+	    	folder: '/AutoMate/scenario'
     	logs:
     		enable: false
     		folder: '/AutoMate/logs'
-There are some required options :
 
-    browser:
-    	default: chrome
-This option is required and cannot be empty. This option is used when you run a scenario and you didn't specify a browser.
-
-     drivers:
-    	 chrome:
-    		 driver: '/AutoMate/chromedriver'
-    	firefox:
-    		driver: '/AutoMate/gueckodriver'
-This option specify where the drivers are. You can set multiple element but one is required.
-
-    scenarioFolder: '/AutoMate/scenario'
-This is where the scenario files are stored. For the moment, AutoMate does not support multiple folders or recursive folders.
-
-    logs:
-    	enable: false
-    	folder: '/AutoMate/logs'
-You can log some element thanks to AutoMate. With this option you can specify if you enable logs or disable and where they have to be stored. 
-**NOTE :** Tests are automatically written in log files.
+**NOTE :** Tests are automatically written in log files folder.
 
 **😄 Run your scenario**
 

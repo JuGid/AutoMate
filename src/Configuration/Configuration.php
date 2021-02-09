@@ -46,10 +46,13 @@ class Configuration implements ConfigurationInterface {
                   ->end()
                 ->end()
               ->end()
-              ->scalarNode('scenarioFolder')
-                ->info("The folder where all the scenarios are stored.")
-                ->cannotBeEmpty()
-                ->isRequired()
+              ->arrayNode('scenario')
+                ->children()
+                    ->scalarNode('folder')
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                  ->end()
+                ->end()
               ->end()
               ->arrayNode('logs')
                 ->children()
@@ -112,7 +115,7 @@ class Configuration implements ConfigurationInterface {
   private function load() 
   {
       $config = $this->getConfigurationArray();
-      $this->scenarioFolder=$config['scenarioFolder'];
+      $this->scenarioFolder=$config['scenario']['folder'];
       $this->logs=$config['logs'];
       $this->drivers=$config['drivers'];
       $this->default = $config['browser']['default'];
