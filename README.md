@@ -53,7 +53,7 @@ You can download multiple drivers but :
     		firefox:
     			driver: '/AutoMate/gueckodriver'
     	scenario:
-	    	folder: '/AutoMate/scenario'
+	        folder: '/AutoMate/scenario'
     	logs:
     		enable: false
     		folder: '/AutoMate/logs'
