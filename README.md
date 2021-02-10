@@ -81,8 +81,8 @@ scenario:
 	    cookie: 'nouveau'
     scenario:
 	    steps:
-		    - go: 'https://youtube.com'
-		    - cookie:
+		   - go: 'https://youtube.com'
+		   - cookie:
 			    name: "{{ scenario.name }}"
 			    value: "{{ scenario.cookie }}"
 
