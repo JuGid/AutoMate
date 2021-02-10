@@ -92,9 +92,13 @@ class Configuration implements ConfigurationInterface {
   public function getLogFolder() : string{
     return $this->logs['folder'];
   }
-
+  
   public function getScenarioFolder() : string{
     return $this->scenarioFolder;
+  }
+
+  public function setScenarioFolder(string $scenarioFolder) {
+    $this->scenarioFolder = $scenarioFolder;
   }
 
   public function getDrivers() : array{

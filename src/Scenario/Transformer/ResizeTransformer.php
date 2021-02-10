@@ -13,7 +13,7 @@ class ResizeTransformer extends AbstractTransformer {
     protected function getPattern()
     {
         return ['resize'=>[
-                            'type'=>':string :regexp("(maximize)|(fullscreen)|(size)")',
+                            'type'=>':string :in("maximize","fullscreen","size")',
                             'width?'=>':number :int',
                             'height?'=>':number :int'
                         ]

@@ -12,7 +12,7 @@ class CreateTransformer extends AbstractTransformer {
      */
     protected function getPattern()
     {
-        return ['create' => ':string :regexp("(tab)|(window)")'];
+        return ['create' => ':string :in("tab","window")'];
     }
 
     /**

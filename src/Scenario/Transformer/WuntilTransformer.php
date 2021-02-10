@@ -3,8 +3,10 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Scenario\Transformer\Helpers\WebConditions;
-use Automate\Scenario\Transformer\Helpers\WebLocator;
 
+/**
+ * @todo Divise this class
+ */
 class WuntilTransformer extends AbstractTransformer {
 
     /**

@@ -4,6 +4,7 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\NotAValidCommandException;
 use Automate\Handler\VariableHandler;
+use Automate\Handler\VariableHandlerHandler;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
 class GetTransformer extends AbstractTransformer {
@@ -16,8 +17,8 @@ class GetTransformer extends AbstractTransformer {
     {
         return ['get' => 
                     [
-                        ':string :regexp("(css)|(xpath)|(id)|(class)|(name)|(tag)|(linktext)|(pltext)")'=>':string',
-                        'what'=>':string :regexp("(text)|(attribute)")',
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+                        'what'=>':string :in("text","attribute")',
                         'attribute?'=>':string',
                         'name'=>':string'
                     ]
@@ -42,7 +43,7 @@ class GetTransformer extends AbstractTransformer {
             $value = $this->driver->findElement($element)->getAttribute($arrayGet['attribute']);
         }
 
-        VariableHandler::add($value, $arrayGet['name']);
+        VariableHandlerHandler::set('global', $value, $arrayGet['name']);
     }
 
 }

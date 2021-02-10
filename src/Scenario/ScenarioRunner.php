@@ -25,9 +25,10 @@ class ScenarioRunner {
     $scenario = new Scenario($scenarioFilepath, $this->configuration);
 
     $scenarioBrowser = $scenario->getScenarioBrowser();
-    if($on_browser !== null) {
+    if($scenarioBrowser == null || $on_browser !== null) {
       $scenarioBrowser = $on_browser;
     }
+
     $driver = $this->driverManager->getDriver($scenarioBrowser, $this->configuration->getWebdriverFolder($scenarioBrowser));
     
     WindowHandler::setWindows($driver->getWindowHandles());
@@ -44,7 +45,11 @@ class ScenarioRunner {
     $driver->quit();
   }
 
-  public function setConfigurationFile(string $configFil) {
-    $this->configuration->setConfigurationFile($configFil);
+  public function setConfigurationFile(string $configFile) {
+    $this->configuration->setConfigurationFile($configFile);
+  }
+
+  public function setScenarioFolder(string $scenarioFolder) {
+    $this->configuration->setScenarioFolder($scenarioFolder);
   }
 }

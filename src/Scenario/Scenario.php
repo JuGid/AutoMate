@@ -2,20 +2,23 @@
 
 namespace Automate\Scenario;
 
-use Automate\Configuration\Configuration;
+use Automate\Handler\SpecVariableHandler;
 use Iterator;
 use Symfony\Component\Yaml\Yaml;
 
 class Scenario implements Iterator{
 
     private $scenario;
-    private $configuration;
     private $step;
 
-    public function __construct(string $file, Configuration $configuration) {
+    public function __construct(string $file) {
         $this->scenario = Yaml::parseFile($file);
-        $this->configuration = $configuration;
         $this->step = 0;
+
+        if(isset($this->scenario['variables'])) {
+            $variables = $this->scenario['variables'];
+            SpecVariableHandler::addMultiple(array_keys($variables), array_values($variables));
+        }
     }
 
     public function getScenarioArray() {
@@ -23,7 +26,7 @@ class Scenario implements Iterator{
     }
 
     public function getScenarioBrowser() {
-        return isset($this->scenario['browser']) ? $this->scenario['browser'] : $this->configuration->getDefaultBrowser();
+        return isset($this->scenario['browser']) ? $this->scenario['browser'] : null;
     }
 
     public function rewind() {

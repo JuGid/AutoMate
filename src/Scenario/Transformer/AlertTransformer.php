@@ -12,7 +12,7 @@ class AlertTransformer extends AbstractTransformer {
      */
     protected function getPattern()
     {
-        return ['alert' => ':string :regexp("(accept)|(dismiss)|(isPresent)")'];
+        return ['alert' => ':string :in("accept", "dismiss", "isPresent")'];
     }
 
     /**

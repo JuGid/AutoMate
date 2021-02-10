@@ -15,8 +15,8 @@ class DeselectTransformer extends AbstractTransformer {
     {
         return ['select'=> 
             [
-                ':string :regexp("(css)|(xpath)|(id)|(class)|(name)|(tag)|(linktext)|(pltext)")'=>':string',
-                'by'=>':string :regexp("(value)|(index)|(text)|(pltext)")',
+                ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+                'by'=>':string :in("value","index","text","pltext")',
                 'value'=>':string and (:number :int)'
             ]
         ];

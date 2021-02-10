@@ -12,7 +12,7 @@ class FrameTransformer extends AbstractTransformer {
     protected function getPattern()
     {
         return ['frame'=>[
-            ':string :regexp("(css)|(xpath)|(id)|(class)|(name)|(tag)|(linktext)|(pltext)") ?'=>':string',
+            ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string',
             'index?'=>':number :int',
             'default?'=>''
         ]];

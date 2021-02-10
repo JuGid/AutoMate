@@ -14,9 +14,9 @@ class ScreenshotTransformer extends AbstractTransformer {
     {
         return ['screenshot' => 
                     [
-                        'type'=> ':string :regexp("(all)|(element)")',
+                        'type'=> ':string in("all","element")',
                         'sname'=>':string',
-                        ':string :regexp("(css)|(xpath)|(id)|(class)|(name)|(tag)|(linktext)|(pltext)") ?'=>':string'
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string'
                     ]
                 ];
     }

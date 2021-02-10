@@ -26,10 +26,14 @@
     },
     "scripts": {
         "all": [
-          "@test"
+          "@global",
+          "@transformers"
         ],
-        "test": [
-          "vendor/bin/phpunit --colors=always"
+        "global": [
+          "vendor/bin/phpunit --colors=always --testsuite global"
+        ],
+        "transformers": [
+          "vendor/bin/phpunit --colors=always --testsuite transformers"
         ]
       }
 }

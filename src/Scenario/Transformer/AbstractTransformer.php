@@ -2,6 +2,8 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Exception\NotAValidCommandException;
+use Automate\Handler\VariableHandlerHandler;
 use PASVL\Validation\ValidatorBuilder;
 use PASVL\Validation\Problems\ArrayFailedValidation;
 
@@ -13,16 +15,32 @@ abstract class AbstractTransformer {
     public function process($driver, array $step) {
         $this->driver = $driver;
         $this->step = $step;
+        $this->setVariables();
 
         if($this->validate()) {
             $this->transform();
         } else {
-            //poor design to change
-            die();
+            throw new NotAValidCommandException(array_keys($this->step)[0]);
         }
     }
 
-    private function validate() {
+    /**
+     * @todo implement spec and globale variable to replace
+     */
+    private function setVariables() {
+        array_walk_recursive($this->step, function(&$item, $key) {
+                preg_match_all("/{{([^{]*)}}/", $item, $matches);
+                $variables = $matches[1];
+                array_walk($variables, function(&$variable) {
+                    $variableExploded = explode('.', $variable);
+                    $variable = VariableHandlerHandler::get($variableExploded[0], $variableExploded[1]);
+                });
+                $item = preg_replace("/{{([^{]*)}}/", $variables, $item);
+            }
+        );
+    }
+
+    public function validate() {
         $pattern = $this->getPattern();
         $builder = ValidatorBuilder::forArray($pattern);
         $validator = $builder->build();
