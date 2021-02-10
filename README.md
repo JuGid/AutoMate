@@ -61,6 +61,31 @@ You can download multiple drivers but :
 
 **NOTE :** Tests are automatically written in log files folder.
 
+
+    browser: chrome
+variables:
+  name: 'bonjour'
+  cookie: 'nouveau'
+scenario:
+  steps:
+    - go: 'https://youtube.com'
+    - cookie:
+        name: "{{ scenario.name }}"
+        value: "{{ scenario.cookie }}"
+
+**🔥 Create your scenario yaml file**
+
+    browser: chrome
+    variables:
+        name: 'bonjour'
+        cookie: 'nouveau'
+    scenario:
+        steps:
+            - go: 'https://youtube.com'
+            - cookie:
+                name: "{{ scenario.name }}"
+                value: "{{ scenario.cookie }}"
+
 **😄 Run your scenario**
 
 ***In app.php***
