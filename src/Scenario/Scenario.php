@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario;
 
-use Automate\Handler\SpecVariableHandler;
+use Automate\Handler\ScenarioVariableHandler;
 use Iterator;
 use Symfony\Component\Yaml\Yaml;
 
@@ -17,7 +17,12 @@ class Scenario implements Iterator{
 
         if(isset($this->scenario['variables'])) {
             $variables = $this->scenario['variables'];
-            SpecVariableHandler::addMultiple(array_keys($variables), array_values($variables));
+
+            $limit = count(array_keys($variables));
+            for($i=0;$i<$limit; $i++) {
+                ScenarioVariableHandler::add(array_keys($variables)[$i], array_values($variables)[$i]);
+            }
+            
         }
     }
 

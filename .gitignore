@@ -1,3 +1,4 @@
 /test.php
 /vendor
 .DS_STORE
+/config/config-jugid.yaml

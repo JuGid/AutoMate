@@ -13,4 +13,6 @@ $scenarioRunner = new ScenarioRunner();
  * $scenarioRunner->setConfigurationFile(__DIR__.'/config/config.yaml');
  */
 
+ 
+$scenarioRunner->setConfigurationFile(__DIR__.'/config/config-jugid.yaml');
 $scenarioRunner->run('youtube', null);

@@ -16,12 +16,6 @@ class SpecVariableHandler implements HandlerInterface {
         self::$variables[$name] = $value;
     }
 
-    public static function addMultiple(...$names, ...$values) {
-        for($i=0;$i<count($names); $i++) {
-            self::add($names[$i], $values[$i]);
-        }
-    }
-
     public static function remove(string $name) {
         if(isset(self::$variables[$name])) {
             unset(self::$variables[$name]);

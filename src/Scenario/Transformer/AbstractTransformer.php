@@ -32,10 +32,17 @@ abstract class AbstractTransformer {
                 preg_match_all("/{{([^{]*)}}/", $item, $matches);
                 $variables = $matches[1];
                 array_walk($variables, function(&$variable) {
-                    $variableExploded = explode('.', $variable);
+                    $variableExploded = explode('.', trim($variable));
                     $variable = VariableHandlerHandler::get($variableExploded[0], $variableExploded[1]);
                 });
-                $item = preg_replace("/{{([^{]*)}}/", $variables, $item);
+
+                $index = 0;
+                $item = preg_replace_callback("/{{([^{]*)}}/", function($matches) use($variables, &$index){
+                    $str = str_replace($matches[$index], $variables[$index], $matches[$index]);
+                    $index++;
+                    return $str;
+                    
+                }, $item);                
             }
         );
     }

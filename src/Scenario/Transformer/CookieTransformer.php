@@ -24,7 +24,7 @@ class CookieTransformer extends AbstractTransformer {
      * {@inheritdoc}
      */
     protected function transform() 
-    {
+    {   
         $cookie = new Cookie($this->step['cookie']['name'], $this->step['cookie']['value']);
         $this->driver->manage()->addCookie($cookie);
     }

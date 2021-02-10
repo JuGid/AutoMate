@@ -1,7 +1,13 @@
 browser: chrome
+variables:
+  name: 'bonjour'
+  cookie: 'nouveau'
 scenario:
   steps:
     - go: 'https://youtube.com'
+    - cookie:
+        name: "{{ scenario.name }}"
+        value: "{{ scenario.cookie }}"
     #- alert: isPresent
     #- alert: dismiss
     #- cookie: 
