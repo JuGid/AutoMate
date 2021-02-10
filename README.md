@@ -77,14 +77,14 @@ scenario:
 
     browser: chrome
     variables:
-        name: 'bonjour'
-        cookie: 'nouveau'
+	    name: 'bonjour'
+	    cookie: 'nouveau'
     scenario:
-        steps:
-            - go: 'https://youtube.com'
-            - cookie:
-                name: "{{ scenario.name }}"
-                value: "{{ scenario.cookie }}"
+	    steps:
+		    - go: 'https://youtube.com'
+		    - cookie:
+			    name: "{{ scenario.name }}"
+			    value: "{{ scenario.cookie }}"
 
 **😄 Run your scenario**
 
