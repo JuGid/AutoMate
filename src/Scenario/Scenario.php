@@ -10,10 +10,12 @@ class Scenario implements Iterator{
 
     private $scenario;
     private $step;
+    private $name;
 
-    public function __construct(string $file) {
+    public function __construct(string $file, string $name) {
         $this->scenario = Yaml::parseFile($file);
         $this->step = 0;
+        $this->name = $name;
 
         if(isset($this->scenario['variables'])) {
             $variables = $this->scenario['variables'];
@@ -26,12 +28,25 @@ class Scenario implements Iterator{
         }
     }
 
+    public function getName() {
+        return $this->name;
+    }
+
     public function getScenarioArray() {
         return $this->scenario;
     }
 
-    public function getScenarioBrowser() {
-        return isset($this->scenario['browser']) ? $this->scenario['browser'] : null;
+    /**
+     * Return a browser name depending on each browser name provided.
+     * If all are set, priority is : scenario -> function -> configuration
+     * Configuration default browser has to be set in config file
+     */
+    public function getScenarioBrowser(?string $default_function, string $default_config) : string {
+        if(!isset($this->scenario['browser'])) {
+            return $default_function !== null ? $default_function : $default_config;
+        } else {
+            return $this->scenario['browser'];
+        }
     }
 
     public function rewind() {

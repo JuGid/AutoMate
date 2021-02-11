@@ -4,7 +4,7 @@ namespace Automate\Scenario;
 
 use Automate\Exception\NotAValidCommandException;
 
-class StepTransform {
+class StepTransformer {
 
     private $driver;
 
@@ -17,7 +17,8 @@ class StepTransform {
         $transformerClass = __NAMESPACE__ . '\\Transformer\\' . ucfirst(key($step)) . 'Transformer';
         if(class_exists($transformerClass)) {
             $transformer = new $transformerClass();
-            $transformer->process($this->driver, $step); 
+            $transformer->process($this->driver, $step);
+            echo $transformer . "\n";
         } else {
             throw new NotAValidCommandException(key($step));
         }

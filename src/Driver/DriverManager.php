@@ -4,6 +4,7 @@ namespace Automate\Driver;
 
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\NotKnownBrowserException;
+use Automate\Handler\WindowHandler;
 
 /**
  * This class is used to get the right Webdriver and process the start of it.
@@ -29,6 +30,7 @@ class DriverManager {
     }else {
       throw new NotKnownBrowserException();
     }
+    WindowHandler::setWindows($this->driver->getWindowHandles());
     return $this->driver;
   }
 

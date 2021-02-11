@@ -34,4 +34,12 @@ class CreateTransformer extends AbstractTransformer {
         WindowHandler::setWindows($this->driver->getWindowHandles());
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Create new window';
+    }
+
 }

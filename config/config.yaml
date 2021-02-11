@@ -8,6 +8,8 @@ automate:
       driver: '/.../gueckodriver'
   scenario:
     folder: '/.../scenario'
+  specs:
+    folder: '/.../specs'
   logs:
     enable: false
     folder: '/.../logs'

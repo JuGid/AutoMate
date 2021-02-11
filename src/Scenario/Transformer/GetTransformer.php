@@ -27,7 +27,6 @@ class GetTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * @todo implement get with variable handler
      */
     protected function transform() 
     {   

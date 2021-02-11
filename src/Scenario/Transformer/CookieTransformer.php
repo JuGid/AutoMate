@@ -29,4 +29,11 @@ class CookieTransformer extends AbstractTransformer {
         $this->driver->manage()->addCookie($cookie);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Add Cookie with name:[' . $this->step['cookie']['name'] . '] and value:[' . $this->step['cookie']['value'] . ']';
+    }
 }

@@ -27,4 +27,12 @@ class ClickTransformer extends AbstractTransformer {
         $this->driver->findElement($webLocator)->click();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Click on element with [' . array_keys($this->step['click'])[0] .'] => [' . array_values($this->step['click'])[0] . ']';
+    }
+
 }

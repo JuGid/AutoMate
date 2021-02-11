@@ -4,52 +4,82 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverManager;
-use Automate\Handler\WindowHandler;
+use Automate\Handler\SpecVariableHandler;
+use Automate\Specification\Specification;
+use Automate\Specification\SpecificationFinder;
 
+/**
+ * @todo watch if hasSpecification is avoidable
+ */
 class ScenarioRunner {
-  private $configuration;
+  private $config;
   private $driverManager;
+  private $spec;
 
   public function __construct() {
-    $this->configuration = new Configuration();
+    $this->config = new Configuration();
     $this->driverManager = new DriverManager();
+    $this->spec = null;
   }
 
   /**
+   * Run the scenario.
+   * If you set $with_spec and did not use ScenarioRunner::setSpecification
+   * please watch SpecificationFinder::find documentation
    * @param string $scenario The scenario name. It corresponds to the yaml file name in scenario folder specified in config file.
+   * @param bool $with_spec Specify if you want to run the scenario with a spec
    * @param string|null $on_browser You can specify a browser. If not, the default browser in config file is taken.
    * @return void
    */
-  public function run(string $scenario, ?string $on_browser) : void{
-    $scenarioFilepath = $this->configuration->getScenarioFolder() . '/' . $scenario . '.yaml';
-    $scenario = new Scenario($scenarioFilepath, $this->configuration);
-
-    $scenarioBrowser = $scenario->getScenarioBrowser();
-    if($scenarioBrowser == null || $on_browser !== null) {
-      $scenarioBrowser = $on_browser;
-    }
-
-    $driver = $this->driverManager->getDriver($scenarioBrowser, $this->configuration->getWebdriverFolder($scenarioBrowser));
+  public function run(string $scenario_name, bool $with_spec = false, string $on_browser = null) : void{
+    $scenarioFilepath = $this->config->getScenarioFolder() . '/' . $scenario_name . '.yaml';
+    $scenario = new Scenario($scenarioFilepath, $scenario_name);
+    $scenarioBrowser = $scenario->getScenarioBrowser($on_browser, $this->config->getDefaultBrowser());
     
-    WindowHandler::setWindows($driver->getWindowHandles());
-
-    $stepTransformer = new StepTransform($driver);
     try {
-      foreach($scenario as $step){
-        $stepTransformer->transform($step);
+      $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
+      $sttr = new StepTransformer($driver);
+
+      if($with_spec) {
+        $this->runSpecification($sttr, $scenario);
+      } else {
+        $this->runScenario($sttr, $scenario);
       }
-    }catch(\Exception $e) {
+
+    } catch(\Exception $e) {
       echo $e->getMessage();
     }
 
     $driver->quit();
   }
 
+  public function runScenario(StepTransformer $sttr, Scenario $scenario) {
+    foreach($scenario as $step){
+      $sttr->transform($step);
+    }
+  }
+
+  public function runSpecification(StepTransformer $sttr, Scenario $scenario) {
+    $finder = new SpecificationFinder();
+    if($this->spec == null) {
+      $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
+    }
+    foreach($this->spec as $dataset) {
+      SpecVariableHandler::load($dataset);
+      $this->runScenario($sttr, $scenario);
+    }
+  }
+
   public function setConfigurationFile(string $configFile) {
-    $this->configuration->setConfigurationFile($configFile);
+    $this->config->setConfigurationFile($configFile);
   }
 
   public function setScenarioFolder(string $scenarioFolder) {
-    $this->configuration->setScenarioFolder($scenarioFolder);
+    $this->config->setScenarioFolder($scenarioFolder);
   }
+
+  public function setSpecification(Specification $spec) {
+    $this->spec = $spec;
+  }
+
 }

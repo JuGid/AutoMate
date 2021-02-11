@@ -22,4 +22,12 @@ class ReloadTransformer extends AbstractTransformer {
         $this->driver->navigate()->refresh();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Reload page';
+    }
+
 }

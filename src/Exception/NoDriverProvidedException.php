@@ -4,10 +4,10 @@ namespace Automate\Exception;
 
 use Exception;
 
-class NoConfigurationFileException extends Exception {
+class NoDriverProvidedException extends Exception {
 
   public function __construct($code = 3, Exception $previous = null) {
-    $this->message = "Please attach a configuration to the DriverManager\n";
+    $this->message = "The driver is not provided or null.\n";
     parent::__construct($this->message, $code, $previous);
   }
 

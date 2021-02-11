@@ -20,4 +20,12 @@ class GoTransformer extends AbstractTransformer {
     {
         $this->driver->get($this->step['go']);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'GO at ' . $this->step['go'];
+    }
 }

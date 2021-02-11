@@ -20,4 +20,12 @@ class ImpltmTransformer extends AbstractTransformer {
         $this->driver->manage()->timeouts()->implicitlyWait($this->step['impltm']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Set implicit timeout :impltm['.$this->step['impltm'].']';
+    }
+
 }

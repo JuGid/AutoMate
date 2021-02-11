@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Exception\NoDriverProvidedException;
 use Automate\Exception\NotAValidCommandException;
 use Automate\Handler\VariableHandlerHandler;
 use PASVL\Validation\ValidatorBuilder;
@@ -12,7 +13,15 @@ abstract class AbstractTransformer {
     protected $driver;
     protected $step;
 
+    /**
+     * Get variables, validate and transform into driver action
+     * @throws NotAValidCommandException If the step is not valid
+     */
     public function process($driver, array $step) {
+        if($driver == null) {
+            throw new NoDriverProvidedException();
+        }
+
         $this->driver = $driver;
         $this->step = $step;
         $this->setVariables();
@@ -25,7 +34,7 @@ abstract class AbstractTransformer {
     }
 
     /**
-     * @todo implement spec and globale variable to replace
+     * Replace elements like {{ spec|scenario|global.name }} into real variable
      */
     private function setVariables() {
         array_walk_recursive($this->step, function(&$item, $key) {
@@ -47,6 +56,10 @@ abstract class AbstractTransformer {
         );
     }
 
+    /**
+     * Validate array with pattern defined in class
+     * @return boolean If the pattern is valide or not
+     */
     public function validate() {
         $pattern = $this->getPattern();
         $builder = ValidatorBuilder::forArray($pattern);
@@ -62,6 +75,14 @@ abstract class AbstractTransformer {
         }
 
         return $value;
+    }
+
+    /**
+     * By default, print the uppercased command name
+     */
+    public function __toString()
+    {
+        return strtoupper(array_keys($this->step)[0]);
     }
 
     /**

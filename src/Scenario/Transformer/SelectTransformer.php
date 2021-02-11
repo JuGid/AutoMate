@@ -52,4 +52,16 @@ class SelectTransformer extends AbstractTransformer {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {   
+        $str = 'Select element with ['.array_keys($this->step['select'])[0].'] => [';
+        $str.= array_values($this->step['select'])[0].'] by:['.$this->step['select']['by'];
+        $str.= '] with value:['.$this->step['select']['value'].']';
+        
+        return $str;
+    }
+
 }

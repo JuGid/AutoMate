@@ -30,4 +30,12 @@ class AlertTransformer extends AbstractTransformer {
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return 'Alert ' . $this->step['alert'];
+    }
+
 }

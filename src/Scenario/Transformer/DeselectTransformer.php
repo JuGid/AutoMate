@@ -13,7 +13,7 @@ class DeselectTransformer extends AbstractTransformer {
      */
     protected function getPattern()
     {
-        return ['select'=> 
+        return ['deselect'=> 
             [
                 ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
                 'by'=>':string :in("value","index","text","pltext")',
@@ -27,9 +27,9 @@ class DeselectTransformer extends AbstractTransformer {
      */
     protected function transform() 
     {
-        $element = $this->driver->findElement(WebLocator::get(array_keys($this->step['select'])[0], array_values($this->step['select'])[0]));
+        $element = $this->driver->findElement(WebLocator::get(array_keys($this->step['deselect'])[0], array_values($this->step['deselect'])[0]));
         $select = new WebDriverSelect($element);
-        $deselectArray = $this->step['select'];
+        $deselectArray = $this->step['deselect'];
 
         if($deselectArray['by'] == 'index' && is_numeric($deselectArray['value'])) {
             $select->deselectByIndex($deselectArray['value']);
@@ -55,6 +55,18 @@ class DeselectTransformer extends AbstractTransformer {
             }
         }
 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {   
+        $str = 'Deselect element with ['.array_keys($this->step['deselect'])[0].'] => [';
+        $str.= array_values($this->step['deselect'])[0].'] by:['.$this->step['deselect']['by'];
+        $str.= '] with value:['.$this->step['deselect']['value'].']';
+
+        return $str;
     }
 
 }

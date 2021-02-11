@@ -28,4 +28,9 @@ class SpecVariableHandler implements HandlerInterface {
         }
         return self::$variables[$name];
     }
+
+    public static function load(array $data) {
+        self::$variables = [];
+        self::$variables = array_merge(self::$variables, $data);
+    }
 }

@@ -14,6 +14,7 @@ class Configuration implements ConfigurationInterface {
   private $config_file;
   private $scenarioFolder;
   private $logs;
+  private $specs;
   private $drivers;
   private $default;
 
@@ -54,9 +55,15 @@ class Configuration implements ConfigurationInterface {
                   ->end()
                 ->end()
               ->end()
+              ->arrayNode('specs')
+                ->children()
+                  ->scalarNode('folder')->end()
+                ->end()
+              ->end()
               ->arrayNode('logs')
                 ->children()
                   ->booleanNode('enable')
+                    ->defaultFalse()
                     ->isRequired()
                   ->end()
                   ->scalarNode('folder')
@@ -93,6 +100,10 @@ class Configuration implements ConfigurationInterface {
     return $this->logs['folder'];
   }
   
+  public function getSpecFolder() : string{
+    return $this->specs['folder'];
+  }
+
   public function getScenarioFolder() : string{
     return $this->scenarioFolder;
   }
@@ -123,6 +134,7 @@ class Configuration implements ConfigurationInterface {
       $this->logs=$config['logs'];
       $this->drivers=$config['drivers'];
       $this->default = $config['browser']['default'];
+      $this->specs=$config['specs'];
   }
 
 }

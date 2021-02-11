@@ -28,4 +28,15 @@ class FillTransformer extends AbstractTransformer {
         $this->driver->findElement($webLocator)->sendKeys($this->step['fill']['with']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        $str = 'Fill element with [' . array_keys($this->step['fill'])[0] .'] => [';
+        $str.= array_values($this->step['fill'])[0] . '] with value ' . $this->step['fill']['with'];
+        
+        return $str;
+    }
+
 }
