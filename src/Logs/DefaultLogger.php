@@ -2,6 +2,6 @@
 
 namespace Automate\Logs;
 
-class DefaultLogger implements LoggerInterface{
+class DefaultLogger implements ILogger{
     
 }

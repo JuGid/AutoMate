@@ -53,21 +53,35 @@ class ScenarioRunner {
     $driver->quit();
   }
 
+  /**
+   * Run a simple scenario, without any specification. [spec] scope is not usable
+   */
   public function runScenario(StepTransformer $sttr, Scenario $scenario) {
     foreach($scenario as $step){
       $sttr->transform($step);
     }
   }
 
+  /**
+   * Run a scenario with a specification.
+   * If the specification is not provided, Automate try to find a valid one
+   * Each line is injected in [spec] variable scope and each line the scenario
+   * start again from the begining
+   * @see Automate\Specification\SpecificationFinder
+   */
   public function runSpecification(StepTransformer $sttr, Scenario $scenario) {
     $finder = new SpecificationFinder();
     if($this->spec == null) {
       $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
     }
-    foreach($this->spec as $dataset) {
+
+    foreach($this->spec as $dataset) 
+    {
       SpecVariableHandler::load($dataset);
       $this->runScenario($sttr, $scenario);
     }
+
+    $this->spec->isProcessed();
   }
 
   public function setConfigurationFile(string $configFile) {

@@ -3,7 +3,8 @@
 namespace Automate\Driver;
 
 use Facebook\WebDriver\Chrome\ChromeDriver;
-use Automate\Exception\NotKnownBrowserException;
+use Automate\Exception\BrowserException;
+use Automate\Exception\DriverException;
 use Automate\Handler\WindowHandler;
 
 /**
@@ -28,7 +29,7 @@ class DriverManager {
     }elseif($browser == 'safari') {
       $this->getSafariDriver();
     }else {
-      throw new NotKnownBrowserException();
+      throw new BrowserException('The browser ' . $browser . 'is not managed by AutoMate');
     }
     WindowHandler::setWindows($this->driver->getWindowHandles());
     return $this->driver;
@@ -40,10 +41,10 @@ class DriverManager {
   }
 
   private function getFirefoxDriver() {
-    throw new \Exception("Not implemented driver");
+    throw new DriverException("Not implemented driver");
   }
 
   private function getSafariDriver() {
-    throw new \Exception("Not implemented driver");
+    throw new DriverException("Not implemented driver");
   }
 }

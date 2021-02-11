@@ -2,7 +2,7 @@
 
 namespace Automate\Handler;
 
-interface HandlerInterface {
+interface IHandler {
 
     public static function add(string $name, $value);
 

@@ -2,8 +2,8 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\NoDriverProvidedException;
-use Automate\Exception\NotAValidCommandException;
+use Automate\Exception\DriverException;
+use Automate\Exception\CommandException;
 use Automate\Handler\VariableHandlerHandler;
 use PASVL\Validation\ValidatorBuilder;
 use PASVL\Validation\Problems\ArrayFailedValidation;
@@ -19,7 +19,7 @@ abstract class AbstractTransformer {
      */
     public function process($driver, array $step) {
         if($driver == null) {
-            throw new NoDriverProvidedException();
+            throw new DriverException('No driver provided');
         }
 
         $this->driver = $driver;
@@ -29,7 +29,7 @@ abstract class AbstractTransformer {
         if($this->validate()) {
             $this->transform();
         } else {
-            throw new NotAValidCommandException(array_keys($this->step)[0]);
+            throw new CommandException('The command ' . array_keys($this->step)[0] . 'is not valid');
         }
     }
 

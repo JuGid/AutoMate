@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario\Transformer\Helpers;
 
-use Automate\Exception\NotAManagedConditionException;
+use Automate\Exception\ConditionException;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 /**
@@ -36,7 +36,7 @@ class WebConditions {
             case "urlMatches":
                 return WebDriverExpectedCondition::urlMatches($text);
             default:
-                throw new NotAManagedConditionException($type);
+                throw new ConditionException('THe condition ' . $type . ' does not exist');
         }
     }
 }

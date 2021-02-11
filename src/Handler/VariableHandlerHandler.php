@@ -2,7 +2,7 @@
 
 namespace Automate\Handler;
 
-use Automate\Exception\BadVariableCallException;
+use Automate\Exception\VariableCallException;
 
 class VariableHandlerHandler {
 
@@ -11,7 +11,7 @@ class VariableHandlerHandler {
         if(class_exists($class)) {
             $class::add($name, $value);
         } else {
-            throw new BadVariableCallException($from . '.' . $name);
+            throw new VariableCallException('The scope ' . $from . ' does not exist');
         }
     }
 
@@ -20,7 +20,7 @@ class VariableHandlerHandler {
         if(class_exists($class)) {
             return $class::get($name);
         } else {
-            throw new BadVariableCallException($from . '.' . $name);
+            throw new VariableCallException('The scope ' . $from . ' does not exist');
         }
     }
 
@@ -29,7 +29,7 @@ class VariableHandlerHandler {
         if(class_exists($class)) {
             $class::remove($name);
         } else {
-            throw new BadVariableCallException($from . '.' . $name);
+            throw new VariableCallException('The scope ' . $from . ' does not exist');
         }
     }
 }

@@ -2,29 +2,28 @@
 
 namespace Automate\Handler;
 
-use Automate\Exception\VariableAlreadyExistsException;
-use Automate\Exception\VariableDoesNotExistException;
+use Automate\Exception\VariableException;
 
-class ScenarioVariableHandler implements HandlerInterface {
+class ScenarioVariableHandler implements IHandler {
     static $variables;
 
-    public static function add(string $name, $value) : void{
+    public static function add(string $name, $value) {
         if(isset(self::$variables[$name])) {
-            throw new VariableAlreadyExistsException($name);
+            throw new VariableException('Variable ' . $name . ' already exists');
         }
 
         self::$variables[$name] = $value;
     }
 
-    public static function remove(string $name) : void{
+    public static function remove(string $name) {
         if(isset(self::$variables[$name])) {
             unset(self::$variables[$name]);
         }
     }
 
-    public static function get(string $name) : string{
+    public static function get(string $name) {
         if(!isset(self::$variables[$name])) {
-            throw new VariableDoesNotExistException($name);
+            throw new VariableException('Variable ' . $name . ' does not exist');
         }
         return self::$variables[$name];
     }

@@ -2,8 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\NotAValidCommandException;
-use Automate\Handler\VariableHandler;
+use Automate\Exception\CommandException;
 use Automate\Handler\VariableHandlerHandler;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
@@ -37,7 +36,7 @@ class GetTransformer extends AbstractTransformer {
             $value = $this->driver->findElement($element)->getText();
         } elseif($arrayGet['what'] == 'attribute') {
             if(!isset($arrayGet['attribute'])) {
-                throw new NotAValidCommandException('get');
+                throw new CommandException('For get command if you use an attribute, you have to tell which one');
             }
             $value = $this->driver->findElement($element)->getAttribute($arrayGet['attribute']);
         }

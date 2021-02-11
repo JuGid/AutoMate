@@ -2,6 +2,6 @@
 
 namespace Automate\Logs;
 
-interface LoggerInterface {
+interface ILogger {
     
 }

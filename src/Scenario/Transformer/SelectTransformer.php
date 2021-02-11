@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\NotAValidCommandException;
+use Automate\Exception\CommandException;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverSelect;
 
@@ -46,7 +46,7 @@ class SelectTransformer extends AbstractTransformer {
                         break;
                 }
             }else {
-                throw new NotAValidCommandException('select');
+                throw new CommandException('The deselect value has to be of type string/text');
             }
         }
 

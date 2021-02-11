@@ -2,6 +2,8 @@
 
 namespace Automate\Specification;
 
+use Automate\Exception\SpecificationException;
+
 class SpecificationFinder {
 
     /**
@@ -39,6 +41,6 @@ class SpecificationFinder {
             } 
         }
 
-        throw new \Exception('The specification has not been found.');
+        throw new SpecificationException('The specification has not been found.');
     }
 }

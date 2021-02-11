@@ -2,7 +2,7 @@
 
 namespace Automate\Scenario;
 
-use Automate\Exception\NotAValidCommandException;
+use Automate\Exception\CommandException;
 
 class StepTransformer {
 
@@ -20,7 +20,7 @@ class StepTransformer {
             $transformer->process($this->driver, $step);
             echo $transformer . "\n";
         } else {
-            throw new NotAValidCommandException(key($step));
+            throw new CommandException('The command ' . key($step) . 'does not exist');
         }
                
     }

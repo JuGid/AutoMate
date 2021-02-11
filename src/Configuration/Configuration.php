@@ -6,8 +6,8 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
-use Automate\Exception\NotAConfigFileException;
-use Automate\Exception\NotKnownBrowserException;
+use Automate\Exception\ConfigurationException;
+use Automate\Exception\BrowserException;
 
 class Configuration implements ConfigurationInterface {
 
@@ -88,7 +88,7 @@ class Configuration implements ConfigurationInterface {
       $this->load();
     }
     else {
-      throw new NotAConfigFileException();
+      throw new ConfigurationException('The configuration file is not valid');
     }
   }
 
@@ -124,7 +124,7 @@ class Configuration implements ConfigurationInterface {
     if(isset($this->drivers[$browser]['driver'])) {
       return $this->drivers[$browser]['driver'];
     }
-    throw new NotKnownBrowserException();
+    throw new BrowserException('The browser provided does not have a driver definition in configuration file');
   }
 
   private function load() 
