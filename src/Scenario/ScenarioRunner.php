@@ -6,6 +6,7 @@ use Automate\Configuration\Configuration;
 use Automate\Driver\DriverManager;
 use Automate\Exception\BrowserException;
 use Automate\Exception\DriverException;
+use Automate\Exception\SpecificationException;
 use Automate\Handler\SpecVariableHandler;
 use Automate\Specification\Specification;
 use Automate\Specification\SpecificationFinder;
@@ -47,7 +48,7 @@ class ScenarioRunner {
       $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
       $sttr = new StepTransformer($driver);
     } catch(BrowserException|DriverException $e) {
-      echo $e->getMessage();
+      echo $e->getMessage() . "\n";
       die();
     }
     
@@ -65,16 +66,17 @@ class ScenarioRunner {
    * Run a simple scenario, without any specification. [spec] scope is not usable
    */
   public function runScenario(StepTransformer $sttr, Scenario $scenario) {
-    try {
+    try 
+    {
       foreach($scenario as $step){
         $sttr->transform($step);
       }
       ++$this->wins;
-    }catch(\Exception $e) {
-      echo $e->getMessage();
+    } catch(\Exception $e) 
+    {
+      echo $e->getMessage() . "\n";
       ++$this->errors;
     } 
-    
   }
 
   /**
@@ -85,10 +87,16 @@ class ScenarioRunner {
    * @see Automate\Specification\SpecificationFinder
    */
   public function runSpecification(StepTransformer $sttr, Scenario $scenario) {
-    $finder = new SpecificationFinder();
-    if($this->spec == null) {
-      $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
+    try {
+      $finder = new SpecificationFinder();
+      if($this->spec == null) {
+        $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
+      }
+    }catch(SpecificationException $e) {
+      echo $e->getMessage() . "\n";
+      die();
     }
+    
 
     foreach($this->spec as $dataset) 
     {
