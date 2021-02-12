@@ -43,7 +43,6 @@ class Specification implements Iterator{
     }
 
     public function current() {
-        echo "Line ". $this->key() .'/'.$this->getRowNumber();
         return $this->data;
     }
 
@@ -78,7 +77,11 @@ class Specification implements Iterator{
         fclose($f);
     }
 
-    public function isProcessed() {
+    /**
+     * Rename the specification file to name_PROCESSED.
+     * No more need since setProcessed must be called at the end of the run
+     */
+    public function setProcessed() {
         rename($this->filepath, $this->getPath() . '/' . $this->getFilename() . '_PROCESSED.' . $this->getExtension());
     }
 

@@ -4,6 +4,8 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverManager;
+use Automate\Exception\BrowserException;
+use Automate\Exception\DriverException;
 use Automate\Handler\SpecVariableHandler;
 use Automate\Specification\Specification;
 use Automate\Specification\SpecificationFinder;
@@ -16,10 +18,15 @@ class ScenarioRunner {
   private $driverManager;
   private $spec;
 
+  private $errors;
+  private $wins;
+
   public function __construct() {
     $this->config = new Configuration();
     $this->driverManager = new DriverManager();
     $this->spec = null;
+    $this->errors = 0;
+    $this->win = 0;
   }
 
   /**
@@ -39,15 +46,16 @@ class ScenarioRunner {
     try {
       $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
       $sttr = new StepTransformer($driver);
-
-      if($with_spec) {
-        $this->runSpecification($sttr, $scenario);
-      } else {
-        $this->runScenario($sttr, $scenario);
-      }
-
-    } catch(\Exception $e) {
+    } catch(BrowserException|DriverException $e) {
       echo $e->getMessage();
+      die();
+    }
+    
+
+    if($with_spec) {
+      $this->runSpecification($sttr, $scenario);
+    } else {
+      $this->runScenario($sttr, $scenario);
     }
 
     $driver->quit();
@@ -57,9 +65,16 @@ class ScenarioRunner {
    * Run a simple scenario, without any specification. [spec] scope is not usable
    */
   public function runScenario(StepTransformer $sttr, Scenario $scenario) {
-    foreach($scenario as $step){
-      $sttr->transform($step);
-    }
+    try {
+      foreach($scenario as $step){
+        $sttr->transform($step);
+      }
+      ++$this->wins;
+    }catch(\Exception $e) {
+      echo $e->getMessage();
+      ++$this->errors;
+    } 
+    
   }
 
   /**
@@ -77,11 +92,14 @@ class ScenarioRunner {
 
     foreach($this->spec as $dataset) 
     {
-      SpecVariableHandler::load($dataset);
+      echo "Line ". $this->spec->key() .'/'.$this->spec->getRowNumber() . "\n";
+      echo "=================================================================\n";
       $this->runScenario($sttr, $scenario);
+      echo "=================================================================\n";
     }
 
-    $this->spec->isProcessed();
+    $this->spec->setProcessed();
+    echo 'Scenario with specification finished with Wins :'.$this->wins . ' / Errors : '. $this->errors;
   }
 
   public function setConfigurationFile(string $configFile) {

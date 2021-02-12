@@ -3,6 +3,7 @@
 namespace Automate\Specification;
 
 use Automate\Exception\SpecificationException;
+use Automate\Handler\SpecVariableHandler;
 
 /**
  * To avoid memory problems, I prefer not store the data a second time in
@@ -41,7 +42,7 @@ class SpecificationLoader {
      * If the dataset is null, the line is empty, an Exception is thrown
      * If fgetcsv detect the EOL, next() return false and close file
      */
-    public function next() : array{
+    public function next() : array {
         $dataline = fgetcsv($this->file, 4096);
 
         if($dataline === null ) {
@@ -52,7 +53,10 @@ class SpecificationLoader {
             return $this->end();
         }
 
-        return array_combine($this->columns, $dataline);
+        $dataset = array_combine($this->columns, $dataline);
+        SpecVariableHandler::load($dataset);
+        
+        return $dataset;
     }
 
     public function end() : bool {
