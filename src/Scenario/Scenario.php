@@ -4,6 +4,7 @@ namespace Automate\Scenario;
 
 use Automate\Handler\ScenarioVariableHandler;
 use Iterator;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 class Scenario implements Iterator{
@@ -13,7 +14,7 @@ class Scenario implements Iterator{
     private $name;
 
     public function __construct(string $file, string $name) {
-        $this->scenario = Yaml::parseFile($file);
+        $this->scenario = $this->parseScenarioFile($file);
         $this->step = 0;
         $this->name = $name;
 
@@ -25,6 +26,15 @@ class Scenario implements Iterator{
                 ScenarioVariableHandler::add(array_keys($variables)[$i], array_values($variables)[$i]);
             }
             
+        }
+    }
+
+    private function parseScenarioFile($file) {
+        try{
+            return Yaml::parseFile($file);
+        } catch(ParseException $e) {
+            echo $e->getMessage() . " Please check your configuration file.\n";
+            die(); 
         }
     }
 

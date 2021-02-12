@@ -7,13 +7,9 @@ use Automate\Driver\DriverManager;
 use Automate\Exception\BrowserException;
 use Automate\Exception\DriverException;
 use Automate\Exception\SpecificationException;
-use Automate\Handler\SpecVariableHandler;
 use Automate\Specification\Specification;
 use Automate\Specification\SpecificationFinder;
 
-/**
- * @todo watch if hasSpecification is avoidable
- */
 class ScenarioRunner {
   private $config;
   private $driverManager;
@@ -43,7 +39,7 @@ class ScenarioRunner {
     $scenarioFilepath = $this->config->getScenarioFolder() . '/' . $scenario_name . '.yaml';
     $scenario = new Scenario($scenarioFilepath, $scenario_name);
     $scenarioBrowser = $scenario->getScenarioBrowser($on_browser, $this->config->getDefaultBrowser());
-    
+
     try {
       $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
       $sttr = new StepTransformer($driver);

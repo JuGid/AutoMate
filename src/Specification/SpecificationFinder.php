@@ -30,7 +30,7 @@ class SpecificationFinder {
             }
         }
 
-        $file = array_diff(scandir($spec_path), ['..', '.']);
+        $files = array_diff(scandir($spec_path), ['..', '.']);
         foreach($files as $file) {
             if(!is_dir($spec_path . '/' . $file)) {
                 if(strpos('_PROCESSED', $file) === false && 
