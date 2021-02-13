@@ -120,7 +120,7 @@ Do not forget to configure your app in a valid configuration file.
     use Automate\Scenario\ScenarioRunner;
     
     $scenarioRunner = new  ScenarioRunner();
-    $scenarioRunner->setConfigurationFile(__DIR__.'/config/config-jugid.yaml');
+    $scenarioRunner->setConfigurationFile(my_directory/config/config-automate.yaml');
     $scenarioRunner->run('youtube', true);
 
 
