@@ -8,7 +8,7 @@ use Facebook\WebDriver\WebDriverExpectedCondition;
 /**
  * WebDriverExpectedCondition overlay that defines the good conditions from type.
  * Warning : Not that much control on that class. Can catch them at a higher level.
- * @todo add control on values
+ * @deprecated This web condition will be removed in next commit
  */
 class WebConditions {
 
@@ -19,7 +19,21 @@ class WebConditions {
         } else {
             $elmLocator = null;
         }
-        
+
+        /*
+        PHP 8.0 Style with match
+        return match($type) {
+            "isClickable" => WebDriverExpectedCondition::elementToBeClickable($elmLocator),
+            "isVisible"=> WebDriverExpectedCondition::visibilityOfElementLocated($elmLocator),
+            "textIs"=> WebDriverExpectedCondition::elementTextIs($elmLocator, $text),
+            "textContains"=> WebDriverExpectedCondition::elementTextContains($elmLocator, $text),
+            "textMatches"=> WebDriverExpectedCondition::elementTextMatches($elmLocator, $text),
+            "urlIs"=> WebDriverExpectedCondition::urlIs($text),
+            "urlContains"=> WebDriverExpectedCondition::urlContains($text),
+            "urlMatches"=> WebDriverExpectedCondition::urlMatches($text),
+            default=> throw new ConditionException('THe condition ' . $type . ' does not exist'),
+        }
+        */
         switch($type) {
             case "isClickable":
                 return WebDriverExpectedCondition::elementToBeClickable($elmLocator);
