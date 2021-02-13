@@ -96,7 +96,7 @@ class Configuration implements ConfigurationInterface {
     return $this->logs['enable'];
   }
 
-  public function getLogFolder() : string{
+  public function getLogsFolder() : string{
     return $this->logs['folder'];
   }
   

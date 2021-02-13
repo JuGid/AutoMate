@@ -4,10 +4,10 @@ variables:
   cookie: 'nouveau'
 scenario:
   steps:
-    - go: 'https://youtube.com'
+    - go: '{{ spec.url }}'
     - cookie:
         name: "{{ scenario.name }}"
-        value: "{{ scenario.cookie }}"
+        value: "{{ spec.cookiename }}"
     #- alert: isPresent
     #- alert: dismiss
     #- cookie: 

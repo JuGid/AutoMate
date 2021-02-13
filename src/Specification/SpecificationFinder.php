@@ -22,7 +22,7 @@ class SpecificationFinder {
             $files = array_diff(scandir($dirpath), ['..', '.']);
             foreach($files as $file) {
                 if(!is_dir($dirpath . '/' . $file)) {
-                    if(strpos('_PROCESSED', $file) === false && 
+                    if(strpos($file, '_PROCESSED') === false && 
                        pathinfo($dirpath. '/' . $file, PATHINFO_EXTENSION) == 'csv') {
                         return new Specification($dirpath. '/' . $file);
                     }
@@ -33,8 +33,8 @@ class SpecificationFinder {
         $files = array_diff(scandir($spec_path), ['..', '.']);
         foreach($files as $file) {
             if(!is_dir($spec_path . '/' . $file)) {
-                if(strpos('_PROCESSED', $file) === false && 
-                   strpos($scenario_name, $file) !== false &&
+                if(strpos($file, '_PROCESSED') === false && 
+                   strpos($file, $scenario_name) !== false &&
                    pathinfo($spec_path. '/' . $file, PATHINFO_EXTENSION) == 'csv') {
                     return new Specification($spec_path . '/' . $file);
                 }

@@ -13,7 +13,7 @@ class Specification implements Iterator{
     /**
      * @var int
      */
-    private $datastep;
+    private $datastep = 0;
 
     /**
      * @var SpecificationLoader
@@ -32,10 +32,9 @@ class Specification implements Iterator{
 
     public function __construct(string $filepath) {
         $this->filepath = $filepath;
-        $this->datastep = 0;
         $this->loader = new SpecificationLoader($filepath);
         $this->data = $this->loader->next();
-        $this->rownumber = $this->countRows();
+        $this->rownumber = $this->countRows() - 1;
     }
 
     public function rewind() {
@@ -75,6 +74,8 @@ class Specification implements Iterator{
         }
 
         fclose($f);
+
+        return $lines;
     }
 
     /**
@@ -99,5 +100,9 @@ class Specification implements Iterator{
 
     public function getRowNumber() {
         return $this->rownumber;
+    }
+
+    public function getColumnsHeader() {
+        return $this->loader->getColumnsHeader();
     }
 }

@@ -2,3 +2,6 @@
 /vendor
 .DS_STORE
 /config/config-jugid.yaml
+/specs
+/scenario
+/logs

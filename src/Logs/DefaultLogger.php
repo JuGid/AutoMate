@@ -2,6 +2,9 @@
 
 namespace Automate\Logs;
 
-class DefaultLogger implements ILogger{
-    
+class DefaultLogger extends AbstractLogger {
+
+    public function log(array $dataset, string $log_type){
+        $this->write($dataset, $log_type);
+    }
 }

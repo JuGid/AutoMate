@@ -1,7 +1,8 @@
 {
     "name": "jugid/auto-mate",
-    "description": "Automatisation par fichier Yaml",
     "type": "library",
+    "description": "Automation by YAML file",
+    "keywords": ["automation", "selenium", "webdriver", "php-webdriver", "UI"],
     "require": {
         "php-webdriver/webdriver": "^1.9",
         "symfony/console": "^5.2",
@@ -12,7 +13,7 @@
     "authors": [
         {
             "name": "Jugid",
-            "email": "gidjulien@gmail.com"
+            "homepage": "https://github.com/JuGid"
         }
     ],
     "autoload": {

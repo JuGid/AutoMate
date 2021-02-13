@@ -7,4 +7,5 @@ use Automate\Scenario\ScenarioRunner;
 
 $scenarioRunner = new ScenarioRunner();
 $scenarioRunner->setConfigurationFile(__DIR__.'/config/config-jugid.yaml');
-$scenarioRunner->run('youtube');
+$scenarioRunner->enableTestMode();
+$scenarioRunner->run('youtube', true);

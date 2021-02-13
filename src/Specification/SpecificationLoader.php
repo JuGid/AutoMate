@@ -42,7 +42,7 @@ class SpecificationLoader {
      * If the dataset is null, the line is empty, an Exception is thrown
      * If fgetcsv detect the EOL, next() return false and close file
      */
-    public function next() : array {
+    public function next() {
         $dataline = fgetcsv($this->file, 4096);
 
         if($dataline === null ) {
@@ -62,5 +62,9 @@ class SpecificationLoader {
     public function end() : bool {
         fclose($this->file);
         return false;
+    }
+
+    public function getColumnsHeader() {
+        return $this->columns;
     }
 }

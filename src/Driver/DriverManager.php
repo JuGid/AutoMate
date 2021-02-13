@@ -14,6 +14,11 @@ class DriverManager {
   private $driver;
   private $webdriverFolder;
 
+  public function __construct()
+  {
+    $this->driver = null;
+    $this->webdriverFolder = '';
+  }
   /**
    * @param string $browser The browser which you want the driver
    * @param string $webdriverFolder The webdriver folder
@@ -23,11 +28,11 @@ class DriverManager {
     $this->webdriverFolder = $webdriverFolder;
     
     if($browser == 'chrome') {
-      $this->getChromeDriver();
+      $this->driver = $this->getChromeDriver();
     }elseif($browser == 'firefox') {
-      $this->getFirefoxDriver();
+      $this->driver = $this->getFirefoxDriver();
     }elseif($browser == 'safari') {
-      $this->getSafariDriver();
+      $this->driver = $this->getSafariDriver();
     }else {
       throw new BrowserException('The browser ' . $browser . 'is not managed by AutoMate');
     }
@@ -35,9 +40,13 @@ class DriverManager {
     return $this->driver;
   }
 
+  public function getCurrentDriver() {
+    return $this->driver;
+  }
+  
   private function getChromeDriver() {
     putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
-    $this->driver = ChromeDriver::start();
+    return ChromeDriver::start();
   }
 
   private function getFirefoxDriver() {
