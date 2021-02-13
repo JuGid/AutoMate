@@ -97,7 +97,6 @@ Don't forget to use `composer install` .
 
 ## 3️⃣ Future features
 
- - [ ] Use spec files to pass data to scenario and run it multiple time
  - [ ] Add more control
  - [ ] Add more managed drivers
  - [ ] Add Proxy management
@@ -106,3 +105,48 @@ Don't forget to use `composer install` .
 
 We love to have your help to make AutoMate better. 
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information about contributing and developing AutoMate
+
+## 5️⃣ Simple example
+
+Do not forget to configure your app in a valid configuration file.
+
+***In your app.php***
+
+    #!/usr/bin/env php
+    <?php
+    
+    require  __DIR__.'/vendor/autoload.php';
+    
+    use Automate\Scenario\ScenarioRunner;
+    
+    $scenarioRunner = new  ScenarioRunner();
+    $scenarioRunner->setConfigurationFile(__DIR__.'/config/config-jugid.yaml');
+    $scenarioRunner->run('youtube', true);
+
+
+***In your scenario_folder/internet.yaml***
+
+    browser: chrome
+    variables:
+    	my_variable: 'bonjour'
+    scenario:
+    	steps:
+    		- go: "{{ spec.url }}"
+    		- cookie:
+    			name: "{{ scenario.my_variable }}"
+    			value: "{{ spec.cookiename }}"
+
+***In your spec_folder/scenario/specification.csv***
+
+    url,cookiename
+    http://youtube.fr,youtube
+    http://google.fr,google
+    http://github.com,github
+
+As you can see, the scenario use variable defined in scenario and variables defined in spec.
+With this files, the scenario will run for each lines in specification file.
+
+![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
+
+
+
