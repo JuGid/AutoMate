@@ -2,9 +2,7 @@
 
 ## Presentation
 
-AutoMate is a library which allows you to control web browsers with a normed YAML file.
-
-This library uses [php-webdriver](https://github.com/php-webdriver/php-webdriver) and you can consider it as an overlay that provides you more easyness.
+AutoMate is a library which allows you to control web browsers with a normed YAML file, create scenario, and log the results.
 
 Thanks to 
  - [php-webdriver](https://github.com/php-webdriver/php-webdriver) for this amazing PHP binding solution
@@ -91,7 +89,7 @@ You can download multiple drivers but :
     * You can pass a new normed file (see doc) like this :
     * $scenarioRunner->setConfigurationFile(__DIR__.'/config/config.yaml');
     */
-    $scenarioRunner->run('scenario', null);
+    $scenarioRunner->run('scenario');
 
 Don't forget to use `composer install` .
 
@@ -121,7 +119,7 @@ Do not forget to configure your app in a valid configuration file.
     
     $scenarioRunner = new  ScenarioRunner();
     $scenarioRunner->setConfigurationFile(my_directory/config/config-automate.yaml');
-    $scenarioRunner->run('youtube', true);
+    $scenarioRunner->run('internet', true);
 
 
 ***In your scenario_folder/internet.yaml***
@@ -136,7 +134,7 @@ Do not forget to configure your app in a valid configuration file.
     			name: "{{ scenario.my_variable }}"
     			value: "{{ spec.cookiename }}"
 
-***In your spec_folder/scenario/specification.csv***
+***In your spec_folder/internet/specification.csv***
 
     url,cookiename
     http://youtube.fr,youtube
