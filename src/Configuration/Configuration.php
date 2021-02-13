@@ -11,11 +11,34 @@ use Automate\Exception\BrowserException;
 
 class Configuration implements ConfigurationInterface {
 
+  /**
+   * @var string
+   */
   private $config_file;
+
+  /**
+   * @var string
+   */
   private $scenarioFolder;
+
+  /**
+   * @var array
+   */
   private $logs;
+
+  /**
+   * @var array
+   */
   private $specs;
+
+  /**
+   * @var array
+   */
   private $drivers;
+
+  /**
+   * @var string
+   */
   private $default;
 
   public function __construct(string $config_file = __DIR__.'/../../config/config.yaml') {
@@ -76,7 +99,7 @@ class Configuration implements ConfigurationInterface {
       return $nodes;
   }
 
-  public function getConfigurationArray() {
+  public function getConfigurationArray() : array {
     $config = Yaml::parse(file_get_contents($this->config_file));
     $processor = new Processor();
     return $processor->processConfiguration($this, $config);
@@ -108,7 +131,7 @@ class Configuration implements ConfigurationInterface {
     return $this->scenarioFolder;
   }
 
-  public function setScenarioFolder(string $scenarioFolder) {
+  public function setScenarioFolder(string $scenarioFolder) : void {
     $this->scenarioFolder = $scenarioFolder;
   }
 
@@ -127,7 +150,7 @@ class Configuration implements ConfigurationInterface {
     throw new BrowserException('The browser provided does not have a driver definition in configuration file');
   }
 
-  private function load() 
+  private function load() : void
   {
       $config = $this->getConfigurationArray();
       $this->scenarioFolder=$config['scenario']['folder'];

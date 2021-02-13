@@ -12,7 +12,7 @@ class GetTransformer extends AbstractTransformer {
      * {@inheritdoc}
      * @todo sendkeys and gettext to implement
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['get' => 
                     [
@@ -27,11 +27,11 @@ class GetTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         $element = WebLocator::get(array_keys($this->step['get'])[0], array_values($this->step['get'])[0]);
         $arrayGet = $this->step['get'];
-        
+        $value = null;
         if($arrayGet['what'] == 'text') {
             $value = $this->driver->findElement($element)->getText();
         } elseif($arrayGet['what'] == 'attribute') {

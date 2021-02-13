@@ -4,13 +4,16 @@ namespace Automate\Handler;
 
 class WindowHandler {
 
+    /**
+     * @var array
+     */
     public static $actual_windows;
 
-    public static function getWindows() {
+    public static function getWindows() : array {
         return self::$actual_windows;
     }
 
-    public static function setWindows($windows) {
+    public static function setWindows(array $windows) : void {
         self::$actual_windows = $windows;
     }
 }

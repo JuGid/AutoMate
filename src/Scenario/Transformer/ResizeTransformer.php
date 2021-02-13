@@ -10,7 +10,7 @@ class ResizeTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['resize'=>[
                             'type'=>':string :in("maximize","fullscreen","size")',
@@ -23,7 +23,7 @@ class ResizeTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         $array = $this->step['resize'];
         if($array['type'] == 'maximize') {

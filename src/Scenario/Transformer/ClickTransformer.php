@@ -9,7 +9,7 @@ class ClickTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return [
             'click' => [
@@ -21,7 +21,7 @@ class ClickTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $webLocator = WebLocator::get(array_keys($this->step['click'])[0], array_values($this->step['click'])[0]);
         $this->driver->findElement($webLocator)->click();

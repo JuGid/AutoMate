@@ -31,7 +31,7 @@ class ScenarioRunner {
   private $spec = null;
 
   /**
-   * @var DefaultLogger
+   * @var AbstractLogger
    */
   private $logger;
 
@@ -66,7 +66,7 @@ class ScenarioRunner {
    * Run the scenario.
    * If you set $with_spec and did not use ScenarioRunner::setSpecification
    * please watch SpecificationFinder::find documentation
-   * @param string $scenario The scenario name. It corresponds to the yaml file name in scenario folder specified in config file.
+   * @param string $scenario_name The scenario name. It corresponds to the yaml file name in scenario folder specified in config file.
    * @param bool $with_spec Specify if you want to run the scenario with a spec
    * @param string|null $on_browser You can specify a browser. If not, the default browser in scenario or config file is taken.
    * @return void
@@ -99,7 +99,7 @@ class ScenarioRunner {
   /**
    * Run a simple scenario, without any specification. [spec] scope is not usable
    */
-  private function runScenario(StepTransformer $sttr, Scenario $scenario, array $dataset = []) {
+  private function runScenario(StepTransformer $sttr, Scenario $scenario, array $dataset = []) : void {
     try 
     {
       foreach($scenario as $step){
@@ -129,7 +129,7 @@ class ScenarioRunner {
    * start again from the begining
    * @see Automate\Specification\SpecificationFinder
    */
-  private function runSpecification(StepTransformer $sttr, Scenario $scenario) {
+  private function runSpecification(StepTransformer $sttr, Scenario $scenario) : void {
     try {
       $finder = new SpecificationFinder();
       if(!$this->hasSpec()) {
@@ -143,8 +143,6 @@ class ScenarioRunner {
       die();
     }
     
-    
-
     foreach($this->spec as $dataset) 
     {
       echo "_________________________________________________________________\n";
@@ -185,7 +183,7 @@ class ScenarioRunner {
    * 
    * @param string $configFile The filepath of the new configuration file
    */
-  public function setConfigurationFile(string $configFile) {
+  public function setConfigurationFile(string $configFile) : void {
     $this->config->setConfigurationFile($configFile);
   }
 
@@ -194,7 +192,7 @@ class ScenarioRunner {
    * 
    * @param string $scenarioFolder
    */
-  public function setScenarioFolder(string $scenarioFolder) {
+  public function setScenarioFolder(string $scenarioFolder) : void {
     $this->config->setScenarioFolder($scenarioFolder);
   }
 
@@ -225,7 +223,7 @@ class ScenarioRunner {
   /**
    * @return bool If the scenario runner spec is not null
    */
-  public function hasSpec() : bool {
+  private function hasSpec() : bool {
     return $this->spec !== null;
   }
 
@@ -234,11 +232,11 @@ class ScenarioRunner {
    * 
    * The efefct is that the specification file is not marked as _PROCESSED
    */
-  public function enableTestMode() {
+  public function enableTestMode() : void {
     $this->testMode = true;
   }
 
-  public function setColumnsToLog(array $columns) {
+  public function setColumnsToLog(array $columns) : void {
     $this->logger->getConfiguration()->setlogColumns($columns);
   }
 

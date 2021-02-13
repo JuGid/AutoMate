@@ -1,0 +1,11 @@
+parameters:
+    level: 3
+    paths:
+        - src/
+        - tests/
+
+    ignoreErrors:
+        # Don't really understand this issue, but Symfony Config component returns this error
+        -   
+            message : '#Call to an undefined method [a-zA-Z0-9\\_]+::children\(\)#'
+            path: src/Configuration/Configuration.php

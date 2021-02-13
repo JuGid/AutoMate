@@ -12,7 +12,7 @@ class WuntilTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return [
             'wuntil' => [
@@ -28,7 +28,7 @@ class WuntilTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $wuntilKeys = array_keys($this->step['wuntil']);
         $wuntilValues = array_values($this->step['wuntil']);

@@ -14,6 +14,8 @@ class SpecificationFinder {
      * It looks for this in folders (ordered) :
      * $spec_path/$scenario_name : first file without "_PROCESSED"
      * $spec_path : file which has for name $scenario_name and not "_PROCESSED"
+     * 
+     * @return Specification
      */
     public function find(string $spec_path, string $scenario_name) : Specification {
 

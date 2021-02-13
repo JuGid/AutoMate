@@ -11,7 +11,7 @@ class DeselectTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['deselect'=> 
             [
@@ -25,7 +25,7 @@ class DeselectTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $element = $this->driver->findElement(WebLocator::get(array_keys($this->step['deselect'])[0], array_values($this->step['deselect'])[0]));
         $select = new WebDriverSelect($element);

@@ -17,17 +17,21 @@ abstract class AbstractLogger {
     /**
      * The logger message queue to add when scenario is logged
      * 
-     * @var array
+     * @var array<string>
      */
     private $messageQueue = [];
 
     /**
      * Pointer to log file errors
+     * 
+     * @var resource
      */
     protected $file_e;
 
     /**
      * Pointer to log file wins
+     * 
+     * @var resource
      */
     protected $file_w;
 
@@ -36,7 +40,10 @@ abstract class AbstractLogger {
         $this->configuration->setLogsDirectory($directory);
     }
 
-    public function init(string $log_directory, string $scenario_name, array $spec_header) {
+    /**
+     * @param array<string> $spec_header
+     */
+    public function init(string $log_directory, string $scenario_name, array $spec_header) : void{
         $this->getConfiguration()->setLogsDirectory($log_directory);
         $this->getConfiguration()->setScenarioName($scenario_name);
 
@@ -76,21 +83,21 @@ abstract class AbstractLogger {
     /**
      * This function returns the messages in queue et reset it.
      */
-    public function getMessages() : string{
+    public function getMessages() : string {
         $messages = $this->messageQueue;
         $this->messageQueue = [];
         return implode(',',$messages);
     }
 
-    public function setConfiguration(LoggerConfiguration $configuration) {
+    public function setConfiguration(LoggerConfiguration $configuration) : void {
         $this->configuration = $configuration;
     }
 
-    public function getConfiguration() {
+    public function getConfiguration() : LoggerConfiguration {
         return $this->configuration;
     }
 
-    protected function write(array $data, string $log_type) {
+    protected function write(array $data, string $log_type) : void{
         $data_to_write = [];
         foreach($data as $key=>$value) {
             if(in_array($key, $this->getConfiguration()->getLogColumns())) {
@@ -108,11 +115,14 @@ abstract class AbstractLogger {
 
     }
     
-    public function end() {
+    public function end() : void{
         fclose($this->file_e);
         fclose($this->file_w);
     }
 
-    abstract public function log(array $dataset, string $log_type);
+    /**
+     * @param array<string, mixed> $dataset
+     */
+    abstract public function log(array $dataset, string $log_type) : void;
 
 }

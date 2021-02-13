@@ -10,7 +10,7 @@ class ScreenshotTransformer extends AbstractTransformer {
      * {@inheritdoc}
      * @todo sendkeys and gettext to implement
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['screenshot' => 
                     [
@@ -24,7 +24,7 @@ class ScreenshotTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         $array = $this->step['screenshot'];
         if($array['type'] == 'all') {

@@ -10,7 +10,7 @@ class AlertTransformer extends AbstractTransformer {
      * {@inheritdoc}
      * @todo sendkeys and gettext to implement
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['alert' => ':string :in("accept", "dismiss", "isPresent")'];
     }
@@ -18,7 +18,7 @@ class AlertTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         $array = $this->step['alert'];
         if($array == 'accept') {

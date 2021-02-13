@@ -6,7 +6,7 @@ use Automate\Exception\VariableCallException;
 
 class VariableHandlerHandler {
 
-    public static function set(string $from, string $name, $value) {
+    public static function set(string $from, string $name, string $value) : void {
         $class = __NAMESPACE__ . '\\'.ucfirst($from) . 'VariableHandler';
         if(class_exists($class)) {
             $class::add($name, $value);
@@ -15,7 +15,7 @@ class VariableHandlerHandler {
         }
     }
 
-    public static function get(string $from, string $name) {
+    public static function get(string $from, string $name) : string {
         $class = __NAMESPACE__ . '\\'.ucfirst($from) . 'VariableHandler';
         if(class_exists($class)) {
             return $class::get($name);
@@ -24,7 +24,7 @@ class VariableHandlerHandler {
         }
     }
 
-    public static function remove(string $from, string $name) {
+    public static function remove(string $from, string $name) : void {
         $class = __NAMESPACE__ . '\\'.ucfirst($from) . 'VariableHandler';
         if(class_exists($class)) {
             $class::remove($name);

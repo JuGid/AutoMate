@@ -7,7 +7,7 @@ class GoTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         //this is the regexp for http/https adress and http/https://localhost
         return ['go'=>':string :url'];
@@ -16,7 +16,7 @@ class GoTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $this->driver->get($this->step['go']);
     }

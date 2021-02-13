@@ -6,7 +6,7 @@ use Iterator;
 
 class Specification implements Iterator{
     /**
-     * @var array|false
+     * @var array<string, mixed>|false
      */
     private $data;
 
@@ -37,32 +37,52 @@ class Specification implements Iterator{
         $this->rownumber = $this->countRows() - 1;
     }
 
+    /**
+     * @return void
+     */
     public function rewind() {
         $this->datastep = 0;
     }
 
+    /**
+     * @return array<string,string>
+     */
     public function current() {
         return $this->data;
     }
 
+    /**
+     * @return int
+     */
     public function key() {
         return $this->datastep;
     }
 
+    /**
+     * @return void
+     */
     public function next() {
         $this->data = $this->loader->next();
         ++$this->datastep;
     }
 
+    /**
+     * @return bool
+     */
     public function valid() {
         return $this->data !== false;
     }
 
+    /**
+     * @return string
+     */
     public function getFilepath() {
         return $this->filepath;
     }
 
     /**
+     * @return int
+     * 
      * @see https://stackoverflow.com/a/20537130
      */
     public function countRows() {
@@ -82,27 +102,30 @@ class Specification implements Iterator{
      * Rename the specification file to name_PROCESSED.
      * No more need since setProcessed must be called at the end of the run
      */
-    public function setProcessed() {
+    public function setProcessed() : void {
         rename($this->filepath, $this->getPath() . '/' . $this->getFilename() . '_PROCESSED.' . $this->getExtension());
     }
 
-    public function getPath() {
+    public function getPath() : string{
         return pathinfo($this->filepath)['dirname'];
     }
 
-    public function getFilename() {
+    public function getFilename() : string{
         return pathinfo($this->filepath)['filename'];
     }
 
-    public function getExtension() {
+    public function getExtension() : string{
         return pathinfo($this->filepath)['extension'];
     }
 
-    public function getRowNumber() {
+    public function getRowNumber() : int{
         return $this->rownumber;
     }
 
-    public function getColumnsHeader() {
+    /**
+     * @return array<string>
+     */
+    public function getColumnsHeader() : array{
         return $this->loader->getColumnsHeader();
     }
 }

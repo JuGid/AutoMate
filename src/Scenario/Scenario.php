@@ -9,8 +9,19 @@ use Symfony\Component\Yaml\Yaml;
 
 class Scenario implements Iterator{
 
+    /**
+     * @var array
+     */
     private $scenario;
+
+    /**
+     * @var int
+     */
     private $step;
+
+    /**
+     * @var string
+     */
     private $name;
 
     public function __construct(string $file, string $name) {
@@ -29,7 +40,7 @@ class Scenario implements Iterator{
         }
     }
 
-    private function parseScenarioFile($file) {
+    private function parseScenarioFile(string $file) : array{
         try{
             return Yaml::parseFile($file);
         } catch(ParseException $e) {
@@ -38,11 +49,11 @@ class Scenario implements Iterator{
         }
     }
 
-    public function getName() {
+    public function getName() : string {
         return $this->name;
     }
 
-    public function getScenarioArray() {
+    public function getScenarioArray() : array {
         return $this->scenario;
     }
 
@@ -59,22 +70,37 @@ class Scenario implements Iterator{
         }
     }
 
+    /**
+     * @return void
+     */
     public function rewind() {
         $this->step = 0;
     }
 
+    /**
+     * @return array
+     */
     public function current() {
         return $this->scenario['scenario']['steps'][$this->step];
     }
 
+    /**
+     * @return string
+     */
     public function key() {
         return key($this->scenario['scenario']['steps'][$this->step]);
     }
 
+    /**
+     * @return void
+     */
     public function next() {
         ++$this->step;
     }
 
+    /**
+     * @return bool
+     */
     public function valid() {
         return isset($this->scenario['scenario']['steps'][$this->step]);
     }

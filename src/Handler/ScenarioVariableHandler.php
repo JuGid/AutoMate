@@ -5,9 +5,13 @@ namespace Automate\Handler;
 use Automate\Exception\VariableException;
 
 class ScenarioVariableHandler implements IHandler {
-    static $variables;
 
-    public static function add(string $name, $value) {
+    /**
+     * @var array<string,string>
+     */
+    private static $variables;
+
+    public static function add(string $name, string $value) : void {
         if(isset(self::$variables[$name])) {
             throw new VariableException('Variable ' . $name . ' already exists');
         }
@@ -15,13 +19,13 @@ class ScenarioVariableHandler implements IHandler {
         self::$variables[$name] = $value;
     }
 
-    public static function remove(string $name) {
+    public static function remove(string $name) : void{
         if(isset(self::$variables[$name])) {
             unset(self::$variables[$name]);
         }
     }
 
-    public static function get(string $name) {
+    public static function get(string $name) : string {
         if(!isset(self::$variables[$name])) {
             throw new VariableException('Variable ' . $name . ' does not exist');
         }

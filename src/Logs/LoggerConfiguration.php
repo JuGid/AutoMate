@@ -7,7 +7,7 @@ class LoggerConfiguration {
     /**
      * Columns to logs
      * 
-     * @var array
+     * @var array<string>
      */
     private $columns_log = [];
 
@@ -20,6 +20,8 @@ class LoggerConfiguration {
 
     /**
      * The name of the scenario running
+     * 
+     * @var string
      */
     private $scenario_name = "";
 
@@ -45,11 +47,14 @@ class LoggerConfiguration {
         return $this;
     }
 
-    public function getLogColumns() {
+    /**
+     * @return array<string>
+     */
+    public function getLogColumns() : array{
         return $this->columns_log;
     }
 
-    public function hasColumnExceptions() {
+    public function hasColumnExceptions() : bool {
         return !empty($this->getLogColumns());
     }
 
@@ -58,19 +63,19 @@ class LoggerConfiguration {
         return $this;
     }
 
-    public function getLogsDirectory() {
+    public function getLogsDirectory() : string {
         return $this->logs_directory;
     }
 
-    public function setScenarioName(string $name) {
+    public function setScenarioName(string $name) : void {
         $this->scenario_name = $name;
     }
 
-    public function getScenarioName() {
+    public function getScenarioName() : string {
         return $this->scenario_name;
     }
 
-    public function getPartialName() {
+    public function getPartialName() : string {
         return $this->partial_name;
     }
 
@@ -79,7 +84,7 @@ class LoggerConfiguration {
      * 
      * @return string Fullpath of the log wins file
      */
-    public function getFilepathLogWins() {
+    public function getFilepathLogWins() : string {
         return $this->getLogsDirectory() . '/' . $this->getScenarioName() . '/LOGS_WINS_' . $this->getPartialName() . '.csv';
     }
 
@@ -88,7 +93,7 @@ class LoggerConfiguration {
      * 
      * @return string Fullpath of the log errors file
      */
-    public function getFilepathLogErrors() {
+    public function getFilepathLogErrors() : string {
         return $this->getLogsDirectory() . '/' . $this->getScenarioName() . '/LOGS_ERRORS_' . $this->getPartialName() . '.csv';
     }
 

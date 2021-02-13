@@ -9,7 +9,7 @@ class ReloadTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['reload'=>'page'];
     }
@@ -17,7 +17,7 @@ class ReloadTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $this->driver->navigate()->refresh();
     }

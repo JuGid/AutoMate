@@ -10,7 +10,7 @@ class CookieTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return [
             'cookie' => [
@@ -23,7 +23,7 @@ class CookieTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void 
     {   
         $cookie = new Cookie($this->step['cookie']['name'], $this->step['cookie']['value']);
         $this->driver->manage()->addCookie($cookie);

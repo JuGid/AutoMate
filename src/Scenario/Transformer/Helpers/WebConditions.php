@@ -12,10 +12,12 @@ use Facebook\WebDriver\WebDriverExpectedCondition;
  */
 class WebConditions {
 
-    public static function get(string $type, string $element = null, string $webLocatorType = null, string $text = null) {
+    public static function get(string $type, string $element = null, string $webLocatorType = null, string $text = null) : WebDriverExpectedCondition{
         
         if($webLocatorType !== null && $element !== null) {
             $elmLocator = WebLocator::get($webLocatorType, $element);
+        } else {
+            $elmLocator = null;
         }
         
         switch($type) {

@@ -6,12 +6,20 @@ use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
 use Automate\Exception\DriverException;
 use Automate\Handler\WindowHandler;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
  * This class is used to get the right Webdriver and process the start of it.
  */
 class DriverManager {
+  /**
+   * @var RemoteWebDriver|null
+   */
   private $driver;
+
+  /**
+   * @var string
+   */
   private $webdriverFolder;
 
   public function __construct()
@@ -22,9 +30,8 @@ class DriverManager {
   /**
    * @param string $browser The browser which you want the driver
    * @param string $webdriverFolder The webdriver folder
-   * @return WebDriver The driver to use.
    */
-  public function getDriver(string $browser, string $webdriverFolder) {
+  public function getDriver(string $browser, string $webdriverFolder) : RemoteWebDriver {
     $this->webdriverFolder = $webdriverFolder;
     
     if($browser == 'chrome') {
@@ -40,20 +47,20 @@ class DriverManager {
     return $this->driver;
   }
 
-  public function getCurrentDriver() {
+  public function getCurrentDriver() : RemoteWebDriver {
     return $this->driver;
   }
   
-  private function getChromeDriver() {
+  private function getChromeDriver() : ChromeDriver {
     putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
     return ChromeDriver::start();
   }
 
-  private function getFirefoxDriver() {
+  private function getFirefoxDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }
 
-  private function getSafariDriver() {
+  private function getSafariDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }
 }

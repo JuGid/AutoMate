@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer\Helpers;
 
+use Automate\Exception\CommandException;
 use Facebook\WebDriver\WebDriverBy;
 
 /**
@@ -9,7 +10,10 @@ use Facebook\WebDriver\WebDriverBy;
  */
 class WebLocator {
 
-    public static function get(string $type, string $element) {
+    /**
+     * @return \Facebook\WebDriver\WebDriverBy
+     */
+    public static function get(string $type, string $element) : WebDriverBy {
         switch($type) {
             case "css":
                 return WebDriverBy::cssSelector($element);
@@ -27,6 +31,8 @@ class WebLocator {
                 return WebDriverBy::linkText($element);
             case "pltext":
                 return WebDriverBy::partialLinkText($element);
+            default:
+                throw new CommandException('Find an element with '. $type . ' is not allowed');
         }  
     }
 }

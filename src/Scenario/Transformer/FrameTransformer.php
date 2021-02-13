@@ -9,7 +9,7 @@ class FrameTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['frame'=>[
             ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string',
@@ -21,7 +21,7 @@ class FrameTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         $keys = array_keys($this->step['frame']);
         $values = array_values($this->step['frame']);
@@ -29,7 +29,8 @@ class FrameTransformer extends AbstractTransformer {
         if($keys[0] == 'index') {
             $this->driver->switchTo()->frame($this->step['frame']['index']);
         } else {
-            $this->driver->switchTo()->frame(WebLocator::get($keys[0], $values[0]));
+            $element = $this->driver->findElement(WebLocator::get($keys[0], $values[0]));
+            $this->driver->switchTo()->frame($element);
         }
     }
 

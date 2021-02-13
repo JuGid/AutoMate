@@ -10,7 +10,7 @@ class CreateTransformer extends AbstractTransformer {
      * {@inheritdoc}
      * @todo sendkeys and gettext to implement
      */
-    protected function getPattern()
+    protected function getPattern() : array 
     {
         return ['create' => ':string :in("tab","window")'];
     }
@@ -18,7 +18,7 @@ class CreateTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {   
         // Coming with the new php-webdriver release
         /*
@@ -30,7 +30,8 @@ class CreateTransformer extends AbstractTransformer {
             $this->driver->switchTo()->newWindow();
         } 
         */
-        $this->driver->switchTo()->newWindow();
+        
+        //$this->driver->switchTo()->newWindow();
         WindowHandler::setWindows($this->driver->getWindowHandles());
     }
 

@@ -7,7 +7,7 @@ class ImpltmTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return ['impltm'=>':number :int'];
     }
@@ -15,7 +15,7 @@ class ImpltmTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $this->driver->manage()->timeouts()->implicitlyWait($this->step['impltm']);
     }

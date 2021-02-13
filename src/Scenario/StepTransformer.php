@@ -3,12 +3,16 @@
 namespace Automate\Scenario;
 
 use Automate\Exception\CommandException;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 class StepTransformer {
 
+    /**
+     * @var RemoteWebDriver
+     */
     private $driver;
 
-    public function __construct($driver)
+    public function __construct(RemoteWebDriver $driver)
     {
         $this->driver = $driver;
     }

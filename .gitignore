@@ -5,3 +5,4 @@
 /specs
 /scenario
 /logs
+.phpunit.result.cache

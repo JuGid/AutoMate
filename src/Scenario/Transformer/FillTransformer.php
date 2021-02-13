@@ -9,7 +9,7 @@ class FillTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function getPattern()
+    protected function getPattern() : array
     {
         return [
             'fill' => [
@@ -22,7 +22,7 @@ class FillTransformer extends AbstractTransformer {
     /**
      * {@inheritdoc}
      */
-    protected function transform() 
+    protected function transform() : void
     {
         $webLocator = WebLocator::get(array_keys($this->step['fill'])[0], array_values($this->step['fill'])[0]);
         $this->driver->findElement($webLocator)->sendKeys($this->step['fill']['with']);

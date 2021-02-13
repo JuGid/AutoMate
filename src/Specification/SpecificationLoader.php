@@ -13,13 +13,16 @@ use Automate\Handler\SpecVariableHandler;
 class SpecificationLoader {
 
     /**
-     * @var ressource
+     * Pointer to spec file
+     * 
+     * @var resource|false
      */
     private $file;
 
     /**
      * The columns from header
-     * @var array
+     * 
+     * @var array<string>|false|null
      */
     private $columns;
 
@@ -33,6 +36,9 @@ class SpecificationLoader {
      */
     public function __construct(string $filepath) {
         $this->file = fopen($filepath, 'r');
+        if($this->file === false) {
+            throw new SpecificationException('Loader cannot open the specification file');
+        }
         $this->columns = fgetcsv($this->file);
         $this->columns_nb = count($this->columns);
     }
@@ -41,6 +47,8 @@ class SpecificationLoader {
      * Give the next dataset from specification file
      * If the dataset is null, the line is empty, an Exception is thrown
      * If fgetcsv detect the EOL, next() return false and close file
+     * 
+     * @return array|bool
      */
     public function next() {
         $dataline = fgetcsv($this->file, 4096);
@@ -64,7 +72,10 @@ class SpecificationLoader {
         return false;
     }
 
-    public function getColumnsHeader() {
+    /**
+     * @return array<string>
+     */
+    public function getColumnsHeader() : array{
         return $this->columns;
     }
 }
