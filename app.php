@@ -6,6 +6,6 @@ require __DIR__.'/vendor/autoload.php';
 use Automate\Scenario\ScenarioRunner;
 
 $scenarioRunner = new ScenarioRunner();
-$scenarioRunner->setConfigurationFile(__DIR__.'/config/config-jugid.yaml');
+$scenarioRunner->setConfigurationFile(__DIR__.'/exemple/config/config-jugid.yaml');
 $scenarioRunner->enableTestMode();
 $scenarioRunner->run('youtube', true);
