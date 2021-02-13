@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap.php"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="true">
+         >
+
     <testsuites>
-        <testsuite name="global">
-            <directory suffix="Test.php">./tests/Global</directory>
-        </testsuite>
-        <testsuite name="transformers">
-            <directory suffix="Test.php">./tests/Transformers</directory>
+        <testsuite name="tests">
+            <directory suffix="Test.php">./tests</directory>e
         </testsuite>
     </testsuites>
+
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
-    <php>
-    </php>
+
 </phpunit>
