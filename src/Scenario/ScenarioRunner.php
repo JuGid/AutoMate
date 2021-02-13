@@ -5,6 +5,7 @@ namespace Automate\Scenario;
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverManager;
 use Automate\Exception\BrowserException;
+use Automate\Exception\ConfigurationException;
 use Automate\Exception\DriverException;
 use Automate\Exception\LogException;
 use Automate\Exception\SpecificationException;
@@ -57,9 +58,9 @@ class ScenarioRunner {
   private $testMode = false;
 
   public function __construct() {
-    $this->config = new Configuration();
-    $this->driverManager = new DriverManager();
-    $this->logger = new DefaultLogger();
+      $this->config = new Configuration();
+      $this->driverManager = new DriverManager();
+      $this->logger = new DefaultLogger();
   }
 
   /**
@@ -184,7 +185,12 @@ class ScenarioRunner {
    * @param string $configFile The filepath of the new configuration file
    */
   public function setConfigurationFile(string $configFile) : void {
-    $this->config->setConfigurationFile($configFile);
+    try {
+      $this->config->setConfigurationFile($configFile);
+    }catch(ConfigurationException $e) {
+      echo $e->getMessage()."\n";
+      die();
+    }
   }
 
   /**

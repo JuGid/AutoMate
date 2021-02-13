@@ -121,7 +121,7 @@ abstract class AbstractLogger {
     }
 
     /**
-     * @param array<string, mixed> $dataset
+     * @param array<string,string> $dataset
      */
     abstract public function log(array $dataset, string $log_type) : void;
 

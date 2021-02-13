@@ -41,9 +41,14 @@ class Configuration implements ConfigurationInterface {
    */
   private $default;
 
-  public function __construct(string $config_file = __DIR__.'/../../config/config.yaml') {
-    $this->setConfigurationFile($config_file);
-    $this->load();
+  public function __construct(string $config_file = __DIR__.'/../../config/default-config.yaml') {
+    try {
+      $this->setConfigurationFile($config_file);
+      $this->load();
+    } catch(ConfigurationException $e) {
+      echo $e->getMessage()."\n";
+      die();
+    }
   }
 
   public function getConfigTreeBuilder() : TreeBuilder
@@ -111,7 +116,7 @@ class Configuration implements ConfigurationInterface {
       $this->load();
     }
     else {
-      throw new ConfigurationException('The configuration file is not valid');
+      throw new ConfigurationException('The configuration file is not valid or does not exist');
     }
   }
 
