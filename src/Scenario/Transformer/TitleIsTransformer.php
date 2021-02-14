@@ -11,7 +11,7 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['titleIs' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']));
     }
 
     /**
@@ -27,7 +27,7 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until title is " . $this->step['titleIs'];
     }
 
 }

@@ -11,7 +11,7 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['urlContains' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']));
     }
 
     /**
@@ -27,7 +27,7 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until contains " . $this->step['urlContains'];
     }
 
 }

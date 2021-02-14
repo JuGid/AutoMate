@@ -11,7 +11,7 @@ class UrlMatchesTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['urlMatches' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class UrlMatchesTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::urlMatches($this->step['urlMatches']));
     }
 
     /**
@@ -27,7 +27,7 @@ class UrlMatchesTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until url matches " . $this->step['urlMatches'];
     }
 
 }

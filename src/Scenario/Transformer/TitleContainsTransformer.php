@@ -11,7 +11,7 @@ class TitleContainsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['titleContains' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class TitleContainsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::titleContains($this->step['titleContains']));
     }
 
     /**
@@ -27,7 +27,7 @@ class TitleContainsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until title contains " . $this->step['titleContains'];
     }
 
 }

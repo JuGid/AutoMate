@@ -15,8 +15,20 @@ class Console {
         echo "/_/    \_\__,_|\__\___/|_|  |_|\__,_|\__\___| \n";
     }
 
+    public static function start() {
+        self::separator();
+        self::writeln(" __ _             _   ");
+        self::writeln("/ _\ |_ __ _ _ __| |_ ");
+        self::writeln("\ \| __/ _` | '__| __|");
+        self::writeln("_\ \ || (_| | |  | |_ ");
+        self::writeln("\__/\__\__,_|_|   \__|");
+        self::separator();
+    }
+
     public static function end() {
+        self::separator('=');
         echo "___ _  _ ___  \n| __| \| |   \ \n| _|| .` | |) |\n|___|_|\_|___/    \n";
+        self::separator('=');
     }
 
     public static function separator($separator = '_', int $size = 60) {

@@ -11,7 +11,7 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['numberOfWindows' => ':number :int'];
     }
 
     /**
@@ -19,7 +19,7 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::numberOfWindowsToBe(intval($this->step['numberOfWindows'])));
     }
 
     /**
@@ -27,7 +27,7 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return 'Wait until number of windows is ' . intval($this->step['numberOfWindows']);
     }
 
 }

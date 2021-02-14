@@ -168,7 +168,6 @@ class ScenarioRunner {
     
     $this->logger->end();
 
-    Console::separator();
     Console::end();
     Console::writeln('Scenario with specification finished with Wins : '.$this->wins . ' / Errors : '. $this->errors);
     Console::separator('=');

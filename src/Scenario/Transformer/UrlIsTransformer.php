@@ -11,7 +11,7 @@ class UrlIsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['urlIs' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class UrlIsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::urlIs($this->step['urlIs']));
     }
 
     /**
@@ -27,7 +27,7 @@ class UrlIsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until url is " . $this->step['urlIs'];
     }
 
 }

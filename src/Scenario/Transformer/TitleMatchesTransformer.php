@@ -11,7 +11,7 @@ class TitleMatchesTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        
+        return ['titleMatches' => ':string'];
     }
 
     /**
@@ -19,7 +19,7 @@ class TitleMatchesTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        
+        $this->driver->wait()->until(WebDriverExpectedCondition::titleMatches($this->step['titleMatches']));
     }
 
     /**
@@ -27,7 +27,7 @@ class TitleMatchesTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        
+        return "Wait until title matches " . $this->step['titleMatches'];
     }
 
 }
