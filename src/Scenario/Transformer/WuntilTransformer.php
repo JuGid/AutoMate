@@ -6,6 +6,7 @@ use Automate\Scenario\Transformer\Helpers\WebConditions;
 
 /**
  * @todo Divise this class
+ * @deprecated Deprecated since wuntil has been split into multiple commands
  */
 class WuntilTransformer extends AbstractTransformer {
 

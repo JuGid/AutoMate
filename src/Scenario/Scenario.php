@@ -40,12 +40,15 @@ class Scenario implements Iterator{
         }
     }
 
+    /**
+     * @todo add scenario validation
+     */
     private function parseScenarioFile(string $file) : array{
         try{
             return Yaml::parseFile($file);
         } catch(ParseException $e) {
-            echo $e->getMessage() . " Please check your configuration file.\n";
-            die(); 
+            $message = sprintf("%s%s",$e->getMessage(), " Please check your configuration file.");
+            throw new ParseException($message, $e->getParsedLine());
         }
     }
 

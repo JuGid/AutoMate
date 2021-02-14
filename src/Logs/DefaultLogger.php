@@ -8,6 +8,11 @@ class DefaultLogger extends AbstractLogger {
      * @param array<string,string> $dataset
      */
     public function log(array $dataset, string $log_type) : void {
-        $this->write($dataset, $log_type);
+        if($this->enable) {
+            if($log_type == LogType::LOG_WINS) {
+                $this->addMessage('Finished with success.');
+            }
+            $this->write($dataset, $log_type);
+        }  
     }
 }

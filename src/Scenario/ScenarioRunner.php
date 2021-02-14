@@ -3,6 +3,7 @@
 namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
+use Automate\Console\Console;
 use Automate\Driver\DriverManager;
 use Automate\Exception\BrowserException;
 use Automate\Exception\ConfigurationException;
@@ -14,6 +15,7 @@ use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
 use Automate\Specification\Specification;
 use Automate\Specification\SpecificationFinder;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 class ScenarioRunner {
   /**
@@ -76,18 +78,19 @@ class ScenarioRunner {
    */
   public function run(string $scenario_name, bool $with_spec = false, string $on_browser = null) : void{
     $scenarioFilepath = $this->config->getScenarioFolder() . '/' . $scenario_name . '.yaml';
-    $scenario = new Scenario($scenarioFilepath, $scenario_name);
-    $scenarioBrowser = $scenario->getScenarioBrowser($on_browser, $this->config->getDefaultBrowser());
-
-    try {
+    
+    try 
+    {
+      $scenario = new Scenario($scenarioFilepath, $scenario_name);
+      $scenarioBrowser = $scenario->getScenarioBrowser($on_browser, $this->config->getDefaultBrowser());
       $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
       $sttr = new StepTransformer($driver);
-    } catch(BrowserException|DriverException $e) {
-      echo $e->getMessage() . "\n";
+    } 
+    catch(BrowserException|DriverException|ParseException $e) {
+      Console::writeEx($e);
       die();
     }
     
-
     if($with_spec) {
       $this->runSpecification($sttr, $scenario);
     } else {
@@ -119,7 +122,7 @@ class ScenarioRunner {
         $this->logger->log($dataset, LogType::LOG_ERRORS);
         ++$this->errors;
       }
-      echo $e->getMessage() . "\n";
+      Console::writeEx($e);
     } 
   }
 
@@ -136,40 +139,43 @@ class ScenarioRunner {
       if(!$this->hasSpec()) {
         $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
         echo 'Detected file : ' . $this->spec->getFilepath() . "\n";
-        $this->logger->init($this->config->getLogsFolder(), $scenario->getName(), $this->spec->getColumnsHeader());
+        
+        if($this->config->isLogEnable()) {
+          $this->logger->init($this->config->getLogsFolder(), $scenario->getName(), $this->spec->getColumnsHeader());
+        } else {
+          $this->logger->disable();
+        }
+        
       }
     } catch(SpecificationException|LogException $e) {
-      echo $e->getMessage() . "\n";
+      Console::writeEx($e);
       $this->driverManager->getCurrentDriver()->quit();
       die();
     }
     
     foreach($this->spec as $dataset) 
     {
-      echo "_________________________________________________________________\n";
-      echo "    /\        | |      |  \/  |     | |      \n";
-      echo "   /  \  _   _| |_ ___ | \  / | __ _| |_ ___ \n";
-      echo "  / /\ \| | | | __/ _ \| |\/| |/ _` | __/ _ \ \n";
-      echo " / ____ \ |_| | || (_) | |  | | (_| | ||  __/ \n";
-      echo "/_/    \_\__,_|\__\___/|_|  |_|\__,_|\__\___| \n";
-      echo "Line ". ($this->spec->key() + 1) .'/'. $this->spec->getRowNumber() . "\n";
-      echo "Data set : " . implode(',',$dataset) . "\n";
-      echo "_________________________________________________________________\n";
+      Console::separator();
+      Console::logo();
+      Console::writeln("Line ". ($this->spec->key() + 1) .'/'. $this->spec->getRowNumber());
+      Console::writeln("Data set : " . implode(',',$dataset));
+      Console::separator();
+
       $this->runScenario($sttr, $scenario, $dataset);
     }
 
     if(!$this->testMode) $this->spec->setProcessed();
+    
     $this->logger->end();
-    echo "_________________________________________________________________\n";
-    echo "___ _  _ ___  \n";
-    echo "| __| \| |   \ \n";
-    echo "| _|| .` | |) |\n";
-    echo "|___|_|\_|___/    \n";
-    echo 'Scenario with specification finished with Wins : '.$this->wins . ' / Errors : '. $this->errors . "\n";
-    echo "Logs can be found at : \n";
-    echo "* LOGS_WIN : " . $this->logger->getConfiguration()->getFilepathLogWins() . "\n";
-    echo "* LOGS_ERRORS : " . $this->logger->getConfiguration()->getFilepathLogErrors() . "\n";
-    echo "=================================================================\n";
+
+    Console::separator();
+    Console::end();
+    Console::writeln('Scenario with specification finished with Wins : '.$this->wins . ' / Errors : '. $this->errors);
+    Console::separator('=');
+    Console::writeln("Logs can be found at :");
+    Console::writeln("* LOGS_WIN : " . $this->logger->getConfiguration()->getFilepathLogWins());
+    Console::writeln("* LOGS_ERRORS : " . $this->logger->getConfiguration()->getFilepathLogErrors());
+    Console::separator('=');
   }
 
   /**
@@ -188,7 +194,7 @@ class ScenarioRunner {
     try {
       $this->config->setConfigurationFile($configFile);
     }catch(ConfigurationException $e) {
-      echo $e->getMessage()."\n";
+      Console::writeEx($e);
       die();
     }
   }

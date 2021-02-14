@@ -8,4 +8,5 @@ use Automate\Scenario\ScenarioRunner;
 $scenarioRunner = new ScenarioRunner();
 $scenarioRunner->setConfigurationFile(__DIR__.'/example/config/config-test.yaml');
 $scenarioRunner->enableTestMode();
+// $scenarioRunner->setColumnsToLog(['url']);
 $scenarioRunner->run('youtube', true);

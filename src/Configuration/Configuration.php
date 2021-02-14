@@ -121,7 +121,7 @@ class Configuration implements ConfigurationInterface {
   }
 
   public function isLogEnable() : bool{
-    return $this->logs['enable'];
+    return $this->logs['enable'] === true;
   }
 
   public function getLogsFolder() : string{

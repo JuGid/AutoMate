@@ -35,9 +35,24 @@ abstract class AbstractLogger {
      */
     protected $file_w;
 
+    /**
+     * If false, the logs are desactivated
+     * 
+     * @var bool
+     */
+    protected $enable = true;
+
     public function __construct(string $directory = "") {
         $this->configuration = new LoggerConfiguration();
         $this->configuration->setLogsDirectory($directory);
+    }
+
+    /**
+     * Enable/Disable the use of logs
+     * 
+     */
+    public function disable() {
+        $this->enable = false;
     }
 
     /**
@@ -116,6 +131,9 @@ abstract class AbstractLogger {
     }
     
     public function end() : void{
+        if($this->file_e === false || $this->file_w === false) {
+            throw new LogException('Cannot close a file that is not open.');
+        }
         fclose($this->file_e);
         fclose($this->file_w);
     }
