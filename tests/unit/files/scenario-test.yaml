@@ -1,0 +1,9 @@
+browser: chrome
+variables:
+  foo: 'bar'
+scenario:
+  steps:
+    - go: 'https://github.com/JuGid/AutoMate'
+    - cookie:
+        name: "myCookie"
+        value: "myValue"

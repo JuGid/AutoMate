@@ -4,6 +4,7 @@ namespace Automate\Driver;
 
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
+use Automate\Exception\ConfigurationException;
 use Automate\Exception\DriverException;
 use Automate\Handler\WindowHandler;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -27,12 +28,18 @@ class DriverManager {
     $this->driver = null;
     $this->webdriverFolder = '';
   }
+
   /**
    * @param string $browser The browser which you want the driver
    * @param string $webdriverFolder The webdriver folder
+   * @return RemoteWebDriver|null 
    */
-  public function getDriver(string $browser, string $webdriverFolder) : RemoteWebDriver {
-    $this->webdriverFolder = $webdriverFolder;
+  public function getDriver(string $browser, string $webdriverFolder) {
+    if(!empty($webdriverFolder)) {
+      $this->webdriverFolder = $webdriverFolder;
+    } else {
+      throw new ConfigurationException('Webdriver folder is not valid');
+    }
     
     if($browser == 'chrome') {
       $this->driver = $this->getChromeDriver();
@@ -41,25 +48,41 @@ class DriverManager {
     }elseif($browser == 'safari') {
       $this->driver = $this->getSafariDriver();
     }else {
-      throw new BrowserException('The browser ' . $browser . 'is not managed by AutoMate');
+      throw new BrowserException('The browser ' . $browser . ' is not managed by AutoMate');
     }
     WindowHandler::setWindows($this->driver->getWindowHandles());
     return $this->driver;
   }
 
-  public function getCurrentDriver() : RemoteWebDriver {
+  /**
+   * @return RemoteWebDriver|null 
+   */
+  public function getCurrentDriver() {
     return $this->driver;
   }
+
+  public function getWebdriverFolder() : string {
+    return $this->webdriverFolder;
+  }
   
+  /**
+   * @return RemoteWebDriver|null 
+   */
   private function getChromeDriver() : ChromeDriver {
     putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
     return ChromeDriver::start();
   }
 
+  /**
+   * @return RemoteWebDriver|null 
+   */
   private function getFirefoxDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }
 
+  /**
+   * @return RemoteWebDriver|null 
+   */
   private function getSafariDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }

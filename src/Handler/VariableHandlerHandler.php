@@ -32,4 +32,22 @@ class VariableHandlerHandler {
             throw new VariableCallException('The scope ' . $from . ' does not exist');
         }
     }
+
+    public static function removeAll(string $from) : void {
+        $class = __NAMESPACE__ . '\\'.ucfirst($from) . 'VariableHandler';
+        if(class_exists($class)) {
+            $class::removeAll();
+        } else {
+            throw new VariableCallException('The scope ' . $from . ' does not exist');
+        }
+    }
+
+    public static function isEmpty(string $from) : bool {
+        $class = __NAMESPACE__ . '\\'.ucfirst($from) . 'VariableHandler';
+        if(class_exists($class)) {
+            return $class::isEmpty();
+        } else {
+            throw new VariableCallException('The scope ' . $from . ' does not exist');
+        }
+    }
 }

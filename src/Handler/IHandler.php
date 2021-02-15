@@ -9,4 +9,8 @@ interface IHandler {
     public static function remove(string $name) : void;
 
     public static function get(string $name) : string;
+
+    public static function removeAll() : void;
+
+    public static function isEmpty() : bool;
 }

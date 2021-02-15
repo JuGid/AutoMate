@@ -55,6 +55,10 @@ abstract class AbstractLogger {
         $this->enable = false;
     }
 
+    public function isEnable() {
+        return $this->enable;
+    }
+
     /**
      * @param array<string> $spec_header
      */
@@ -131,6 +135,10 @@ abstract class AbstractLogger {
     }
     
     public function end() : void{
+        if($this->file_e === null || $this->file_w === null) {
+            throw new LogException('Use init() to set logs files');
+        }
+
         if($this->file_e === false || $this->file_w === false) {
             throw new LogException('Cannot close a file that is not open.');
         }
