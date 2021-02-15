@@ -65,24 +65,15 @@ class DriverManager {
     return $this->webdriverFolder;
   }
   
-  /**
-   * @return RemoteWebDriver|null 
-   */
   private function getChromeDriver() : ChromeDriver {
     putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
     return ChromeDriver::start();
   }
 
-  /**
-   * @return RemoteWebDriver|null 
-   */
   private function getFirefoxDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }
 
-  /**
-   * @return RemoteWebDriver|null 
-   */
   private function getSafariDriver() : RemoteWebDriver {
     throw new DriverException("Not implemented driver");
   }
