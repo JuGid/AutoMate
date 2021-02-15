@@ -41,7 +41,7 @@ class GetTransformer extends AbstractTransformer {
             $value = $this->driver->findElement($element)->getAttribute($arrayGet['attribute']);
         }
 
-        VariableHandlerHandler::set('global', $value, $arrayGet['name']);
+        VariableHandlerHandler::set('global', $arrayGet['name'], $value);
     }
 
     /**

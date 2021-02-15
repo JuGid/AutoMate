@@ -32,24 +32,21 @@ class SelectTransformer extends AbstractTransformer {
         $selectArray = $this->step['select'];
         if($selectArray['by'] == 'index' && is_numeric($selectArray['value'])) {
             $select->selectByIndex($selectArray['value']);
-        } else {
-            if(is_string($selectArray['value'])) {
-                switch($selectArray['by']) {
-                    case 'value':
-                        $select->selectByValue($selectArray['value']);
-                        break;
-                    case 'text':
-                        $select->selectByVisibleText($selectArray['value']);
-                        break;
-                    case 'pltext':
-                        $select->selectByVisiblePartialText($selectArray['value']);
-                        break;
-                }
-            }else {
-                throw new CommandException('The deselect value has to be of type string/text');
-            }
+        } elseif(is_string($selectArray['value'])) {
+            switch($selectArray['by']) {
+                case 'value':
+                    $select->selectByValue($selectArray['value']);
+                    break;
+                case 'text':
+                    $select->selectByVisibleText($selectArray['value']);
+                    break;
+                case 'pltext':
+                    $select->selectByVisiblePartialText($selectArray['value']);
+                    break;
+            } 
+        }else {
+            throw new CommandException('The select value has to be of type string/text or numeric for select by index');
         }
-
     }
 
     /**

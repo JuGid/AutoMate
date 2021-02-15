@@ -31,30 +31,27 @@ class DeselectTransformer extends AbstractTransformer {
         $select = new WebDriverSelect($element);
         $deselectArray = $this->step['deselect'];
 
-        if($deselectArray['by'] == 'index' && is_numeric($deselectArray['value'])) {
+        if(is_string($deselectArray['value'])) {
+            switch($deselectArray['by']) {
+                case 'value':
+                    if($deselectArray['value'] == 'all') {
+                        $select->deselectAll();
+                    } else {
+                        $select->selectByValue($deselectArray['value']);
+                    }
+                    break;
+                case 'text':
+                    $select->deselectByVisibleText($deselectArray['value']);
+                    break;
+                case 'pltext':
+                    $select->deselectByVisiblePartialText($deselectArray['value']);
+                    break;
+            }
+        } elseif(is_numeric($deselectArray['value']) && $deselectArray['by'] == 'index') {
             $select->deselectByIndex($deselectArray['value']);
         } else {
-            if(is_string($deselectArray['value'])) {
-                switch($deselectArray['by']) {
-                    case 'value':
-                        if($deselectArray['value'] == 'all') {
-                            $select->deselectAll();
-                        } else {
-                            $select->selectByValue($deselectArray['value']);
-                        }
-                        break;
-                    case 'text':
-                        $select->deselectByVisibleText($deselectArray['value']);
-                        break;
-                    case 'pltext':
-                        $select->deselectByVisiblePartialText($deselectArray['value']);
-                        break;
-                }
-            }else {
-                throw new CommandException('The deselect value has to be of type string/text');
-            }
+            throw new CommandException('The deselect value has to be of type string/text or numeric for deselect by index');
         }
-
     }
 
     /**

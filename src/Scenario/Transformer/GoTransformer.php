@@ -9,7 +9,6 @@ class GoTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        //this is the regexp for http/https adress and http/https://localhost
         return ['go'=>':string :url'];
     }
 
