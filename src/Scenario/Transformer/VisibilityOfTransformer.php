@@ -5,14 +5,14 @@ namespace Automate\Scenario\Transformer;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class PresenceOfTransformer extends AbstractTransformer {
+class VisibilityOfTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
      */
     protected function getPattern() : array
     {
-        return ['presenceOf'=> 
+        return ['visibilityOf'=> 
                     [
                         ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string'
                     ]
@@ -24,9 +24,9 @@ class PresenceOfTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        $key = array_keys($this->step['presenceOf'])[0];
-        $this->driver->wait()->until(WebDriverExpectedCondition::presenceOfElementLocated(
-            WebLocator::get($key , $this->step['presenceOf'][$key])
+        $key = array_keys($this->step['visibilityOf'])[0];
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated(
+            WebLocator::get($key , $this->step['visibilityOf'][$key])
         ));
     }
 
@@ -35,9 +35,9 @@ class PresenceOfTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Checking presence of element located by %s[%s]',
-                            array_keys($this->step['presenceOf'])[0],
-                            array_values($this->step['presenceOf'])[0]
+        return sprintf('Checking visibility of element located by %s[%s]',
+                            array_keys($this->step['visibilityOf'])[0],
+                            array_values($this->step['visibilityOf'])[0]
                         );
     }
 

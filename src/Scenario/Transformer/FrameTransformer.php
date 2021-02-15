@@ -34,4 +34,14 @@ class FrameTransformer extends AbstractTransformer {
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return sprintf('Frame to string');
+    }
+
+
+
 }

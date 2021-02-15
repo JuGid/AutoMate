@@ -27,7 +27,7 @@ class ReloadTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Reload page';
+        return sprintf('Reload the page');
     }
 
 }

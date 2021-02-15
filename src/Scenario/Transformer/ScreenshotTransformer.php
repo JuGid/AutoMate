@@ -37,11 +37,10 @@ class ScreenshotTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * @todo change this message pls
      */
     public function __toString()
     {
-        return 'Cheeeeeese';
+        return sprintf('Cheeeeeese');
     }
 
 }

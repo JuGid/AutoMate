@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Exception\NotImplementedException;
 use Automate\Handler\WindowHandler;
 
 class CreateTransformer extends AbstractTransformer {
@@ -32,7 +33,8 @@ class CreateTransformer extends AbstractTransformer {
         */
         
         //$this->driver->switchTo()->newWindow();
-        WindowHandler::setWindows($this->driver->getWindowHandles());
+        //WindowHandler::setWindows($this->driver->getWindowHandles());
+        throw new NotImplementedException('Command not implemented yet. Waiting php-driver new release.');
     }
 
     /**
@@ -40,7 +42,7 @@ class CreateTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Create new window';
+        return sprintf('Create a new %s and switch to it',$this->step['create']);
     }
 
 }

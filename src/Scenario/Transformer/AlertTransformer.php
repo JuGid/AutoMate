@@ -35,7 +35,7 @@ class AlertTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Alert ' . $this->step['alert'];
+        return sprintf('On alert : %s', $this->step['alert']);
     }
 
 }

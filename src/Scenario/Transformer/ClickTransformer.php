@@ -32,7 +32,10 @@ class ClickTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Click on element with [' . array_keys($this->step['click'])[0] .'] => [' . array_values($this->step['click'])[0] . ']';
+        return sprintf('Click on element %s[%s]',
+                            array_keys($this->step['click'])[0],
+                            array_values($this->step['click'])[0]
+                        );
     }
 
 }

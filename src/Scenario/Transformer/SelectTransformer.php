@@ -57,11 +57,12 @@ class SelectTransformer extends AbstractTransformer {
      */
     public function __toString()
     {   
-        $str = 'Select element with ['.array_keys($this->step['select'])[0].'] => [';
-        $str.= array_values($this->step['select'])[0].'] by:['.$this->step['select']['by'];
-        $str.= '] with value:['.$this->step['select']['value'].']';
-        
-        return $str;
+        return sprintf('Select in select %s[%s] by %s with value %s',
+                            array_keys($this->step['select'])[0],
+                            array_values($this->step['select'])[0],
+                            $this->step['select']['by'],
+                            $this->step['select']['value']
+                        );
     }
 
 }

@@ -5,14 +5,14 @@ namespace Automate\Scenario\Transformer;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class PresenceOfTransformer extends AbstractTransformer {
+class IsNotSelectedTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
      */
     protected function getPattern() : array
     {
-        return ['presenceOf'=> 
+        return ['isNotSelected'=> 
                     [
                         ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string'
                     ]
@@ -24,9 +24,9 @@ class PresenceOfTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        $key = array_keys($this->step['presenceOf'])[0];
-        $this->driver->wait()->until(WebDriverExpectedCondition::presenceOfElementLocated(
-            WebLocator::get($key , $this->step['presenceOf'][$key])
+        $key = array_keys($this->step['isNotSelected'])[0];
+        $this->driver->wait()->until(WebDriverExpectedCondition::elementSelectionStateToBe(
+            WebLocator::get($key , $this->step['isNotSelected'][$key]), false
         ));
     }
 
@@ -35,9 +35,9 @@ class PresenceOfTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Checking presence of element located by %s[%s]',
-                            array_keys($this->step['presenceOf'])[0],
-                            array_values($this->step['presenceOf'])[0]
+        return sprintf('Checking if element located by %s[%s] is not selected',
+                            array_keys($this->step['isNotSelected'])[0],
+                            array_values($this->step['isNotSelected'])[0]
                         );
     }
 

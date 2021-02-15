@@ -39,4 +39,17 @@ class ResizeTransformer extends AbstractTransformer {
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        $array = $this->step['resize'];
+        $str = isset($array['width']) && isset($array['height']) ? sprintf('with weight %spx and $spx',
+                                                                            $array['width'],
+                                                                            $array['height']
+                                                                        ) : '';
+        return sprintf('Resize the page [%s] %s', $this->step['resize']['type'], $str);
+    }
+
 }

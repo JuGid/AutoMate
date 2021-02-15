@@ -62,11 +62,12 @@ class DeselectTransformer extends AbstractTransformer {
      */
     public function __toString()
     {   
-        $str = 'Deselect element with ['.array_keys($this->step['deselect'])[0].'] => [';
-        $str.= array_values($this->step['deselect'])[0].'] by:['.$this->step['deselect']['by'];
-        $str.= '] with value:['.$this->step['deselect']['value'].']';
-
-        return $str;
+        return sprintf('Deselect in select %s[%s] by %s with value %s',
+                            array_keys($this->step['deselect'])[0],
+                            array_values($this->step['deselect'])[0],
+                            $this->step['deselect']['by'],
+                            $this->step['deselect']['value']
+                        );
     }
 
 }

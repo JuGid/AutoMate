@@ -27,7 +27,7 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Wait until number of windows is ' . intval($this->step['numberOfWindows']);
+        return sprintf('Wait until number of windows is %s', intval($this->step['numberOfWindows']));
     }
 
 }

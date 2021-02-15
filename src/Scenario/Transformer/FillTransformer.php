@@ -33,10 +33,11 @@ class FillTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        $str = 'Fill element with [' . array_keys($this->step['fill'])[0] .'] => [';
-        $str.= array_values($this->step['fill'])[0] . '] with value ' . $this->step['fill']['with'];
-        
-        return $str;
+        return sprintf('Fill element %s[%s] with value %s',
+                            array_keys($this->step['fill'])[0],
+                            array_values($this->step['fill'])[0],
+                            $this->step['fill']['with']
+                        );
     }
 
 }

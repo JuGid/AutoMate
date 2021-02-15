@@ -44,4 +44,17 @@ class GetTransformer extends AbstractTransformer {
         VariableHandlerHandler::set('global', $value, $arrayGet['name']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        $str = isset($this->step['get']['attribute']) ? 'with value ' . $this->step['get']['attribute'] : '';
+        return sprintf('Get %s for element %s[%s] %s',
+                            $this->step['get']['what'],
+                            array_keys($this->step['get'])[0],
+                            array_values($this->step['get'])[0],
+                            $str
+                        );
+    }
 }

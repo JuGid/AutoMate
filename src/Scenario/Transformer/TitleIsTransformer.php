@@ -27,7 +27,7 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until title is " . $this->step['titleIs'];
+        return sprintf('Wait until title is %s', $this->step['titleIs']);
     }
 
 }

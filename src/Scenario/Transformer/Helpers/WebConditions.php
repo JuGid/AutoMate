@@ -8,7 +8,7 @@ use Facebook\WebDriver\WebDriverExpectedCondition;
 /**
  * WebDriverExpectedCondition overlay that defines the good conditions from type.
  * Warning : Not that much control on that class. Can catch them at a higher level.
- * @deprecated This web condition will be removed in next commit
+ * @deprecated To remove soon
  */
 class WebConditions {
 

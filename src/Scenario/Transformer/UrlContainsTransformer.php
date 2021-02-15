@@ -27,7 +27,7 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until contains " . $this->step['urlContains'];
+        return sprintf('Wait until url contains %s', $this->step['urlContains']);
     }
 
 }

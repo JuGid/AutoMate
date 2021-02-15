@@ -25,7 +25,7 @@ class ImpltmTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Set implicit timeout :impltm['.$this->step['impltm'].']';
+        return sprintf('Set implicit timeout %s s', $this->step['impltm']);
     }
 
 }

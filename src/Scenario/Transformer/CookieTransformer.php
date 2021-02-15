@@ -34,6 +34,9 @@ class CookieTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'Add Cookie with name:[' . $this->step['cookie']['name'] . '] and value:[' . $this->step['cookie']['value'] . ']';
+        return sprintf('Create a cookie with %s:%s',
+                            $this->step['cookie']['name'],
+                            $this->step['cookie']['value']
+                        );
     }
 }

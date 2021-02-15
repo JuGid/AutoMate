@@ -27,7 +27,7 @@ class UrlMatchesTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until url matches " . $this->step['urlMatches'];
+        return sprintf('Wait until url matches regexp %s', $this->step['urlMatches']);
     }
 
 }

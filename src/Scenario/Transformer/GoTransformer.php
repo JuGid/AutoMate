@@ -26,6 +26,6 @@ class GoTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return 'GO at ' . $this->step['go'];
+        return sprintf('Go at adresse %s', $this->step['go']);
     }
 }

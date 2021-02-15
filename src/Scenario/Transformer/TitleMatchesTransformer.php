@@ -27,7 +27,7 @@ class TitleMatchesTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until title matches " . $this->step['titleMatches'];
+        return sprintf('Wait until title matches regexp %s', $this->step['titleContains']);
     }
 
 }

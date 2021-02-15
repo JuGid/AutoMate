@@ -27,7 +27,7 @@ class TitleContainsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until title contains " . $this->step['titleContains'];
+        return sprintf('Wait until title contains %s', $this->step['titleContains']);
     }
 
 }

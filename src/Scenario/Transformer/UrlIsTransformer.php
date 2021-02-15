@@ -27,7 +27,7 @@ class UrlIsTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return "Wait until url is " . $this->step['urlIs'];
+        return sprintf('Wait until url is %s', $this->step['urlIs']);
     }
 
 }

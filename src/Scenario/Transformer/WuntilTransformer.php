@@ -52,4 +52,8 @@ class WuntilTransformer extends AbstractTransformer {
         $this->driver->wait($for, $every)->until($webCondition);
     }
 
+    public function __toString()
+    {
+        return 'Wuntil deprecated';
+    }
 }
