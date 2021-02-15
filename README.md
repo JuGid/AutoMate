@@ -1,3 +1,4 @@
+![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg)
 # AutoMate - Yaml automation library
 
 ## Presentation
