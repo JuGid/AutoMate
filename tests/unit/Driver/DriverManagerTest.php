@@ -16,24 +16,6 @@ class DriverManagerTest extends TestCase {
         $this->assertSame('', $driverManager->getWebdriverFolder());
     }
 
-    public function testGetNotImplementedFirefoxDriver() {
-        $this->expectException(DriverException::class);
-        $this->expectExceptionMessage('Not implemented driver');
-        
-        $driverManager = new DriverManager();
-
-        $driver = $driverManager->getDriver('firefox', '/');
-    }
-
-    public function testGetNotImplementedSafariDriver() {
-        $this->expectException(DriverException::class);
-        $this->expectExceptionMessage('Not implemented driver');
-   
-        $driverManager = new DriverManager();
-
-        $driver = $driverManager->getDriver('safari', '/');
-    }
-
     public function testGetNotImplementedOtherDriver() {
         $this->expectException(BrowserException::class);
         $this->expectExceptionMessage('The browser foo is not managed by AutoMate');

@@ -2,6 +2,7 @@
 
 namespace Automate\Logs;
 
+use Automate\Handler\GlobalVariableHandler;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -11,7 +12,8 @@ class LoggerConfigurationTest extends TestCase {
 
     public function testShouldCreateSetAndGetValue() {
         $loggerConfiguration = new LoggerConfiguration();
-
+        GlobalVariableHandler::setScenarioName('scenario-test');
+        
         $loggerConfiguration->setlogColumns(['foo', 'bar', 'action']);
         $loggerConfiguration->setLogsDirectory('/logs');
 
