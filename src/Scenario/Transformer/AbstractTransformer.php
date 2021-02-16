@@ -7,7 +7,6 @@ use Automate\Exception\CommandException;
 use Automate\Handler\VariableHandlerHandler;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use PASVL\Validation\ValidatorBuilder;
-use PASVL\Validation\Problems\ArrayFailedValidation;
 
 abstract class AbstractTransformer {
 
@@ -39,7 +38,7 @@ abstract class AbstractTransformer {
         if($this->validate()) {
             $this->transform();
         } else {
-            throw new CommandException('The command ' . array_keys($this->step)[0] . 'is not valid');
+            throw new CommandException('The command ' . array_keys($this->step)[0] . ' is not valid');
         }
     }
 
@@ -76,13 +75,7 @@ abstract class AbstractTransformer {
         $validator = $builder->build();
         $value = true;
 
-        try {
-            $validator->validate($this->step);
-        } catch (ArrayFailedValidation $e) {
-            echo "Step [". key($this->step)  ."] is not a valid step. Watch out the syntax pattern.\n";
-            echo "[Error details] " . $e->getMessage() . "\n";
-            $value = false;
-        }
+        $validator->validate($this->step);
 
         return $value;
     }

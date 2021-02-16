@@ -10,7 +10,6 @@ class GetTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * @todo sendkeys and gettext to implement
      */
     protected function getPattern() : array
     {

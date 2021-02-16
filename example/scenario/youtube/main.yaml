@@ -1,0 +1,14 @@
+browser: chrome
+variables:
+  name: 'bonjour'
+  cookie: 'nouveau'
+scenario:
+  steps:
+    - go: '{{ spec.url }}'
+    - loop: 
+        count: 5
+        sub: create-cookie
+    #UploadTransformer
+
+
+  

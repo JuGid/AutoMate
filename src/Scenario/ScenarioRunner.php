@@ -5,16 +5,19 @@ namespace Automate\Scenario;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\DriverManager;
+use Automate\Driver\Proxy;
 use Automate\Exception\BrowserException;
 use Automate\Exception\ConfigurationException;
 use Automate\Exception\DriverException;
 use Automate\Exception\LogException;
 use Automate\Exception\SpecificationException;
+use Automate\Handler\GlobalVariableHandler;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
 use Automate\Specification\Specification;
 use Automate\Specification\SpecificationFinder;
+use PASVL\Validation\Problems\ArrayFailedValidation;
 use Symfony\Component\Yaml\Exception\ParseException;
 
 class ScenarioRunner {
@@ -77,13 +80,23 @@ class ScenarioRunner {
    * @see Automate\Scenario\Scenario::getScenarioBrowser()
    */
   public function run(string $scenario_name, bool $with_spec = false, string $on_browser = null) : void{
-    $scenarioFilepath = $this->config->getScenarioFolder() . '/' . $scenario_name . '.yaml';
-    
+    $scenarioFilepath = $this->config->getScenarioFolder() . '/' . $scenario_name . '/main.yaml';
+    Console::writeln('Scenario file : ' . $scenarioFilepath);
     try 
     {
       $scenario = new Scenario($scenarioFilepath, $scenario_name);
-      $scenarioBrowser = $scenario->getScenarioBrowser($on_browser, $this->config->getDefaultBrowser());
-      $driver = $this->driverManager->getDriver($scenarioBrowser, $this->config->getWebdriverFolder($scenarioBrowser));
+      GlobalVariableHandler::setScenarioName($scenario_name);
+
+      $scenarioBrowser = $scenario->getScenarioBrowser(
+        $on_browser, 
+        $this->config->getDefaultBrowser()
+      );
+      
+      $driver = $this->driverManager->getDriver(
+        $scenarioBrowser, 
+        $this->config->getWebdriverFolder($scenarioBrowser)
+      );
+
       $sttr = new StepTransformer($driver);
     } 
     catch(BrowserException|DriverException|ParseException $e) {
@@ -115,7 +128,8 @@ class ScenarioRunner {
         ++$this->wins;
       }
       
-    } catch(\Exception $e) 
+    } 
+    catch(\Exception $e) 
     {
       if($this->hasSpec()) {
         $this->logger->addMessage($e->getMessage());
@@ -137,11 +151,14 @@ class ScenarioRunner {
     try {
       $finder = new SpecificationFinder();
       if(!$this->hasSpec()) {
-        $this->spec = $finder->find($this->config->getSpecFolder(), $scenario->getName());
+        $this->spec = $finder->find($this->config->getSpecFolder());
         echo 'Detected file : ' . $this->spec->getFilepath() . "\n";
         
         if($this->config->isLogEnable()) {
-          $this->logger->init($this->config->getLogsFolder(), $scenario->getName(), $this->spec->getColumnsHeader());
+          $this->logger->init(
+            $this->config->getLogsFolder(), 
+            $this->spec->getColumnsHeader()
+          );
         } else {
           $this->logger->disable();
         }
@@ -249,6 +266,10 @@ class ScenarioRunner {
 
   public function setColumnsToLog(array $columns) : void {
     $this->logger->getConfiguration()->setlogColumns($columns);
+  }
+
+  public function runWithProxy(Proxy $proxy) {
+    $this->proxy = $proxy;
   }
 
 }

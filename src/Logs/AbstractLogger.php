@@ -62,9 +62,8 @@ abstract class AbstractLogger {
     /**
      * @param array<string> $spec_header
      */
-    public function init(string $log_directory, string $scenario_name, array $spec_header) : void{
+    public function init(string $log_directory, array $spec_header) : void{
         $this->getConfiguration()->setLogsDirectory($log_directory);
-        $this->getConfiguration()->setScenarioName($scenario_name);
 
         $this->file_e = fopen($this->getConfiguration()->getFilepathLogErrors(), 'a');
         $this->file_w = fopen($this->getConfiguration()->getFilepathLogWins(), 'a');
@@ -142,6 +141,7 @@ abstract class AbstractLogger {
         if($this->file_e === false || $this->file_w === false) {
             throw new LogException('Cannot close a file that is not open.');
         }
+        
         fclose($this->file_e);
         fclose($this->file_w);
     }

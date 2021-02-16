@@ -7,6 +7,12 @@ use Automate\Exception\VariableException;
 class GlobalVariableHandler implements IHandler {
 
     /**
+     * The scenario name is stored here
+     * @var string
+     */
+    private static $scenario;
+
+    /**
      * @var array<string,string>
      */
     private static $variables;
@@ -41,5 +47,13 @@ class GlobalVariableHandler implements IHandler {
 
     public static function isEmpty() : bool{
         return empty(self::$variables);
+    }
+
+    public static function setScenarioName(string $name) : void {
+        self::$scenario = $name;
+    }
+
+    public static function scenarioName() : string {
+        return self::$scenario;
     }
 }

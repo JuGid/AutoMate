@@ -22,7 +22,7 @@ class Scenario implements Iterator{
     /**
      * @var string
      */
-    private $name;
+    public $name;
 
     public function __construct(string $file, string $name) {
         $this->scenario = $this->parseScenarioFile($file);

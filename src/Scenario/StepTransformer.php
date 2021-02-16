@@ -24,7 +24,7 @@ class StepTransformer {
             $transformer->process($this->driver, $step);
             echo $transformer . "\n";
         } else {
-            throw new CommandException('The command ' . key($step) . 'does not exist');
+            throw new CommandException('The command ' . key($step) . ' does not exist');
         }
                
     }

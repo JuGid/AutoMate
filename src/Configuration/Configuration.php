@@ -12,34 +12,46 @@ use Automate\Exception\BrowserException;
 class Configuration implements ConfigurationInterface {
 
   /**
+   * Filepath of configuration file
    * @var string
    */
-  private $config_file;
+  private $config_file = '';
 
   /**
+   * Scenario folder
    * @var string
    */
-  private $scenarioFolder;
+  private $scenarioFolder = '';
 
   /**
+   * Logs configuration array
    * @var array
    */
-  private $logs;
+  private $logs = [];
 
   /**
+   * Specs configuration array
    * @var array
    */
-  private $specs;
+  private $specs = [];
 
   /**
+   * Drivers configuration array
    * @var array
    */
-  private $drivers;
+  private $drivers = [];
 
   /**
+   * Proxy to run with
+   * @var Proxy
+   */
+  private $proxy;
+
+  /**
+   * Default browser
    * @var string
    */
-  private $default;
+  private $default = '';
 
   public function __construct(string $config_file = __DIR__.'/../../config/default-config.yaml') {
     try {

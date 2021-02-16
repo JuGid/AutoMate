@@ -5,12 +5,12 @@ namespace Automate\Driver;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
 use Automate\Exception\ConfigurationException;
-use Automate\Exception\DriverException;
 use Automate\Handler\WindowHandler;
+use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 /**
- * This class is used to get the right Webdriver and process the start of it.
+ * This class is used to get the good Webdriver and process the start of it.
  */
 class DriverManager {
   /**
@@ -23,6 +23,11 @@ class DriverManager {
    */
   private $webdriverFolder;
 
+  /**
+   * @var string
+   */
+  private $serverUrl;
+
   public function __construct()
   {
     $this->driver = null;
@@ -34,12 +39,14 @@ class DriverManager {
    * @param string $webdriverFolder The webdriver folder
    * @return RemoteWebDriver|null 
    */
-  public function getDriver(string $browser, string $webdriverFolder) {
+  public function getDriver(string $browser, string $webdriverFolder, string $serverUrl = 'http://localhost:4444') {
     if(!empty($webdriverFolder)) {
       $this->webdriverFolder = $webdriverFolder;
     } else {
       throw new ConfigurationException('Webdriver folder is not valid');
     }
+
+    $this->serverUrl = $serverUrl;
     
     if($browser == 'chrome') {
       $this->driver = $this->getChromeDriver();
@@ -47,6 +54,8 @@ class DriverManager {
       $this->driver = $this->getFirefoxDriver();
     }elseif($browser == 'safari') {
       $this->driver = $this->getSafariDriver();
+    }elseif($browser == 'edge') {
+      $this->driver = $this->getEdgeDriver();
     }else {
       throw new BrowserException('The browser ' . $browser . ' is not managed by AutoMate');
     }
@@ -71,10 +80,14 @@ class DriverManager {
   }
 
   private function getFirefoxDriver() : RemoteWebDriver {
-    throw new DriverException("Not implemented driver");
+    return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::firefox());
+  }
+
+  private function getEdgeDriver() : RemoteWebDriver {
+    return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::microsoftEdge());
   }
 
   private function getSafariDriver() : RemoteWebDriver {
-    throw new DriverException("Not implemented driver");
+    return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::safari());
   }
 }

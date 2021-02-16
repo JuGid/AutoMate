@@ -3,6 +3,7 @@
 namespace Automate\Specification;
 
 use Automate\Exception\SpecificationException;
+use Automate\Handler\GlobalVariableHandler;
 
 class SpecificationFinder {
 
@@ -17,15 +18,14 @@ class SpecificationFinder {
      * 
      * @return Specification
      */
-    public function find(string $spec_path, string $scenario_name) : Specification {
+    public function find(string $spec_path) : Specification {
 
-        $dirpath = $spec_path . '/'.$scenario_name;
+        $dirpath = $spec_path . '/'. GlobalVariableHandler::scenarioName();
         if(is_dir($dirpath)) {
             $files = array_diff(scandir($dirpath), ['..', '.']);
             foreach($files as $file) {
                 if(!is_dir($dirpath . '/' . $file)) {
-                    if(strpos($file, '_PROCESSED') === false && 
-                       pathinfo($dirpath. '/' . $file, PATHINFO_EXTENSION) == 'csv') {
+                    if(!$this->isProcessed($file) && $this->isCsv($dirpath. '/' . $file)) {
                         return new Specification($dirpath. '/' . $file);
                     }
                 } 
@@ -35,14 +35,22 @@ class SpecificationFinder {
         $files = array_diff(scandir($spec_path), ['..', '.']);
         foreach($files as $file) {
             if(!is_dir($spec_path . '/' . $file)) {
-                if(strpos($file, '_PROCESSED') === false && 
-                   strpos($file, $scenario_name) !== false &&
-                   pathinfo($spec_path. '/' . $file, PATHINFO_EXTENSION) == 'csv') {
+                if(!$this->isProcessed($file) && 
+                   strpos($file, GlobalVariableHandler::scenarioName()) !== false &&
+                   $this->isCsv($spec_path. '/' . $file)) {
                     return new Specification($spec_path . '/' . $file);
                 }
             } 
         }
 
         throw new SpecificationException('The specification has not been found.');
+    }
+
+    public function isProcessed(string $file) : bool{
+        return strpos($file, '_PROCESSED') !== false ;
+    }
+
+    public function isCsv(string $file) : bool {
+        return pathinfo($file, PATHINFO_EXTENSION) == 'csv';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Automate\Logs;
 
+use Automate\Handler\GlobalVariableHandler;
+
 class LoggerConfiguration {
 
     /**
@@ -17,13 +19,6 @@ class LoggerConfiguration {
      * @var string
      */
     private $logs_directory = "";
-
-    /**
-     * The name of the scenario running
-     * 
-     * @var string
-     */
-    private $scenario_name = "";
 
     /**
      * This name helps to have unique log file names
@@ -67,14 +62,6 @@ class LoggerConfiguration {
         return $this->logs_directory;
     }
 
-    public function setScenarioName(string $name) : void {
-        $this->scenario_name = $name;
-    }
-
-    public function getScenarioName() : string {
-        return $this->scenario_name;
-    }
-
     public function getPartialName() : string {
         return $this->partial_name;
     }
@@ -85,7 +72,7 @@ class LoggerConfiguration {
      * @return string Fullpath of the log wins file
      */
     public function getFilepathLogWins() : string {
-        return $this->getLogsDirectory() . '/' . $this->getScenarioName() . '/LOGS_WINS_' . $this->getPartialName() . '.csv';
+        return $this->getLogsDirectory() . '/' . GlobalVariableHandler::scenarioName() . '/LOGS_WINS_' . $this->getPartialName() . '.csv';
     }
 
     /**
@@ -94,7 +81,7 @@ class LoggerConfiguration {
      * @return string Fullpath of the log errors file
      */
     public function getFilepathLogErrors() : string {
-        return $this->getLogsDirectory() . '/' . $this->getScenarioName() . '/LOGS_ERRORS_' . $this->getPartialName() . '.csv';
+        return $this->getLogsDirectory() . '/' . GlobalVariableHandler::scenarioName() . '/LOGS_ERRORS_' . $this->getPartialName() . '.csv';
     }
 
 }
