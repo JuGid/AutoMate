@@ -8,6 +8,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\ConfigurationException;
 use Automate\Exception\BrowserException;
+use Automate\Driver\Proxy;
 
 class Configuration implements ConfigurationInterface {
 
@@ -165,6 +166,14 @@ class Configuration implements ConfigurationInterface {
       return $this->drivers[$browser]['driver'];
     }
     throw new BrowserException('The browser provided does not have a driver definition in configuration file');
+  }
+
+  public function getProxy() : Proxy {
+    return $this->proxy;
+  }
+
+  public function setProxy(Proxy $proxy) {
+    $this->proxy = $proxy;
   }
 
   private function load() : void

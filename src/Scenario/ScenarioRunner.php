@@ -269,7 +269,7 @@ class ScenarioRunner {
   }
 
   public function runWithProxy(Proxy $proxy) {
-    $this->proxy = $proxy;
+    $this->config->setProxy($proxy);
   }
 
 }
