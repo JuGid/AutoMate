@@ -1,0 +1,9 @@
+variables:
+  adresse: http://wikipedia.fr
+  subScenario: create-cookie
+scenario:
+  steps:
+    - go: "{{ scenario.adresse }}"
+    - loop: 
+        count: 5
+        sub: "{{ scenario.subScenario }}"

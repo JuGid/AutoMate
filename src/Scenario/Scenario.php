@@ -2,6 +2,8 @@
 
 namespace Automate\Scenario;
 
+use Automate\Configuration\Configuration;
+use Automate\Handler\GlobalVariableHandler;
 use Automate\Handler\ScenarioVariableHandler;
 use Iterator;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -24,8 +26,8 @@ class Scenario implements Iterator{
      */
     public $name;
 
-    public function __construct(string $file, string $name) {
-        $this->scenario = $this->parseScenarioFile($file);
+    public function __construct(string $name) {
+        $this->scenario = $this->parseScenarioFile(Configuration::get('scenario.folder') .'/'.$name.'/main.yaml');
         $this->step = 0;
         $this->name = $name;
 
@@ -38,6 +40,8 @@ class Scenario implements Iterator{
             }
             
         }
+
+        GlobalVariableHandler::setScenarioName($name);
     }
 
     /**
@@ -47,7 +51,7 @@ class Scenario implements Iterator{
         try{
             return Yaml::parseFile($file);
         } catch(ParseException $e) {
-            $message = sprintf("%s%s",$e->getMessage(), " Please check your configuration file.");
+            $message = sprintf("%s%s",$e->getMessage(), "\nPlease check your scenario file and be sure to surround variable call with quotes.");
             throw new ParseException($message, $e->getParsedLine());
         }
     }
@@ -65,9 +69,9 @@ class Scenario implements Iterator{
      * If all are set, priority is : scenario -> function -> configuration
      * Configuration default browser has to be set in config file
      */
-    public function getScenarioBrowser(?string $default_function, string $default_config) : string {
+    public function getScenarioBrowser(?string $default_function) : string {
         if(!isset($this->scenario['browser'])) {
-            return $default_function !== null ? $default_function : $default_config;
+            return ($default_function !== null) && !empty($default_function) ? $default_function : Configuration::get('browser.default');
         } else {
             return $this->scenario['browser'];
         }

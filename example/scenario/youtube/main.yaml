@@ -5,9 +5,9 @@ variables:
 scenario:
   steps:
     - go: '{{ spec.url }}'
-    - loop: 
-        count: 5
-        sub: create-cookie
+    - cookie: 
+        name: "{{ scenario.name }}"
+        value: "{{ scenario.cookie }}" 
     #UploadTransformer
 
 

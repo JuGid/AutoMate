@@ -33,6 +33,8 @@ class Proxy {
      */
     private $ftp = '';
 
+    public function __construct() {}
+    
     public function setHttpProxy(string $url, string $port = '') {
         $this->http = sprintf('%s:%s', $url, $port);
     }

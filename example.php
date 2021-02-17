@@ -3,10 +3,10 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Automate\Scenario\ScenarioRunner;
+use Automate\Scenario\AutoMate;
 
-$scenarioRunner = new ScenarioRunner();
-$scenarioRunner->setConfigurationFile(__DIR__.'/example/config/config-test.yaml');
-$scenarioRunner->enableTestMode();
-// $scenarioRunner->setColumnsToLog(['url']);
-$scenarioRunner->run('youtube', true);
+$configFile = __DIR__.'/example/config/config-test.yaml';
+
+$autoMate = new AutoMate($configFile);
+$autoMate->run('youtube', true, true);
+//$automate->run('internet');

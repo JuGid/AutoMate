@@ -1,5 +1,0 @@
-subscenario:
-  steps:
-    - cookie:
-        name: "{{ scenario.name }}"
-        value: "{{ spec.cookiename }}"

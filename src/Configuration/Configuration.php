@@ -7,183 +7,125 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\ConfigurationException;
-use Automate\Exception\BrowserException;
 use Automate\Driver\Proxy;
 
 class Configuration implements ConfigurationInterface {
 
   /**
-   * Filepath of configuration file
-   * @var string
-   */
-  private $config_file = '';
-
-  /**
-   * Scenario folder
-   * @var string
-   */
-  private $scenarioFolder = '';
-
-  /**
-   * Logs configuration array
-   * @var array
-   */
-  private $logs = [];
-
-  /**
-   * Specs configuration array
-   * @var array
-   */
-  private $specs = [];
-
-  /**
-   * Drivers configuration array
-   * @var array
-   */
-  private $drivers = [];
-
-  /**
    * Proxy to run with
    * @var Proxy
    */
-  private $proxy;
+  private static $proxy;
 
   /**
-   * Default browser
-   * @var string
+   * Array with all the configuration
    */
-  private $default = '';
+  private static $config_array = null;
 
-  public function __construct(string $config_file = __DIR__.'/../../config/default-config.yaml') {
-    try {
-      $this->setConfigurationFile($config_file);
-      $this->load();
-    } catch(ConfigurationException $e) {
-      echo $e->getMessage()."\n";
-      die();
+  public function __construct() {}
+
+  /**
+   * @return string|array|bool
+   */
+  public static function get(string $valueAsked) {
+    if(self::$config_array !== null ) {
+      $gval = explode('.', $valueAsked);
+      $arrayValue = self::$config_array;
+
+      for($i = 0; $i< count($gval); $i++) {
+        if(isset($arrayValue[$gval[$i]])) {
+          $arrayValue = $arrayValue[$gval[$i]];
+        }
+      }
+      return $arrayValue;
     }
+    return '';
+  }
+
+  public static function getProxy() : Proxy {
+    return self::$proxy;
+  }
+
+  public static function setProxy(Proxy $proxy) {
+    self::$proxy = $proxy;
+  }
+
+  public static function logsColumns(array $columns = [])
+  {
+    if(!empty($columns))
+    {
+      self::$config_array['logs']['columns'] = $columns;
+    }
+  }
+
+  public static function hasLogsExceptions() {
+    return isset(self::$config_array['logs']['columns']);
+  }
+
+  public static function load(string $file) : void
+  {
+    if(file_exists($file) && pathinfo($file)['extension'] == 'yaml') {
+      $config = Yaml::parse(file_get_contents($file));
+      $processor = new Processor();
+      self::$config_array = $processor->processConfiguration(new Configuration(), $config);
+      return;
+    }
+
+    throw new ConfigurationException('The configuration file is not valid or does not exist');
+    
   }
 
   public function getConfigTreeBuilder() : TreeBuilder
   {
-      $nodes = new TreeBuilder('automate');
-      $nodes->getRootNode()
-            ->children()
-              ->arrayNode('browser')
-                ->children()
-                  ->scalarNode('default')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                  ->end()
+    $nodes = new TreeBuilder('automate');
+    $nodes->getRootNode()
+          ->children()
+            ->arrayNode('browser')
+              ->children()
+                ->scalarNode('default')
+                  ->isRequired()
+                  ->cannotBeEmpty()
                 ->end()
               ->end()
-              ->arrayNode('drivers')
-                ->useAttributeAsKey('name')
-                ->arrayPrototype()
-                  ->children()
-                    ->scalarNode('driver')
-                      ->info('Where the browser WebDriver is stored.')
-                      ->isRequired()
-                    ->end()
-                  ->end()
-                ->end()
-              ->end()
-              ->arrayNode('scenario')
+            ->end()
+            ->arrayNode('drivers')
+              ->useAttributeAsKey('name')
+              ->arrayPrototype()
                 ->children()
-                    ->scalarNode('folder')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                  ->end()
-                ->end()
-              ->end()
-              ->arrayNode('specs')
-                ->children()
-                  ->scalarNode('folder')->end()
-                ->end()
-              ->end()
-              ->arrayNode('logs')
-                ->children()
-                  ->booleanNode('enable')
-                    ->defaultFalse()
+                  ->scalarNode('driver')
+                    ->info('Where the browser WebDriver is stored.')
                     ->isRequired()
                   ->end()
+                ->end()
+              ->end()
+            ->end()
+            ->arrayNode('scenario')
+              ->children()
                   ->scalarNode('folder')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                  ->end()
+                  ->isRequired()
+                  ->cannotBeEmpty()
                 ->end()
               ->end()
-            ->end();
-      return $nodes;
-  }
-
-  public function getConfigurationArray() : array {
-    $config = Yaml::parse(file_get_contents($this->config_file));
-    $processor = new Processor();
-    return $processor->processConfiguration($this, $config);
-  }
-
-  public function setConfigurationFile(string $file) : void{
-    if(file_exists($file) && pathinfo($file)['extension'] == 'yaml') {
-      $this->config_file = $file;
-      $this->load();
-    }
-    else {
-      throw new ConfigurationException('The configuration file is not valid or does not exist');
-    }
-  }
-
-  public function isLogEnable() : bool{
-    return $this->logs['enable'] === true;
-  }
-
-  public function getLogsFolder() : string{
-    return $this->logs['folder'];
-  }
-  
-  public function getSpecFolder() : string{
-    return $this->specs['folder'];
-  }
-
-  public function getScenarioFolder() : string{
-    return $this->scenarioFolder;
-  }
-
-  public function setScenarioFolder(string $scenarioFolder) : void {
-    $this->scenarioFolder = $scenarioFolder;
-  }
-
-  public function getDrivers() : array{
-    return $this->drivers;
-  }
-
-  public function getDefaultBrowser() : string{
-    return $this->default;
-  }
-  
-  public function getWebdriverFolder(string $browser) : string{
-    if(isset($this->drivers[$browser]['driver'])) {
-      return $this->drivers[$browser]['driver'];
-    }
-    throw new BrowserException('The browser provided does not have a driver definition in configuration file');
-  }
-
-  public function getProxy() : Proxy {
-    return $this->proxy;
-  }
-
-  public function setProxy(Proxy $proxy) {
-    $this->proxy = $proxy;
-  }
-
-  private function load() : void
-  {
-      $config = $this->getConfigurationArray();
-      $this->scenarioFolder=$config['scenario']['folder'];
-      $this->logs=$config['logs'];
-      $this->drivers=$config['drivers'];
-      $this->default = $config['browser']['default'];
-      $this->specs=$config['specs'];
+            ->end()
+            ->arrayNode('specs')
+              ->children()
+                ->scalarNode('folder')->end()
+              ->end()
+            ->end()
+            ->arrayNode('logs')
+              ->children()
+                ->booleanNode('enable')
+                  ->defaultFalse()
+                  ->isRequired()
+                ->end()
+                ->scalarNode('folder')
+                  ->isRequired()
+                  ->cannotBeEmpty()
+                ->end()
+              ->end()
+            ->end()
+          ->end();
+    return $nodes;
   }
 
 }

@@ -2,6 +2,7 @@
 
 namespace Automate\Specification;
 
+use Automate\Configuration\Configuration;
 use Automate\Exception\SpecificationException;
 use Automate\Handler\GlobalVariableHandler;
 
@@ -18,9 +19,9 @@ class SpecificationFinder {
      * 
      * @return Specification
      */
-    public function find(string $spec_path) : Specification {
+    public function find() : Specification {
 
-        $dirpath = $spec_path . '/'. GlobalVariableHandler::scenarioName();
+        $dirpath = Configuration::get('specs.folder') . '/'. GlobalVariableHandler::scenarioName();
         if(is_dir($dirpath)) {
             $files = array_diff(scandir($dirpath), ['..', '.']);
             foreach($files as $file) {
@@ -32,13 +33,14 @@ class SpecificationFinder {
             }
         }
 
-        $files = array_diff(scandir($spec_path), ['..', '.']);
+        $files = array_diff(scandir(Configuration::get('specs.folder')), ['..', '.']);
         foreach($files as $file) {
-            if(!is_dir($spec_path . '/' . $file)) {
+            $filepath = Configuration::get('specs.folder') . '/' . $file;
+            if(!is_dir($filepath)) {
                 if(!$this->isProcessed($file) && 
                    strpos($file, GlobalVariableHandler::scenarioName()) !== false &&
-                   $this->isCsv($spec_path. '/' . $file)) {
-                    return new Specification($spec_path . '/' . $file);
+                   $this->isCsv($filepath)) {
+                    return new Specification($filepath);
                 }
             } 
         }
