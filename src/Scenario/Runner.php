@@ -44,7 +44,7 @@ class Runner {
     /**
      * @var AbstractLogger
      */
-    private $logger;
+    private $logger = null;
 
     /**
      * @var array
@@ -54,17 +54,17 @@ class Runner {
     /**
      * @var bool
      */
-    private $testMode;
+    private $testMode = false;
 
     /**
      * @var DriverManager
      */
-    private $driverManager;
+    private $driverManager = null;
     
     /**
      * @var RemoteWebDriver|null
      */
-    private $driver;
+    private $driver = null;
 
     public function __construct(string $browser, bool $testMode) {
         $this->driverManager = new DriverManager();
@@ -73,6 +73,9 @@ class Runner {
         $this->testMode = $testMode;
     }
 
+    /**
+     * To run a scenario with a specification
+     */
     public function runSpecification(Scenario $scenario, Specification $specification) : void {
         $this->runningWithSpec = true;
         
@@ -106,6 +109,10 @@ class Runner {
         $this->driver->quit();
     }
 
+    /**
+     * To run a simple scenario without specification and without logs if it's
+     * called like $runner->runSimpleScenario(...)
+     */
     public function runSimpleScenario(Scenario $scenario) : void {
         try {
             foreach($scenario as $step){

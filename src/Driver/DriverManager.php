@@ -18,17 +18,14 @@ class DriverManager {
   /**
    * @var string
    */
-  private $webdriverFolder;
+  private $webdriverFolder = '';
 
   /**
    * @var string
    */
-  private $serverUrl;
+  private $serverUrl = '';
 
-  public function __construct()
-  {
-    $this->webdriverFolder = '';
-  }
+  public function __construct(){}
 
   /**
    * @param string $browser The browser which you want the driver

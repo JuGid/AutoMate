@@ -18,13 +18,16 @@ class Configuration implements ConfigurationInterface {
   private static $proxy;
 
   /**
-   * Array with all the configuration
+   * Array with all the configuration variables
    */
   private static $config_array = null;
 
   public function __construct() {}
 
   /**
+   * Get a value of a config variable
+   * 
+   * Can be called as get('browser.default') or get('drivers.chrome.driver')
    * @return string|array|bool
    */
   public static function get(string $valueAsked) {
@@ -62,6 +65,12 @@ class Configuration implements ConfigurationInterface {
     return isset(self::$config_array['logs']['columns']);
   }
 
+  /**
+   * Load the config file as an array into $config_array
+   * using symfony/config component
+   * 
+   * @see https://symfony.com/components/Config
+   */
   public static function load(string $file) : void
   {
     if(file_exists($file) && pathinfo($file)['extension'] == 'yaml') {
@@ -75,6 +84,9 @@ class Configuration implements ConfigurationInterface {
     
   }
 
+  /**
+   * Used by symfony/config
+   */
   public function getConfigTreeBuilder() : TreeBuilder
   {
     $nodes = new TreeBuilder('automate');
