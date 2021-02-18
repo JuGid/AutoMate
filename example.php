@@ -3,7 +3,7 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Automate\Scenario\AutoMate;
+use Automate\AutoMate;
 
 $configFile = __DIR__.'/example/config/config-test.yaml';
 

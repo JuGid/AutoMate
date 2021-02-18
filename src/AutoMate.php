@@ -1,12 +1,14 @@
 <?php 
 
-namespace Automate\Scenario;
+namespace Automate;
 
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Exception\ScenarioException;
 use Automate\Exception\SpecificationException;
 use Automate\Specification\SpecificationFinder;
+use Automate\Scenario\Scenario;
+use Automate\Scenario\Runner;
 use Symfony\Component\Yaml\Exception\ParseException;
 
 class AutoMate {
