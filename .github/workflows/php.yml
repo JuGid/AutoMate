@@ -14,6 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Setup PHP with Xdebug
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        coverage: xdebug
+
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -35,4 +41,12 @@ jobs:
 
     - name: Run PHPUnit tests
       run: composer run-script tests
+    
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        files: ./coverage.xml
+        flags: unittests
+        fail_ci_if_error: false
+        verbose: false
 
