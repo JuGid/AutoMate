@@ -87,14 +87,4 @@ class LoggerTest extends TestCase {
         $this->assertTrue($logger->end());
     }
 
-    /**
-     * @after
-     */
-    public function deleteAllFilesCreated() {
-        $files = array_diff(scandir(Configuration::get('logs.folder').'/'.self::SCENARIO), ['..', '.']);
-        foreach($files as $file) {
-            unlink(Configuration::get('logs.folder').'/'.self::SCENARIO.'/'. $file);
-        }
-    }
-
 }
