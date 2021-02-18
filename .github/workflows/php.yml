@@ -39,7 +39,7 @@ jobs:
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        files: coverage.xml
+        files: ./coverage.xml
         flags: unittests
         fail_ci_if_error: false
         verbose: true
