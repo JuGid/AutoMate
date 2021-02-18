@@ -86,11 +86,6 @@ You can download multiple drivers but :
     $configFile = __DIR__.'/example/config/config-test.yaml'
     $automate = new AutoMate($configFile);
     
-    /**
-    * By default, the config file is in %this_lib_dir%/config/config.yaml
-    * You can pass a new normed file (see doc) like this :
-    * $scenarioRunner->setConfigurationFile(__DIR__.'/config/config.yaml');
-    */
     $automate->run('youtube', true, true);
 
 Don't forget to use `composer install` .
