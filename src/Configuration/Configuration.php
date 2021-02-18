@@ -44,6 +44,7 @@ class Configuration implements ConfigurationInterface {
       }
       return $arrayValue;
     }
+    return '';
   }
 
   public static function getProxy() : Proxy {
