@@ -19,7 +19,7 @@ jobs:
       with:
         php-version: '7.4'
         coverage: xdebug
-        
+
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -48,5 +48,5 @@ jobs:
         files: ./coverage.xml
         flags: unittests
         fail_ci_if_error: false
-        verbose: true
+        verbose: false
 
