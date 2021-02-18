@@ -81,22 +81,23 @@ You can download multiple drivers but :
     
     require  __DIR__.'/vendor/autoload.php';
     
-    use Automate\Scenario\ScenarioRunner;
+    use Automate\AutoMate;
     
-    $scenarioRunner = new  ScenarioRunner();
+    $configFile = __DIR__.'/example/config/config-test.yaml'
+    $automate = new AutoMate($configFile);
     
     /**
     * By default, the config file is in %this_lib_dir%/config/config.yaml
     * You can pass a new normed file (see doc) like this :
     * $scenarioRunner->setConfigurationFile(__DIR__.'/config/config.yaml');
     */
-    $scenarioRunner->run('scenario');
+    $automate->run('youtube', true, true);
 
 Don't forget to use `composer install` .
 
 ## 3️⃣ Future features
 
- - [ ] Add more control
+ - [ ] Loop and Conditions
  - [ ] Add more managed drivers
  - [ ] Add Proxy management
 
@@ -107,43 +108,8 @@ See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information about contri
 
 ## 5️⃣ Simple example
 
-Do not forget to configure your app in a valid configuration file.
+You can find an example in ![example folder](example)
 
-***In your app.php***
-
-    #!/usr/bin/env php
-    <?php
-    
-    require  __DIR__.'/vendor/autoload.php';
-    
-    use Automate\Scenario\ScenarioRunner;
-    
-    $scenarioRunner = new  ScenarioRunner();
-    $scenarioRunner->setConfigurationFile(my_directory/config/config-automate.yaml');
-    $scenarioRunner->run('internet', true);
-
-
-***In your scenario_folder/internet.yaml***
-
-    browser: chrome
-    variables:
-    	my_variable: 'bonjour'
-    scenario:
-    	steps:
-    		- go: "{{ spec.url }}"
-    		- cookie:
-    			name: "{{ scenario.my_variable }}"
-    			value: "{{ spec.cookiename }}"
-
-***In your spec_folder/internet/specification.csv***
-
-    url,cookiename
-    http://youtube.fr,youtube
-    http://google.fr,google
-    http://github.com,github
-
-As you can see, the scenario use variable defined in scenario and variables defined in spec.
-With this files, the scenario will run for each lines in specification file.
 
 ![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
 
