@@ -15,12 +15,12 @@ class Configuration implements ConfigurationInterface {
    * Proxy to run with
    * @var Proxy
    */
-  private static $proxy;
+  public static $proxy = null;
 
   /**
    * Array with all the configuration variables
    */
-  private static $config_array = null;
+  public static $config_array = null;
 
   public function __construct() {}
 
@@ -38,11 +38,12 @@ class Configuration implements ConfigurationInterface {
       for($i = 0; $i< count($gval); $i++) {
         if(isset($arrayValue[$gval[$i]])) {
           $arrayValue = $arrayValue[$gval[$i]];
+        } else {
+          throw new ConfigurationException('The value asked '.$valueAsked. ' does not exist');
         }
       }
       return $arrayValue;
     }
-    return '';
   }
 
   public static function getProxy() : Proxy {

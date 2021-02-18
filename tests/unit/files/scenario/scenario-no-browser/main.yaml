@@ -1,0 +1,9 @@
+variables:
+  name: 'bonjour'
+  cookie: 'nouveau'
+scenario:
+  steps:
+    - go: '{{ spec.url }}'
+    - cookie: 
+        name: "{{ scenario.name }}"
+        value: "{{ scenario.cookie }}" 

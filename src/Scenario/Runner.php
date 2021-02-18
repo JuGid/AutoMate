@@ -81,7 +81,7 @@ class Runner {
         
         if(Configuration::get('logs.enable') === true) {
             try {
-                $this->logger = new DefaultLogger($specification->getColumnsHeader());
+                $this->logger = new DefaultLogger($specification->getColumnsHeader(), $scenario->getName());
             } catch(LogException $e) {
                 Console::writeEx($e);
                 $this->driver->quit();
@@ -89,7 +89,7 @@ class Runner {
         }
         
         foreach($specification as $line) {
-            Console::writeBeginingLine($specification->key() + 1, $specification->getRowNumber(), $line);
+            Console::writeBeginingLine($specification->key() + 1, $specification->getRowNumber() - 1, $line);
             
             $this->currentDataset = $line;
             $this->runSimpleScenario($scenario);

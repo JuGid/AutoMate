@@ -4,6 +4,7 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
+use Automate\Exception\ScenarioException;
 use Automate\Exception\SpecificationException;
 use Automate\Specification\SpecificationFinder;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -32,7 +33,7 @@ class AutoMate {
             } else {
                 $runner->runSimpleScenario($scenario);
             }
-        } catch(ParseException|SpecificationException $e) {
+        } catch(ParseException|SpecificationException|ScenarioException $e) {
             Console::writeEx($e);
         }
     }

@@ -47,6 +47,18 @@ class Proxy {
         $this->ftp = sprintf('%s:%s', $url, $port);
     }
 
+    public function getHttpProxy() {
+        return $this->http;
+    }
+
+    public function getSslProxy() {
+        return $this->ssl;
+    }
+
+    public function getFtpProxy() {
+        return $this->ftp;
+    }
+
     /**
      * @return array Array of capability proxy
      */

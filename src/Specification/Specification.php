@@ -34,7 +34,8 @@ class Specification implements Iterator{
         $this->filepath = $filepath;
         $this->loader = new SpecificationLoader($filepath);
         $this->data = $this->loader->next();
-        $this->rownumber = $this->countRows() - 1;
+        $this->rownumber = $this->countRows();
+        var_dump($this->rownumber);
     }
 
     /**

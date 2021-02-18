@@ -5,7 +5,6 @@ namespace Automate\Driver;
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
-use Automate\Exception\ConfigurationException;
 use Automate\Handler\WindowHandler;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -58,6 +57,10 @@ class DriverManager {
 
   public function getWebdriverFolder() : string {
     return $this->webdriverFolder;
+  }
+
+  public function getServerUrl() : string {
+    return $this->serverUrl;
   }
 
   private function getChromeDriver() : ChromeDriver {

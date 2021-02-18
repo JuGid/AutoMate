@@ -3,13 +3,13 @@ automate:
     default: chrome
   drivers:
     chrome:
-      driver : '/.../chromedriver'
+      driver : '/../chromedriver'
     firefox:
-      driver: '/.../gueckodriver'
+      driver: '/../gueckodriver'
   scenario:
-    folder: '/.../scenario'
+    folder: '/../scenario'
   specs:
-    folder: '/.../specs'
+    folder: '/../specs'
   logs:
-    enable: false
-    folder: '/.../logs'
+    enable: true
+    folder: '/../logs'

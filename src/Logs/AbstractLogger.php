@@ -39,7 +39,15 @@ abstract class AbstractLogger {
      */
     private $partialName = "";
 
-    public function __construct(array $header) {
+    /**
+     * The scenario name is stored for filepath
+     * 
+     * @var string
+     */
+    private $scenario;
+
+    public function __construct(array $header, string $scenario) {
+        $this->scenario = $scenario;
         $this->partialName = uniqid();
         $this->file_e = fopen($this->getFilepath(LogType::LOG_ERRORS), 'a');
         $this->file_w = fopen($this->getFilepath(LogType::LOG_WINS), 'a');
@@ -77,6 +85,8 @@ abstract class AbstractLogger {
         foreach($data as $key=>$value) {
             if(in_array($key, Configuration::get('logs.columns'))) {
                 $data_to_write[] = $value;
+            } else {
+                throw new LogException('AutoMate try to log data that does not exist in spec file');
             }
         }
 
@@ -90,26 +100,22 @@ abstract class AbstractLogger {
 
     }
     
-    public function end() : void{
-        if($this->file_e === null || $this->file_w === null) {
-            throw new LogException('Use init() to set logs files');
-        }
-
+    public function end() : bool{
         if($this->file_e === false || $this->file_w === false) {
             throw new LogException('Cannot close a file that is not open.');
         }
         
-        fclose($this->file_e);
-        fclose($this->file_w);
+        return fclose($this->file_e) && fclose($this->file_w);
     }
 
     public function getFilepath(string $logType) {
-        return sprintf('%s/%s/%s_%s.csv',
+        $filepath = sprintf('%s/%s/%s_%s.csv',
             Configuration::get('logs.folder'),
-            GlobalVariableHandler::scenarioName(),
+            $this->scenario,
             $logType,
             $this->partialName
         );
+        return $filepath;
     }
 
     /**

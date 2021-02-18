@@ -88,6 +88,9 @@ abstract class AbstractTransformer {
         return strtoupper(array_keys($this->step)[0]);
     }
 
+    public function setStep(array $step) {
+        $this->step = $step;
+    }
     /**
      * Get pattern validation for lezhnev74/pasvl library
      * 

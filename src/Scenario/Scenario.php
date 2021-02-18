@@ -3,6 +3,7 @@
 namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
+use Automate\Exception\ScenarioException;
 use Automate\Handler\GlobalVariableHandler;
 use Automate\Handler\ScenarioVariableHandler;
 use Iterator;
@@ -31,6 +32,10 @@ class Scenario implements Iterator{
         $this->step = 0;
         $this->name = $name;
 
+        if(!isset($this->scenario['scenario']['steps'])) {
+            throw new ScenarioException('You must define steps in your scenario file');
+        }
+
         if(isset($this->scenario['variables'])) {
             $variables = $this->scenario['variables'];
 
@@ -38,7 +43,6 @@ class Scenario implements Iterator{
             for($i=0;$i<$limit; $i++) {
                 ScenarioVariableHandler::add(array_keys($variables)[$i], array_values($variables)[$i]);
             }
-            
         }
 
         GlobalVariableHandler::setScenarioName($name);

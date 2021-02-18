@@ -2,8 +2,22 @@
 
 namespace Automate\Driver;
 
+use Automate\Configuration\Configuration;
 use PHPUnit\Framework\TestCase;
 
 class DriverManagerTest extends TestCase {
 
+    /**
+     * @before
+     */
+    public function loadConfiguration() {
+        Configuration::load(__DIR__.'/../files/config-test.yaml');
+    }
+
+    public function testShouldGetPropertiesValue() {
+        $dm = new DriverManager();
+
+        $this->assertSame('', $dm->getServerUrl());
+        $this->assertSame('', $dm->getWebdriverFolder());
+    }
 }
