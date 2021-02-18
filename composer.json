@@ -35,7 +35,7 @@
           "vendor/bin/phpstan analyse -c phpstan.neon"
         ],
         "tests": [
-          "vendor/bin/phpunit --colors=always --testsuite tests --coverage-html '/' "
+          "vendor/bin/phpunit --colors=always --testsuite tests --coverage-clover coverage.xml "
         ]
       }
 }
