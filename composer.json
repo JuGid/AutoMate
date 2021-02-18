@@ -3,6 +3,7 @@
     "type": "library",
     "description": "Automation by YAML file",
     "keywords": ["automation", "selenium", "webdriver", "php-webdriver", "UI"],
+    "license": "MIT",
     "require": {
         "php-webdriver/webdriver": "^1.9",
         "symfony/console": "^5.2",
