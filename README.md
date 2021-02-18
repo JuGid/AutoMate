@@ -1,4 +1,4 @@
-![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg)
+![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/JuGid/AutoMate/branch/master/graph/badge.svg?token=JK9IA306US)](https://codecov.io/gh/JuGid/AutoMate)
 # AutoMate - Yaml automation library
 
 ## Presentation
