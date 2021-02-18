@@ -108,8 +108,7 @@ See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information about contri
 
 ## 5️⃣ Simple example
 
-You can find an example in ![example folder](example)
-
+You can find an example in [example folder](example)
 
 ![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
 
