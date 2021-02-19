@@ -47,7 +47,7 @@ abstract class AbstractTransformer {
     /**
      * Replace elements like {{ spec|scenario|global.name }} into real variable
      */
-    private function setVariables() : void {
+    public function setVariables() : void {
         array_walk_recursive($this->step, function(&$item, $key) {
                 preg_match_all("/{{([^{]*)}}/", $item, $matches);
                 $variables = $matches[1];
@@ -95,6 +95,11 @@ abstract class AbstractTransformer {
     public function setStep(array $step) {
         $this->step = $step;
     }
+
+    public function getStep() : array {
+        return $this->step;
+    }
+
     /**
      * Get pattern validation for lezhnev74/pasvl library
      * 

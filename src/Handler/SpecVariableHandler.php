@@ -9,7 +9,7 @@ class SpecVariableHandler implements IHandler {
     /**
      * @var array<string,string>
      */
-    private static $variables;
+    public static $variables;
 
     public static function add(string $name, string $value) : void {
         if(isset(self::$variables[$name])) {

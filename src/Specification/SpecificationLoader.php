@@ -32,6 +32,11 @@ class SpecificationLoader {
     private $columns_nb;
 
     /**
+     * @var string
+     */
+    private $filepath;
+
+    /**
      * The first line MUST be the header to define variables name
      */
     public function __construct(string $filepath) {
@@ -39,8 +44,14 @@ class SpecificationLoader {
         if($this->file === false) {
             throw new SpecificationException('Loader cannot open the specification file');
         }
+        $this->filepath = $filepath;
         $this->columns = fgetcsv($this->file);
         $this->columns_nb = count($this->columns);
+    }
+
+    public function reset() {
+        $this->file = fopen($this->filepath, 'r');
+        $this->columns = fgetcsv($this->file);
     }
 
     /**

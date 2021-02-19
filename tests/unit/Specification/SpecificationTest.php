@@ -8,7 +8,8 @@ class SpecificationTest extends TestCase {
 
     const SCENARIO = 'scenario-tests';
     const FILEPATH = __DIR__. '/../files/specs/'.self::SCENARIO.'/spec.csv';
-
+    const FILEPATH_TO_RENAME = __DIR__. '/../files/specs/scenario-spec-processed/spec.csv';
+    const FILEPATH_RENAMED = __DIR__. '/../files/specs/scenario-spec-processed/spec_PROCESSED.csv';
     /**
      * @before
      */
@@ -48,7 +49,24 @@ class SpecificationTest extends TestCase {
 
         for($i=0; $i < count($dataArray); $i++) {
             $this->assertSame($dataArray[$i], $specification->current());
+            $this->assertSame($i, $specification->key());
+            $this->assertTrue($specification->valid());
             $specification->next();
         }
+
+        $specification->rewind();
+        $this->assertSame($dataArray[0], $specification->current());
     }
+
+    public function testShouldSetSpecAsProcessed() {
+        $specification = new Specification(self::FILEPATH_TO_RENAME);
+
+        $specification->setProcessed();
+
+        $this->assertFalse(file_exists(self::FILEPATH_TO_RENAME));
+        $this->assertTrue(file_exists(self::FILEPATH_RENAMED));
+
+        rename(self::FILEPATH_RENAMED,self::FILEPATH_TO_RENAME);
+    }
+
 }

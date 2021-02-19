@@ -42,6 +42,8 @@ class Specification implements Iterator{
      */
     public function rewind() {
         $this->datastep = 0;
+        $this->loader->reset();
+        $this->data = $this->loader->next();
     }
 
     /**

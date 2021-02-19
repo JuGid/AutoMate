@@ -12,6 +12,9 @@ use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
 use Automate\Specification\Specification;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Runner {
 
     /**

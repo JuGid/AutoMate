@@ -2,6 +2,10 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Handler\GlobalVariableHandler;
+use Automate\Handler\ScenarioVariableHandler;
+use Automate\Handler\SpecVariableHandler;
+use Automate\Handler\VariableHandlerHandler;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;
 use PASVL\Validation\Problems\DataValueMatchedNoPattern;
 use PHPUnit\Framework\TestCase;
@@ -11,6 +15,28 @@ use PHPUnit\Framework\TestCase;
  */
 class TransformersTest extends TestCase {
     
+    public function testShouldSetVariables() {
+        
+        ScenarioVariableHandler::$variables['var'] = 'scenario';
+        SpecVariableHandler::$variables['var'] = 'scenario';
+        GlobalVariableHandler::$variables['var'] = 'scenario';
+
+        $scopes = [
+            ['go'=>'{{ scenario.var }}'],
+            ['go'=>'{{ spec.var }}'],
+            ['go'=>'{{ global.var }}']
+        ];
+
+        $afterSetting = ['go'=>'scenario'];
+
+        $transformer = new GoTransformer();
+        foreach($scopes as $scope) {
+            $transformer->setStep($scope);
+            $transformer->setVariables();
+            $this->assertSame($afterSetting, $transformer->getStep());
+        }
+    }
+
     public function testGoTransformerAndGetProperties() {
         $this->expectException(DataValueMatchedNoPattern::class);
 
@@ -424,6 +450,8 @@ class TransformersTest extends TestCase {
             $transformer->setStep($thirdvalidPattern);
             $this->assertTrue($transformer->validate());
         }
+
+        $this->assertSame('Frame to string', strval($transformer));
     }
 
     public function testResizeTransformerAndGetProperties() {
