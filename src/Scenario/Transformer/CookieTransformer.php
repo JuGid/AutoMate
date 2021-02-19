@@ -4,9 +4,6 @@ namespace Automate\Scenario\Transformer;
 
 use Facebook\WebDriver\Cookie;
 
-/**
- * @codeCoverageIgnore
- */
 class CookieTransformer extends AbstractTransformer {
 
     /**
@@ -24,6 +21,8 @@ class CookieTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void 
     {   

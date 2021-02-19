@@ -21,6 +21,8 @@ abstract class AbstractTransformer {
     protected $step;
 
     /**
+     * @codeCoverageIgnore
+     * 
      * Get variables, validate and transform into driver action
      * @throws CommandException If the step is not valid
      * 
@@ -82,6 +84,8 @@ abstract class AbstractTransformer {
 
     /**
      * By default, print the uppercased command name
+     * 
+     * @codeCoverageIgnore
      */
     public function __toString()
     {

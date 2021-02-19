@@ -6,9 +6,6 @@ use Automate\Exception\CommandException;
 use Automate\Handler\VariableHandlerHandler;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
-/**
- * @codeCoverageIgnore
- */
 class GetTransformer extends AbstractTransformer {
 
     /**
@@ -28,6 +25,8 @@ class GetTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

@@ -17,6 +17,9 @@ class AutoMate {
         Configuration::load($configFile);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') {
         $scenario = null;
         $specification = null;

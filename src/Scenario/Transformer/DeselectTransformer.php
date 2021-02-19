@@ -6,9 +6,6 @@ use Automate\Exception\CommandException;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverSelect;
 
-/**
- * @codeCoverageIgnore
- */
 class DeselectTransformer extends AbstractTransformer {
 
     /**
@@ -20,13 +17,15 @@ class DeselectTransformer extends AbstractTransformer {
             [
                 ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
                 'by'=>':string :in("value","index","text","pltext")',
-                'value'=>':string and (:number :int)'
+                'value'=>':string or (:number :int)'
             ]
         ];
     }
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {

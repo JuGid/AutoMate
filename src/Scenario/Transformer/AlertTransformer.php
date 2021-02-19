@@ -4,9 +4,6 @@ namespace Automate\Scenario\Transformer;
 
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-/**
- * @codeCoverageIgnore
- */
 class AlertTransformer extends AbstractTransformer {
 
     /**
@@ -19,6 +16,8 @@ class AlertTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

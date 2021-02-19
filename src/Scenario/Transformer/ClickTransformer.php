@@ -4,9 +4,6 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
-/**
- * @codeCoverageIgnore
- */
 class ClickTransformer extends AbstractTransformer {
 
     /**
@@ -23,6 +20,8 @@ class ClickTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {

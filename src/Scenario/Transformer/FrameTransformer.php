@@ -4,9 +4,6 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
-/**
- * @codeCoverageIgnore
- */
 class FrameTransformer extends AbstractTransformer {
 
     /**
@@ -17,12 +14,14 @@ class FrameTransformer extends AbstractTransformer {
         return ['frame'=>[
             ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string',
             'index?'=>':number :int',
-            'default?'=>''
+            'default?'=>'content'
         ]];
     }
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

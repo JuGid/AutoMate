@@ -5,9 +5,6 @@ namespace Automate\Scenario\Transformer;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-/**
- * @codeCoverageIgnore
- */
 class IsClickableTransformer extends AbstractTransformer {
 
     /**
@@ -24,6 +21,8 @@ class IsClickableTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

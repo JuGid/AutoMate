@@ -4,9 +4,6 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\NotImplementedException;
 
-/**
- * @codeCoverageIgnore
- */
 class CreateTransformer extends AbstractTransformer {
 
     /**
@@ -19,6 +16,8 @@ class CreateTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

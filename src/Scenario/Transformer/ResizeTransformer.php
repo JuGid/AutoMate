@@ -5,9 +5,6 @@ namespace Automate\Scenario\Transformer;
 use Automate\Exception\CommandException;
 use Facebook\WebDriver\WebDriverDimension;
 
-/**
- * @codeCoverageIgnore
- */
 class ResizeTransformer extends AbstractTransformer {
 
     /**
@@ -25,6 +22,8 @@ class ResizeTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {   

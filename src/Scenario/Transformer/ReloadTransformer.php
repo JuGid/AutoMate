@@ -2,9 +2,6 @@
 
 namespace Automate\Scenario\Transformer;
 
-/**
- * @codeCoverageIgnore
- */
 class ReloadTransformer extends AbstractTransformer {
 
     /**
@@ -17,6 +14,8 @@ class ReloadTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {

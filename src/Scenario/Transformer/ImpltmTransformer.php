@@ -2,9 +2,6 @@
 
 namespace Automate\Scenario\Transformer;
 
-/**
- * @codeCoverageIgnore
- */
 class ImpltmTransformer extends AbstractTransformer {
 
     /**
@@ -12,11 +9,13 @@ class ImpltmTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        return ['impltm'=>':number :int'];
+        return ['impltm'=>':number'];
     }
 
     /**
      * {@inheritdoc}
+     * 
+     * @codeCoverageIgnore
      */
     protected function transform() : void
     {

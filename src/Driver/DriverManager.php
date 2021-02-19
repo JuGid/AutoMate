@@ -27,6 +27,7 @@ class DriverManager {
   public function __construct(){}
 
   /**
+   * @codeCoverageIgnore
    * @param string $browser The browser which you want the driver
    * @param string $serverUrl The server url (selenium)
    * @return RemoteWebDriver|null 
@@ -63,19 +64,31 @@ class DriverManager {
     return $this->serverUrl;
   }
 
+  /**
+   * @codeCoverageIgnore
+   */
   private function getChromeDriver() : ChromeDriver {
     putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverFolder);
     return ChromeDriver::start();
   }
 
+  /**
+   * @codeCoverageIgnore
+   */
   private function getFirefoxDriver() : RemoteWebDriver {
     return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::firefox());
   }
 
+  /**
+   * @codeCoverageIgnore
+   */
   private function getEdgeDriver() : RemoteWebDriver {
     return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::microsoftEdge());
   }
 
+  /**
+   * @codeCoverageIgnore
+   */
   private function getSafariDriver() : RemoteWebDriver {
     return RemoteWebDriver::create($this->serverUrl, DesiredCapabilities::safari());
   }
