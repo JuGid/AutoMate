@@ -18,19 +18,19 @@ Today, with AutoMate you can :
 
 ### Installation 
 
-**Install AutoMate with composer**
+**:arrow_right: Install AutoMate with composer**
 
 ```sh
 composer install jugid/auto-mate
 ```
 
-**Get a Webdriver**
+**:arrow_right: Get a Webdriver**
 
  - [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) : Chrome
  - [Geckodriver](https://github.com/mozilla/geckodriver/tree/v0.29.0) : Firefox
  - For Safari driver, see [Apple docs](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)
 
-**Selenium Grid**
+**:arrow_right: Selenium Grid**
 
 You can use Selenium Grid. See [Selenium Grid](https://www.selenium.dev/documentation/en/grid/) and [Selenium Grid 4 Downloads](https://www.selenium.dev/downloads/)
 
@@ -45,24 +45,24 @@ To use AutoMate, you first need to :
 3. Create some folders corresponding to the scenario
 4. Maybe create a specification csv file
 
-**Create you yaml configuration file**
+**:arrow_right: Create you yaml configuration file**
 
 Your configuration file should looks like [this](config/default-config.yaml). You MUST prefer using absolute path.
 
-**Create your scenario file with yaml**
+**:arrow_right: Create your scenario file with yaml**
 
 A scenario is a list of steps that have to be executed by AutoMate. You also can declare variables and the browser to use for this specific scenario. You can find an example [here](example/scenario)
 
 > Your scenario needs to be named `main.yaml` and saved in `scenario_folder/scenario_name/`
 
-**Create some folders corresponding to the scenario**
+**:arrow_right: Create some folders corresponding to the scenario**
 
 Now you have to create some folders corresponding to the scenario you just created.
 
 * logs_folder/scenario_name/ : to log the results in details
 * specs_folder/scenario_name/ : to load data in the scenario specification variables scope
 
-**Create your specification file**
+**:arrow_right: Create your specification file**
 
 Specification are csv files that provide data to AutoMate. It will execute the scenario for each lines and load data inside the spec variables scope.
 
