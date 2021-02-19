@@ -44,6 +44,9 @@ abstract class CustomException extends Exception implements IException
         parent::__construct($message, $code);
     }
     
+    /**
+     * @codeCoverageIgnore
+     */
     public function __toString() : string
     {
         return get_class($this) . " '{$this->message}' in {$this->file}({$this->line})\n"

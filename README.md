@@ -76,7 +76,7 @@ Your specification files need to be saved in specs_folder/scenario_name/my_spec.
 
 This is what AutoMate looks like :
 
-![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
+![AutoMate Screenshot](.github/images/screen_automate.png)
 
 ## Support
 

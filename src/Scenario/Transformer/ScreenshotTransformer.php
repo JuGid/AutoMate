@@ -13,7 +13,7 @@ class ScreenshotTransformer extends AbstractTransformer {
     {
         return ['screenshot' => 
                     [
-                        'type'=> ':string in("all","element")',
+                        'type'=> ':string :in("all","element")',
                         'sname'=>':string',
                         ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string'
                     ]
@@ -29,10 +29,10 @@ class ScreenshotTransformer extends AbstractTransformer {
     {   
         $array = $this->step['screenshot'];
         if($array['type'] == 'all') {
-            $this->driver->takeScreenshot($array['name']);
+            $this->driver->takeScreenshot($array['sname']);
         } else {
             $element = $this->driver->findElement(WebLocator::get(array_keys($array)[2], array_values($array)[2]));
-            $element->takeElementScreenshot($array['name']);
+            $element->takeElementScreenshot($array['sname']);
         }
     }
 
@@ -41,7 +41,7 @@ class ScreenshotTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Cheeeeeese');
+        return sprintf('Cheeeeeese [%s]', $this->step['screenshot']['sname']);
     }
 
 }

@@ -4,6 +4,8 @@ namespace Automate\Console;
 
 /**
  * Simple class to help writting things in terminal
+ * 
+ * @codeCoverageIgnore
  */
 class Console {
 

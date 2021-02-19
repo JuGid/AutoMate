@@ -11,7 +11,7 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        return ['numberOfWindows' => ':number :int'];
+        return ['numberOfWindows' => ':number'];
     }
 
     /**

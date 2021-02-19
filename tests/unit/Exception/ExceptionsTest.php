@@ -85,4 +85,11 @@ class ExceptionsTest extends TestCase {
 
         throw new VariableException('Variable exception', 9);
     }
+
+    public function testShouldThrowExceptionWithouMessage() {
+        $this->expectException(VariableException::class);
+        $this->expectExceptionMessage('Unknown Automate\Exception\VariableException');
+
+        throw new VariableException();
+    }
 }

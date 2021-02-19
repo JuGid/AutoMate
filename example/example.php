@@ -1,11 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 use Automate\AutoMate;
 
-$configFile = __DIR__.'/example/config/config-test.yaml';
+$configFile = __DIR__.'/config/config-test.yaml';
 
 $autoMate = new AutoMate($configFile);
 

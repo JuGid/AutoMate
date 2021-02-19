@@ -14,8 +14,11 @@ class ResizeTransformer extends AbstractTransformer {
     {
         return ['resize'=>[
                             'type'=>':string :in("maximize","fullscreen","size")',
-                            'width?'=>':number :int',
-                            'height?'=>':number :int'
+                            'size?'=> [
+                                'width'=>':number',
+                                'height'=>':number'
+                            ]
+                            
                         ]
                 ];
     }

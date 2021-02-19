@@ -13,7 +13,7 @@ class FrameTransformer extends AbstractTransformer {
     {
         return ['frame'=>[
             ':string :in("css","xpath","id","class","name","tag","linktext", "pltext") ?'=>':string',
-            'index?'=>':number :int',
+            'index?'=>':number',
             'default?'=>'content'
         ]];
     }

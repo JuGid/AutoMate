@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3e45cb16a9c737c275a804979942f59",
+    "content-hash": "9a38ed345d1e94409d640e0b11d09cda",
     "packages": [
         {
             "name": "lezhnev74/pasvl",
-            "version": "0.6.4",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lezhnev74/pasvl.git",
-                "reference": "45aac2597f38007fde1410ff0aa66345705ab187"
+                "reference": "63dee4e79b367733269c0ff791c4910a90a7b581"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lezhnev74/pasvl/zipball/45aac2597f38007fde1410ff0aa66345705ab187",
-                "reference": "45aac2597f38007fde1410ff0aa66345705ab187",
+                "url": "https://api.github.com/repos/lezhnev74/pasvl/zipball/63dee4e79b367733269c0ff791c4910a90a7b581",
+                "reference": "63dee4e79b367733269c0ff791c4910a90a7b581",
                 "shasum": ""
             },
             "require": {
@@ -44,14 +44,15 @@
                     "email": "lezhnev.work@gmail.com"
                 }
             ],
-            "description": "PHP Array Structure Validation Library",
+            "description": "Array Validator",
             "keywords": [
                 "array",
                 "pattern",
                 "structure",
-                "validation"
+                "validation",
+                "validator"
             ],
-            "time": "2020-09-18T12:00:24+00:00"
+            "time": "2021-02-10T06:58:04+00:00"
         },
         {
             "name": "php-webdriver/webdriver",
