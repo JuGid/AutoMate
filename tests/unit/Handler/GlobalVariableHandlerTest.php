@@ -52,4 +52,18 @@ class GlobalVariableHandlerTest extends TestCase {
         $this->assertSame(true, GlobalVariableHandler::isEmpty());
     }
 
+    public function testShouldSetAndGetScenarioName() {
+        GlobalVariableHandler::setScenarioName('scenario');
+
+        $this->assertSame('scenario', GlobalVariableHandler::scenarioName());
+    }
+
+    public function testShouldThrowVariableAlreadyExists() {
+        $this->expectException(VariableException::class);
+        $this->expectExceptionMessage('Variable foo already exists');
+
+        GlobalVariableHandler::add('foo', 'bar');
+        GlobalVariableHandler::add('foo', 'rab');
+    }
+
 }

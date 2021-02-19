@@ -2,6 +2,9 @@
 
 namespace Automate\Scenario\Transformer;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ImpltmTransformer extends AbstractTransformer {
 
     /**

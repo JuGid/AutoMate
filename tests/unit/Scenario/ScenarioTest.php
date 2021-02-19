@@ -3,8 +3,10 @@
 namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
+use Automate\Exception\ScenarioException;
 use Automate\Handler\ScenarioVariableHandler;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 /**
  * @covers \Automate\Scenario\Scenario
@@ -12,6 +14,9 @@ use PHPUnit\Framework\TestCase;
 class ScenarioTest extends TestCase {
     const SCENARIO = 'scenario-tests';
     const SCENARIO_NO_BROWSER = 'scenario-no-browser';
+    const SCENARIO_NO_STEPS =  'scenario-no-steps';
+    const SCENARIO_PARSE_ERROR = 'scenario-parse-error';
+
     const SCENARIO_ARRAY = [
         'browser'=> 'chrome',
         'variables' => [
@@ -57,6 +62,11 @@ class ScenarioTest extends TestCase {
             $this->assertSame($steps[$i], $scenario->current());
             $scenario->next();
         }
+
+        $this->assertFalse($scenario->valid());
+        $scenario->rewind();
+        $this->assertSame(self::SCENARIO_ARRAY['scenario']['steps'][0], $scenario->current());
+        $this->assertSame('go', $scenario->key());
     }
 
     public function testShouldGetTheScenarioBrowser() {
@@ -83,6 +93,19 @@ class ScenarioTest extends TestCase {
         
         $this->assertSame('bonjour', ScenarioVariableHandler::get('name'));
         $this->assertSame('nouveau', ScenarioVariableHandler::get('cookie'));
+    }
+
+    public function testShouldThrowNoStepException() {
+        $this->expectException(ScenarioException::class);
+        $this->expectExceptionMessage('You must define steps in your scenario file');
+
+        $scenario = new Scenario(self::SCENARIO_NO_STEPS);
+    }
+
+    public function testShouldThrowParseException() {
+        $this->expectException(ParseException::class);
+
+        $scenario = new Scenario(self::SCENARIO_PARSE_ERROR);
     }
 
 }

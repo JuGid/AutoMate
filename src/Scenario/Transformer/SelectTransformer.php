@@ -6,6 +6,9 @@ use Automate\Exception\CommandException;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverSelect;
 
+/**
+ * @codeCoverageIgnore
+ */
 class SelectTransformer extends AbstractTransformer {
 
     /**

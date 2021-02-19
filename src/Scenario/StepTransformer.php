@@ -5,6 +5,9 @@ namespace Automate\Scenario;
 use Automate\Exception\CommandException;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 
+/**
+ * @codeCoverageIgnore
+ */
 class StepTransformer {
 
     /**

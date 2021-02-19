@@ -4,6 +4,9 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ScreenshotTransformer extends AbstractTransformer {
 
     /**

@@ -3,8 +3,10 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\NotImplementedException;
-use Automate\Handler\WindowHandler;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CreateTransformer extends AbstractTransformer {
 
     /**

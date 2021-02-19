@@ -3,9 +3,11 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Scenario\Transformer\Helpers\WebLocator;
-use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
+/**
+ * @codeCoverageIgnore
+ */
 class TextMatchesTransformer extends AbstractTransformer {
 
     /**

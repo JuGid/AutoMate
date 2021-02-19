@@ -2,9 +2,11 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\Cookie;
 
+/**
+ * @codeCoverageIgnore
+ */
 class CookieTransformer extends AbstractTransformer {
 
     /**

@@ -33,12 +33,13 @@ class ConfigurationTest extends TestCase {
 
     public function testShouldSetAndGetAProxy() {
         $proxy = new Proxy();
-        $proxy->setHttpProxy('0.0.0.0', '8080');
+        $proxy->setHttpProxy('0.0.0.1', '8080');
+        $proxy->setFtpProxy('0.0.0.2', '23');
+        $proxy->setSslProxy('0.0.0.3','443');
 
         Configuration::setProxy($proxy);
         $confProxy = Configuration::getProxy();
 
-        $this->assertSame('0.0.0.0:8080',$confProxy->getHttpProxy());
         $this->assertSame($proxy->getHttpProxy(), $confProxy->getHttpProxy());
         $this->assertSame($proxy->getFtpProxy(), $confProxy->getFtpProxy());
         $this->assertSame($proxy->getSslProxy(), $confProxy->getSslProxy());

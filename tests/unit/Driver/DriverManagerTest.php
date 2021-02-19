@@ -5,6 +5,9 @@ namespace Automate\Driver;
 use Automate\Configuration\Configuration;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \Automate\Driver\DriverManager
+ */
 class DriverManagerTest extends TestCase {
 
     /**

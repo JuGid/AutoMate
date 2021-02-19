@@ -4,6 +4,9 @@ namespace Automate\Scenario\Transformer;
 
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
+/**
+ * @codeCoverageIgnore
+ */
 class UrlIsTransformer extends AbstractTransformer {
 
     /**
