@@ -1,111 +1,109 @@
-![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/JuGid/AutoMate/branch/master/graph/badge.svg?token=JK9IA306US)](https://codecov.io/gh/JuGid/AutoMate)
+![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/JuGid/AutoMate/branch/master/graph/badge.svg?token=JK9IA306US)](https://codecov.io/gh/JuGid/AutoMate) [![Latest Stable Version](https://poser.pugx.org/jugid/auto-mate/v)](//packagist.org/packages/jugid/auto-mate) [![License](https://poser.pugx.org/jugid/auto-mate/license)](//packagist.org/packages/jugid/auto-mate) [![Latest Unstable Version](https://poser.pugx.org/jugid/auto-mate/v/unstable)](//packagist.org/packages/jugid/auto-mate)
+
+
 # AutoMate - Yaml automation library
 
-## Presentation
+## Why AutoMate ?
 
-AutoMate is a library which allows you to control web browsers with a normed YAML file, create scenario, and log the results.
+At work, we need to make a lot of management acts. There is already a homemade framework which works well for this kind of actions. The thing is that it takes a long time to develop and create new scenarios. With AutoMate, I tried reducing this wasted time.
 
-Thanks to 
- - [php-webdriver](https://github.com/php-webdriver/php-webdriver) for this amazing PHP binding solution
- - [PASVL](https://github.com/lezhnev74/pasvl) from Lezhnev74 for this array validation with patterns that help
- - [Symfony Config Component](https://github.com/symfony/config) for the component (obvious)
+Today, with AutoMate you can :
+- Create multiple scenarios
+- Run them on different browsers
+- Inject data into them to use variable in the scenario and repeat the scenario for each dataset
+- Get logs from files to know which data was used when the scenario failed/successed
+- Have a step by step description written on console
 
-## 1️⃣ Installation (not yet)
+## Getting started
 
-**Installation is possible using [Composer](https://getcomposer.org/).**
+### Installation 
 
-If you don't already use Composer, you can download the `composer.phar` binary :
+**Install AutoMate with composer**
 
-    curl -sS https://getcomposer.org/installer | php
+```sh
+composer install jugid/auto-mate
+```
 
-Then install the library :
+**Get a Webdriver**
 
-    php composer.phar require jugid/auto-mate
-
-If you already have composer installed and in path :
-
-    composer require jugid/auto-mate
-
-## 2️⃣ Getting started
-
-**🚘 Webdriver**
-
-First of all, you need to download a driver to interact between AutoMate and your browser and control it. This driver will listen to the commands sent and execute them in the browser specified.
-
-You can download multiple drivers but :
-
- - Be sure you have the driver for the browser you want to use in your scenario
-
-**Download links**
-*(Only chrome for the moment)*
  - [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) : Chrome
+ - [Geckodriver](https://github.com/mozilla/geckodriver/tree/v0.29.0) : Firefox
+ - For Safari driver, see [Apple docs](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)
 
-**🔧 Create your config.yaml file**
+**Selenium Grid**
 
-    automate:
-    	browser:
-    		default: chrome
-    	drivers:
-	    	# One or more required
-    		chrome:
-    			driver : '/AutoMate/chromedriver'
-    		firefox:
-    			driver: '/AutoMate/gueckodriver'
-    	scenario
-			folder: '/AutoMate/scenario'
-    	logs:
-    		enable: false
-    		folder: '/AutoMate/logs'
+You can use Selenium Grid. See [Selenium Grid](https://www.selenium.dev/documentation/en/grid/) and [Selenium Grid 4 Downloads](https://www.selenium.dev/downloads/)
 
+> If you do it, please send a PR with your example and a quick guide.
 
-**NOTE :** Tests are automatically written in log files folder.
+### Usage
 
-**🔥 Create your scenario yaml file**
+To use AutoMate, you first need to :
 
-    browser: chrome
-    variables:
-        name: 'bonjour'
-        cookie: 'nouveau'
-    scenario:
-        steps:
-    	   - go: 'https://youtube.com'
-    	   - cookie:
-    		    name: "{{ scenario.name }}"
-    		    value: "{{ scenario.cookie }}"
+1. Create your yaml configuration file
+2. Create your scenario file with yaml
+3. Create some folders corresponding to the scenario
+4. Maybe create a specification csv file
 
-**😄 Run your scenario**
+**Create you yaml configuration file**
 
-***In app.php***
+Your configuration file should looks like [this](config/default-config.yaml). You MUST prefer using absolute path.
 
-    <?php
-    
-    require  __DIR__.'/vendor/autoload.php';
-    
-    use Automate\AutoMate;
-    
-    $configFile = __DIR__.'/example/config/config-test.yaml'
-    $automate = new AutoMate($configFile);
-    
-    $automate->run('youtube', true, true);
+**Create your scenario file with yaml**
 
-Don't forget to use `composer install` .
+A scenario is a list of steps that have to be executed by AutoMate. You also can declare variables and the browser to use for this specific scenario. You can find an example [here](example/scenario)
 
-## 3️⃣ Future features
+> Your scenario needs to be named `main.yaml` and saved in `scenario_folder/scenario_name/`
 
- - [ ] Loop and Conditions
- - [ ] Add more managed drivers
- - [ ] Add Proxy management
+**Create some folders corresponding to the scenario**
 
-## 4️⃣ Contributing
+Now you have to create some folders corresponding to the scenario you just created.
+
+* logs_folder/scenario_name/ : to log the results in details
+* specs_folder/scenario_name/ : to load data in the scenario specification variables scope
+
+**Create your specification file**
+
+Specification are csv files that provide data to AutoMate. It will execute the scenario for each lines and load data inside the spec variables scope.
+
+Your specification files need to be saved in specs_folder/scenario_name/my_spec.csv.
+
+> Your specification needs to have a header. Otherwise, your variables name will be the data at first line.
+
+> You can create the number of specification you want. If AutoMate does not run in Test mode, the spec is renamed with the suffix `_PROCESSED` when the scenario run ends. The specification cannot be detected if it has `_PROCESSED` in its name.
+
+## Visual
+
+This is what AutoMate looks like :
+
+![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
+
+## Support
+
+First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). Then if you don't find what you want, you can contact us.
+
+## Roadmap
+
+The first version will be release soon. We first need to implement some additionnal features :
+
+- [ ] Possibility to loop through some steps like a 'for'
+- [ ] Possibility to add conditions to continue or not in the scenario or execute other steps
+- [ ] Provide a Proxy management
+
+## Contributing
 
 We love to have your help to make AutoMate better. 
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for more information about contributing and developing AutoMate
 
-## 5️⃣ Simple example
+## License
 
-You can find an example in [example folder](example)
+AutoMate is under MIT License. You can find the license file at [License](LICENSE). 
 
-![AutoMate Screenshot](https://github.com/JuGid/AutoMate/blob/master/docs/images/screen_automate.png)
+## Thanks
 
+ - [php-webdriver](https://github.com/php-webdriver/php-webdriver) for this amazing PHP binding solution
+ - [PASVL](https://github.com/lezhnev74/pasvl) from Lezhnev74 for this array validation with patterns that help
+ - [Symfony Config Component](https://github.com/symfony/config)
+ - [Badge poser](https://poser.pugx.org) to provide an helper to pimp the README with great badges
 
-
+ If you like AutoMate, do not hesitate to tell us how you love it and if you can, contribute.
