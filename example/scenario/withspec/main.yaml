@@ -8,7 +8,6 @@ scenario:
     - cookie: 
         name: "{{ scenario.name }}"
         value: "{{ scenario.cookie }}" 
-    #UploadTransformer
 
 
   

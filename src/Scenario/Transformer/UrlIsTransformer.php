@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Driver\DriverManager;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class UrlIsTransformer extends AbstractTransformer {

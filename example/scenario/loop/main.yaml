@@ -1,0 +1,19 @@
+browser: chrome
+scenario:
+  steps:
+    - go: 'http://youtube.Fr'
+    - titleContains: YouTube
+    - urlIs: https://www.youtube.com/?gl=FR
+    - loop:
+        repeat: 3
+        steps:
+          - presenceOf:
+              id: 'search-icon-legacy'
+          - cookie:
+              name: myCookieName
+              value: myCookieValue
+          - reload: page
+    - urlIs: https://www.youtube.com/?gl=FR  
+
+
+  

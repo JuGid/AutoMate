@@ -1,0 +1,18 @@
+browser: chrome
+scenario:
+  steps:
+    - go: 'http://youtube.Fr'
+    - titleContains: YouTube
+    - urlIs: https://www.youtube.com/?gl=FR
+    - condition:
+        eval: 'true == false'
+        ifTrue:
+          steps:
+            - reload: page
+            #- exit: 'Exit scenario because true is equal to true'
+        ifFalse: 
+          steps:
+            - go: http://github.com
+
+
+  

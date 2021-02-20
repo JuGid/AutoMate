@@ -2,6 +2,9 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Driver\DriverManager;
+use SebastianBergmann\CodeCoverage\Driver\Driver;
+
 class GoTransformer extends AbstractTransformer {
 
     /**

@@ -53,6 +53,7 @@ class DriverManager {
       throw new BrowserException('The browser ' . $browser . ' is not managed by AutoMate');
     }
     WindowHandler::setWindows($driver->getWindowHandles());
+    
     return $driver;
   }
 

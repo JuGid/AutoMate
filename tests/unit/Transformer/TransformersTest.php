@@ -517,4 +517,19 @@ class TransformersTest extends TestCase {
 
         $this->assertSame('Cheeeeeese [myScreenshot]', strval($transformer));
     }
+
+    public function testLoopTransformerAndGetProperties() {
+        $transformer = new LoopTransformer();
+        $transformer->setStep([
+            'loop'=> [
+                'repeat'=> '5',
+                'steps'=> [
+                    ['go'=>'http://github.com'],
+                    ['urlIs'=>'https://github.com']
+                ]
+            ]
+        ]);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('> Loop ends after 5 times', strval($transformer));
+    }
 }

@@ -86,8 +86,9 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 
 The first version will be release soon. We first need to implement some additionnal features :
 
-- [ ] Possibility to loop through some steps like a 'for'
-- [ ] Possibility to add conditions to continue or not in the scenario or execute other steps
+- [x] Possibility to loop through some steps like a 'for'
+- [x] Possibility to add conditions
+- [ ] Prossibility to exit senario at any time
 - [ ] Provide a Proxy management
 
 ## Contributing

@@ -135,6 +135,8 @@ class Runner {
               }
               Console::writeEx($e);
         }
+
+        if(!$this->runWithSpecification()) $this->driver->quit();
     }
 
     public function getStepTransformer() : StepTransformer {
