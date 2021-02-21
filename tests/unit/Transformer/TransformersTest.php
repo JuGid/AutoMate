@@ -5,7 +5,6 @@ namespace Automate\Scenario\Transformer;
 use Automate\Handler\GlobalVariableHandler;
 use Automate\Handler\ScenarioVariableHandler;
 use Automate\Handler\SpecVariableHandler;
-use Automate\Handler\VariableHandlerHandler;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;
 use PASVL\Validation\Problems\DataValueMatchedNoPattern;
 use PHPUnit\Framework\TestCase;
@@ -569,5 +568,13 @@ class TransformersTest extends TestCase {
         $transformer->setStep($stepResult);
 
         $this->assertSame('Condition assessed 5 == 6 as false', strval($transformer));
+    }
+
+    public function testExitTransformer() {
+        $transformer = new ExitTransformer();
+        $transformer->setStep(['exit'=>'For the example']);
+
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('EXIT', strval($transformer));
     }
 }

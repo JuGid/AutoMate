@@ -20,7 +20,7 @@ class AutoMate {
     /**
      * @codeCoverageIgnore
      */
-    public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') {
+    public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') : void {
         $scenario = null;
         $specification = null;
         $scenarioBrowser = '';

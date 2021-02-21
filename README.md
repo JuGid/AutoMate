@@ -2,12 +2,13 @@
 
 
 # AutoMate - Yaml automation library
+*First release 0.1.0 see ![Changelogs](CHANGELOG.md)*
 
 ## Why AutoMate ?
 
 At work, we need to make a lot of management acts. There is already a homemade framework which works well for this kind of actions. The thing is that it takes a long time to develop and create new scenarios. With AutoMate, I tried reducing this wasted time.
 
-Today, with AutoMate you can :
+With AutoMate you can :
 - Create multiple scenarios
 - Run them on different browsers
 - Inject data into them to use variable in the scenario and repeat the scenario for each dataset
@@ -84,12 +85,17 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 
 ## Roadmap
 
-The first version will be release soon. We first need to implement some additionnal features :
+The first "version" will be release soon. We first need to implement some additionnal features :
 
 - [x] Possibility to loop through some steps like a 'for'
 - [x] Possibility to add conditions
-- [ ] Prossibility to exit senario at any time
+- [x] Prossibility to exit senario at any time
+
+The next version will be able to : 
 - [ ] Provide a Proxy management
+- [ ] Possibility to import a scenario for reusability
+- [ ] Configure a browser as permitted by Selenium.
+- [x] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing
 

@@ -92,4 +92,11 @@ class ExceptionsTest extends TestCase {
 
         throw new VariableException();
     }
+
+    public function testShouldThrowScenarioExitException() {
+        $this->expectException(ScenarioExitException::class);
+        $this->expectExceptionMessage('The scenario exit with message : Test exception');
+
+        throw new ScenarioExitException('Test exception');
+    }
 }
