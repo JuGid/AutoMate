@@ -385,8 +385,8 @@ class TransformersTest extends TestCase {
     public function testGetTransformerAndGetProperties() {
         $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
 
-        $transformer = new GetTransformer();
-
+        $transformerAttribute = new GetTransformer();
+        $transformerNoAttribute = new GetTransformer();
         foreach($findingPossibilities as $possibility) {
             $validPattern = [
                 'get'=> [
@@ -405,12 +405,15 @@ class TransformersTest extends TestCase {
                 ]
             ];
 
-            $transformer->setStep($validPattern);
-            $this->assertTrue($transformer->validate());
+            $transformerAttribute->setStep($validPattern);
+            $this->assertTrue($transformerAttribute->validate());
 
-            $transformer->setStep($secondValidPattern);
-            $this->assertTrue($transformer->validate());
+            $transformerNoAttribute->setStep($secondValidPattern);
+            $this->assertTrue($transformerNoAttribute->validate());
         }
+        
+        $this->assertSame('Get attribute for element pltext[selector] with value attribut', strval($transformerAttribute));
+        $this->assertSame('Get text for element pltext[selector] ', strval($transformerNoAttribute));
         
     }
 
@@ -457,7 +460,8 @@ class TransformersTest extends TestCase {
     public function testResizeTransformerAndGetProperties() {
         $screenPossibilities = ["maximize","fullscreen","size"];
 
-        $transformer = new ResizeTransformer();
+        $transformerNoSize = new ResizeTransformer();
+        $transformerSize = new ResizeTransformer();
 
         foreach($screenPossibilities as $possibility) {
             $validPattern = [
@@ -476,12 +480,18 @@ class TransformersTest extends TestCase {
                 ]
             ];
 
-            $transformer->setStep($validPattern);
-            $this->assertTrue($transformer->validate());
+            $transformerNoSize->setStep($validPattern);
+            $this->assertTrue($transformerNoSize->validate());
 
-            $transformer->setStep($secondValidPattern);
-            $this->assertTrue($transformer->validate());
+            $transformerSize->setStep($secondValidPattern);
+            $this->assertTrue($transformerSize->validate());
         }
+
+        // This assert is false in the process but works here and need to be
+        // verified
+        $this->assertSame('Resize the page [size] ',strval($transformerNoSize));
+
+        $this->assertSame('Resize the page [size] with 500px per 600px',strval($transformerSize));
     }
 
     public function testScreenshotTransformerAndGetProperties() {
@@ -531,5 +541,33 @@ class TransformersTest extends TestCase {
         ]);
         $this->assertTrue($transformer->validate());
         $this->assertSame('> Loop ends after 5 times', strval($transformer));
+    }
+
+    public function testConditionTransformer() {
+        $transformer = new ConditionTransformer();
+        $transformer->setStep([
+            'condition'=> [
+                'eval'=>'5 == 6',
+                'ifTrue'=> [
+                    'steps'=>[
+                        ['go'=>'http://github.com']
+                    ]
+                ],
+                'ifFalse'=> [
+                    'steps'=>[
+                        ['go'=> 'http://youtube.com'],
+                        ['reload'=>'page']
+                    ]
+                ]
+            ]
+        ]);
+        
+        $this->assertTrue($transformer->validate());
+        
+        $stepResult = $transformer->getStep();
+        $stepResult['condition']['result'] = 'false';
+        $transformer->setStep($stepResult);
+
+        $this->assertSame('Condition assessed 5 == 6 as false', strval($transformer));
     }
 }

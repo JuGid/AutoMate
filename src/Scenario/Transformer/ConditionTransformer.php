@@ -46,8 +46,6 @@ class ConditionTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
-     * @codeCoverageIgnore
      */
     public function __toString()
     {

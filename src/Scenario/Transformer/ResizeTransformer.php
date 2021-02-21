@@ -50,10 +50,10 @@ class ResizeTransformer extends AbstractTransformer {
     public function __toString()
     {
         $array = $this->step['resize'];
-        $str = isset($array['width']) && isset($array['height']) ? sprintf('with weight %s px and %spx',
-                                                                            $array['width'],
-                                                                            $array['height']
-                                                                        ) : ' ';
+        $str = isset($array['size']['width']) && isset($array['size']['height']) ? sprintf('with %spx per %spx',
+                                                                            $array['size']['width'],
+                                                                            $array['size']['height']
+                                                                        ) : '';
         return sprintf('Resize the page [%s] %s', $this->step['resize']['type'], $str);
     }
 
