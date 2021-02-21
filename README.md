@@ -2,7 +2,7 @@
 
 
 # AutoMate - Yaml automation library
-*First release 0.1.0 see ![Changelogs](CHANGELOG.md)*
+*First release 0.1.0 see the [Changelogs](CHANGELOG.md)*
 
 ## Why AutoMate ?
 
