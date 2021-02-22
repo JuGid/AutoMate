@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 23/02/2021
+
+# Added
+
+- `Use` command to import scenario `use: sub.name` or `use: main.name`
+    - You can use `main.name` to run a scenario that is scenario_folder/name/main.yaml
+    - You can use `sub.name` to run a scenario that is scenario_folder/current_scenario/name.yaml
+- You can now use a proxy (see [example.php](example/example.php))
+- New scenarios example
+
+# Fixed
+
+- You can now use AutoMate with Geckodriver (not only Chromedriver)
+
+# Changed
+
+- `Scenario` class can now open any scenario file. `AutoMate` still open the main.yaml first.
+
 ## [0.1.0] - 22/02/2021
 
 # Initial release

@@ -577,4 +577,13 @@ class TransformersTest extends TestCase {
         $this->assertTrue($transformer->validate());
         $this->assertSame('EXIT', strval($transformer));
     }
+
+    public function testUseTransformer() {
+        $transformer = new UseTransformer();
+        $transformer->setStep(['use'=>'main.name']);
+        $this->assertTrue($transformer->validate());
+
+        $transformer->setStep(['use'=>'sub.name']);
+        $this->assertTrue($transformer->validate());
+    }
 }
