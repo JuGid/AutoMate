@@ -21,6 +21,7 @@ class ExitTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {
+        $this->driver->quit();
         throw new ScenarioExitException($this->step['exit']);
     }
 

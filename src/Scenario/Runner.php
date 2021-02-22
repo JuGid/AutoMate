@@ -6,6 +6,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\DriverManager;
+use Automate\Driver\Proxy\HttpProxy;
 use Automate\Exception\LogException;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
@@ -69,9 +70,9 @@ class Runner {
      */
     private $driver = null;
 
-    public function __construct(string $browser, bool $testMode) {
+    public function __construct(string $browser, bool $testMode = false, HttpProxy $httpProxy = null) {
         $this->driverManager = new DriverManager();
-        $this->driver = $this->driverManager->getDriver($browser);
+        $this->driver = $this->driverManager->getDriver($browser, $httpProxy);
         $this->stepTransformer = new StepTransformer($this->driver);
         $this->testMode = $testMode;
     }
