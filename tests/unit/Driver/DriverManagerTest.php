@@ -21,6 +21,6 @@ class DriverManagerTest extends TestCase {
         $dm = new DriverManager();
 
         $this->assertSame('http://localhost:4444', $dm->getServerUrl());
-        $this->assertSame('', $dm->getWebdriverFolder());
+        $this->assertSame('', $dm->getWebdriverPath());
     }
 }

@@ -63,13 +63,13 @@ class DriverManager {
   
       $driver = RemoteWebDriver::create($this->serverUrl, $caps);
     }
-    
+
     WindowHandler::setWindows($driver->getWindowHandles());
     return $driver;
   }
 
-  public function getWebdriverFolder() : string {
-    return $this->webdriverFolder;
+  public function getWebdriverPath() : string {
+    return $this->webdriverPath;
   }
 
   public function getServerUrl() : string {

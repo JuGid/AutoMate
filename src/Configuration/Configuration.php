@@ -7,15 +7,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\ConfigurationException;
-use Automate\Driver\Proxy;
 
 class Configuration implements ConfigurationInterface {
-
-  /**
-   * Proxy to run with
-   * @var Proxy
-   */
-  public static $proxy = null;
 
   /**
    * Array with all the configuration variables
@@ -45,14 +38,6 @@ class Configuration implements ConfigurationInterface {
       return $arrayValue;
     }
     return '';
-  }
-
-  public static function getProxy() : Proxy {
-    return self::$proxy;
-  }
-
-  public static function setProxy(Proxy $proxy) {
-    self::$proxy = $proxy;
   }
 
   public static function logsColumns(array $columns = [])

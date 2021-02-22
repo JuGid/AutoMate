@@ -2,7 +2,6 @@
 
 namespace Automate\Configuration;
 
-use Automate\Driver\Proxy;
 use Automate\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
@@ -29,20 +28,6 @@ class ConfigurationTest extends TestCase {
         
         //Should throw the Exception
         Configuration::get('foo.bar');
-    }
-
-    public function testShouldSetAndGetAProxy() {
-        $proxy = new Proxy();
-        $proxy->setHttpProxy('0.0.0.1', '8080');
-        $proxy->setFtpProxy('0.0.0.2', '23');
-        $proxy->setSslProxy('0.0.0.3','443');
-
-        Configuration::setProxy($proxy);
-        $confProxy = Configuration::getProxy();
-
-        $this->assertSame($proxy->getHttpProxy(), $confProxy->getHttpProxy());
-        $this->assertSame($proxy->getFtpProxy(), $confProxy->getFtpProxy());
-        $this->assertSame($proxy->getSslProxy(), $confProxy->getSslProxy());
     }
 
     public function testShouldGetAndSetLogsColumns() {
