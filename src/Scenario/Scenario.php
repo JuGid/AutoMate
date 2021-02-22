@@ -4,7 +4,6 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\ScenarioException;
-use Automate\Handler\GlobalVariableHandler;
 use Automate\Handler\ScenarioVariableHandler;
 use Iterator;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -27,8 +26,13 @@ class Scenario implements Iterator{
      */
     public $name;
 
-    public function __construct(string $name) {
-        $this->scenario = $this->parseScenarioFile(Configuration::get('scenario.folder') .'/'.$name.'/main.yaml');
+    public function __construct(string $name , string $sub = 'main') {
+        
+        $this->scenario = $this->parseScenarioFile(sprintf('%s/%s/%s.yaml', 
+                                    Configuration::get('scenario.folder'),
+                                    $name,
+                                    $sub)
+                                );
         $this->step = 0;
         $this->name = $name;
 
@@ -44,8 +48,6 @@ class Scenario implements Iterator{
                 ScenarioVariableHandler::add(array_keys($variables)[$i], array_values($variables)[$i]);
             }
         }
-
-        GlobalVariableHandler::setScenarioName($name);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 
 # AutoMate - Yaml automation library
-*First release 0.1.0 see the [Changelogs](CHANGELOG.md)*
+* Pre-release 0.2.0 see the [Changelogs](CHANGELOG.md)*
 
 ## Why AutoMate ?
 
@@ -84,16 +84,10 @@ This is what AutoMate looks like :
 First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). Then if you don't find what you want, you can contact us.
 
 ## Roadmap
+*See [Changelogs](CHANGELOG.md) for more information*
 
-The first "version" will be release soon. We first need to implement some additionnal features :
-
-- [x] Possibility to loop through some steps like a 'for'
-- [x] Possibility to add conditions
-- [x] Prossibility to exit senario at any time
-
-The next version will be able to : 
-- [ ] Provide a Proxy management
-- [ ] Possibility to import a scenario for reusability
+- [x] Provide a Proxy management
+- [x] Possibility to import a scenario for reusability
 - [ ] Configure a browser as permitted by Selenium.
 - [x] **Tell us your ideas ! You can directly send a PR or open an issue**
 

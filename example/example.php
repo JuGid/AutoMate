@@ -16,6 +16,7 @@ use Automate\Driver\Proxy\HttpProxy;
 $configFile = __DIR__.'/config/config-test.yaml';
 
 $autoMate = new AutoMate($configFile);
+
 /**
  * You can set a proxy using
  * $autoMate->setHttpProxy(new HttpProxy('193.269.32.1', 4543));
