@@ -5,13 +5,9 @@ namespace Automate;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\Proxy\HttpProxy;
-use Automate\Exception\BrowserException;
-use Automate\Exception\ScenarioException;
-use Automate\Exception\SpecificationException;
 use Automate\Specification\SpecificationFinder;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 class AutoMate {
 
@@ -52,5 +48,9 @@ class AutoMate {
 
     public function setProxy(HttpProxy $httpProxy) {
         $this->httpProxy = $httpProxy;
+    }
+
+    public function getProxy() : ?HttpProxy {
+        return $this->httpProxy;
     }
 }
