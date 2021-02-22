@@ -3,8 +3,10 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\CommandException;
-use Automate\Handler\VariableHandlerHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
+use PHPUnit\TextUI\XmlConfiguration\Variable;
 
 class GetTransformer extends AbstractTransformer {
 
@@ -42,7 +44,7 @@ class GetTransformer extends AbstractTransformer {
             $value = $this->driver->findElement($element)->getAttribute($arrayGet['attribute']);
         }
 
-        VariableHandlerHandler::set('global', $arrayGet['name'], $value);
+        VariableRegistry::set(Scope::WORLD, $arrayGet['name'], $value);
     }
 
     /**

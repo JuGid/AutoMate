@@ -4,7 +4,6 @@ namespace Automate\Logs;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\LogException;
-use Automate\Handler\GlobalVariableHandler;
 
 /**
  * @todo Create a log file manager ???

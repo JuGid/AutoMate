@@ -3,7 +3,8 @@
 namespace Automate\Specification;
 
 use Automate\Exception\SpecificationException;
-use Automate\Handler\SpecVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 
 /**
  * To avoid memory problems, I prefer not store the data a second time in
@@ -73,7 +74,10 @@ class SpecificationLoader {
         }
 
         $dataset = array_combine($this->columns, $dataline);
-        SpecVariableHandler::load($dataset);
+        VariableRegistry::reset(Scope::SPEC);
+        VariableRegistry::setMultiple(Scope::SPEC, $dataset);
+
+        //SpecVariableHandler::load($dataset);
         
         return $dataset;
     }

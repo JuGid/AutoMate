@@ -9,7 +9,7 @@ scenario:
         ifTrue:
           steps:
             - reload: page
-            #- exit: 'Exit scenario because true is equal to true'
+            - exit: 'Exit scenario because true is equal to true'
         ifFalse: 
           steps:
             - go: http://github.com

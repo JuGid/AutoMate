@@ -4,7 +4,8 @@ namespace Automate\Specification;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\SpecificationException;
-use Automate\Handler\GlobalVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use PHPUnit\Framework\TestCase;
 
 class SpecificationFinderTest extends TestCase {
@@ -19,7 +20,7 @@ class SpecificationFinderTest extends TestCase {
 
     public function testShouldFindTheSpecificationInScenarioSpecFolder() {
         $finder = new SpecificationFinder();
-        GlobalVariableHandler::setScenarioName('scenario-tests');
+        VariableRegistry::set(Scope::WORLD, 'scenario', 'scenario-tests');
 
         $specification = $finder->find();
 
@@ -29,7 +30,7 @@ class SpecificationFinderTest extends TestCase {
 
     public function testShouldFindTheSpecInSpecFolder() {
         $finder = new SpecificationFinder();
-        GlobalVariableHandler::setScenarioName('scenario-no-spec');
+        VariableRegistry::set(Scope::WORLD, 'scenario', 'scenario-no-spec');
 
         $specification = $finder->find();
 
@@ -42,7 +43,8 @@ class SpecificationFinderTest extends TestCase {
         $this->expectExceptionMessage('The specification has not been found.');
 
         $finder = new SpecificationFinder();
-        GlobalVariableHandler::setScenarioName('scenario-not-found');
+        
+        VariableRegistry::set(Scope::WORLD, 'scenario', 'scenario-not-found');
 
         $specification = $finder->find();
     }

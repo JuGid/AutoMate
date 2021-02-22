@@ -5,7 +5,8 @@ namespace Automate;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\Proxy\HttpProxy;
-use Automate\Handler\GlobalVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use Automate\Specification\SpecificationFinder;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
@@ -29,7 +30,7 @@ class AutoMate {
         $specification = null;
         $scenarioBrowser = '';
         $runner = null;
-        GlobalVariableHandler::setScenarioName($scenario_name);
+        VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
         
         try {
             $scenario = new Scenario($scenario_name);

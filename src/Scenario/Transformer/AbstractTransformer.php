@@ -4,7 +4,7 @@ namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
-use Automate\Handler\VariableHandlerHandler;
+use Automate\Registry\VariableRegistry;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use PASVL\Validation\ValidatorBuilder;
 
@@ -53,7 +53,7 @@ abstract class AbstractTransformer {
                 $variables = $matches[1];
                 array_walk($variables, function(&$variable) {
                     $variableExploded = explode('.', trim($variable));
-                    $variable = VariableHandlerHandler::get($variableExploded[0], $variableExploded[1]);
+                    $variable = VariableRegistry::get($variableExploded[0], $variableExploded[1]);
                 });
 
                 $index = 0;

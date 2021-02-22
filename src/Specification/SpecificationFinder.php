@@ -4,7 +4,8 @@ namespace Automate\Specification;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\SpecificationException;
-use Automate\Handler\GlobalVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 
 class SpecificationFinder {
 
@@ -20,8 +21,8 @@ class SpecificationFinder {
      * @return Specification
      */
     public function find() : Specification {
-
-        $dirpath = Configuration::get('specs.folder') . '/'. GlobalVariableHandler::scenarioName();
+        $scenarioName = VariableRegistry::get(Scope::WORLD, 'scenario');
+        $dirpath = Configuration::get('specs.folder') . '/'. $scenarioName;
         if(is_dir($dirpath)) {
             $files = array_diff(scandir($dirpath), ['..', '.']);
             foreach($files as $file) {
@@ -38,7 +39,7 @@ class SpecificationFinder {
             $filepath = Configuration::get('specs.folder') . '/' . $file;
             if(!is_dir($filepath)) {
                 if(!$this->isProcessed($file) && 
-                   strpos($file, GlobalVariableHandler::scenarioName()) !== false &&
+                   strpos($file, $scenarioName) !== false &&
                    $this->isCsv($filepath)) {
                     return new Specification($filepath);
                 }

@@ -1,6 +1,7 @@
 <?php
 
-use Automate\Handler\SpecVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use Automate\Specification\Specification;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class SpecificationTest extends TestCase {
      * @before
      */
     public function purgeSpecVariables() {
-        SpecVariableHandler::removeAll();
+        VariableRegistry::reset(Scope::SPEC);
     }
 
     public function testShouldCreateNewSpecificationAndGetProperties() {

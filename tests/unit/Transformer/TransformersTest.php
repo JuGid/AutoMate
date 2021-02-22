@@ -2,9 +2,8 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Handler\GlobalVariableHandler;
-use Automate\Handler\ScenarioVariableHandler;
-use Automate\Handler\SpecVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;
 use PASVL\Validation\Problems\DataValueMatchedNoPattern;
 use PHPUnit\Framework\TestCase;
@@ -16,14 +15,14 @@ class TransformersTest extends TestCase {
     
     public function testShouldSetVariables() {
         
-        ScenarioVariableHandler::$variables['var'] = 'scenario';
-        SpecVariableHandler::$variables['var'] = 'scenario';
-        GlobalVariableHandler::$variables['var'] = 'scenario';
+        VariableRegistry::set(Scope::SCENARIO, 'var', 'scenario');
+        VariableRegistry::set(Scope::SPEC, 'var', 'scenario');
+        VariableRegistry::set(Scope::WORLD, 'var', 'scenario');
 
         $scopes = [
             ['go'=>'{{ scenario.var }}'],
             ['go'=>'{{ spec.var }}'],
-            ['go'=>'{{ global.var }}']
+            ['go'=>'{{ world.var }}']
         ];
 
         $afterSetting = ['go'=>'scenario'];

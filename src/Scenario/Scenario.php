@@ -4,7 +4,8 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\ScenarioException;
-use Automate\Handler\ScenarioVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use Iterator;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -45,7 +46,7 @@ class Scenario implements Iterator{
 
             $limit = count(array_keys($variables));
             for($i=0;$i<$limit; $i++) {
-                ScenarioVariableHandler::add(array_keys($variables)[$i], array_values($variables)[$i]);
+                VariableRegistry::set(Scope::SCENARIO, array_keys($variables)[$i], array_values($variables)[$i]);
             }
         }
     }

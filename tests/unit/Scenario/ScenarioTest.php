@@ -4,7 +4,8 @@ namespace Automate\Scenario;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\ScenarioException;
-use Automate\Handler\ScenarioVariableHandler;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Exception\ParseException;
 
@@ -44,7 +45,7 @@ class ScenarioTest extends TestCase {
     public function setConfiguration() {
         Configuration::load(__DIR__.'/../files/config-test.yaml');
         Configuration::$config_array['scenario']['folder'] = __DIR__.'/../files/scenario';
-        ScenarioVariableHandler::removeAll();
+        VariableRegistry::reset(Scope::SCENARIO);
     }
 
     public function testShouldCreateNewScenarioObject() {
@@ -91,8 +92,8 @@ class ScenarioTest extends TestCase {
     public function testShouldGetScenarioVariables() {
         $scenario = new Scenario(self::SCENARIO);
         
-        $this->assertSame('bonjour', ScenarioVariableHandler::get('name'));
-        $this->assertSame('nouveau', ScenarioVariableHandler::get('cookie'));
+        $this->assertSame('bonjour', VariableRegistry::get(Scope::SCENARIO, 'name'));
+        $this->assertSame('nouveau', VariableRegistry::get(Scope::SCENARIO, 'cookie'));
     }
 
     public function testShouldThrowNoStepException() {
