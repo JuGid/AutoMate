@@ -89,7 +89,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [x] Provide a Proxy management
 - [x] Possibility to import a scenario for reusability
 - [x] Firefox Profile
-- [ ] Add a command `ajax` to work with ajax/js
+- [ ] Add a command `ajax` and `js` to work with ajax/js
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing

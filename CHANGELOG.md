@@ -11,7 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Variables are stored in one Variable registry and not one for each scope.
 - Variable scope `global` changed to `world` because global can be confusing
-- DriverManager has a DriverConfiguration to access FirefoxProfile, Server Url and Http proxy
+- `DriverManager` has a `DriverConfiguration` to access FirefoxProfile, Server Url and Http proxy
+- `Runner` refactored
+- `BrowserException` threw in `DriverManager::getDriver()` doesn't exist anymore since this is a real Configuration Exception
+- `DriverManager` is now abstract. This class has only one job : get the driver and doesn't need to be instanciated.
+
+### Fixed
+
+- Code coverage is better now even if it's juste an indicator
 
 ## [0.2.0] - 23/02/2021
 

@@ -7,7 +7,6 @@ use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\DriverConfiguration;
 use Automate\Driver\DriverManager;
-use Automate\Driver\Proxy\HttpProxy;
 use Automate\Exception\LogException;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
@@ -60,11 +59,6 @@ class Runner {
      * @var bool
      */
     private $testMode = false;
-
-    /**
-     * @var DriverManager
-     */
-    private $driverManager = null;
     
     /**
      * @var RemoteWebDriver|null
@@ -72,8 +66,7 @@ class Runner {
     private $driver = null;
 
     public function __construct(string $browser, bool $testMode = false, DriverConfiguration $driverConfiguration = null) {
-        $this->driverManager = new DriverManager();
-        $this->driver = $this->driverManager->getDriver($browser, $driverConfiguration);
+        $this->driver = DriverManager::getDriver($browser, $driverConfiguration);
         $this->stepTransformer = new StepTransformer($this->driver);
         $this->testMode = $testMode;
     }

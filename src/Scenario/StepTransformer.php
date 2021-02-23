@@ -20,7 +20,7 @@ class StepTransformer {
         $this->driver = $driver;
     }
 
-    public function transform(array $step) : void{
+    public function transform(array $step) : void {
         $transformerClass = __NAMESPACE__ . '\\Transformer\\' . ucfirst(key($step)) . 'Transformer';
         if(class_exists($transformerClass)) {
             $transformer = new $transformerClass();

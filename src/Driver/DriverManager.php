@@ -16,12 +16,7 @@ use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 /**
  * This class is used to get the good Webdriver and process the start of it.
  */
-class DriverManager {
-
-  /**
-   * @var string
-   */
-  private $webdriverPath = '';
+abstract class DriverManager {
 
   public function __construct(){}
 
@@ -32,19 +27,15 @@ class DriverManager {
    * @param DriverConfiguration $driverConfiguration The proxy
    * @return RemoteWebDriver|null 
    */
-  public function getDriver(string $browser, DriverConfiguration $driverConfiguration = null) {
-    try {
-      $this->webdriverPath = Configuration::get('drivers.'.$browser.'.driver');
-    } catch( ConfigurationException $e) {
-      throw new BrowserException('The browser ' . $browser . ' is not managed by php-webdriver');
-    }
-    
+  public static function getDriver(string $browser, DriverConfiguration $driverConfiguration = null) {
+    $webdriverPath = Configuration::get('drivers.'.$browser.'.driver');
+
     if($driverConfiguration == null) $driverConfiguration = new DriverConfiguration();
     $driver = null;
     $caps = null;
 
     if($driverConfiguration->getHttpProxy() == null && $browser == 'chrome') {
-      putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverPath);
+      putenv('WEBDRIVER_CHROME_DRIVER=' . $webdriverPath);
       $driver = ChromeDriver::start();
     } else {
       $desired = new DesiredCapabilities();
@@ -73,9 +64,5 @@ class DriverManager {
 
     WindowHandler::setWindows($driver->getWindowHandles());
     return $driver;
-  }
-
-  public function getWebdriverPath() : string {
-    return $this->webdriverPath;
   }
 }
