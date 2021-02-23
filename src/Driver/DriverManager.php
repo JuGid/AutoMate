@@ -18,8 +18,6 @@ use Facebook\WebDriver\Remote\WebDriverCapabilityType;
  */
 abstract class DriverManager {
 
-  public function __construct(){}
-
   /**
    * @codeCoverageIgnore
    * 
