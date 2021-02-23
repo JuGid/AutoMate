@@ -3,10 +3,8 @@
 namespace Automate\Driver;
 
 use Automate\Configuration\Configuration;
-use Automate\Driver\Proxy\HttpProxy;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
-use Automate\Exception\ConfigurationException;
 use Automate\Handler\WindowHandler;
 use Facebook\WebDriver\Firefox\FirefoxDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;

@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Code coverage is better now even if it's juste an indicator
+- Useless imports deleted
 
 ## [0.2.0] - 23/02/2021
 

@@ -2,8 +2,6 @@
 
 namespace Automate\Driver\Proxy;
 
-use Facebook\WebDriver\Remote\WebDriverCapabilityType;
-
 /**
  * Not implemented yet.
  * @todo User proxy

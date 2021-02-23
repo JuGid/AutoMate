@@ -6,7 +6,6 @@ use Automate\Exception\CommandException;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
-use PHPUnit\TextUI\XmlConfiguration\Variable;
 
 class GetTransformer extends AbstractTransformer {
 

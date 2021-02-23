@@ -4,7 +4,6 @@ namespace Automate;
 
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
-use Automate\Driver\Proxy\HttpProxy;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use Automate\Specification\SpecificationFinder;
