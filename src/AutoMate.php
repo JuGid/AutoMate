@@ -10,13 +10,14 @@ use Automate\Registry\VariableRegistry;
 use Automate\Specification\SpecificationFinder;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
+use Automate\Driver\DriverConfiguration;
 
 class AutoMate {
 
     /**
-     * @var HttpProxy
+     * @var DriverConfiguration
      */
-    private $httpProxy = null;
+    private $driverConfiguration = null;
 
     public function __construct(string $configFile){
         Configuration::load($configFile);
@@ -35,7 +36,7 @@ class AutoMate {
         try {
             $scenario = new Scenario($scenario_name);
             $scenarioBrowser = $scenario->getScenarioBrowser($onBrowser);
-            $runner = new Runner($scenarioBrowser , $testMode, $this->httpProxy);
+            $runner = new Runner($scenarioBrowser , $testMode, $this->driverConfiguration);
             
             if($withSpec) {
                 $specification = (new SpecificationFinder())->find();
@@ -49,11 +50,11 @@ class AutoMate {
         }
     }
 
-    public function setProxy(HttpProxy $httpProxy) {
-        $this->httpProxy = $httpProxy;
+    public function setDriverConfiguration(DriverConfiguration $driverConfiguration) {
+        $this->driverConfiguration = $driverConfiguration;
     }
 
-    public function getProxy() : ?HttpProxy {
-        return $this->httpProxy;
+    public function getDriverConfiguration() : ?DriverConfiguration {
+        return $this->driverConfiguration;
     }
 }

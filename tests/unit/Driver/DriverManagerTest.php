@@ -20,7 +20,6 @@ class DriverManagerTest extends TestCase {
     public function testShouldGetPropertiesValue() {
         $dm = new DriverManager();
 
-        $this->assertSame('http://localhost:4444', $dm->getServerUrl());
         $this->assertSame('', $dm->getWebdriverPath());
     }
 }

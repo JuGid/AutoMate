@@ -50,7 +50,7 @@ class VariableRegistryTest extends TestCase {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
-        VariableRegistry::get('unknown', 'notworking', 'value');
+        VariableRegistry::get('unknown', 'notworking');
     }
 
     public function testShouldSetMultipleWithUnknownScope() {

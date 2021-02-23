@@ -3,12 +3,12 @@
 namespace Automate\Driver;
 
 use Automate\Configuration\Configuration;
-use Automate\Console\Console;
 use Automate\Driver\Proxy\HttpProxy;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
 use Automate\Exception\ConfigurationException;
 use Automate\Handler\WindowHandler;
+use Facebook\WebDriver\Firefox\FirefoxDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
@@ -23,45 +23,52 @@ class DriverManager {
    */
   private $webdriverPath = '';
 
-  /**
-   * @var string
-   */
-  private $serverUrl = 'http://localhost:4444';
-
   public function __construct(){}
 
   /**
    * @codeCoverageIgnore
    * 
    * @param string $browser The browser which you want the driver
-   * @param HttpProxy $httpProxy The proxy
+   * @param DriverConfiguration $driverConfiguration The proxy
    * @return RemoteWebDriver|null 
    */
-  public function getDriver(string $browser, HttpProxy $httpProxy = null) {
+  public function getDriver(string $browser, DriverConfiguration $driverConfiguration = null) {
     try {
       $this->webdriverPath = Configuration::get('drivers.'.$browser.'.driver');
     } catch( ConfigurationException $e) {
       throw new BrowserException('The browser ' . $browser . ' is not managed by php-webdriver');
     }
     
+    if($driverConfiguration == null) $driverConfiguration = new DriverConfiguration();
     $driver = null;
     $caps = null;
-    if($httpProxy == null && $browser == 'chrome') {
+
+    if($driverConfiguration->getHttpProxy() == null && $browser == 'chrome') {
       putenv('WEBDRIVER_CHROME_DRIVER=' . $this->webdriverPath);
       $driver = ChromeDriver::start();
     } else {
       $desired = new DesiredCapabilities();
-      if(method_exists($desired, $browser)) {
-        $caps = DesiredCapabilities::$browser();
-      } else {
+      
+      if(!method_exists($desired, $browser)) {
         throw new BrowserException('The browser ' . $browser . ' is not managed by php-webdriver');
       }
-  
-      if($httpProxy !== null) {
-        $caps->setCapability(WebDriverCapabilityType::PROXY, $httpProxy->getAsCapability());
+
+      $caps = DesiredCapabilities::$browser();
+
+      //Set http proxy as a capability
+      if($driverConfiguration->getHttpProxy() !== null) {
+        $caps->setCapability(
+          WebDriverCapabilityType::PROXY, 
+          $driverConfiguration->getHttpProxy()->getAsCapability()
+        );
+      }
+
+      //Set firefox profile in browser capabilities
+      if($driverConfiguration->getFirefoxProfile() !== null && $browser == 'firefox') {
+        $caps->setCapability(FirefoxDriver::PROFILE,$driverConfiguration->getFirefoxProfile());
       }
   
-      $driver = RemoteWebDriver::create($this->serverUrl, $caps);
+      $driver = RemoteWebDriver::create($driverConfiguration->getServerUrl(), $caps);
     }
 
     WindowHandler::setWindows($driver->getWindowHandles());
@@ -70,9 +77,5 @@ class DriverManager {
 
   public function getWebdriverPath() : string {
     return $this->webdriverPath;
-  }
-
-  public function getServerUrl() : string {
-    return $this->serverUrl;
   }
 }

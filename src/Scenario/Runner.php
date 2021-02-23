@@ -5,6 +5,7 @@ namespace Automate\Scenario;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
+use Automate\Driver\DriverConfiguration;
 use Automate\Driver\DriverManager;
 use Automate\Driver\Proxy\HttpProxy;
 use Automate\Exception\LogException;
@@ -70,9 +71,9 @@ class Runner {
      */
     private $driver = null;
 
-    public function __construct(string $browser, bool $testMode = false, HttpProxy $httpProxy = null) {
+    public function __construct(string $browser, bool $testMode = false, DriverConfiguration $driverConfiguration = null) {
         $this->driverManager = new DriverManager();
-        $this->driver = $this->driverManager->getDriver($browser, $httpProxy);
+        $this->driver = $this->driverManager->getDriver($browser, $driverConfiguration);
         $this->stepTransformer = new StepTransformer($this->driver);
         $this->testMode = $testMode;
     }

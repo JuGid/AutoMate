@@ -15,8 +15,6 @@ class Configuration implements ConfigurationInterface {
    */
   public static $config_array = null;
 
-  public function __construct() {}
-
   /**
    * Get a value of a config variable
    * 

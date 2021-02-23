@@ -4,7 +4,9 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Automate\AutoMate;
+use Automate\Driver\DriverConfiguration;
 use Automate\Driver\Proxy\HttpProxy;
+use Facebook\WebDriver\Firefox\FirefoxProfile;
 
 /**
  * First you have to create your configuration file or replace
@@ -18,9 +20,19 @@ $configFile = __DIR__.'/config/config-test.yaml';
 $autoMate = new AutoMate($configFile);
 
 /**
- * You can set a proxy using
- * $autoMate->setHttpProxy(new HttpProxy('193.269.32.1', 4543));
+ * This configuration part is optionnal and helps you to customize AutoMate
+ * 
+ * For Firefox Profile 
+ * @see https://github.com/php-webdriver/php-webdriver/wiki/FirefoxProfile
+ * 
+ * $driverConfiguration = new DriverConfiguration();
+ * $driverConfiguration->setHttpProxy('0.0.0.0', 1234);
+ * $driverConfiguration->setFirefoxProfile(new FirefoxProfile());
+ * $driverConfiguration->setServerUrl('http://localhost:4444');
+ * 
+ * $autoMate->setDriverConfiguration($driverConfiguration)
  */
+ 
 $autoMate->run('simple');
 
 /**

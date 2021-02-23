@@ -3,7 +3,7 @@
 namespace Automate;
 
 use Automate\Configuration\Configuration;
-use Automate\Driver\Proxy\HttpProxy;
+use Automate\Driver\DriverConfiguration;
 use PHPUnit\Framework\TestCase;
 
 class AutoMateTest extends TestCase {
@@ -15,16 +15,17 @@ class AutoMateTest extends TestCase {
         $this->assertSame('chrome', Configuration::get('browser.default'));
     }
 
-    public function testShouldSetAProxy() {
+    public function testShouldSetADriverConfiguration() {
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
 
-        $this->assertNull($automate->getProxy());
+        $this->assertNull($automate->getDriverConfiguration());
         
-        $httpProxy = new HttpProxy('0.0.0.4', 4567);
-        $automate->setProxy($httpProxy);
+        $driverConfiguration = new DriverConfiguration();
+        $driverConfiguration->setHttpProxy('0.0.0.1', 4567);
 
-        $this->assertNotNull($automate->getProxy());
-        $this->assertSame('0.0.0.4', $automate->getProxy()->getAdresse());
-        $this->assertSame(4567, $automate->getProxy()->getPort());
+        $automate->setDriverConfiguration($driverConfiguration);
+
+        $this->assertNotNull($automate->getDriverConfiguration()->getHttpProxy());
+        $this->assertSame('http://localhost:4444', $automate->getDriverConfiguration()->getServerUrl());
     }
 }
