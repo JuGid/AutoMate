@@ -62,6 +62,8 @@ class Configuration implements ConfigurationInterface {
       $config = Yaml::parse(file_get_contents($file));
       $processor = new Processor();
       self::$config_array = $processor->processConfiguration(new Configuration(), $config);
+      self::$config_array['wait']['for'] = '30';
+      self::$config_array['wait']['every'] = '250';
       return;
     }
 

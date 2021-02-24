@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;
@@ -33,6 +34,19 @@ class TransformersTest extends TestCase {
             $transformer->setVariables();
             $this->assertSame($afterSetting, $transformer->getStep());
         }
+    }
+
+    /**
+     * I put this test first as it may change more then others
+     */
+    public function testConfigurationTransformer() {
+        $transformer = new ConfigurationTransformer();
+        $transformer->setStep(['configuration'=>[]]);
+        $this->assertTrue($transformer->validate());
+
+        $config = ['configuration'=>['wait'=>['for'=>'35', 'every'=>'500']]];
+        $transformer->setStep($config);
+        $this->assertTrue($transformer->validate());
     }
 
     public function testGoTransformerAndGetProperties() {
@@ -585,4 +599,46 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['use'=>'sub.name']);
         $this->assertTrue($transformer->validate());
     }
+
+    /**
+     * This test the validate/__toString() and the detection of ';' in Js script
+     */
+    public function testScriptTransformer() {
+        $transformer = new ScriptTransformer();
+        
+        $transformer->setStep(['script'=>'return jQuery.active === 0']);
+        $this->assertTrue($transformer->validate());
+        if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
+            $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
+        }
+        $this->assertSame('Executing script return jQuery.active === 0;', strval($transformer));
+
+        $transformer->setStep(['script'=>'return jQuery.active === 0;']);
+        $this->assertTrue($transformer->validate());
+        if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
+            $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
+        }
+        $this->assertSame('Executing script return jQuery.active === 0;', strval($transformer));
+    }
+
+    public function testWajaxTransformer() {
+        $transformer = new WajaxTransformer();
+        
+        $transformer->setStep(['wajax'=>'return jQuery.active === 0']);
+        $this->assertTrue($transformer->validate());
+
+        if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
+            $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
+        }
+        $this->assertSame('Waiting with script return jQuery.active === 0;', strval($transformer));
+
+        $transformer->setStep(['wajax'=>'return jQuery.active === 0;']);
+        $this->assertTrue($transformer->validate());
+        if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
+            $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
+        }
+        $this->assertSame('Waiting with script return jQuery.active === 0;', strval($transformer));
+    }
+
+    
 }
