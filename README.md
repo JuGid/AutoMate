@@ -91,6 +91,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [x] Firefox Profile
 - [x] Add a command `ajax` and `js` to work with ajax/js
 - [x] Add a `configuration` command to change configuration at runtime
+- [ ] Add a submit command to submit forms
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing
