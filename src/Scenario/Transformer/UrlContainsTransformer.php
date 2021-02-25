@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class UrlContainsTransformer extends AbstractTransformer {
@@ -21,7 +22,8 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        $this->driver->wait()->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']));
     }
 
     /**

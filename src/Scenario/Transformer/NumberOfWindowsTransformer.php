@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class NumberOfWindowsTransformer extends AbstractTransformer {
@@ -21,7 +22,8 @@ class NumberOfWindowsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        $this->driver->wait()->until(WebDriverExpectedCondition::numberOfWindowsToBe(intval($this->step['numberOfWindows'])));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::numberOfWindowsToBe(intval($this->step['numberOfWindows'])));
     }
 
     /**

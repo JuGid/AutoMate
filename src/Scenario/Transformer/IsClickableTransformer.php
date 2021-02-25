@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
@@ -27,9 +28,10 @@ class IsClickableTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['isClickable'])[0];
-        $this->driver->wait()->until(WebDriverExpectedCondition::elementToBeClickable(
-            WebLocator::get($key, $this->step['isClickable'][$key])
-        ));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::elementToBeClickable(
+                        WebLocator::get($key, $this->step['isClickable'][$key])
+                    ));
     }
 
     /**

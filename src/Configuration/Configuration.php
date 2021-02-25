@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface {
    * Get a value of a config variable
    * 
    * Can be called as get('browser.default') or get('drivers.chrome.driver')
-   * @return string|array|bool
+   * @return string|array|bool|int
    */
   public static function get(string $valueAsked) {
     if(self::$config_array !== null ) {
@@ -62,8 +62,8 @@ class Configuration implements ConfigurationInterface {
       $config = Yaml::parse(file_get_contents($file));
       $processor = new Processor();
       self::$config_array = $processor->processConfiguration(new Configuration(), $config);
-      self::$config_array['wait']['for'] = '30';
-      self::$config_array['wait']['every'] = '250';
+      self::$config_array['wait']['for'] = 30;
+      self::$config_array['wait']['every'] = 250;
       return;
     }
 

@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class TitleIsTransformer extends AbstractTransformer {
@@ -21,7 +22,8 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
-        $this->driver->wait()->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']));
     }
 
     /**

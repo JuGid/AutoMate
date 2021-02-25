@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
@@ -27,9 +28,10 @@ class VisibilityOfAnyTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['visibilityOfAny'])[0];
-        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfAnyElementLocated(
-            WebLocator::get($key , $this->step['visibilityOfAny'][$key])
-        ));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::visibilityOfAnyElementLocated(
+                        WebLocator::get($key , $this->step['visibilityOfAny'][$key])
+                    ));
     }
 
     /**

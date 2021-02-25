@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class AlertTransformer extends AbstractTransformer {
@@ -27,7 +28,8 @@ class AlertTransformer extends AbstractTransformer {
         } elseif($array == 'dismiss') {
             $this->driver->switchTo()->alert()->dismiss();
         } elseif($array == 'isPresent') {
-            $this->driver->wait()->until(WebDriverExpectedCondition::alertIsPresent());
+            $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                         ->until(WebDriverExpectedCondition::alertIsPresent());
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Configuration\Configuration;
 use Automate\Scenario\Transformer\Helpers\WebLocator;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
@@ -28,10 +29,11 @@ class TextContainsTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $keyLocator = array_keys($this->step['textContains'])[1];
-        $this->driver->wait()->until(WebDriverExpectedCondition::elementTextIs(
-            WebLocator::get($keyLocator, array_values($this->step['textContains'])[$keyLocator]),
-            $this->step['value']
-        ));
+        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+                     ->until(WebDriverExpectedCondition::elementTextIs(
+                        WebLocator::get($keyLocator, array_values($this->step['textContains'])[$keyLocator]),
+                        $this->step['value']
+                    ));
     }
 
     /**
