@@ -17,8 +17,8 @@ class ConfigurationTest extends TestCase {
         $this->assertSame('/../specs', Configuration::get('specs.folder'));
         $this->assertSame('/../logs', Configuration::get('logs.folder'));
         $this->assertTrue(Configuration::get('logs.enable'));
-        $this->assertSame('30', Configuration::get('wait.for'));
-        $this->assertSame('250', Configuration::get('wait.every'));
+        $this->assertSame(30, Configuration::get('wait.for'));
+        $this->assertSame(250, Configuration::get('wait.every'));
     }
 
     public function testShouldAskForAnUnknownValueAndThrowException() {
