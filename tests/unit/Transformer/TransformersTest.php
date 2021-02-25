@@ -47,6 +47,8 @@ class TransformersTest extends TestCase {
         $config = ['configuration'=>['wait'=>['for'=>'35', 'every'=>'500']]];
         $transformer->setStep($config);
         $this->assertTrue($transformer->validate());
+
+        $this->assertSame('Configuration changed', strval($transformer));
     }
 
     public function testGoTransformerAndGetProperties() {

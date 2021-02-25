@@ -10,8 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `Script`command to use javascript in your scenario (`script`)
-- `WAjax`command to wait an ajax request (`wAjax`)
-- `Configuration`command to chage some configuration element at run time
+- `Wajax`command to wait an ajax request (`wajax`)
+- `Configuration`command to chage some configuration elements at run time (`configuration`)
+
+### Fixed
+
+- Functions that wait() now use the configuration wait. `Configuration::get('wait.for')` and `Configuration::get('wait.every')` 
 
 ## [0.3.0] - 24/02/2021
 
