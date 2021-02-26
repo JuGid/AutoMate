@@ -22,8 +22,9 @@ class UrlContainsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Url does not contains '.$this->step['urlContains'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']));
+                     ->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']), $errorMessage);
     }
 
     /**

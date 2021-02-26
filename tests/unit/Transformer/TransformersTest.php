@@ -2,7 +2,6 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Configuration\Configuration;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;

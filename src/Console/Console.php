@@ -2,6 +2,8 @@
 
 namespace Automate\Console;
 
+use Automate\Handler\ErrorHandler;
+
 /**
  * Simple class to help writting things in terminal
  * 
@@ -17,22 +19,22 @@ class Console {
         self::separator();
     }
 
-    public static function writeEndingSpecification(int $wins, int $errors, string $logfileWins, string $logfileErrors) {
-        Console::end();
-        Console::writeln('Scenario with specification finished with Wins : '.$wins . ' / Errors : '. $errors);
-        Console::separator('=');
-        Console::writeln("Logs can be found at :");
-        Console::writeln("* LOGS_WIN : " . $logfileWins);
-        Console::writeln("* LOGS_ERRORS : " . $logfileErrors);
-        Console::separator('='); 
+    public static function writeEndingSpecification(ErrorHandler $errorHandler, string $logfileWins, string $logfileErrors) {
+        self::end();
+        self::writeln($errorHandler, null, $errorHandler->getBackgroundColor());
+        self::separator('=');
+        self::writeln("Logs can be found at :");
+        self::writeln("* LOGS_WIN : " . $logfileWins);
+        self::writeln("* LOGS_ERRORS : " . $logfileErrors);
+        self::separator('='); 
     }
 
     public static function logo() {
-        echo "    /\        | |      |  \/  |     | |      \n";
-        echo "   /  \  _   _| |_ ___ | \  / | __ _| |_ ___ \n";
-        echo "  / /\ \| | | | __/ _ \| |\/| |/ _` | __/ _ \ \n";
-        echo " / ____ \ |_| | || (_) | |  | | (_| | ||  __/ \n";
-        echo "/_/    \_\__,_|\__\___/|_|  |_|\__,_|\__\___| \n";
+        self::writeln("    /\        | |      |  \/  |     | |      ");
+        self::writeln("   /  \  _   _| |_ ___ | \  / | __ _| |_ ___ ");
+        self::writeln("  / /\ \| | | | __/ _ \| |\/| |/ _` | __/ _ \ ");
+        self::writeln(" / ____ \ |_| | || (_) | |  | | (_| | ||  __/ ");
+        self::writeln("/_/    \_\__,_|\__\___/|_|  |_|\__,_|\__\___| ");
     }
 
     public static function start() {
@@ -59,12 +61,16 @@ class Console {
         self::writeln($str);
     }
 
-    public static function writeln(string $str) {
+    public static function writeln(string $str, string $foreground = null, string $background = null) {
+        if($foreground !== null || $background !== null) {
+            $colors = new Colors();
+            $str = $colors->getColoredString($str, $foreground, $background);
+        }
+
         echo sprintf("%s\n", $str);
     }
 
     public static function writeEx(\Exception $e) {
         self::writeln($e->getMessage());
-        exit(1);
     }
 }

@@ -28,10 +28,11 @@ class IsNotSelectedTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['isNotSelected'])[0];
+        $errorMessage = sprintf('%s[%s] is selected', $key, $this->step['isNotSelected'][$key]);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::elementSelectionStateToBe(
                         WebLocator::get($key , $this->step['isNotSelected'][$key]), false
-                    ));
+                    ), $errorMessage);
     }
 
     /**

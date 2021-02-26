@@ -28,10 +28,11 @@ class VisibilityOfTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['visibilityOf'])[0];
+        $errorMessage = sprintf('%s[%s] is not visible', $key, $this->step['visibilityOfAny'][$key]);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::visibilityOfElementLocated(
                         WebLocator::get($key , $this->step['visibilityOf'][$key])
-                    ));
+                    ), $errorMessage);
     }
 
     /**

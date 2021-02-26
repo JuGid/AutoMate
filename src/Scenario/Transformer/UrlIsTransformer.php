@@ -3,6 +3,8 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Configuration\Configuration;
+use Facebook\WebDriver\Exception\TimeoutException;
+use Automate\Exception\TimeoutException as AutomateTimeoutException;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class UrlIsTransformer extends AbstractTransformer {
@@ -22,8 +24,9 @@ class UrlIsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Url is not '.$this->step['urlIs'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::urlIs($this->step['urlIs']));
+                    ->until(WebDriverExpectedCondition::urlIs($this->step['urlIs']), $errorMessage);
     }
 
     /**

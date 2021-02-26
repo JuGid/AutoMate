@@ -22,8 +22,9 @@ class UrlMatchesTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Url does not match '.$this->step['urlMatches'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::urlMatches($this->step['urlMatches']));
+                     ->until(WebDriverExpectedCondition::urlMatches($this->step['urlMatches']), $errorMessage);
     }
 
     /**

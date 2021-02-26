@@ -22,8 +22,9 @@ class TitleContainsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Title does not contain'.$this->step['titleContains'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::titleContains($this->step['titleContains']));
+                     ->until(WebDriverExpectedCondition::titleContains($this->step['titleContains']), $errorMessage);
     }
 
     /**

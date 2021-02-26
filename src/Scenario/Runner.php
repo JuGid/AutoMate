@@ -8,6 +8,7 @@ use Automate\Console\Console;
 use Automate\Driver\DriverConfiguration;
 use Automate\Driver\DriverManager;
 use Automate\Exception\LogException;
+use Automate\Handler\ErrorHandler;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
@@ -17,20 +18,6 @@ use Automate\Specification\Specification;
  * @codeCoverageIgnore
  */
 class Runner {
-
-    /**
-     * If you run with a spec, errors counter
-     * 
-     * @var int
-     */
-    private $errors = 0;
-
-    /**
-     * If you run with a spec, wins counter
-     * 
-     * @var int
-     */
-    private $wins = 0;
 
     /**
      * 
@@ -65,10 +52,16 @@ class Runner {
      */
     private $driver = null;
 
+    /**
+     * @var ErrorHandler
+     */
+    private $errorHandler = null;
+
     public function __construct(string $browser, bool $testMode = false, DriverConfiguration $driverConfiguration = null) {
         $this->driver = DriverManager::getDriver($browser, $driverConfiguration);
         $this->stepTransformer = new StepTransformer($this->driver);
         $this->testMode = $testMode;
+        $this->errorHandler = new ErrorHandler();
     }
 
     /**
@@ -97,13 +90,13 @@ class Runner {
         
         if(!$this->testMode) $specification->setProcessed();
         
+        
         Console::writeEndingSpecification(
-            $this->wins, 
-            $this->errors,
+            $this->errorHandler,
             $this->logger->getFilepath(LogType::LOG_WINS),
             $this->logger->getFilepath(LogType::LOG_ERRORS)
         );
-
+        
         $this->driver->quit();
     }
 
@@ -118,17 +111,17 @@ class Runner {
             }
 
             if($this->runWithSpecification()) {
+                $this->errorHandler->win();
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
-                ++$this->wins;
             }
 
         } catch(\Exception $e) {
             if($this->runWithSpecification()) {
+                $this->errorHandler->error($this->getCurrentDataset(), $e->getMessage());
                 $this->logger->addMessage($e->getMessage());
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_ERRORS);
-                ++$this->errors;
-              }
-              Console::writeEx($e);
+            }
+            Console::writeEx($e);
         }
 
         if(!$this->runWithSpecification()) $this->driver->quit();

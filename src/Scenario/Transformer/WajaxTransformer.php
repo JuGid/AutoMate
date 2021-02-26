@@ -28,7 +28,7 @@ class WajaxTransformer extends AbstractTransformer {
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(function($driver) {
                                 return $driver->executeScript($this->step['wajax']);
-                            });
+                            }, 'Your script returned false');
     }
 
     /**

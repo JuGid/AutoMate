@@ -29,7 +29,7 @@ class AlertTransformer extends AbstractTransformer {
             $this->driver->switchTo()->alert()->dismiss();
         } elseif($array == 'isPresent') {
             $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                         ->until(WebDriverExpectedCondition::alertIsPresent());
+                         ->until(WebDriverExpectedCondition::alertIsPresent(), 'Alert is not present');
         }
     }
 

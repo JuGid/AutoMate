@@ -29,11 +29,12 @@ class TextMatchesTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $keyLocator = array_keys($this->step['textMatches'])[1];
+        $errorMessage = sprintf('%s[%s] text does not match %s', $keyLocator, $this->step['textMatches'][$keyLocator], $this->step['value']);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::elementTextMatches(
                         WebLocator::get($keyLocator, array_values($this->step['textMatches'])[$keyLocator]),
                         $this->step['regexp']
-                    ));
+                    ), $errorMessage);
     }
 
     /**

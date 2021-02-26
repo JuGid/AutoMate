@@ -29,11 +29,12 @@ class TextIsTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $keyLocator = array_keys($this->step['textIs'])[1];
+        $errorMessage = sprintf('%s[%s] text is not %s', $keyLocator, $this->step['textIs'][$keyLocator], $this->step['value']);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::elementTextIs(
                         WebLocator::get($keyLocator, array_values($this->step['textIs'])[$keyLocator]),
                         $this->step['value']
-                    ));
+                    ), $errorMessage);
     }
 
     /**

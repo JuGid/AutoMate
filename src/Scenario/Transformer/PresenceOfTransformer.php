@@ -28,10 +28,11 @@ class PresenceOfTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['presenceOf'])[0];
+        $errorMessage = sprintf('%s[%s] is not present', $key, $this->step['presenceOf'][$key]);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::presenceOfElementLocated(
                         WebLocator::get($key , $this->step['presenceOf'][$key])
-                    ));
+                    ), $errorMessage);
     }
 
     /**

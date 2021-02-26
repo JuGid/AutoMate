@@ -22,8 +22,9 @@ class TitleIsTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Title is not '.$this->step['titleIs'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']));
+                     ->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']), $errorMessage);
     }
 
     /**

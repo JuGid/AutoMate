@@ -99,4 +99,11 @@ class ExceptionsTest extends TestCase {
 
         throw new ScenarioExitException('Test exception');
     }
+
+    public function testShouldThrowTimeoutException() {
+        $this->expectException(TimeoutException::class);
+        $this->expectExceptionMessage('Timeout exception');
+
+        throw new TimeoutException('Timeout exception');
+    }
 }

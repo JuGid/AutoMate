@@ -1,0 +1,8 @@
+browser: chrome
+variables:
+  myVariable: hello
+scenario:
+  steps:
+    - go: http://youtube.fr
+    - urlIs: http://google.Fr
+    - exit: 'This should not appear'

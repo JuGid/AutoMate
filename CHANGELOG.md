@@ -12,10 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Script`command to use javascript in your scenario (`script`)
 - `Wajax`command to wait an ajax request (`wajax`)
 - `Configuration`command to chage some configuration elements at run time (`configuration`)
+- `ErrorHandler` to handle errors and render it on Console
+
+### Changed
+
+- Functions that wait() now use the configuration wait. `Configuration::get('wait.for')` and `Configuration::get('wait.every')` 
+- If testMode is enable, the errors are rendered with colors and details
 
 ### Fixed
 
-- Functions that wait() now use the configuration wait. `Configuration::get('wait.for')` and `Configuration::get('wait.every')` 
+- Commands that use wait()->until() now have an error message to show what was wrong
 
 ## [0.3.0] - 24/02/2021
 

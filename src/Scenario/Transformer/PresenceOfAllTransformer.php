@@ -28,10 +28,11 @@ class PresenceOfAllTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         $key = array_keys($this->step['presenceOfAll'])[0];
+        $errorMessage = sprintf('For every %s[%s] none is present', $key, $this->step['presenceOfAll'][$key]);
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::presenceOfAllElementsLocatedBy(
                         WebLocator::get($key , $this->step['presenceOfAll'][$key])
-                    ));
+                    ), $errorMessage);
     }
 
     /**

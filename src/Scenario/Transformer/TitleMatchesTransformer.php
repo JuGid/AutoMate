@@ -22,8 +22,9 @@ class TitleMatchesTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {   
+        $errorMessage = 'Title does not match '.$this->step['titleMatches'];
         $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::titleMatches($this->step['titleMatches']));
+                     ->until(WebDriverExpectedCondition::titleMatches($this->step['titleMatches']), $errorMessage);
     }
 
     /**
