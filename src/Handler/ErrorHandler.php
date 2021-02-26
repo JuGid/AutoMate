@@ -2,6 +2,8 @@
 
 namespace Automate\Handler;
 
+use Automate\Console\Console;
+
 class ErrorHandler {
 
     private $errors = [];
@@ -45,7 +47,28 @@ class ErrorHandler {
         );
     }
 
+    /**
+     * codeCoverageIgnore
+     */
     public function printErrors() : void {
+        if($this->countErrors()) {
+            foreach($this->errors as $type=>$datasets) {
+                Console::writeln($type, 'red');
+                Console::separator('-');
+                $this->printErrorForType($type);
+                Console::separator('-');
+            }
+        } else {
+            Console::writeln("No error", 'green', null);
+        }
+    }
 
+    /**
+     * codeCoverageIgnore
+     */
+    public function printErrorForType(string $type) {
+        foreach($this->errors[$type] as $key=>$dataset) {
+            Console::writeln(sprintf("\t[%d] : %s", $key, implode(',', $dataset)));
+        }
     }
 }

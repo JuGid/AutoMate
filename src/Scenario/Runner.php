@@ -89,12 +89,12 @@ class Runner {
         $this->logger->end();
         
         if(!$this->testMode) $specification->setProcessed();
-        
-        
+            
         Console::writeEndingSpecification(
             $this->errorHandler,
             $this->logger->getFilepath(LogType::LOG_WINS),
-            $this->logger->getFilepath(LogType::LOG_ERRORS)
+            $this->logger->getFilepath(LogType::LOG_ERRORS),
+            $this->testMode
         );
         
         $this->driver->quit();
