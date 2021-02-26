@@ -48,7 +48,7 @@ class ErrorHandler {
     }
 
     /**
-     * codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function printErrors() : void {
         if($this->countErrors()) {
@@ -64,7 +64,7 @@ class ErrorHandler {
     }
 
     /**
-     * codeCoverageIgnore
+     * @codeCoverageIgnore
      */
     public function printErrorForType(string $type) {
         foreach($this->errors[$type] as $key=>$dataset) {
