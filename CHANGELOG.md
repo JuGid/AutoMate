@@ -9,9 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `Script`command to use javascript in your scenario (`script`)
-- `Wajax`command to wait an ajax request (`wajax`)
-- `Configuration`command to chage some configuration elements at run time (`configuration`)
+- `Script` command to use javascript in your scenario (`script`)
+- `Wajax` command to wait an ajax request (`wajax`)
+- `Configuration` command to chage some configuration elements at run time (`configuration`)
 - `ErrorHandler` to handle errors and render it on Console
 
 ### Changed

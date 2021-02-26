@@ -3,6 +3,8 @@
 namespace Automate\Scenario\Transformer;
 
 use Automate\Exception\NotImplementedException;
+use Automate\Handler\WindowHandler;
+use Facebook\WebDriver\WebDriverTargetLocator;
 
 class CreateTransformer extends AbstractTransformer {
 
@@ -22,19 +24,15 @@ class CreateTransformer extends AbstractTransformer {
     protected function transform() : void
     {   
         // Coming with the new php-webdriver release
-        /*
+        
         $array = $this->step['create'];
         if($array == 'tab') {
             $this->driver->switchTo()->newWindow(WebDriverTargetLocator::WINDOW_TYPE_TAB);
         } elseif($array == 'window') {
             $this->driver->switchTo()->newWindow(WebDriverTargetLocator::WINDOW_TYPE_WINDOW);
-            $this->driver->switchTo()->newWindow();
         } 
-        */
         
-        //$this->driver->switchTo()->newWindow();
-        //WindowHandler::setWindows($this->driver->getWindowHandles());
-        throw new NotImplementedException('Command not implemented yet. Waiting php-driver new release.');
+        WindowHandler::setWindows($this->driver->getWindowHandles());
     }
 
     /**
