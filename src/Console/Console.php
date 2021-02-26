@@ -19,6 +19,12 @@ class Console {
         self::separator();
     }
 
+    public static function writeBegining() {
+        self::separator();
+        self::logo();
+        self::separator();
+    }
+
     public static function writeEndingSpecification(ErrorHandler $errorHandler, string $logfileWins, string $logfileErrors, bool $testMode) {
         self::end();
         self::writeln($errorHandler, null, $errorHandler->getBackgroundColor());

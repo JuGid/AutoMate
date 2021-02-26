@@ -76,8 +76,6 @@ class SpecificationLoader {
         $dataset = array_combine($this->columns, $dataline);
         VariableRegistry::reset(Scope::SPEC);
         VariableRegistry::setMultiple(Scope::SPEC, $dataset);
-
-        //SpecVariableHandler::load($dataset);
         
         return $dataset;
     }

@@ -105,6 +105,8 @@ class Runner {
      * called like $runner->runSimpleScenario(...)
      */
     public function runSimpleScenario(Scenario $scenario) : void {
+        if(!$this->runWithSpecification()) Console::writeBegining();
+
         try {
             foreach($scenario as $step){
                 $this->getStepTransformer()->transform($step);

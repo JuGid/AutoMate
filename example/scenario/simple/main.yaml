@@ -4,4 +4,4 @@ variables:
 scenario:
   steps:
     - go: "{{ scenario.adresse }}"
-    - exit: 'Simple scenario juste go and exit'
+    - exit: 'Simple scenario just go and exit'
