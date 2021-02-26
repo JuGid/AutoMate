@@ -8,8 +8,12 @@ use PHPUnit\Framework\TestCase;
 class ConfigurationTest extends TestCase {
 
     public function testShouldLoadConfigurationFileAndgetValues() {
+        Configuration::reset();
+        $this->assertFalse(Configuration::isLoaded());
+
         Configuration::load(__DIR__.'/../files/config-test.yaml');
 
+        $this->assertTrue(Configuration::isLoaded());
         $this->assertSame('chrome', Configuration::get('browser.default'));
         $this->assertSame('/../chromedriver', Configuration::get('drivers.chrome.driver'));
         $this->assertSame('/../gueckodriver', Configuration::get('drivers.firefox.driver'));
@@ -24,9 +28,6 @@ class ConfigurationTest extends TestCase {
     public function testShouldAskForAnUnknownValueAndThrowException() {
         $this->expectException(ConfigurationException::class);
         $this->expectExceptionMessage('The value asked foo.bar does not exist');
-
-        //The config is loaded
-        Configuration::get('browser.default'); 
         
         //Should throw the Exception
         Configuration::get('foo.bar');

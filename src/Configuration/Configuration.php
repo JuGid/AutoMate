@@ -11,6 +11,11 @@ use Automate\Exception\ConfigurationException;
 class Configuration implements ConfigurationInterface {
 
   /**
+   * @var bool
+   */
+  private static $isLoaded = false;
+
+  /**
    * Array with all the configuration variables
    */
   public static $config_array = null;
@@ -22,20 +27,26 @@ class Configuration implements ConfigurationInterface {
    * @return string|array|bool|int
    */
   public static function get(string $valueAsked) {
-    if(self::$config_array !== null ) {
-      $gval = explode('.', $valueAsked);
-      $arrayValue = self::$config_array;
-
-      for($i = 0; $i< count($gval); $i++) {
-        if(isset($arrayValue[$gval[$i]])) {
-          $arrayValue = $arrayValue[$gval[$i]];
-        } else {
-          throw new ConfigurationException('The value asked '.$valueAsked. ' does not exist');
-        }
-      }
-      return $arrayValue;
+    if(!self::isLoaded()) {
+      throw new ConfigurationException('The configuration is not loaded, please use Configuration::load');
     }
-    return '';
+
+    if(self::$config_array === null) {
+      throw new ConfigurationException('The configuration is empty. Did you use Configuration::load ?');
+    }
+
+    $gval = explode('.', $valueAsked);
+    $arrayValue = self::$config_array;
+
+    for($i = 0; $i< count($gval); $i++) {
+      if(isset($arrayValue[$gval[$i]])) {
+        $arrayValue = $arrayValue[$gval[$i]];
+      } else {
+        throw new ConfigurationException('The value asked '.$valueAsked. ' does not exist');
+      }
+    }
+    return $arrayValue;
+
   }
 
   public static function logsColumns(array $columns = [])
@@ -64,11 +75,21 @@ class Configuration implements ConfigurationInterface {
       self::$config_array = $processor->processConfiguration(new Configuration(), $config);
       self::$config_array['wait']['for'] = 30;
       self::$config_array['wait']['every'] = 250;
+      self::$isLoaded = true;
       return;
     }
 
     throw new ConfigurationException('The configuration file is not valid or does not exist');
     
+  }
+
+  public static function reset() {
+    self::$config_array = null;
+    self::$isLoaded = false;
+  }
+
+  public static function isLoaded() : bool {
+    return self::$isLoaded;
   }
 
   /**
