@@ -18,10 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Functions that wait() now use the configuration wait. `Configuration::get('wait.for')` and `Configuration::get('wait.every')` 
 - If testMode is enable, the errors are rendered with colors and details
+- `Configuration` permit to test if it is loaded or not
 
 ### Fixed
 
 - Commands that use wait()->until() now have an error message to show what was wrong
+- `Use` command detect if there is a potential loop
+- `Configuration` throw Exception if config is null or not loaded
 
 ## [0.3.0] - 24/02/2021
 

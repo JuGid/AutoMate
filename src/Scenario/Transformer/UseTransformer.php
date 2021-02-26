@@ -28,7 +28,7 @@ class UseTransformer extends AbstractTransformer {
         $askedScenario = explode('.', $this->step['use']);
         
         if($askedScenario[0] == 'main' && $askedScenario[1] == VariableRegistry::get(Scope::WORLD, 'scenario')) {
-            throw new ScenarioException('A boucle has been detected, please try not to use the same scenario');
+            throw new ScenarioException('A loop has been detected, please try not to use the same scenario');
         }
 
         $scenario = new Scenario($askedScenario[1], $askedScenario[0]);
