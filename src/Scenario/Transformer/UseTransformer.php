@@ -2,6 +2,9 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\Exception\ScenarioException;
+use Automate\Registry\Scope;
+use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\StepTransformer;
 
@@ -24,6 +27,10 @@ class UseTransformer extends AbstractTransformer {
     {
         $askedScenario = explode('.', $this->step['use']);
         
+        if($askedScenario[0] == 'main' && $askedScenario[1] == VariableRegistry::get(Scope::WORLD, 'scenario')) {
+            throw new ScenarioException('A boucle has been detected, please try not to use the same scenario');
+        }
+
         $scenario = new Scenario($askedScenario[1], $askedScenario[0]);
         $sttr = new StepTransformer($this->driver);
         
