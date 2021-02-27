@@ -37,7 +37,6 @@ class ErrorHandlerTest extends TestCase {
 
         $this->assertSame(5, $errorHandler->countErrors());
         $this->assertSame(5, $errorHandler->countErrorsType());
-        $this->assertSame('one,two', $errorHandler->getErrors()['type'][0]);
         $this->assertSame('red', $errorHandler->getBackgroundColor());
         $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', (string) $errorHandler );
     }
@@ -52,6 +51,7 @@ class ErrorHandlerTest extends TestCase {
             $errorHandler->error('type', ['one', 'two']);
         }
 
+        $this->assertSame('one,two', $errorHandler->getErrors()['type'][0]);
         $this->assertSame(5, $errorHandler->countErrors());
         $this->assertSame(1, $errorHandler->countErrorsType());
         $this->assertSame('red', $errorHandler->getBackgroundColor());
