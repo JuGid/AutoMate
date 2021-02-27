@@ -10,34 +10,47 @@ class ErrorHandler {
 
     private $wins = 0;
 
+    private $shouldStoreDataset = false;
+
     public function __construct(){}
 
     public function win() : void {
         $this->wins++;
     }
 
-    public function error(array $dataset, string $type) : void {
-        $this->errors[$type][] = $dataset;
-    }
-
-    public function countErrorsType() : int {
-        return count($this->errors);
-    }
-
-    public function countErrors() : int {
-        $count = 0;
-        foreach($this->errors as $errorList) {
-            $count += count($errorList);
+    public function error(string $type, array $dataset = []) : void {
+        if($this->shouldStoreDataset) {
+            $this->errors[$type][] = implode(",", $dataset);
+        } else {
+            $this->errors[] = $type;
         }
-        return $count;
     }
 
     public function countWins() : int {
         return $this->wins;
     }
 
+    public function countErrors() : int {
+        if($this->shouldStoreDataset) {
+            return count($this->errors, COUNT_RECURSIVE) - $this->countErrorsType();
+        }
+        return $this->countErrorsType();
+    }
+
+    public function countErrorsType() : int {
+        return count($this->errors, COUNT_NORMAL);
+    }
+
     public function getBackgroundColor() : string {
-        return $this->countErrors()>0 ? 'red' : 'green';
+        return $this->countErrors() > 0 ? 'red' : 'green';
+    }
+
+    public function getShouldStoreDataset() : bool {
+        return $this->shouldStoreDataset;
+    }
+
+    public function shouldStoreDataset() : void {
+        $this->shouldStoreDataset = true;
     }
 
     public function __toString() {
@@ -51,24 +64,38 @@ class ErrorHandler {
      * @codeCoverageIgnore
      */
     public function printErrors() : void {
-        if($this->countErrors()) {
-            foreach($this->errors as $type=>$datasets) {
-                Console::writeln($type, 'red');
-                Console::separator('-');
-                $this->printErrorForType($type);
-                Console::separator('-');
-            }
+        if($this->countErrors() == 0 ) {
+            Console::writeln('NO ERROR', 'green');
+            return;
+        }
+
+        if($this->shouldStoreDataset) {
+            $this->printErrorsTypeWithDataset();
         } else {
-            Console::writeln("No error", 'green', null);
+            $this->printErrorsTypeOnly();
         }
     }
 
     /**
      * @codeCoverageIgnore
      */
-    public function printErrorForType(string $type) {
-        foreach($this->errors[$type] as $key=>$dataset) {
-            Console::writeln(sprintf("\t[%d] : %s", $key, implode(',', $dataset)));
+    public function printErrorsTypeOnly() : void {
+        foreach($this->errors as $key=>$type) {
+            Console::writeln(sprintf("[%d] %s", $key, $type), 'red');
         }
     }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function printErrorsTypeWithDataset() : void {
+        foreach($this->errors as $type=>$datasets) {
+            Console::writeln($type, 'red');
+            Console::separator('-');
+            foreach($datasets as $dataset) {
+                Console::writeln("\t".$dataset);
+            }
+        }
+    }
+   
 }

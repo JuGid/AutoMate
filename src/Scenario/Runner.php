@@ -69,7 +69,8 @@ class Runner {
      */
     public function runSpecification(Scenario $scenario, Specification $specification) : void {
         $this->runningWithSpec = true;
-        
+        $this->errorHandler->shouldStoreDataset();
+
         if(Configuration::get('logs.enable') === true) {
             try {
                 $this->logger = new DefaultLogger($specification->getColumnsHeader(), $scenario->getName());
@@ -90,7 +91,7 @@ class Runner {
         
         if(!$this->testMode) $specification->setProcessed();
             
-        Console::writeEndingSpecification(
+        Console::endSpecification(
             $this->errorHandler,
             $this->logger->getFilepath(LogType::LOG_WINS),
             $this->logger->getFilepath(LogType::LOG_ERRORS),
@@ -112,21 +113,26 @@ class Runner {
                 $this->getStepTransformer()->transform($step);
             }
 
+            $this->errorHandler->win();
+
             if($this->runWithSpecification()) {
-                $this->errorHandler->win();
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
             }
 
         } catch(\Exception $e) {
+            $this->errorHandler->error($e->getMessage(), $this->getCurrentDataset());
+
             if($this->runWithSpecification()) {
-                $this->errorHandler->error($this->getCurrentDataset(), $e->getMessage());
                 $this->logger->addMessage($e->getMessage());
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_ERRORS);
             }
             Console::writeEx($e);
         }
 
-        if(!$this->runWithSpecification()) $this->driver->quit();
+        if(!$this->runWithSpecification()) {
+            Console::endSimple($this->errorHandler, $this->testMode);
+            $this->driver->quit();
+        }
     }
 
     public function getStepTransformer() : StepTransformer {
@@ -141,4 +147,7 @@ class Runner {
         return $this->currentDataset;
     }
 
+    public function getErrorHandler() : Errorhandler {
+        return $this->errorHandler;
+    }
 }

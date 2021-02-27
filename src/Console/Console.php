@@ -25,20 +25,26 @@ class Console {
         self::separator();
     }
 
-    public static function writeEndingSpecification(ErrorHandler $errorHandler, string $logfileWins, string $logfileErrors, bool $testMode) {
-        self::end();
+    public static function endSpecification(ErrorHandler $errorHandler, string $logfileWins, string $logfileErrors, bool $testMode) {
+        self::separator();
         self::writeln($errorHandler, null, $errorHandler->getBackgroundColor());
         self::separator('=');
-        
         if($testMode) {
             $errorHandler->printErrors();
             self::separator('=');
         }
-
         self::writeln("Logs can be found at :");
         self::writeln("* LOGS_WIN : " . $logfileWins);
         self::writeln("* LOGS_ERRORS : " . $logfileErrors);
         self::separator('='); 
+    }
+
+    public static function endSimple(ErrorHandler $errorHandler, bool $testMode) {
+        self::separator('=');
+        if($testMode) {
+            $errorHandler->printErrors();
+            self::separator('=');
+        }
     }
 
     public static function logo() {

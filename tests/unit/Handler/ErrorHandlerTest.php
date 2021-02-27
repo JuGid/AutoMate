@@ -11,49 +11,48 @@ class ErrorHandlerTest extends TestCase {
 
         $this->assertSame(0, $errorHandler->countWins());
         $this->assertSame(0, $errorHandler->countErrors());
-        $this->assertSame(0, $errorHandler->countErrorsType());
+        $this->assertFalse($errorHandler->getShouldStoreDataset());
     }
 
-    public function testShouldInstanciateSetWinsAndGetWins() {
+    public function testShouldInstanciateAndWin() {
         $errorHandler = new ErrorHandler();
-        $winsCount = 10;
-        for($i=0; $i < $winsCount; $i++) {
+
+        $wins = 5;
+        for($i = 0; $i<$wins; $i++) {
             $errorHandler->win();
         }
 
-        $this->assertSame($winsCount, $errorHandler->countWins());
-    }
-
-    public function testShouldInstanciateSetErrorAndGetErrors() {
-        $errorHandler = new ErrorHandler();
-        $errorsCount = 10;
-        $typeOfErrorsCount = 2;
-
-        for($i=0; $i < $errorsCount; $i++) {
-            $errorHandler->error(['test'=>'errors'], 'Test with error first type');
-        }
-
-        for($i=0; $i < $errorsCount; $i++) {
-            $errorHandler->error(['test'=>'errors'], 'Test with error second type');
-        }
-
-        $this->assertSame($errorsCount*$typeOfErrorsCount, $errorHandler->countErrors());
-        $this->assertSame($typeOfErrorsCount, $errorHandler->countErrorsType());
-    }
-
-    public function testShouldUseToStringAndGetTheGreenColor() {
-        $errorHandler = new ErrorHandler();
-        $errorHandler->win();
-
-        $this->assertSame('Scenario with specification finished with Wins : 1 and Errors : 0', strval($errorHandler));
+        $this->assertSame(5, $errorHandler->countWins());
         $this->assertSame('green', $errorHandler->getBackgroundColor());
+        $this->assertSame('Scenario with specification finished with Wins : 5 and Errors : 0', strval($errorHandler));
     }
 
-    public function testShouldUseToStringAndGetTheRedColor() {
+    public function testShouldInstanciateAndErrorAndShouldNotStoreDataset() {
         $errorHandler = new ErrorHandler();
-        $errorHandler->error(['test'=>'test'], 'My message');
 
-        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 1', strval($errorHandler));
+        $errors = 5;
+        for($i = 0; $i<$errors; $i++) {
+            $errorHandler->error('type', ['one', 'two']);
+        }
+
+        $this->assertSame(5, $errorHandler->countErrors());
+        $this->assertSame(5, $errorHandler->countErrorsType());
+        $this->assertSame('red', $errorHandler->getBackgroundColor());
+        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', strval($errorHandler));
+    }
+
+    public function testShouldInstanciateAndErrorAndShouldStoreDataset() {
+        $errorHandler = new ErrorHandler();
+        $errorHandler->shouldStoreDataset();
+        $this->assertTrue($errorHandler->getShouldStoreDataset());
+
+        $errors = 5;
+        for($i = 0; $i<$errors; $i++) {
+            $errorHandler->error('type', ['one', 'two']);
+        }
+
+        $this->assertSame(5, $errorHandler->countErrors());
+        $this->assertSame(1, $errorHandler->countErrorsType());
         $this->assertSame('red', $errorHandler->getBackgroundColor());
     }
 }

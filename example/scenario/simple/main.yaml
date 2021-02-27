@@ -4,4 +4,7 @@ variables:
 scenario:
   steps:
     - go: "{{ scenario.adresse }}"
+    - cookie:
+        name: 'cookieName'
+        value: 'cookieValue'
     - exit: 'Simple scenario just go and exit'

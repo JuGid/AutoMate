@@ -10,6 +10,7 @@ use Automate\Specification\SpecificationFinder;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
 use Automate\Driver\DriverConfiguration;
+use Automate\Handler\ErrorHandler;
 
 class AutoMate {
 
@@ -24,8 +25,10 @@ class AutoMate {
 
     /**
      * @codeCoverageIgnore
+     * 
+     * @return ErrorHandler|bool If the scenario has errors
      */
-    public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') : void {
+    public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') {
         $scenario = null;
         $specification = null;
         $scenarioBrowser = '';
@@ -46,7 +49,10 @@ class AutoMate {
             }
         } catch(\Exception $e) {
             Console::writeEx($e);
+            return false;
         }
+
+        return $runner->getErrorHandler();
     }
 
     public function setDriverConfiguration(DriverConfiguration $driverConfiguration) {
