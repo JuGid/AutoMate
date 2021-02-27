@@ -41,6 +41,8 @@ class Scenario implements Iterator{
             throw new ScenarioException('You must define steps in your scenario file');
         }
 
+        VariableRegistry::reset(Scope::SCENARIO);
+        
         if(isset($this->scenario['variables'])) {
             $variables = $this->scenario['variables'];
 
