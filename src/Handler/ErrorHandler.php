@@ -6,10 +6,19 @@ use Automate\Console\Console;
 
 class ErrorHandler {
 
+    /**
+     * @var array
+     */
     private $errors = [];
 
+    /**
+     * @var int
+     */
     private $wins = 0;
 
+    /**
+     * @var bool
+     */
     private $shouldStoreDataset = false;
 
     public function __construct(){}
@@ -62,6 +71,9 @@ class ErrorHandler {
 
     /**
      * @codeCoverageIgnore
+     * 
+     * @todo In future version, this should use an ErrorPrinter
+     * @todo Should print dataset like [0] - dataset / [1] - dataset
      */
     public function printErrors() : void {
         if($this->countErrors() == 0 ) {

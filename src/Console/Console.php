@@ -27,7 +27,7 @@ class Console {
 
     public static function endSpecification(ErrorHandler $errorHandler, string $logfileWins, string $logfileErrors, bool $testMode) {
         self::separator();
-        self::writeln($errorHandler, null, $errorHandler->getBackgroundColor());
+        self::writeln((string) $errorHandler, null, $errorHandler->getBackgroundColor());
         self::separator('=');
         if($testMode) {
             $errorHandler->printErrors();
@@ -55,16 +55,6 @@ class Console {
         self::writeln("/_/    \_\__,_|\__\___/|_|  |_|\__,_|\__\___| ");
     }
 
-    public static function start() {
-        self::separator();
-        self::writeln(" __ _             _   ");
-        self::writeln("/ _\ |_ __ _ _ __| |_ ");
-        self::writeln("\ \| __/ _` | '__| __|");
-        self::writeln("_\ \ || (_| | |  | |_ ");
-        self::writeln("\__/\__\__,_|_|   \__|");
-        self::separator();
-    }
-
     public static function end() {
         self::separator('=');
         echo "___ _  _ ___  \n| __| \| |   \ \n| _|| .` | |) |\n|___|_|\_|___/    \n";
@@ -80,12 +70,7 @@ class Console {
     }
 
     public static function writeln(string $str, string $foreground = null, string $background = null) {
-        if($foreground !== null || $background !== null) {
-            $colors = new Colors();
-            $str = $colors->getColoredString($str, $foreground, $background);
-        }
-
-        echo sprintf("%s\n", $str);
+        echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
     }
 
     public static function writeEx(\Exception $e) {

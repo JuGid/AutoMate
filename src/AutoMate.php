@@ -29,11 +29,11 @@ class AutoMate {
      * @return ErrorHandler|bool If the scenario has errors
      */
     public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') {
+        VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
         $scenario = null;
         $specification = null;
         $scenarioBrowser = '';
         $runner = null;
-        VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
         
         try {
             $scenario = new Scenario($scenario_name);
@@ -43,10 +43,10 @@ class AutoMate {
             if($withSpec) {
                 $specification = (new SpecificationFinder())->find();
                 $runner->runSpecification($scenario, $specification);
-
             } else {
                 $runner->runSimpleScenario($scenario);
             }
+
         } catch(\Exception $e) {
             Console::writeEx($e);
             return false;

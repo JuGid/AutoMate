@@ -47,7 +47,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep($config);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Configuration changed', strval($transformer));
+        $this->assertSame('Configuration changed', (string) $transformer);
     }
 
     public function testGoTransformerAndGetProperties() {
@@ -56,7 +56,7 @@ class TransformersTest extends TestCase {
         $transformer = new GoTransformer();
         $transformer->setStep(['go'=>'http://github.fr']);
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Go at adresse http://github.fr', strval($transformer));
+        $this->assertSame('Go at adresse http://github.fr', (string) $transformer);
 
         $transformer->setStep(['go'=>'foo']);
         $transformer->validate();
@@ -74,7 +74,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('On alert : isPresent', strval($transformer));
+        $this->assertSame('On alert : isPresent', (string) $transformer);
 
         $transformer->setStep(['alert'=>'foo']);
         $transformer->validate();
@@ -92,7 +92,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Click on element pltext[selector]', strval($transformer));
+        $this->assertSame('Click on element pltext[selector]', (string) $transformer);
 
         $transformer->setStep(['click'=>['foo'=>'selector']]);
         $transformer->validate();
@@ -103,7 +103,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['cookie'=>['name'=>'foo', 'value'=>'bar']]);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Create a cookie with foo:bar', strval($transformer));
+        $this->assertSame('Create a cookie with foo:bar', (string) $transformer);
     }
 
     public function testCreateTransformerAndGetProperties() {
@@ -118,7 +118,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Create a new window and switch to it', strval($transformer));
+        $this->assertSame('Create a new window and switch to it', (string) $transformer);
 
         $transformer->setStep(['create'=>'tabs']);
         $transformer->validate();
@@ -142,7 +142,7 @@ class TransformersTest extends TestCase {
             }
         }
 
-        $this->assertSame('Deselect in select pltext[selector] by pltext with value selectPoint', strval($transformer));
+        $this->assertSame('Deselect in select pltext[selector] by pltext with value selectPoint', (string) $transformer);
     }
 
     public function testSelectTransformerAndGetProperties() {
@@ -163,7 +163,7 @@ class TransformersTest extends TestCase {
             }
         }
 
-        $this->assertSame('Select in select pltext[selector] by pltext with value selectPoint', strval($transformer));
+        $this->assertSame('Select in select pltext[selector] by pltext with value selectPoint', (string) $transformer);
     }
 
     public function testFillTransformerAndGetProperties() {
@@ -176,7 +176,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Fill element pltext[selector] with value phpunit', strval($transformer));
+        $this->assertSame('Fill element pltext[selector] with value phpunit', (string) $transformer);
     }
 
     public function testImpltmTransformerAndGetProperties() {
@@ -187,7 +187,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['impltm'=>'60']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Set implicit timeout 60 s', strval($transformer));
+        $this->assertSame('Set implicit timeout 60 s', (string) $transformer);
 
         $transformer->setStep(['impltm'=>'foo']);
         $this->assertTrue($transformer->validate());
@@ -203,7 +203,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Checking if pltext[selector] is clickable', strval($transformer));
+        $this->assertSame('Checking if pltext[selector] is clickable', (string) $transformer);
     }
 
     public function testIsNotSelectedTransformerAndGetProperties() {
@@ -216,7 +216,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Checking if element located by pltext[selector] is not selected', strval($transformer));
+        $this->assertSame('Checking if element located by pltext[selector] is not selected', (string) $transformer);
     }
 
     public function testIsSelectedTransformerAndGetProperties() {
@@ -229,7 +229,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Checking if element located by pltext[selector] is selected', strval($transformer));
+        $this->assertSame('Checking if element located by pltext[selector] is selected', (string) $transformer);
     }
 
     public function testNumberOfWindowsTransformerAndGetProperties() {
@@ -238,7 +238,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['numberOfWindows'=>'2']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until number of windows is 2', strval($transformer));
+        $this->assertSame('Wait until number of windows is 2', (string) $transformer);
     }
 
     public function testPresenceOfAllTransformerAndGetProperties() {
@@ -251,7 +251,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Checking presence of all elements located by pltext[selector]', strval($transformer));
+        $this->assertSame('Checking presence of all elements located by pltext[selector]', (string) $transformer);
     }
 
     public function testPresenceOfTransformerAndGetProperties() {
@@ -264,7 +264,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
         
-        $this->assertSame('Checking presence of element located by pltext[selector]', strval($transformer));
+        $this->assertSame('Checking presence of element located by pltext[selector]', (string) $transformer);
     }
 
     public function testReloadTransformerAndGetProperties() {
@@ -273,7 +273,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['reload'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Reload the page', strval($transformer));
+        $this->assertSame('Reload the page', (string) $transformer);
     }
 
     public function testTextContainsTransformerAndGetProperties() {
@@ -286,7 +286,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Checking if text of element pltext[selector] contains val', strval($transformer));
+        $this->assertSame('Checking if text of element pltext[selector] contains val', (string) $transformer);
     }
 
     public function testTextIsTransformerAndGetProperties() {
@@ -299,7 +299,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Checking if text of element pltext[selector] is val', strval($transformer));
+        $this->assertSame('Checking if text of element pltext[selector] is val', (string) $transformer);
     }
 
     public function testTextMatchesTransformerAndGetProperties() {
@@ -312,7 +312,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Checking if text of element pltext[selector] matches val', strval($transformer));
+        $this->assertSame('Checking if text of element pltext[selector] matches val', (string) $transformer);
     }
 
     public function testTitleContainsTransformerAndGetProperties() {
@@ -321,7 +321,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['titleContains'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until title contains page', strval($transformer));
+        $this->assertSame('Wait until title contains page', (string) $transformer);
     }
 
     public function testTitleIsTransformerAndGetProperties() {
@@ -330,7 +330,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['titleIs'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until title is page', strval($transformer));
+        $this->assertSame('Wait until title is page', (string) $transformer);
     }
 
     public function testTitleMatchesTransformerAndGetProperties() {
@@ -339,7 +339,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['titleMatches'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until title matches regexp page', strval($transformer));
+        $this->assertSame('Wait until title matches regexp page', (string) $transformer);
     }
 
     public function testUrlContainsTransformerAndGetProperties() {
@@ -348,7 +348,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['urlContains'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until url contains page', strval($transformer));
+        $this->assertSame('Wait until url contains page', (string) $transformer);
     }
 
     public function testUrlIsTransformerAndGetProperties() {
@@ -357,7 +357,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['urlIs'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until url is page', strval($transformer));
+        $this->assertSame('Wait until url is page', (string) $transformer);
     }
 
     public function testUrlMatchesTransformerAndGetProperties() {
@@ -366,7 +366,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['urlMatches'=>'page']);
         $this->assertTrue($transformer->validate());
 
-        $this->assertSame('Wait until url matches regexp page', strval($transformer));
+        $this->assertSame('Wait until url matches regexp page', (string) $transformer);
     }
 
     public function testVilibilityOfAnyTransformerAndGetProperties() {
@@ -379,7 +379,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Checking visibility of any elements located by pltext[selector]', strval($transformer));
+        $this->assertSame('Checking visibility of any elements located by pltext[selector]', (string) $transformer);
     }
 
     public function testVilibilityOfTransformerAndGetProperties() {
@@ -392,7 +392,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Checking visibility of element located by pltext[selector]', strval($transformer));
+        $this->assertSame('Checking visibility of element located by pltext[selector]', (string) $transformer);
     }
 
     public function testGetTransformerAndGetProperties() {
@@ -425,8 +425,8 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformerNoAttribute->validate());
         }
         
-        $this->assertSame('Get attribute for element pltext[selector] with value attribut', strval($transformerAttribute));
-        $this->assertSame('Get text for element pltext[selector] ', strval($transformerNoAttribute));
+        $this->assertSame('Get attribute for element pltext[selector] with value attribut', (string) $transformerAttribute);
+        $this->assertSame('Get text for element pltext[selector] ', (string) $transformerNoAttribute);
         
     }
 
@@ -467,7 +467,7 @@ class TransformersTest extends TestCase {
             $this->assertTrue($transformer->validate());
         }
 
-        $this->assertSame('Frame to string', strval($transformer));
+        $this->assertSame('Frame to string', (string) $transformer);
     }
 
     public function testResizeTransformerAndGetProperties() {
@@ -502,9 +502,9 @@ class TransformersTest extends TestCase {
 
         // This assert is false in the process but works here and need to be
         // verified
-        $this->assertSame('Resize the page [size] ',strval($transformerNoSize));
+        $this->assertSame('Resize the page [size] ',(string) $transformerNoSize );
 
-        $this->assertSame('Resize the page [size] with 500px per 600px',strval($transformerSize));
+        $this->assertSame('Resize the page [size] with 500px per 600px',(string) $transformerSize);
     }
 
     public function testScreenshotTransformerAndGetProperties() {
@@ -538,7 +538,7 @@ class TransformersTest extends TestCase {
             }
         }
 
-        $this->assertSame('Cheeeeeese [myScreenshot]', strval($transformer));
+        $this->assertSame('Cheeeeeese [myScreenshot]', (string) $transformer);
     }
 
     public function testLoopTransformerAndGetProperties() {
@@ -553,7 +553,7 @@ class TransformersTest extends TestCase {
             ]
         ]);
         $this->assertTrue($transformer->validate());
-        $this->assertSame('> Loop ends after 5 times', strval($transformer));
+        $this->assertSame('> Loop ends after 5 times', (string) $transformer);
     }
 
     public function testConditionTransformer() {
@@ -581,7 +581,7 @@ class TransformersTest extends TestCase {
         $stepResult['condition']['result'] = 'false';
         $transformer->setStep($stepResult);
 
-        $this->assertSame('Condition assessed 5 == 6 as false', strval($transformer));
+        $this->assertSame('Condition assessed 5 == 6 as false', (string) $transformer);
     }
 
     public function testExitTransformer() {
@@ -589,7 +589,7 @@ class TransformersTest extends TestCase {
         $transformer->setStep(['exit'=>'For the example']);
 
         $this->assertTrue($transformer->validate());
-        $this->assertSame('EXIT', strval($transformer));
+        $this->assertSame('EXIT', (string) $transformer);
     }
 
     public function testUseTransformer() {
@@ -612,14 +612,14 @@ class TransformersTest extends TestCase {
         if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
-        $this->assertSame('Executing script return jQuery.active === 0;', strval($transformer));
+        $this->assertSame('Executing script return jQuery.active === 0;', (string) $transformer);
 
         $transformer->setStep(['script'=>'return jQuery.active === 0;']);
         $this->assertTrue($transformer->validate());
         if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
-        $this->assertSame('Executing script return jQuery.active === 0;', strval($transformer));
+        $this->assertSame('Executing script return jQuery.active === 0;', (string) $transformer);
     }
 
     public function testWajaxTransformer() {
@@ -631,14 +631,14 @@ class TransformersTest extends TestCase {
         if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
-        $this->assertSame('Waiting with script return jQuery.active === 0;', strval($transformer));
+        $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
 
         $transformer->setStep(['wajax'=>'return jQuery.active === 0;']);
         $this->assertTrue($transformer->validate());
         if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
-        $this->assertSame('Waiting with script return jQuery.active === 0;', strval($transformer));
+        $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
     }
 
     

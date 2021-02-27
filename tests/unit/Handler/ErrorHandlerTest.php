@@ -24,7 +24,7 @@ class ErrorHandlerTest extends TestCase {
 
         $this->assertSame(5, $errorHandler->countWins());
         $this->assertSame('green', $errorHandler->getBackgroundColor());
-        $this->assertSame('Scenario with specification finished with Wins : 5 and Errors : 0', strval($errorHandler));
+        $this->assertSame('Scenario with specification finished with Wins : 5 and Errors : 0', (string) $errorHandler);
     }
 
     public function testShouldInstanciateAndErrorAndShouldNotStoreDataset() {
@@ -38,7 +38,7 @@ class ErrorHandlerTest extends TestCase {
         $this->assertSame(5, $errorHandler->countErrors());
         $this->assertSame(5, $errorHandler->countErrorsType());
         $this->assertSame('red', $errorHandler->getBackgroundColor());
-        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', strval($errorHandler));
+        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', (string) $errorHandler );
     }
 
     public function testShouldInstanciateAndErrorAndShouldStoreDataset() {

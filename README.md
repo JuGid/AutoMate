@@ -15,6 +15,9 @@ With AutoMate you can :
 - Get logs from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
 
+**Coming**
+- Run scenarios as functionnal tests
+
 ## Getting started
 
 ### Installation 
@@ -92,6 +95,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [x] Add a command `ajax` and `js` to work with ajax/js
 - [x] Add a `configuration` command to change configuration at runtime
 - [ ] Add a submit command to submit forms
+- [ ] Possibility to run scenarios as functionnal tests (new repository ?)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing

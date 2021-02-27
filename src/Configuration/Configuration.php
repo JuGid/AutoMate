@@ -46,7 +46,6 @@ class Configuration implements ConfigurationInterface {
       }
     }
     return $arrayValue;
-
   }
 
   public static function logsColumns(array $columns = [])
