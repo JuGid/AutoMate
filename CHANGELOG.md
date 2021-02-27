@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Functions that wait() now use the configuration wait. `Configuration::get('wait.for')` and `Configuration::get('wait.every')` 
 - If testMode is enable, the errors are rendered with colors and details
 - `Configuration` permit to test if it is loaded or not
-- Remade `ErrorHandler` to handle errors from scenario with specification **and** simple scenario. Error rendering should be render by an ErrorPrinter and not the ErrorHandler itself. This should change in future.
+- Remade `ErrorHandler` to handle errors from scenario with specification **and** simple scenario. Error rendering should be render by an ErrorPrinter and not the ErrorHandler itself. This should change in future. Error handler now handle every errors.
 - Activate the testMode in AutoMate::run to see errors report
 
 ### Fixed
