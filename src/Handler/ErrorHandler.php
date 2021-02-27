@@ -4,7 +4,7 @@ namespace Automate\Handler;
 
 use Automate\Console\Console;
 
-class ErrorHandler {
+final class ErrorHandler {
 
     /**
      * @var array
@@ -60,6 +60,10 @@ class ErrorHandler {
 
     public function shouldStoreDataset() : void {
         $this->shouldStoreDataset = true;
+    }
+
+    public function getErrors() : array {
+        return $this->errors;
     }
 
     public function __toString() {

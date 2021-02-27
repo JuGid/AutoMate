@@ -14,7 +14,8 @@ abstract class VariableRegistry {
     private static $scopesAllowed = [
         Scope::SCENARIO,
         Scope::SPEC,
-        Scope::WORLD
+        Scope::WORLD,
+        Scope::TEST
     ];
 
     /**

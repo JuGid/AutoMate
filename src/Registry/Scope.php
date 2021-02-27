@@ -6,4 +6,5 @@ abstract class Scope {
     const SCENARIO = 'scenario';
     const SPEC = 'spec';
     const WORLD = 'world';
+    const TEST = 'test';
 }
