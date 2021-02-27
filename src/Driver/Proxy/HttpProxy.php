@@ -2,11 +2,7 @@
 
 namespace Automate\Driver\Proxy;
 
-/**
- * Not implemented yet.
- * @todo User proxy
- */
-class HttpProxy {
+final class HttpProxy {
 
     /**
      * proxy type

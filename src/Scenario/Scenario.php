@@ -51,9 +51,6 @@ class Scenario implements Iterator{
         }
     }
 
-    /**
-     * @todo add scenario validation
-     */
     private function parseScenarioFile(string $file) : array{
         try{
             return Yaml::parseFile($file);
@@ -74,7 +71,7 @@ class Scenario implements Iterator{
     /**
      * Return a browser name depending on each browser name provided.
      * If all are set, priority is : scenario -> function -> configuration
-     * Configuration default browser has to be set in config file
+     * Configuration default browser MUST be set in config file
      */
     public function getScenarioBrowser(?string $default_function) : string {
         if(!isset($this->scenario['browser'])) {

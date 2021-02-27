@@ -5,9 +5,6 @@ namespace Automate\Logs;
 use Automate\Configuration\Configuration;
 use Automate\Exception\LogException;
 
-/**
- * @todo Create a log file manager ???
- */
 abstract class AbstractLogger {
 
     /**
