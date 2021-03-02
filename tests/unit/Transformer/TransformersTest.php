@@ -641,5 +641,17 @@ class TransformersTest extends TestCase {
         $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
     }
 
+    public function testSubmitTransformerAndGetProperties() {
+        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
+
+        $transformer = new SubmitTransformer();
+
+        foreach($findingPossibilities as $possibility) {
+            $transformer->setStep(['submit'=>[$possibility=>'selector', 'text'=>'jugid']]);
+            $this->assertTrue($transformer->validate());
+        }
+
+        $this->assertSame('Submit jugid for element pltext[selector]', (string) $transformer);
+    }
     
 }

@@ -89,13 +89,10 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 ## Roadmap
 *See [Changelogs](CHANGELOG.md) for more information*
 
-- [x] Provide a Proxy management
-- [x] Possibility to import a scenario for reusability
-- [x] Firefox Profile
-- [x] Add a command `ajax` and `js` to work with ajax/js
-- [x] Add a `configuration` command to change configuration at runtime
-- [ ] Add a submit command to submit forms
-- [ ] Possibility to run scenarios as functionnal tests (new repository ?)
+- [x] Add a submit command to submit element
+- [ ] Find a way to use keyboard (`Keyboard` command)
+- [ ] Find a way to use the mouse (`Mouse` command)
+- [x] Repository for AutoMate-tests [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing
