@@ -16,9 +16,6 @@ With AutoMate you can :
 - Have a step by step description written on console
 - You can create test case with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests)
 
-**Coming**
-- Run scenarios as functionnal tests
-
 ## Getting started
 
 ### Installation 
@@ -93,6 +90,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [x] Add a submit command to submit element
 - [ ] Find a way to use keyboard (`Keyboard` command)
 - [ ] Find a way to use the mouse (`Mouse` command)
+- [ ] New command to work with tables
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing
