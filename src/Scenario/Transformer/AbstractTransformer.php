@@ -2,13 +2,17 @@
 
 namespace Automate\Scenario\Transformer;
 
+use Automate\AutoMateEvents;
+use Automate\AutoMateListener;
+use Automate\Console\Console;
 use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
+use Automate\Exception\EventException;
 use Automate\Registry\VariableRegistry;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use PASVL\Validation\ValidatorBuilder;
 
-abstract class AbstractTransformer {
+abstract class AbstractTransformer implements AutoMateListener {
 
     /**
      * @var RemoteWebDriver
@@ -22,13 +26,35 @@ abstract class AbstractTransformer {
 
     /**
      * @codeCoverageIgnore
+     */
+    public function notify(string $event, $data) : int {
+        if($event != AutoMateEvents::STEP_TRANSFORM) {
+            return AutoMateListener::STATE_REJECTED;
+        }
+
+        if(!isset($data['step']) && !isset($data['driver'])) {
+            throw new EventException('For event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step and driver data');
+        }
+
+        if(array_keys($data['step'])[0] !== array_keys($this->getPattern())[0]) {
+            return AutoMateListener::STATE_REJECTED;
+        }
+
+        $this->process($data['driver'], $data['step']);
+
+        return AutoMateListener::STATE_RECEIVED;
+    }
+
+    /**
+     * @codeCoverageIgnore
      * 
      * Get variables, validate and transform into driver action
      * @throws CommandException If the step is not valid
      * 
      * @param array $step
      */
-    public function process(RemoteWebDriver $driver, array $step) : void {
+    public function process(RemoteWebDriver $driver, array $step) {
+        
         if($driver == null) {
             throw new DriverException('No driver provided');
         }
@@ -42,6 +68,8 @@ abstract class AbstractTransformer {
         } else {
             throw new CommandException('The command ' . array_keys($this->step)[0] . ' is not valid');
         }
+
+        Console::writeln((string) $this);
     }
 
     /**

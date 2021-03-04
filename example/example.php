@@ -33,7 +33,7 @@ $autoMate = new AutoMate($configFile);
  * $autoMate->setDriverConfiguration($driverConfiguration)
  */
  
-$autoMate->run('simple');
+$autoMate->run('simple', false, true);
 
 /**
  * 

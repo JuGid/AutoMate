@@ -2,6 +2,9 @@
 
 namespace Automate\Scenario;
 
+use Automate\AutoMateDispatcher;
+use Automate\AutoMateEvents;
+use Automate\AutoMateListener;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
@@ -12,7 +15,9 @@ use Automate\Handler\ErrorHandler;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
+use Automate\Mapper\ClassMapper;
 use Automate\Specification\Specification;
+use ReflectionClass;
 
 /**
  * @codeCoverageIgnore
@@ -20,10 +25,9 @@ use Automate\Specification\Specification;
 class Runner {
 
     /**
-     * 
-     * @var StepTransformer
+     * @var AutoMateDispatcher
      */
-    private $stepTransformer = null;
+    private $dispatcher = null;
 
     /**
      * Specify if the runner is running with a specification
@@ -59,9 +63,11 @@ class Runner {
 
     public function __construct(string $browser, bool $testMode = false, DriverConfiguration $driverConfiguration = null) {
         $this->driver = DriverManager::getDriver($browser, $driverConfiguration);
-        $this->stepTransformer = new StepTransformer($this->driver);
         $this->testMode = $testMode;
         $this->errorHandler = new ErrorHandler();
+        $this->dispatcher = new AutoMateDispatcher();
+
+        $this->attachCoreTransformersToDispatcher();
     }
 
     /**
@@ -110,7 +116,8 @@ class Runner {
 
         try {
             foreach($scenario as $step){
-                $this->getStepTransformer()->transform($step);
+                $data = ['driver'=> $this->driver, 'step'=>$step];
+                $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
             }
 
             $this->errorHandler->win();
@@ -132,6 +139,20 @@ class Runner {
         if(!$this->runWithSpecification()) {
             Console::endSimple($this->errorHandler, $this->testMode);
             $this->driver->quit();
+        }
+    }
+
+    private function attachCoreTransformersToDispatcher() {
+        $path = __DIR__.'/Transformer';
+        $mapper = new ClassMapper();
+        $map = $mapper->getClassMap($path, 'AbstractTransformer', '', 'Transformer');
+
+        foreach($map as $transformerClass) {
+            $instance = (new ReflectionClass($transformerClass))->newInstance();
+
+            if($instance instanceof AutoMateListener) {
+                $this->dispatcher->attach(AutoMateEvents::STEP_TRANSFORM, $instance);
+            }
         }
     }
 

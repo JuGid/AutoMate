@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `Submit` command to fill then submit an element
+- AutoMate now use an EventDispatcher. This can permit you to create your own transformers (command) and your own plugins
 
 ### Changed 
 
