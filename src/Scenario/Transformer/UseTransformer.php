@@ -7,6 +7,7 @@ use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Scenario;
 use Automate\Scenario\StepTransformer;
+use InvalidArgumentException;
 
 class UseTransformer extends AbstractTransformer {
 
@@ -26,12 +27,18 @@ class UseTransformer extends AbstractTransformer {
     protected function transform() : void
     {
         $askedScenario = explode('.', $this->step['use']);
-        
-        if($askedScenario[0] == 'main' && $askedScenario[1] == VariableRegistry::get(Scope::WORLD, 'scenario')) {
-            throw new ScenarioException('A loop has been detected, please try not to use the same scenario');
+
+        if($askedScenario[0] == 'main') {
+            $name = $askedScenario[1];
+            $sub = 'main';
+        } elseif($askedScenario[0] == 'sub') {
+            $name = VariableRegistry::get(Scope::WORLD, 'scenario');
+            $sub = $askedScenario[1];
+        } else {
+            throw new InvalidArgumentException('You should use main or sub to import a scenario');
         }
 
-        $scenario = new Scenario($askedScenario[1], $askedScenario[0]);
+        $scenario = new Scenario($name, $sub, false);
         $sttr = new StepTransformer($this->driver);
         
         foreach($scenario as $step){

@@ -29,6 +29,7 @@ class AutoMate {
      * @return ErrorHandler|bool If the scenario has errors
      */
     public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '') {
+        VariableRegistry::reset(Scope::WORLD);
         VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
         $scenario = null;
         $specification = null;

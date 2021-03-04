@@ -11,6 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `Submit` command to fill then submit an element
 
+### Changed 
+
+- `Use` command does not detect loop anymore as a condition can make the scenario change
+
+### Fixed 
+
+- `Scenario` can now reset or not the scope. When using `use`, the Scenario variable scope is now not reset.
+- When AutoMate runs, the World variable scope is reset.
+- `Use` command now use the right scenario.
+
 ## [0.4.1] - 28/02/2021
 
 ### Fixed

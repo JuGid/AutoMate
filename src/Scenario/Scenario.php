@@ -27,7 +27,7 @@ class Scenario implements Iterator{
      */
     public $name;
 
-    public function __construct(string $name , string $sub = 'main') {
+    public function __construct(string $name , string $sub = 'main', bool $resetScope = true) {
         
         $this->scenario = $this->parseScenarioFile(sprintf('%s/%s/%s.yaml', 
                                     Configuration::get('scenario.folder'),
@@ -41,7 +41,9 @@ class Scenario implements Iterator{
             throw new ScenarioException('You must define steps in your scenario file');
         }
 
-        VariableRegistry::reset(Scope::SCENARIO);
+        if($resetScope) {
+            VariableRegistry::reset(Scope::SCENARIO);
+        }
         
         if(isset($this->scenario['variables'])) {
             $variables = $this->scenario['variables'];
