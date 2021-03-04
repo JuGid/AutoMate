@@ -2,7 +2,6 @@
 
 namespace Automate\Scenario\Transformer;
 
-use Automate\Exception\ScenarioException;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Scenario;
@@ -38,6 +37,8 @@ class UseTransformer extends AbstractTransformer {
             throw new InvalidArgumentException('You should use main or sub to import a scenario');
         }
 
+        $this->step['use']['scenario_file'] = sprintf('%s/%s.yaml', $name, $sub);
+
         $scenario = new Scenario($name, $sub, false);
         $sttr = new StepTransformer($this->driver);
         
@@ -45,8 +46,6 @@ class UseTransformer extends AbstractTransformer {
             $sttr->transform($step);
         }
 
-        $this->step['use']['type'] = $askedScenario[0];
-        $this->step['use']['name'] = $askedScenario[1];
     }
 
     /**
@@ -56,6 +55,6 @@ class UseTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Use scenario %s %s', $this->step['use']['type'], $this->step['use']['name']);
+        return sprintf('Use scenario %s', $this->step['use']['scenario_file']);
     }
 }
