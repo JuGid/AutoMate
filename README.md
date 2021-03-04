@@ -1,4 +1,4 @@
-![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/JuGid/AutoMate/branch/master/graph/badge.svg?token=JK9IA306US)](https://codecov.io/gh/JuGid/AutoMate) [![Latest Stable Version](https://poser.pugx.org/jugid/auto-mate/v)](//packagist.org/packages/jugid/auto-mate) [![License](https://poser.pugx.org/jugid/auto-mate/license)](//packagist.org/packages/jugid/auto-mate) [![Latest Unstable Version](https://poser.pugx.org/jugid/auto-mate/v/unstable)](//packagist.org/packages/jugid/auto-mate)
+![Tests](https://github.com/JuGid/AutoMate/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/JuGid/AutoMate/branch/master/graph/badge.svg?token=JK9IA306US)](https://codecov.io/gh/JuGid/AutoMate) [![Latest Stable Version](https://poser.pugx.org/jugid/auto-mate/v)](//packagist.org/packages/jugid/auto-mate) [![License](https://poser.pugx.org/jugid/auto-mate/license)](//packagist.org/packages/jugid/auto-mate)
 
 
 # AutoMate - Yaml automation library
