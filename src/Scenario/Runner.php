@@ -4,7 +4,6 @@ namespace Automate\Scenario;
 
 use Automate\AutoMateDispatcher;
 use Automate\AutoMateEvents;
-use Automate\AutoMateListener;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
@@ -15,9 +14,7 @@ use Automate\Handler\ErrorHandler;
 use Automate\Logs\AbstractLogger;
 use Automate\Logs\DefaultLogger;
 use Automate\Logs\LogType;
-use Automate\Mapper\ClassMapper;
 use Automate\Specification\Specification;
-use ReflectionClass;
 
 /**
  * @codeCoverageIgnore
@@ -66,8 +63,6 @@ class Runner {
         $this->testMode = $testMode;
         $this->errorHandler = new ErrorHandler();
         $this->dispatcher = new AutoMateDispatcher();
-
-        $this->attachCoreTransformersToDispatcher();
     }
 
     /**
@@ -140,24 +135,6 @@ class Runner {
             Console::endSimple($this->errorHandler, $this->testMode);
             $this->driver->quit();
         }
-    }
-
-    private function attachCoreTransformersToDispatcher() {
-        $path = __DIR__.'/Transformer';
-        $mapper = new ClassMapper();
-        $map = $mapper->getClassMap($path, 'AbstractTransformer', '', 'Transformer');
-
-        foreach($map as $transformerClass) {
-            $instance = (new ReflectionClass($transformerClass))->newInstance();
-
-            if($instance instanceof AutoMateListener) {
-                $this->dispatcher->attach(AutoMateEvents::STEP_TRANSFORM, $instance);
-            }
-        }
-    }
-
-    public function getStepTransformer() : StepTransformer {
-        return $this->stepTransformer;
     }
 
     public function runWithSpecification() : bool {

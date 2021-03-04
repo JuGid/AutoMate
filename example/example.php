@@ -4,6 +4,7 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use Automate\AutoMate;
+use Automate\AutoMateEvents;
 use Automate\Driver\DriverConfiguration;
 use Automate\Driver\Proxy\HttpProxy;
 use Facebook\WebDriver\Firefox\FirefoxProfile;
@@ -31,6 +32,11 @@ $autoMate = new AutoMate($configFile);
  * $driverConfiguration->setServerUrl('http://localhost:4444');
  * 
  * $autoMate->setDriverConfiguration($driverConfiguration)
+ * 
+ * You can also register a plugin to use it on some AutoMate events
+ * For example, to register your custom Transformer
+ * 
+ * $autoMate->registerPlugin(AutoMateEvents::STEP_TRANSFORM, new MyTransformer());
  */
  
 $autoMate->run('simple', false, true);
