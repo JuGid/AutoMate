@@ -14,6 +14,7 @@ With AutoMate you can :
 - Inject data into them to use variable in the scenario and repeat the scenario for each dataset
 - Get logs from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
+- You can create test case with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests)
 
 **Coming**
 - Run scenarios as functionnal tests
@@ -92,7 +93,6 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [x] Add a submit command to submit element
 - [ ] Find a way to use keyboard (`Keyboard` command)
 - [ ] Find a way to use the mouse (`Mouse` command)
-- [x] Repository for AutoMate-tests [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing
