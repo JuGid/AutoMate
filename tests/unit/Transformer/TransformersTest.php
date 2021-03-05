@@ -1,6 +1,6 @@
 <?php 
 
-namespace Automate\Scenario\Transformer;
+namespace Automate\Transformer;
 
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;

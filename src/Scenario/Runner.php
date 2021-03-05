@@ -58,11 +58,16 @@ class Runner {
      */
     private $errorHandler = null;
 
-    public function __construct(string $browser, bool $testMode = false, DriverConfiguration $driverConfiguration = null) {
+    public function __construct(
+        string $browser, 
+        bool $testMode = false, 
+        DriverConfiguration $driverConfiguration = null,
+        AutoMateDispatcher $dispatcher = null
+    ) {
         $this->driver = DriverManager::getDriver($browser, $driverConfiguration);
         $this->testMode = $testMode;
         $this->errorHandler = new ErrorHandler();
-        $this->dispatcher = new AutoMateDispatcher();
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -117,12 +122,17 @@ class Runner {
 
             $this->errorHandler->win();
 
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_WIN, []);
+
             if($this->runWithSpecification()) {
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
             }
 
         } catch(\Exception $e) {
+            
             $this->errorHandler->error($e->getMessage(), $this->getCurrentDataset());
+
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_ERROR, ['exception'=>$e]);
 
             if($this->runWithSpecification()) {
                 $this->logger->addMessage($e->getMessage());
@@ -133,6 +143,7 @@ class Runner {
 
         if(!$this->runWithSpecification()) {
             Console::endSimple($this->errorHandler, $this->testMode);
+
             $this->driver->quit();
         }
     }
