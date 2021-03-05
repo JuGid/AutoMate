@@ -91,7 +91,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 - [ ] Find a way to use keyboard (`Keyboard` command)
 - [ ] Find a way to use the mouse (`Mouse` command)
 - [ ] New command to work with tables
-- [ ] Create your own commands (AbstractTransformer)
+- [x] Create your own commands (AbstractTransformer)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ## Contributing

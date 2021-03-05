@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `Submit` command to fill then submit an element
-- AutoMate now use an EventDispatcher. This can permit you to create your own transformers (command) and your own plugins
+- AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
 
 ### Changed 
 
@@ -18,9 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 
 
-- `Scenario` can now reset or not the scope. When using `use`, the Scenario variable scope is now not reset.
+- `Scenario` can now reset or not the scope. When using `use`, the Scenario variable scope is not reset.
 - When AutoMate runs, the World variable scope is reset.
-- `Use` command now use the right scenario.
+- `Use` command now use the good scenario.
 
 ## [0.4.1] - 28/02/2021
 
