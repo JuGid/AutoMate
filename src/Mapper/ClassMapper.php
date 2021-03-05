@@ -91,11 +91,9 @@ class ClassMapper {
     /**
      * get the class namespace form file path using token
      *
-     * @param $filePathName
-     *
      * @return  null|string
      */
-    protected function getClassNamespaceFromFile($filePathName)
+    protected function getClassNamespaceFromFile(string $filePathName)
     {
         $src = file_get_contents($filePathName);
 
@@ -130,11 +128,9 @@ class ClassMapper {
     /**
      * get the class name form file path using token
      *
-     * @param $filePathName
-     *
      * @return  mixed
      */
-    protected function getClassNameFromFile($filePathName)
+    protected function getClassNameFromFile(string $filePathName)
     {
         $php_code = file_get_contents($filePathName);
 

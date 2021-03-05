@@ -2,7 +2,7 @@
 
 namespace Automate\Transformer;
 
-use Automate\Scenario\Transformer\Helpers\WebLocator;
+use Automate\Transformer\Helpers\WebLocator;
 
 class SubmitTransformer extends AbstractTransformer {
 

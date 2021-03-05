@@ -1,6 +1,6 @@
 <?php
 
-namespace Automate\Scenario\Transformer\Helpers;
+namespace Automate\Transformer\Helpers;
 
 use Automate\Exception\CommandException;
 use PHPUnit\Framework\TestCase;
