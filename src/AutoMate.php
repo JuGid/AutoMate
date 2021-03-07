@@ -11,8 +11,9 @@ use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
 use Automate\Driver\DriverConfiguration;
 use Automate\Handler\ErrorHandler;
+use InvalidArgumentException;
 
-class AutoMate {
+final class AutoMate {
 
     /**
      * @var DriverConfiguration
@@ -26,8 +27,9 @@ class AutoMate {
     private $dispatcher;
 
     public function __construct(string $configFile){
-        Configuration::load($configFile);
         $this->dispatcher = new AutoMateDispatcher();
+        $this->dispatcher->attachCoreListeners();
+        Configuration::load($configFile);
     }
 
     /**
@@ -82,7 +84,10 @@ class AutoMate {
         return $this->driverConfiguration;
     }
 
-    public function registerPlugin(string $event, AutoMateListener $listener) {
+    /**
+     * @param array|string $event Event or array of event to subsbribe on
+     */
+    public function registerPlugin($event, AutoMateListener $listener) {
         $this->dispatcher->attach($event, $listener);
     }
 }

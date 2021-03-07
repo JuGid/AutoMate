@@ -5,6 +5,7 @@ namespace Automate;
 use Automate\Exception\EventException;
 use Automate\Mapper\ClassMapper;
 use Automate\Transformer\AbstractTransformer;
+use InvalidArgumentException;
 use ReflectionClass;
 
 final class AutoMateDispatcher {
@@ -19,12 +20,21 @@ final class AutoMateDispatcher {
 
     private $listeners = [];
 
-    public function __construct()
-    {
-        $this->attachCoreListeners();
-    }
+    /**
+     * @param array|string $event
+     * @param AutoMateListener $object
+     */
+    public function attach($event, AutoMateListener $object) : void {
+        if(is_array($event)) {
+            array_map(function($item) use ($object) {
+                $this->attach($item, $object);
+            }, $event);
+        }
 
-    public function attach(string $event, AutoMateListener $object) : void {
+        if(!is_string($event)) {
+            throw new InvalidArgumentException('Event should comes from class AutoMateEvents constants');
+        }
+
         $this->listeners[$event][] = $object;
     }
 
@@ -45,10 +55,10 @@ final class AutoMateDispatcher {
     }
 
     public function countListeners() : int {
-        return count($this->listeners);
+        return count($this->listeners, COUNT_RECURSIVE) - count($this->listeners, COUNT_NORMAL);
     }
 
-    private function attachCoreListeners() : void {
+    public function attachCoreListeners() : void {
         $mapper = new ClassMapper();
 
         foreach(self::CORE_LISTENERS as $event=>$params) {

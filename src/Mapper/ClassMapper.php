@@ -9,41 +9,6 @@ use RegexIterator;
 
 class ClassMapper {
 
-    public function getMap(string $path, string $except = '', string $first = '', string $last = '') : array {
-        $map = [];
-        $directory = new RecursiveDirectoryIterator($path);
-        $iterator = new RecursiveIteratorIterator($directory);
-        $regex = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
-
-        foreach($regex as $file) {
-            if(!empty($except)) {
-                if(!strpos($except, $file[0])) continue;
-            }
-
-            if(!empty($first)) {
-                if(!$this->matchFirst($file[0], $first)) continue;
-            }
-
-            if(!empty($last)) {
-                if(!$this->matchLast($file[0], $last)) continue;
-            }
-            
-            $className = $this->getClassNameFromFile($file[0]);
-            $namespace = $this->getClassNamespaceFromFile($file[0]);
-
-            if($className == null || $namespace == null) {
-                continue;
-            }
-
-            $fullClassName = $namespace.'\\'.$className;
-            
-            $map[$file] = $fullClassName;
-            
-        }
-
-        return $map;
-    }
-
     public function getClassMap(string $path, string $except = '', string $first = '', string $last = '') : array{
         $map = [];
         $directory = new RecursiveDirectoryIterator($path);
@@ -150,4 +115,44 @@ class ClassMapper {
 
         return $classes[0];
     }
+
+    /*
+    This function is not used anymore.
+    
+    public function getMap(string $path, string $except = '', string $first = '', string $last = '') : array {
+        $map = [];
+        $directory = new RecursiveDirectoryIterator($path);
+        $iterator = new RecursiveIteratorIterator($directory);
+        $regex = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+
+        foreach($regex as $file) {
+            if(!empty($except)) {
+                if(!strpos($except, $file[0])) continue;
+            }
+
+            if(!empty($first)) {
+                if(!$this->matchFirst($file[0], $first)) continue;
+            }
+
+            if(!empty($last)) {
+                if(!$this->matchLast($file[0], $last)) continue;
+            }
+            
+            $className = $this->getClassNameFromFile($file[0]);
+            $namespace = $this->getClassNamespaceFromFile($file[0]);
+
+            if($className == null || $namespace == null) {
+                continue;
+            }
+
+            $fullClassName = $namespace.'\\'.$className;
+            
+            $map[$file] = $fullClassName;
+            
+        }
+
+        return $map;
+    }
+    */
+
 }

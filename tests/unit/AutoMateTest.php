@@ -4,6 +4,8 @@ namespace Automate;
 
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverConfiguration;
+use Automate\Transformer\GoTransformer;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class AutoMateTest extends TestCase {
@@ -27,5 +29,17 @@ class AutoMateTest extends TestCase {
 
         $this->assertNotNull($automate->getDriverConfiguration()->getHttpProxy());
         $this->assertSame('http://localhost:4444', $automate->getDriverConfiguration()->getServerUrl());
+    }
+
+    public function testShouldResgisterANewPlugin() {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Event should comes from class AutoMateEvents constants');
+
+        $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
+
+        $automate->registerPlugin(AutoMateEvents::RUNNER_SPEC_BEGIN, new GoTransformer());
+        $automate->registerPlugin([AutoMateEvents::RUNNER_SIMPLE_END, AutoMateEvents::RUNNER_ERROR], new Gotransformer());
+        $automate->registerPlugin(4, new GoTransformer());
+        //Just to see if no errors are returned and for future tests
     }
 }
