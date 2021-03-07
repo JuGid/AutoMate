@@ -40,7 +40,7 @@ abstract class DriverManager {
         throw new BrowserException('The browser ' . $browser . ' is not managed by php-webdriver');
       }
 
-      $caps = DesiredCapabilities::$browser();
+      $caps = DesiredCapabilities::{$browser}();
 
       //Set http proxy as a capability
       if($driverConfiguration->getHttpProxy() !== null) {

@@ -4,7 +4,7 @@ namespace Automate\Specification;
 
 use Iterator;
 
-class Specification implements Iterator{
+final class Specification implements Iterator{
     /**
      * @var array<string, mixed>|false
      */

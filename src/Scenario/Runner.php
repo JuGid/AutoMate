@@ -19,7 +19,7 @@ use Automate\Specification\Specification;
 /**
  * @codeCoverageIgnore
  */
-class Runner {
+final class Runner {
 
     /**
      * @var AutoMateDispatcher

@@ -8,7 +8,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\ConfigurationException;
 
-class Configuration implements ConfigurationInterface {
+final class Configuration implements ConfigurationInterface {
 
   /**
    * @var bool

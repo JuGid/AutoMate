@@ -11,7 +11,6 @@ use Automate\Scenario\Scenario;
 use Automate\Scenario\Runner;
 use Automate\Driver\DriverConfiguration;
 use Automate\Handler\ErrorHandler;
-use InvalidArgumentException;
 
 final class AutoMate {
 

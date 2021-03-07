@@ -7,7 +7,7 @@ use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
 use RegexIterator;
 
-class ClassMapper {
+final class ClassMapper {
 
     public function getClassMap(string $path, string $except = '', string $first = '', string $last = '') : array{
         $map = [];

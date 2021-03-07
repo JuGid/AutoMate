@@ -11,7 +11,7 @@ use Automate\Registry\VariableRegistry;
  * its wholeness. So Automate open the file and then return lines when it's needed.
  * At the end, close the file.
  */
-class SpecificationLoader {
+final class SpecificationLoader {
 
     /**
      * Pointer to spec file

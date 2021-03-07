@@ -10,7 +10,7 @@ use Iterator;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-class Scenario implements Iterator{
+final class Scenario implements Iterator{
 
     /**
      * @var array

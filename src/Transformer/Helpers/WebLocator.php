@@ -8,7 +8,7 @@ use Facebook\WebDriver\WebDriverBy;
 /**
  * WebDriverBy overlay to define the good one from string
  */
-class WebLocator {
+final class WebLocator {
 
     /**
      * @return \Facebook\WebDriver\WebDriverBy

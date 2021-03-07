@@ -40,6 +40,5 @@ class AutoMateTest extends TestCase {
         $automate->registerPlugin(AutoMateEvents::RUNNER_SPEC_BEGIN, new GoTransformer());
         $automate->registerPlugin([AutoMateEvents::RUNNER_SIMPLE_END, AutoMateEvents::RUNNER_ERROR], new Gotransformer());
         $automate->registerPlugin(4, new GoTransformer());
-        //Just to see if no errors are returned and for future tests
     }
 }
