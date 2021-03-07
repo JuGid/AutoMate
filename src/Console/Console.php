@@ -62,11 +62,7 @@ class Console {
     }
 
     public static function separator($separator = '_', int $size = 60) {
-        $str = '';
-        for($i=0; $i<$size;$i++) {
-            $str.=$separator;
-        }
-        self::writeln($str);
+        self::writeln(str_repeat($separator, $size));
     }
 
     public static function writeln(string $str, string $foreground = null, string $background = null) {
