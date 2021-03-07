@@ -33,7 +33,7 @@ class SelectTransformer extends AbstractTransformer {
         $select = new WebDriverSelect($element);
         $selectArray = $this->step['select'];
         if($selectArray['by'] == 'index' && is_numeric($selectArray['value'])) {
-            $select->selectByIndex($selectArray['value']);
+            $select->selectByIndex(intval($selectArray['value']));
         } elseif(is_string($selectArray['value'])) {
             switch($selectArray['by']) {
                 case 'value':

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `Submit` command to fill then submit an element
 - AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
+- `Keyboard` command to simulate keyboard
 
 ### Changed 
 

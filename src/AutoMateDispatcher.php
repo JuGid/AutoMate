@@ -3,8 +3,8 @@
 namespace Automate;
 
 use Automate\Exception\EventException;
-use Automate\Handler\ErrorHandler;
 use Automate\Mapper\ClassMapper;
+use Automate\Transformer\AbstractTransformer;
 use ReflectionClass;
 
 final class AutoMateDispatcher {
@@ -65,9 +65,15 @@ final class AutoMateDispatcher {
         foreach($map as $transformerClass) {
             $instance = (new ReflectionClass($transformerClass))->newInstance();
 
-            if($instance instanceof AutoMateListener) {
-                $this->attach($event, $instance);
+            if(! ($instance instanceof AutoMateListener)) {
+                throw new EventException('Listener should implements AutoMateListener interface');
             }
+
+            if($instance instanceof AbstractTransformer) {
+                $instance->setDispatcher($this);
+            }
+
+            $this->attach($event, $instance);
         }
     } 
 }

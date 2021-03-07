@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\AutoMateDispatcher;
 use Automate\AutoMateEvents;
 use Automate\AutoMateListener;
 use Automate\Console\Console;
@@ -17,12 +18,17 @@ abstract class AbstractTransformer implements AutoMateListener {
     /**
      * @var RemoteWebDriver
      */
-    protected $driver;
+    protected $driver = null;
 
     /**
      * @var array
      */
     protected $step;
+
+    /**
+     * @var AutoMateDispatcher
+     */
+    protected $dispatcher = null;
 
     /**
      * @codeCoverageIgnore
@@ -126,6 +132,20 @@ abstract class AbstractTransformer implements AutoMateListener {
 
     public function getStep() : array {
         return $this->step;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function setDispatcher(AutoMateDispatcher $dispatcher) {
+        $this->dispatcher = $dispatcher;
+    } 
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDispatcher() : AutoMateDispatcher {
+        return $this->dispatcher;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\AutoMateEvents;
 use Automate\Exception\NotImplementedException;
 
 class ConditionTransformer extends AbstractTransformer {
@@ -11,17 +12,11 @@ class ConditionTransformer extends AbstractTransformer {
      */
     protected function getPattern() : array
     {
-        return ['condition'=>
-                    [
+        return ['condition'=> [
                         'eval'=>':string',
-                        'ifTrue'=>[
-                            'steps'=>':array'
-                        ],
-                        'ifFalse'=>[
-                            'steps'=>':array'
-                        ]
-                    ]
-                ];
+                        'ifTrue'=>['steps'=>':array'],
+                        'ifFalse'=>['steps'=>':array']
+                    ]];
     }
 
     /**
@@ -33,18 +28,17 @@ class ConditionTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {
-        /*
         $result = eval(sprintf('return %s;',$this->step['condition']['eval']));
         $this->step['condition']['result'] = $result ? 'true':'false';
 
         $steps = $result ? $this->step['condition']['ifTrue']['steps'] : $this->step['condition']['ifFalse']['steps'];
-        $sttr = new StepTransformer($this->driver);
         
         foreach($steps as $step) {
-            $sttr->transform($step);
+            $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
+                'driver'=> $this->driver, 
+                'step'=>$step
+            ]);
         }
-        */
-        throw new NotImplementedException('Condition is not implemented');
     }
 
     /**

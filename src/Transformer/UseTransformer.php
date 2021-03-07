@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\AutoMateEvents;
 use Automate\Exception\NotImplementedException;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
@@ -25,7 +26,7 @@ class UseTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {
-        /*
+        
         $askedScenario = explode('.', $this->step['use']);
 
         if($askedScenario[0] == 'main') {
@@ -41,13 +42,14 @@ class UseTransformer extends AbstractTransformer {
         $this->step['use']['scenario_file'] = sprintf('%s/%s.yaml', $name, $sub);
 
         $scenario = new Scenario($name, $sub, false);
-        $sttr = new StepTransformer($this->driver);
         
         foreach($scenario as $step){
-            $sttr->transform($step);
+            $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
+                'driver'=> $this->driver, 
+                'step'=>$step
+            ]);
         }
-        */
-        throw new NotImplementedException('Use is not implemented');
+        
     }
 
     /**

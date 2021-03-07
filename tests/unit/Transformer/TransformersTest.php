@@ -125,58 +125,42 @@ class TransformersTest extends TestCase {
     }
 
     public function testDeselectTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-        $byPossibilities = ["value","index","text","pltext"];
         $transformer = new DeselectTransformer();
 
-        foreach($findingPossibilities as $fpossibility) {
-            foreach($byPossibilities as $bpossibilitiy) {
-                $transformer->setStep([
-                    'deselect'=> [
-                        $fpossibility => 'selector',
-                        'by'=> $bpossibilitiy,
-                        'value' => 'selectPoint'
-                    ]
-                ]);
-                $this->assertTrue($transformer->validate());
-            }
-        }
+        $transformer->setStep([
+            'deselect'=> [
+                'id' => 'selector',
+                'by'=> 'index',
+                'value' => '0'
+            ]
+        ]);
 
-        $this->assertSame('Deselect in select pltext[selector] by pltext with value selectPoint', (string) $transformer);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Deselect in select id[selector] by index with value 0', (string) $transformer);
     }
 
     public function testSelectTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-        $byPossibilities = ["value","index","text","pltext"];
         $transformer = new SelectTransformer();
 
-        foreach($findingPossibilities as $fpossibility) {
-            foreach($byPossibilities as $bpossibilitiy) {
-                $transformer->setStep([
-                    'select'=> [
-                        $fpossibility => 'selector',
-                        'by'=> $bpossibilitiy,
-                        'value' => 'selectPoint'
-                    ]
-                ]);
-                $this->assertTrue($transformer->validate());
-            }
-        }
+        $transformer->setStep([
+            'select'=> [
+                'id' => 'selector',
+                'by'=> 'text',
+                'value' => 'selectPoint'
+            ]
+        ]);
 
-        $this->assertSame('Select in select pltext[selector] by pltext with value selectPoint', (string) $transformer);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Select in select id[selector] by text with value selectPoint', (string) $transformer);
     }
 
     public function testFillTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new FillTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['fill'=>[$possibility =>'selector', 'with'=>'phpunit']]);
-            $this->assertTrue($transformer->validate());
-        }
+        $transformer->setStep(['fill'=>['id' =>'selector', 'with'=>'phpunit']]);
         
-        $this->assertSame('Fill element pltext[selector] with value phpunit', (string) $transformer);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Fill element id[selector] with value phpunit', (string) $transformer);
     }
 
     public function testImpltmTransformerAndGetProperties() {
@@ -185,8 +169,8 @@ class TransformersTest extends TestCase {
         $transformer = new ImpltmTransformer();
 
         $transformer->setStep(['impltm'=>'60']);
+       
         $this->assertTrue($transformer->validate());
-
         $this->assertSame('Set implicit timeout 60 s', (string) $transformer);
 
         $transformer->setStep(['impltm'=>'foo']);
@@ -194,76 +178,56 @@ class TransformersTest extends TestCase {
     }
 
     public function testIsClickableTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new IsClickableTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['isClickable'=>[$possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-        
-        $this->assertSame('Checking if pltext[selector] is clickable', (string) $transformer);
+        $transformer->setStep(['isClickable'=>['css' =>'selector']]);
+
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if css[selector] is clickable', (string) $transformer);
     }
 
     public function testIsNotSelectedTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new IsNotSelectedTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['isNotSelected'=>[$possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
+        $transformer->setStep(['isNotSelected'=>['css' =>'selector']]);
         
-        $this->assertSame('Checking if element located by pltext[selector] is not selected', (string) $transformer);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if element located by css[selector] is not selected', (string) $transformer);
     }
 
     public function testIsSelectedTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new IsSelectedTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['isSelected'=>[$possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
+        $transformer->setStep(['isSelected'=>['xpath' =>'selector']]);
         
-        $this->assertSame('Checking if element located by pltext[selector] is selected', (string) $transformer);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if element located by xpath[selector] is selected', (string) $transformer);
     }
 
     public function testNumberOfWindowsTransformerAndGetProperties() {
         $transformer = new NumberOfWindowsTransformer();
 
         $transformer->setStep(['numberOfWindows'=>'2']);
+        
         $this->assertTrue($transformer->validate());
-
         $this->assertSame('Wait until number of windows is 2', (string) $transformer);
     }
 
     public function testPresenceOfAllTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new PresenceOfAllTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['presenceOfAll'=>[$possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-        
-        $this->assertSame('Checking presence of all elements located by pltext[selector]', (string) $transformer);
+        $transformer->setStep(['presenceOfAll'=>['tag' =>'selector']]);
+
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking presence of all elements located by tag[selector]', (string) $transformer);
     }
 
     public function testPresenceOfTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new PresenceOfTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['presenceOf'=>[$possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-        
+        $transformer->setStep(['presenceOf'=>['pltext' =>'selector']]);
+
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Checking presence of element located by pltext[selector]', (string) $transformer);
     }
 
@@ -271,56 +235,44 @@ class TransformersTest extends TestCase {
         $transformer = new ReloadTransformer();
 
         $transformer->setStep(['reload'=>'page']);
+        
         $this->assertTrue($transformer->validate());
-
         $this->assertSame('Reload the page', (string) $transformer);
     }
 
     public function testTextContainsTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new TextContainsTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['textContains'=>['value'=>'val', $possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-
-        $this->assertSame('Checking if text of element pltext[selector] contains val', (string) $transformer);
+        $transformer->setStep(['textContains'=>['value'=>'val', "class" =>'selector']]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if text of element class[selector] contains val', (string) $transformer);
     }
 
     public function testTextIsTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new TextIsTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['textIs'=>['value'=>'val', $possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-
-        $this->assertSame('Checking if text of element pltext[selector] is val', (string) $transformer);
+        $transformer->setStep(['textIs'=>['value'=>'val', 'linktext' =>'selector']]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if text of element linktext[selector] is val', (string) $transformer);
     }
 
     public function testTextMatchesTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new TextMatchesTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['textMatches'=>['regexp'=>'val', $possibility =>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-
-        $this->assertSame('Checking if text of element pltext[selector] matches val', (string) $transformer);
+        $transformer->setStep(['textMatches'=>['regexp'=>'val', 'name' =>'selector']]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking if text of element name[selector] matches val', (string) $transformer);
     }
 
     public function testTitleContainsTransformerAndGetProperties() {
         $transformer = new TitleContainsTransformer();
 
         $transformer->setStep(['titleContains'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until title contains page', (string) $transformer);
     }
 
@@ -328,8 +280,8 @@ class TransformersTest extends TestCase {
         $transformer = new TitleIsTransformer();
 
         $transformer->setStep(['titleIs'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until title is page', (string) $transformer);
     }
 
@@ -337,8 +289,8 @@ class TransformersTest extends TestCase {
         $transformer = new TitleMatchesTransformer();
 
         $transformer->setStep(['titleMatches'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until title matches regexp page', (string) $transformer);
     }
 
@@ -346,8 +298,8 @@ class TransformersTest extends TestCase {
         $transformer = new UrlContainsTransformer();
 
         $transformer->setStep(['urlContains'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until url contains page', (string) $transformer);
     }
 
@@ -355,8 +307,8 @@ class TransformersTest extends TestCase {
         $transformer = new UrlIsTransformer();
 
         $transformer->setStep(['urlIs'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until url is page', (string) $transformer);
     }
 
@@ -364,180 +316,148 @@ class TransformersTest extends TestCase {
         $transformer = new UrlMatchesTransformer();
 
         $transformer->setStep(['urlMatches'=>'page']);
-        $this->assertTrue($transformer->validate());
 
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Wait until url matches regexp page', (string) $transformer);
     }
 
     public function testVilibilityOfAnyTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new VisibilityOfAnyTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['visibilityOfAny'=>[$possibility=>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-
+        $transformer->setStep(['visibilityOfAny'=>['pltext'=>'selector']]);
+        
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Checking visibility of any elements located by pltext[selector]', (string) $transformer);
     }
 
     public function testVilibilityOfTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new VisibilityOfTransformer();
-
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['visibilityOf'=>[$possibility=>'selector']]);
-            $this->assertTrue($transformer->validate());
-        }
-
-        $this->assertSame('Checking visibility of element located by pltext[selector]', (string) $transformer);
+        $transformer->setStep(['visibilityOf'=>['id'=>'selector']]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Checking visibility of element located by id[selector]', (string) $transformer);
     }
 
     public function testGetTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
+        $transformer = new GetTransformer();
 
-        $transformerAttribute = new GetTransformer();
-        $transformerNoAttribute = new GetTransformer();
-        foreach($findingPossibilities as $possibility) {
-            $validPattern = [
-                'get'=> [
-                    $possibility => 'selector',
-                    'what'=>'attribute',
-                    'attribute'=>'attribut',
-                    'varname'=>'var'
-                ]
-            ];
+        $validPattern = [
+            'get'=> [
+                'id' => 'selector',
+                'what'=>'attribute',
+                'attribute'=>'attr',
+                'varname'=>'var'
+            ]
+        ];
 
-            $secondValidPattern = [
-                'get'=> [
-                    $possibility => 'selector',
-                    'what'=>'text',
-                    'varname'=>'var'
-                ]
-            ];
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Get attribute for element id[selector] with value attr', (string) $transformer);
 
-            $transformerAttribute->setStep($validPattern);
-            $this->assertTrue($transformerAttribute->validate());
+        $validPattern = [
+            'get'=> [
+                'class' => 'selector',
+                'what'=>'text',
+                'varname'=>'var'
+            ]
+        ];
 
-            $transformerNoAttribute->setStep($secondValidPattern);
-            $this->assertTrue($transformerNoAttribute->validate());
-        }
-        
-        $this->assertSame('Get attribute for element pltext[selector] with value attribut', (string) $transformerAttribute);
-        $this->assertSame('Get text for element pltext[selector] ', (string) $transformerNoAttribute);
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Get text for element class[selector] ', (string) $transformer);
         
     }
 
     public function testFrameTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new FrameTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $validPattern = [
-                'frame'=> [
-                    $possibility => 'selector'
-                ]
-            ];
+        $validPattern = [
+            'frame'=> [
+                'pltext' => 'selector'
+            ]
+        ];
 
-            $secondValidPattern = [
-                'frame'=> [
-                    $possibility => 'selector',
-                    'index'=>'0'
-                ]
-            ];
-
-            $thirdvalidPattern = [
-                'frame'=> [
-                    $possibility => 'selector',
-                    'index'=>'1',
-                    'default' => 'content'
-                ]
-            ];
-
-            $transformer->setStep($validPattern);
-            $this->assertTrue($transformer->validate());
-
-            $transformer->setStep($secondValidPattern);
-            $this->assertTrue($transformer->validate());
-
-            $transformer->setStep($thirdvalidPattern);
-            $this->assertTrue($transformer->validate());
-        }
-
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Frame to string', (string) $transformer);
+
+        $validPattern = [
+            'frame'=> [
+                'tag' => 'selector',
+                'index'=>'0'
+            ]
+        ];
+
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Frame to string', (string) $transformer);
+
+        $validPattern = [
+            'frame'=> [
+                'id' => 'selector',
+                'index'=>'1',
+                'default' => 'content'
+            ]
+        ];
+
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Frame to string', (string) $transformer);
+        
     }
 
     public function testResizeTransformerAndGetProperties() {
-        $screenPossibilities = ["maximize","fullscreen","size"];
+        $transformer = new ResizeTransformer();
 
-        $transformerNoSize = new ResizeTransformer();
-        $transformerSize = new ResizeTransformer();
+        $validPattern = [
+            'resize'=> [
+                'type' => 'maximize'
+            ]
+        ];
 
-        foreach($screenPossibilities as $possibility) {
-            $validPattern = [
-                'resize'=> [
-                    'type' => $possibility
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Resize the page [maximize] ',(string) $transformer );
+
+        $validPattern = [
+            'resize'=> [
+                'type'=>'size',
+                'size'=>[
+                    'width'=>'500',
+                    'height'=>'600'
                 ]
-            ];
+            ]
+        ];
 
-            $secondValidPattern = [
-                'resize'=> [
-                    'type'=>$possibility,
-                    'size'=>[
-                        'width'=>'500',
-                        'height'=>'600'
-                    ]
-                ]
-            ];
-
-            $transformerNoSize->setStep($validPattern);
-            $this->assertTrue($transformerNoSize->validate());
-
-            $transformerSize->setStep($secondValidPattern);
-            $this->assertTrue($transformerSize->validate());
-        }
-
-        // This assert is false in the process but works here and need to be
-        // verified
-        $this->assertSame('Resize the page [size] ',(string) $transformerNoSize );
-
-        $this->assertSame('Resize the page [size] with 500px per 600px',(string) $transformerSize);
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Resize the page [size] with 500px per 600px',(string) $transformer);        
     }
 
     public function testScreenshotTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-        $screenshotTypes = ["all","element"];
-
         $transformer = new ScreenshotTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            foreach($screenshotTypes as $type) {
-                $validPattern = [
-                    'screenshot'=> [
-                        'type' => $type,
-                        'sname'=>'myScreenshot'
-                    ]
-                ];
-                
-                $secondValidPattern = [
-                    'screenshot'=> [
-                        'type' => $type,
-                        'sname'=>'myScreenshot',
-                        $possibility => 'selector'
-                    ]
-                ];
+        $validPattern = [
+            'screenshot'=> [
+                'type' => 'all',
+                'sname'=>'myScreenshot'
+            ]
+        ];
+        
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Cheeeeeese [myScreenshot]', (string) $transformer);
 
-                $transformer->setStep($validPattern);
-                $this->assertTrue($transformer->validate());
+        $validPattern = [
+            'screenshot'=> [
+                'type' => 'element',
+                'sname'=>'myScreenshot',
+                'id' => 'selector'
+            ]
+        ];
 
-                $transformer->setStep($secondValidPattern);
-                $this->assertTrue($transformer->validate());
-            }
-        }
-
+        $transformer->setStep($validPattern);
+        $this->assertTrue($transformer->validate());        
         $this->assertSame('Cheeeeeese [myScreenshot]', (string) $transformer);
     }
 
@@ -608,17 +528,21 @@ class TransformersTest extends TestCase {
         $transformer = new ScriptTransformer();
         
         $transformer->setStep(['script'=>'return jQuery.active === 0']);
-        $this->assertTrue($transformer->validate());
+
         if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
+
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Executing script return jQuery.active === 0;', (string) $transformer);
 
         $transformer->setStep(['script'=>'return jQuery.active === 0;']);
-        $this->assertTrue($transformer->validate());
+
         if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
+
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Executing script return jQuery.active === 0;', (string) $transformer);
     }
 
@@ -626,32 +550,43 @@ class TransformersTest extends TestCase {
         $transformer = new WajaxTransformer();
         
         $transformer->setStep(['wajax'=>'return jQuery.active === 0']);
-        $this->assertTrue($transformer->validate());
-
+        
         if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
+        
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
 
         $transformer->setStep(['wajax'=>'return jQuery.active === 0;']);
-        $this->assertTrue($transformer->validate());
+
         if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
+
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
     }
 
     public function testSubmitTransformerAndGetProperties() {
-        $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
-
         $transformer = new SubmitTransformer();
 
-        foreach($findingPossibilities as $possibility) {
-            $transformer->setStep(['submit'=>[$possibility=>'selector', 'text'=>'jugid']]);
-            $this->assertTrue($transformer->validate());
-        }
-
+        $transformer->setStep(['submit'=>['pltext'=>'selector', 'text'=>'jugid']]);
+        
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Submit jugid for element pltext[selector]', (string) $transformer);
     }
     
+    public function testKeyboardTransformerAndGetProperties() {
+        $transformer = new KeyboardTransformer();
+        $transformer->setStep(['keyboard' => 
+            [
+                'event'=>'pressKey',
+                'keys'=> ['key1'=> 't', 'key2'=>'e']
+            ]
+        ]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Keyboard use on pressKey', (string) $transformer);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\AutoMateEvents;
 use Automate\Console\Console;
 use Automate\Exception\NotImplementedException;
 
@@ -26,20 +27,20 @@ class LoopTransformer extends AbstractTransformer {
      */
     protected function transform() : void
     {
-        /*
         $runFor = intval($this->step['loop']['repeat']);
-        $sttr = new StepTransformer($this->driver);
 
         Console::writeln(sprintf("> Loop begins for %d times", $runFor));
 
         for($i = 0; $i<$runFor; $i++) {
             foreach($this->step['loop']['steps'] as $step) {
-                $sttr->transform($step);
+
+                $this->getDispatcher()->notify(AutoMateEvents::STEP_TRANSFORM, [
+                    'driver'=> $this->driver, 
+                    'step'=>$step
+                ]);
             }
             Console::separator('.', 3);
         }
-        */
-        throw new NotImplementedException('Loop is not implemented');
     }
 
     /**
