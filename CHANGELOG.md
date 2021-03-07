@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 
 - `Use` command does not detect loop anymore as a condition can make the scenario change
+- You can register plugins on multiple events `AutoMate::registerPlugin(array|string $event, AutoMateListener $listener)
 
 ### Fixed 
 
