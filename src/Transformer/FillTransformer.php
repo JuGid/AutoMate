@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class FillTransformer extends AbstractTransformer {
+class FillTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -13,7 +14,7 @@ class FillTransformer extends AbstractTransformer {
     {
         return [
             'fill' => [
-                ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string', 
+                ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
                 'with' => ':string'
                 ]
             ];
@@ -21,7 +22,7 @@ class FillTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -35,11 +36,11 @@ class FillTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Fill element %s[%s] with value %s',
-                            array_keys($this->step['fill'])[0],
-                            array_values($this->step['fill'])[0],
-                            $this->step['fill']['with']
-                        );
+        return sprintf(
+            'Fill element %s[%s] with value %s',
+            array_keys($this->step['fill'])[0],
+            array_values($this->step['fill'])[0],
+            $this->step['fill']['with']
+        );
     }
-
 }

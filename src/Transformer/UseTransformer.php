@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
@@ -9,7 +9,8 @@ use Automate\Registry\VariableRegistry;
 use Automate\Scenario\Scenario;
 use InvalidArgumentException;
 
-class UseTransformer extends AbstractTransformer {
+class UseTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -21,18 +22,17 @@ class UseTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
     {
-        
         $askedScenario = explode('.', $this->step['use']);
 
-        if($askedScenario[0] == 'main') {
+        if ($askedScenario[0] == 'main') {
             $name = $askedScenario[1];
             $sub = 'main';
-        } elseif($askedScenario[0] == 'sub') {
+        } elseif ($askedScenario[0] == 'sub') {
             $name = VariableRegistry::get(Scope::WORLD, 'scenario');
             $sub = $askedScenario[1];
         } else {
@@ -43,18 +43,17 @@ class UseTransformer extends AbstractTransformer {
 
         $scenario = new Scenario($name, $sub, false);
         
-        foreach($scenario as $step){
+        foreach ($scenario as $step) {
             $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
-                'driver'=> $this->driver, 
+                'driver'=> $this->driver,
                 'step'=>$step
             ]);
         }
-        
     }
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     public function __toString()

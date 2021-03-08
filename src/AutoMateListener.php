@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate;
 
-interface AutoMateListener {
+interface AutoMateListener
+{
     const STATE_RECEIVED = 0;
     const STATE_REJECTED = 1;
     

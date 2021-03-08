@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
@@ -6,7 +6,8 @@ use Automate\AutoMateEvents;
 use Automate\Console\Console;
 use Automate\Exception\NotImplementedException;
 
-class LoopTransformer extends AbstractTransformer {
+class LoopTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -22,7 +23,7 @@ class LoopTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -31,11 +32,10 @@ class LoopTransformer extends AbstractTransformer {
 
         Console::writeln(sprintf("> Loop begins for %d times", $runFor));
 
-        for($i = 0; $i<$runFor; $i++) {
-            foreach($this->step['loop']['steps'] as $step) {
-
+        for ($i = 0; $i<$runFor; $i++) {
+            foreach ($this->step['loop']['steps'] as $step) {
                 $this->getDispatcher()->notify(AutoMateEvents::STEP_TRANSFORM, [
-                    'driver'=> $this->driver, 
+                    'driver'=> $this->driver,
                     'step'=>$step
                 ]);
             }

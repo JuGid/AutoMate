@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
-class KeyboardTransformer extends AbstractTransformer {
+class KeyboardTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,7 +18,7 @@ class KeyboardTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -26,7 +27,7 @@ class KeyboardTransformer extends AbstractTransformer {
         
         $event = $this->step['keyboard']['event'];
 
-        foreach($this->step['keyboard']['keys'] as $k=>$keyToSend) {
+        foreach ($this->step['keyboard']['keys'] as $k=>$keyToSend) {
             $keyboard->{$event}($keyToSend);
             //$keyboard->$event($keyToSend); this is not a pretty thing to do
         }

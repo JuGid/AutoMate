@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
-class GoTransformer extends AbstractTransformer {
+class GoTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -14,7 +15,7 @@ class GoTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void

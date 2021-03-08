@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Driver\Proxy;
 
-final class HttpProxy {
+final class HttpProxy
+{
 
     /**
      * proxy type
@@ -22,24 +23,29 @@ final class HttpProxy {
      */
     private $port = null;
 
-    public function __construct(string $adresse = null, int $port) {
+    public function __construct(string $adresse = null, int $port)
+    {
         $this->adresse = $adresse;
         $this->port = $port;
     }
     
-    public function getAdresse() : string {
+    public function getAdresse() : string
+    {
         return $this->adresse;
     }
 
-    public function getPort() : int {
+    public function getPort() : int
+    {
         return $this->port;
     }
 
-    public function getType() : string {
+    public function getType() : string
+    {
         return $this->type;
     }
 
-    public function getAsCapability() : array {
+    public function getAsCapability() : array
+    {
         return ['proxyType' => $this->type, 'httpProxy'=>sprintf('%s:%s', $this->adresse, $this->port)];
     }
 }

@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class TimeoutException extends CustomException {}
+class TimeoutException extends CustomException
+{
+}

@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class ConfigurationException extends CustomException {}
+class ConfigurationException extends CustomException
+{
+}

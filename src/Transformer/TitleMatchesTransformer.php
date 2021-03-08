@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class TitleMatchesTransformer extends AbstractTransformer {
+class TitleMatchesTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,13 +18,13 @@ class TitleMatchesTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $errorMessage = 'Title does not match '.$this->step['titleMatches'];
-        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+        $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::titleMatches($this->step['titleMatches']), $errorMessage);
     }
 
@@ -34,5 +35,4 @@ class TitleMatchesTransformer extends AbstractTransformer {
     {
         return sprintf('Wait until title matches regexp %s', $this->step['titleMatches']);
     }
-
 }

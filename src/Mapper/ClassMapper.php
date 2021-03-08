@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Mapper;
 
@@ -7,49 +7,56 @@ use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
 use RegexIterator;
 
-final class ClassMapper {
-
-    public function getClassMap(string $path, string $except = '', string $first = '', string $last = '') : array{
+final class ClassMapper
+{
+    public function getClassMap(string $path, string $except = '', string $first = '', string $last = '') : array
+    {
         $map = [];
         $directory = new RecursiveDirectoryIterator($path);
         $iterator = new RecursiveIteratorIterator($directory);
         $regex = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
 
-        foreach($regex as $file) {
-
-            if(!empty($except)) {
-                if(strpos($file[0], $except) !== false ) continue;
+        foreach ($regex as $file) {
+            if (!empty($except)) {
+                if (strpos($file[0], $except) !== false) {
+                    continue;
+                }
             }
 
-            if(!empty($first)) {
-                if(!$this->matchFirst($file[0], $first)) continue;
+            if (!empty($first)) {
+                if (!$this->matchFirst($file[0], $first)) {
+                    continue;
+                }
             }
 
-            if(!empty($last)) {
-                if(!$this->matchLast($file[0], $last)) continue;
+            if (!empty($last)) {
+                if (!$this->matchLast($file[0], $last)) {
+                    continue;
+                }
             }
 
             $className = $this->getClassNameFromFile($file[0]);
             $namespace = $this->getClassNamespaceFromFile($file[0]);
 
-            if($className == null || $namespace == null) {
+            if ($className == null || $namespace == null) {
                 continue;
             }
 
             $fullClassName = $namespace.'\\'.$className;
             
             $map[] = $fullClassName;
-            
         }
 
         return $map;
     }
 
-    private function matchFirst(string $name, string $first) : bool {
+    private function matchFirst(string $name, string $first) : bool
+    {
         return substr(pathinfo($name, PATHINFO_FILENAME), strlen($first)) == $first;
     }
 
-    private function matchLast(string $name, string $last) : bool {
+    private function matchLast(string $name, string $last) : bool
+    {
         return substr(pathinfo($name, PATHINFO_FILENAME), -strlen($last)) == $last;
     }
 
@@ -107,7 +114,6 @@ final class ClassMapper {
                 && $tokens[$i - 1][0] == T_WHITESPACE
                 && $tokens[$i][0] == T_STRING
             ) {
-
                 $class_name = $tokens[$i][1];
                 $classes[] = $class_name;
             }
@@ -118,7 +124,7 @@ final class ClassMapper {
 
     /*
     This function is not used anymore.
-    
+
     public function getMap(string $path, string $except = '', string $first = '', string $last = '') : array {
         $map = [];
         $directory = new RecursiveDirectoryIterator($path);
@@ -137,7 +143,7 @@ final class ClassMapper {
             if(!empty($last)) {
                 if(!$this->matchLast($file[0], $last)) continue;
             }
-            
+
             $className = $this->getClassNameFromFile($file[0]);
             $namespace = $this->getClassNamespaceFromFile($file[0]);
 
@@ -146,13 +152,12 @@ final class ClassMapper {
             }
 
             $fullClassName = $namespace.'\\'.$className;
-            
+
             $map[$file] = $fullClassName;
-            
+
         }
 
         return $map;
     }
     */
-
 }

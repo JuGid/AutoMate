@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class MouseTransformer extends AbstractTransformer {
+class MouseTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -19,7 +20,7 @@ class MouseTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -37,7 +38,8 @@ class MouseTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('%s use on %s[%s]', 
+        return sprintf(
+            '%s use on %s[%s]',
             ucfirst($this->step['mouse']['event']),
             array_keys($this->step['mouse'])[0],
             array_values($this->step['mouse'])[0]

@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class AlertTransformer extends AbstractTransformer {
+class AlertTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,18 +18,18 @@ class AlertTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $array = $this->step['alert'];
-        if($array == 'accept') {
+        if ($array == 'accept') {
             $this->driver->switchTo()->alert()->accept();
-        } elseif($array == 'dismiss') {
+        } elseif ($array == 'dismiss') {
             $this->driver->switchTo()->alert()->dismiss();
-        } elseif($array == 'isPresent') {
-            $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+        } elseif ($array == 'isPresent') {
+            $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
                          ->until(WebDriverExpectedCondition::alertIsPresent(), 'Alert is not present');
         }
     }
@@ -40,5 +41,4 @@ class AlertTransformer extends AbstractTransformer {
     {
         return sprintf('On alert : %s', $this->step['alert']);
     }
-
 }

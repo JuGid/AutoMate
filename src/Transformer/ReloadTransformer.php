@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
-class ReloadTransformer extends AbstractTransformer {
+class ReloadTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -14,7 +15,7 @@ class ReloadTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -29,5 +30,4 @@ class ReloadTransformer extends AbstractTransformer {
     {
         return sprintf('Reload the page');
     }
-
 }

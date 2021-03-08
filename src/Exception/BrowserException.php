@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class BrowserException extends CustomException {}
+class BrowserException extends CustomException
+{
+}

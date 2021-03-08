@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
-class ScriptTransformer extends AbstractTransformer {
+class ScriptTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -14,12 +15,12 @@ class ScriptTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
     {
-        if(!substr(trim($this->step['script']), -1) == ';') {
+        if (!substr(trim($this->step['script']), -1) == ';') {
             $this->step['script'] = trim($this->step['script']).';';
         }
 

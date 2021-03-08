@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class UrlIsTransformer extends AbstractTransformer {
+class UrlIsTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,13 +18,13 @@ class UrlIsTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $errorMessage = 'Url is not '.$this->step['urlIs'];
-        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+        $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
                     ->until(WebDriverExpectedCondition::urlIs($this->step['urlIs']), $errorMessage);
     }
 
@@ -34,5 +35,4 @@ class UrlIsTransformer extends AbstractTransformer {
     {
         return sprintf('Wait until url is %s', $this->step['urlIs']);
     }
-
 }

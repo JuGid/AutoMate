@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Scenario;
 
@@ -19,7 +19,8 @@ use Automate\Specification\Specification;
 /**
  * @codeCoverageIgnore
  */
-final class Runner {
+final class Runner
+{
 
     /**
      * @var AutoMateDispatcher
@@ -28,7 +29,7 @@ final class Runner {
 
     /**
      * Specify if the runner is running with a specification
-     * 
+     *
      * @var bool
      */
     private $runningWithSpec = false;
@@ -59,8 +60,8 @@ final class Runner {
     private $errorHandler = null;
 
     public function __construct(
-        string $browser, 
-        bool $testMode = false, 
+        string $browser,
+        bool $testMode = false,
         DriverConfiguration $driverConfiguration = null,
         AutoMateDispatcher $dispatcher = null
     ) {
@@ -73,20 +74,21 @@ final class Runner {
     /**
      * To run a scenario with a specification
      */
-    public function runSpecification(Scenario $scenario, Specification $specification) : void {
+    public function runSpecification(Scenario $scenario, Specification $specification) : void
+    {
         $this->runningWithSpec = true;
         $this->errorHandler->shouldStoreDataset();
 
-        if(Configuration::get('logs.enable') === true) {
+        if (Configuration::get('logs.enable') === true) {
             try {
                 $this->logger = new DefaultLogger($specification->getColumnsHeader(), $scenario->getName());
-            } catch(LogException $e) {
+            } catch (LogException $e) {
                 Console::writeEx($e);
                 $this->driver->quit();
-            } 
+            }
         }
         
-        foreach($specification as $line) {
+        foreach ($specification as $line) {
             Console::writeBeginingLine($specification->key() + 1, $specification->getRowNumber() - 1, $line);
             
             $this->currentDataset = $line;
@@ -95,7 +97,9 @@ final class Runner {
 
         $this->logger->end();
         
-        if(!$this->testMode) $specification->setProcessed();
+        if (!$this->testMode) {
+            $specification->setProcessed();
+        }
             
         Console::endSpecification(
             $this->errorHandler,
@@ -111,11 +115,14 @@ final class Runner {
      * To run a simple scenario without specification and without logs if it's
      * called like $runner->runSimpleScenario(...)
      */
-    public function runSimpleScenario(Scenario $scenario) : void {
-        if(!$this->runWithSpecification()) Console::writeBegining();
+    public function runSimpleScenario(Scenario $scenario) : void
+    {
+        if (!$this->runWithSpecification()) {
+            Console::writeBegining();
+        }
 
         try {
-            foreach($scenario as $step){
+            foreach ($scenario as $step) {
                 $data = ['driver'=> $this->driver, 'step'=>$step];
                 $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
             }
@@ -124,39 +131,40 @@ final class Runner {
 
             $this->dispatcher->notify(AutoMateEvents::RUNNER_WIN, []);
 
-            if($this->runWithSpecification()) {
+            if ($this->runWithSpecification()) {
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
             }
-
-        } catch(\Exception $e) {
-            
+        } catch (\Exception $e) {
             $this->errorHandler->error($e->getMessage(), $this->getCurrentDataset());
 
             $this->dispatcher->notify(AutoMateEvents::RUNNER_ERROR, ['exception'=>$e]);
 
-            if($this->runWithSpecification()) {
+            if ($this->runWithSpecification()) {
                 $this->logger->addMessage($e->getMessage());
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_ERRORS);
             }
             Console::writeEx($e);
         }
 
-        if(!$this->runWithSpecification()) {
+        if (!$this->runWithSpecification()) {
             Console::endSimple($this->errorHandler, $this->testMode);
 
             $this->driver->quit();
         }
     }
 
-    public function runWithSpecification() : bool {
+    public function runWithSpecification() : bool
+    {
         return $this->runningWithSpec;
     }
 
-    public function getCurrentDataset() : array {
+    public function getCurrentDataset() : array
+    {
         return $this->currentDataset;
     }
 
-    public function getErrorHandler() : Errorhandler {
+    public function getErrorHandler() : Errorhandler
+    {
         return $this->errorHandler;
     }
 }

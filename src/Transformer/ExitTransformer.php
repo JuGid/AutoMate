@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Exception\ScenarioExitException;
 
-class ExitTransformer extends AbstractTransformer {
+class ExitTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -16,7 +17,7 @@ class ExitTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -24,5 +25,4 @@ class ExitTransformer extends AbstractTransformer {
         $this->driver->quit();
         throw new ScenarioExitException($this->step['exit']);
     }
-
 }

@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class FrameTransformer extends AbstractTransformer {
+class FrameTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -20,15 +21,15 @@ class FrameTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $keys = array_keys($this->step['frame']);
         $values = array_values($this->step['frame']);
 
-        if($keys[0] == 'index') {
+        if ($keys[0] == 'index') {
             $this->driver->switchTo()->frame($this->step['frame']['index']);
         } else {
             $element = $this->driver->findElement(WebLocator::get($keys[0], $values[0]));
@@ -43,7 +44,4 @@ class FrameTransformer extends AbstractTransformer {
     {
         return sprintf('Frame to string');
     }
-
-
-
 }

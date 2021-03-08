@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class SubmitTransformer extends AbstractTransformer {
+class SubmitTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -19,12 +20,11 @@ class SubmitTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
     {
-
         $webLocator = WebLocator::get(array_keys($this->step['submit'])[0], array_values($this->step['submit'])[0]);
         $this->driver->findElement($webLocator)
                      ->sendKeys($this->step['submit']['text'])
@@ -36,10 +36,11 @@ class SubmitTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Submit %s for element %s[%s]', 
-                            $this->step['submit']['text'], 
-                            array_keys($this->step['submit'])[0],
-                            array_values($this->step['submit'])[0]
-                        );
+        return sprintf(
+            'Submit %s for element %s[%s]',
+            $this->step['submit']['text'],
+            array_keys($this->step['submit'])[0],
+            array_values($this->step['submit'])[0]
+        );
     }
 }

@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class EventException extends CustomException {}
+class EventException extends CustomException
+{
+}

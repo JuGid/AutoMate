@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Exception;
 
@@ -14,7 +14,7 @@ abstract class CustomException extends Exception implements IException
     /**
      * @var string
      */
-    private   $string;                            // Unknown
+    private $string;                            // Unknown
 
     /**
      * @var int
@@ -34,7 +34,7 @@ abstract class CustomException extends Exception implements IException
     /**
      * @var array
      */
-    private   $trace;                             // Unknown
+    private $trace;                             // Unknown
 
     public function __construct(string $message = null, int $code = 0)
     {

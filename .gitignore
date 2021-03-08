@@ -3,3 +3,5 @@
 .DS_STORE
 /example/config/config-test.yaml
 .phpunit.result.cache
+.php_cs.cache
+/tools/php-cs-fixer

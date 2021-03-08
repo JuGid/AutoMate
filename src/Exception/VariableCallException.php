@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class VariableCallException extends CustomException {}
+class VariableCallException extends CustomException
+{
+}

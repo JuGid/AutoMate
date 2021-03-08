@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Facebook\WebDriver\Cookie;
 
-class CookieTransformer extends AbstractTransformer {
+class CookieTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -21,11 +22,11 @@ class CookieTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
-    protected function transform() : void 
-    {   
+    protected function transform() : void
+    {
         $cookie = new Cookie($this->step['cookie']['name'], $this->step['cookie']['value']);
         $this->driver->manage()->addCookie($cookie);
     }
@@ -35,9 +36,10 @@ class CookieTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Create a cookie with %s:%s',
-                            $this->step['cookie']['name'],
-                            $this->step['cookie']['value']
-                        );
+        return sprintf(
+            'Create a cookie with %s:%s',
+            $this->step['cookie']['name'],
+            $this->step['cookie']['value']
+        );
     }
 }

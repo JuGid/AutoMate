@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Exception;
 
@@ -9,7 +9,7 @@ interface IException
 {
     /* Protected methods inherited from Exception class */
 
-    public function getMessage();                 // Exception message 
+    public function getMessage();                 // Exception message
     public function getCode();                    // User-defined Exception code
     public function getFile();                    // Source filename
     public function getLine();                    // Source line

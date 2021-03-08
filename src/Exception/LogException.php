@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class LogException extends CustomException {}
+class LogException extends CustomException
+{
+}

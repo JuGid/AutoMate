@@ -1,17 +1,18 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class ScreenshotTransformer extends AbstractTransformer {
+class ScreenshotTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
      */
     protected function getPattern() : array
     {
-        return ['screenshot' => 
+        return ['screenshot' =>
                     [
                         'type'=> ':string :in("all","element")',
                         'sname'=>':string',
@@ -22,13 +23,13 @@ class ScreenshotTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $array = $this->step['screenshot'];
-        if($array['type'] == 'all') {
+        if ($array['type'] == 'all') {
             $this->driver->takeScreenshot($array['sname']);
         } else {
             $element = $this->driver->findElement(WebLocator::get(array_keys($array)[2], array_values($array)[2]));
@@ -43,5 +44,4 @@ class ScreenshotTransformer extends AbstractTransformer {
     {
         return sprintf('Cheeeeeese [%s]', $this->step['screenshot']['sname']);
     }
-
 }

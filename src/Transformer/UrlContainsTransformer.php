@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class UrlContainsTransformer extends AbstractTransformer {
+class UrlContainsTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,13 +18,13 @@ class UrlContainsTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $errorMessage = 'Url does not contains '.$this->step['urlContains'];
-        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+        $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::urlContains($this->step['urlContains']), $errorMessage);
     }
 
@@ -34,5 +35,4 @@ class UrlContainsTransformer extends AbstractTransformer {
     {
         return sprintf('Wait until url contains %s', $this->step['urlContains']);
     }
-
 }

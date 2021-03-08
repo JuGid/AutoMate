@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
-class ImpltmTransformer extends AbstractTransformer {
+class ImpltmTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -14,7 +15,7 @@ class ImpltmTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -29,5 +30,4 @@ class ImpltmTransformer extends AbstractTransformer {
     {
         return sprintf('Set implicit timeout %s s', $this->step['impltm']);
     }
-
 }

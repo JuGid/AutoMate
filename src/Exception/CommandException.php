@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class CommandException extends CustomException {}
+class CommandException extends CustomException
+{
+}

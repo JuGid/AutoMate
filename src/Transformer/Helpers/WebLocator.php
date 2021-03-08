@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Transformer\Helpers;
 
@@ -8,12 +8,14 @@ use Facebook\WebDriver\WebDriverBy;
 /**
  * WebDriverBy overlay to define the good one from string
  */
-final class WebLocator {
+final class WebLocator
+{
 
     /**
      * @return \Facebook\WebDriver\WebDriverBy
      */
-    public static function get(string $type, string $element) : WebDriverBy {
+    public static function get(string $type, string $element) : WebDriverBy
+    {
 
         /*
         PHP 8.0 Style with match
@@ -27,9 +29,9 @@ final class WebLocator {
             "linktext" => WebDriverBy::linkText($element),
             "pltext" => WebDriverBy::partialLinkText($element),
             default => throw new CommandException('Find an element with '. $type . ' is not allowed')
-        }  
+        }
         */
-        switch($type) {
+        switch ($type) {
             case "css":
                 return WebDriverBy::cssSelector($element);
             case "xpath":
@@ -48,6 +50,6 @@ final class WebLocator {
                 return WebDriverBy::partialLinkText($element);
             default:
                 throw new CommandException('Find an element with '. $type . ' is not allowed');
-        }  
+        }
     }
 }

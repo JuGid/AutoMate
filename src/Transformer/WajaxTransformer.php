@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 
-class WajaxTransformer extends AbstractTransformer {
+class WajaxTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -16,19 +17,19 @@ class WajaxTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
     {
-        if(!substr(trim($this->step['wajax']), -1) == ';') {
+        if (!substr(trim($this->step['wajax']), -1) == ';') {
             $this->step['wajax'] = trim($this->step['wajax']).';';
         }
 
-        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
-                     ->until(function($driver) {
-                                return $driver->executeScript($this->step['wajax']);
-                            }, 'Your script returned false');
+        $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
+                     ->until(function ($driver) {
+                         return $driver->executeScript($this->step['wajax']);
+                     }, 'Your script returned false');
     }
 
     /**

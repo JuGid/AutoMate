@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 
-class ConfigurationTransformer extends AbstractTransformer {
+class ConfigurationTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -23,12 +24,12 @@ class ConfigurationTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
     {
-        if(isset($this->step['configuration']['wait'])) {
+        if (isset($this->step['configuration']['wait'])) {
             Configuration::$config_array['wait']['for'] = intval($this->step['configuration']['wait']['for']);
             Configuration::$config_array['wait']['every'] = intval($this->step['configuration']['wait']['every']);
         }

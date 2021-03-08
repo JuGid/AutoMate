@@ -5,11 +5,13 @@ namespace Automate\Console;
 /**
  * @codeCoverageIgnore
  */
-class Colors {
+class Colors
+{
     private $foreground_colors = array();
     private $background_colors = array();
 
-    public function __construct() {
+    public function __construct()
+    {
         // Set up shell colors
         $this->foreground_colors['black'] = '0;30';
         $this->foreground_colors['dark_gray'] = '1;30';
@@ -38,7 +40,8 @@ class Colors {
         $this->background_colors['light_gray'] = '47';
     }
 
-    public function getColoredString($string, $foreground_color = null, $background_color = null) {
+    public function getColoredString($string, $foreground_color = null, $background_color = null)
+    {
         $colored_string = "";
 
         if (isset($this->foreground_colors[$foreground_color])) {

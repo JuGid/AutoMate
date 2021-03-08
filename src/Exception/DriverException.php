@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class DriverException extends CustomException {}
+class DriverException extends CustomException
+{
+}

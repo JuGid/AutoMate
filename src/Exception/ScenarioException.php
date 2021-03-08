@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class ScenarioException extends CustomException {}
+class ScenarioException extends CustomException
+{
+}

@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
-class TitleIsTransformer extends AbstractTransformer {
+class TitleIsTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -17,13 +18,13 @@ class TitleIsTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
-    {   
+    {
         $errorMessage = 'Title is not '.$this->step['titleIs'];
-        $this->driver->wait(Configuration::get('wait.for'),Configuration::get('wait.every'))
+        $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
                      ->until(WebDriverExpectedCondition::titleIs($this->step['titleIs']), $errorMessage);
     }
 
@@ -34,5 +35,4 @@ class TitleIsTransformer extends AbstractTransformer {
     {
         return sprintf('Wait until title is %s', $this->step['titleIs']);
     }
-
 }

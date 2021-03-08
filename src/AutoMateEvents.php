@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Automate;
 
-class AutoMateEvents {
+class AutoMateEvents
+{
     const RUNNER_SIMPLE_BEGIN = 'core:runner:simple:begin';
     const RUNNER_SIMPLE_END = 'core:runner:simple:end';
 

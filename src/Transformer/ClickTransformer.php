@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
 use Automate\Transformer\Helpers\WebLocator;
 
-class ClickTransformer extends AbstractTransformer {
+class ClickTransformer extends AbstractTransformer
+{
 
     /**
      * {@inheritdoc}
@@ -20,7 +21,7 @@ class ClickTransformer extends AbstractTransformer {
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     protected function transform() : void
@@ -34,10 +35,10 @@ class ClickTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Click on element %s[%s]',
-                            array_keys($this->step['click'])[0],
-                            array_values($this->step['click'])[0]
-                        );
+        return sprintf(
+            'Click on element %s[%s]',
+            array_keys($this->step['click'])[0],
+            array_values($this->step['click'])[0]
+        );
     }
-
 }

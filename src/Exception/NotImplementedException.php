@@ -2,4 +2,6 @@
 
 namespace Automate\Exception;
 
-class NotImplementedException extends CustomException {}
+class NotImplementedException extends CustomException
+{
+}
