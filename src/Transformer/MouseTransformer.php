@@ -37,6 +37,10 @@ class MouseTransformer extends AbstractTransformer {
      */
     public function __toString()
     {
-        return sprintf('Mouse use on %s', $this->step['mouse']['event']);
+        return sprintf('%s use on %s[%s]', 
+            $this->step['mouse']['event'],
+            array_keys($this->step['mouse'])[0],
+            array_values($this->step['mouse'])[0]
+        );
     }
 }

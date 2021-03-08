@@ -600,6 +600,6 @@ class TransformersTest extends TestCase {
         ]);
         
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Click use on click', (string) $transformer);
+        $this->assertSame('Click use on id[selector]', (string) $transformer);
     }
 }
