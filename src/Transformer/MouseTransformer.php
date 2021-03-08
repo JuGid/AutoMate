@@ -13,7 +13,7 @@ class MouseTransformer extends AbstractTransformer {
     {
         return ['mouse'=>[
             ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
-            'event'=> ':string in("click","doubleClick","mouseDown","mouseUp","mouseMove")'
+            'event'=> ':string :in("click","doubleClick","mouseDown","mouseUp","mouseMove")'
         ]];
     }
 
