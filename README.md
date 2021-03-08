@@ -87,9 +87,8 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 ## Roadmap
 *See [Changelogs](CHANGELOG.md) for more information*
 
-- [x] Add a submit command to submit element
-- [ ] Find a way to use keyboard (`Keyboard` command)
-- [ ] Find a way to use the mouse (`Mouse` command)
+- [x] Find a way to use keyboard (`Keyboard` command)
+- [x] Find a way to use the mouse (`Mouse` command)
 - [ ] New command to work with tables
 - [x] Create your own commands (AbstractTransformer)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**

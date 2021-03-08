@@ -589,4 +589,17 @@ class TransformersTest extends TestCase {
         $this->assertTrue($transformer->validate());
         $this->assertSame('Keyboard use on pressKey', (string) $transformer);
     }
+
+    public function testMouseTransformerAndGetProperties() {
+        $transformer = new MouseTransformer();
+        $transformer->setStep(['mouse' => 
+            [
+                'id'=>'selector',
+                'event'=> 'click'
+            ]
+        ]);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Click use on click', (string) $transformer);
+    }
 }
