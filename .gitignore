@@ -1,4 +1,6 @@
 /test.php
+/tests/functionnal/config/config.yaml
+/tests/functionnal/scenario/*/go.yaml
 /vendor
 .DS_STORE
 /example/config/config-test.yaml

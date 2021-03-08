@@ -67,6 +67,17 @@ class Console
         self::separator('=');
     }
 
+    public static function report() {
+        self::writeln("_____                       _   ");
+        self::writeln("|  __ \                     | |  ");
+        self::writeln("| |__) |___ _ __   ___  _ __| |_ ");
+        self::writeln("|  _  // _ \ '_ \ / _ \| '__| __|");
+        self::writeln("| | \ \  __/ |_) | (_) | |  | |_ ");
+        self::writeln("|_|  \_\___| .__/ \___/|_|   \__|");
+        self::writeln("           | |                   ");
+        self::writeln("           |_|                   ");
+    }
+
     public static function separator($separator = '_', int $size = 60)
     {
         self::writeln(str_repeat($separator, $size));

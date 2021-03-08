@@ -39,7 +39,7 @@ class UseTransformer extends AbstractTransformer
             throw new InvalidArgumentException('You should use main or sub to import a scenario');
         }
 
-        $this->step['use']['scenario_file'] = sprintf('%s/%s.yaml', $name, $sub);
+        $this->step['scenario_file'] = sprintf('%s/%s.yaml', $name, $sub);
 
         $scenario = new Scenario($name, $sub, false);
         
@@ -58,6 +58,6 @@ class UseTransformer extends AbstractTransformer
      */
     public function __toString()
     {
-        return sprintf('Use scenario %s', $this->step['use']['scenario_file']);
+        return sprintf('Use scenario %s', $this->step['scenario_file']);
     }
 }

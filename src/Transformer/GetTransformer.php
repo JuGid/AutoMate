@@ -44,7 +44,7 @@ class GetTransformer extends AbstractTransformer
             $value = $this->driver->findElement($element)->getAttribute($arrayGet['attribute']);
         }
 
-        VariableRegistry::set(Scope::WORLD, $arrayGet['name'], $value);
+        VariableRegistry::set(Scope::WORLD, $arrayGet['varname'], $value);
     }
 
     /**

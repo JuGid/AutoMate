@@ -1,0 +1,13 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go #Intentionnaly hidden 
+    - titleIs: Test tables
+    - get:
+        xpath: '//div[@id="table"]//table//tbody//tr//td[2]'
+        what: text
+        varname: textInTable
+    - textContains:
+        value: '{{ world.textInTable }}'
+        xpath: '//div[@id="table"]//table//tbody//tr//td[2]'
+    

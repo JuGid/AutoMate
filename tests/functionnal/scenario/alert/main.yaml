@@ -1,0 +1,13 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go
+    - click:
+        id: open-alert
+    - alert: dismiss
+    - click:
+        id: open-alert-delayed
+    - alert: isPresent
+    - click:
+        id: open-confirm
+    - alert: accept
