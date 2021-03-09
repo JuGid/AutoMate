@@ -60,7 +60,7 @@ abstract class DriverManager
                 );
             }
 
-            //For chrome, set headless mode if needed
+            //Set headless mode if needed
             if($driverConfiguration->shouldRunHeadless()) {
                 switch($browser) {
                     case 'chrome':
