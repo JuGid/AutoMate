@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 namespace Automate\Registry;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class VariableRegistryTest extends TestCase {
-
-
-    public function testShouldAddVariableAndGetIt() {
+class VariableRegistryTest extends TestCase
+{
+    public function testShouldAddVariableAndGetIt()
+    {
         VariableRegistry::set(Scope::WORLD, 'test', 'world');
         VariableRegistry::set(Scope::SPEC, 'test', 'spec');
         VariableRegistry::set(Scope::SCENARIO, 'test', 'scenario');
@@ -18,7 +18,8 @@ class VariableRegistryTest extends TestCase {
         $this->assertSame('scenario', VariableRegistry::get(Scope::SCENARIO, 'test'));
     }
 
-    public function testShouldRemoveAllAndTestIsEmpty() {
+    public function testShouldRemoveAllAndTestIsEmpty()
+    {
         $this->assertFalse(VariableRegistry::isEmpty(Scope::WORLD));
 
         VariableRegistry::reset(Scope::WORLD);
@@ -26,7 +27,8 @@ class VariableRegistryTest extends TestCase {
         $this->assertTrue(VariableRegistry::isEmpty(Scope::WORLD));
     }
 
-    public function testShouldSetMultiple() {
+    public function testShouldSetMultiple()
+    {
         $data = [
             'url'=>'http://github.com',
             'cookie'=>'cookiename'
@@ -39,42 +41,48 @@ class VariableRegistryTest extends TestCase {
         $this->assertSame('cookiename', VariableRegistry::get(Scope::SCENARIO, 'cookie'));
     }
 
-    public function testShouldSetWithUnknownScope() {
+    public function testShouldSetWithUnknownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
         VariableRegistry::set('unknown', 'notworking', 'value');
     }
 
-    public function testShouldGetWithUnknownScope() {
+    public function testShouldGetWithUnknownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
         VariableRegistry::get('unknown', 'notworking');
     }
 
-    public function testShouldSetMultipleWithUnknownScope() {
+    public function testShouldSetMultipleWithUnknownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
         VariableRegistry::setMultiple('unknown', ['url'=>'http://github.fr', 'cookie'=>'cookiename']);
     }
 
-    public function testShouldResetWithUnknownScope() {
+    public function testShouldResetWithUnknownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
         VariableRegistry::reset('unknown');
     }
 
-    public function testShouldIsEmptyWithUnknownScope() {
+    public function testShouldIsEmptyWithUnknownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 
         VariableRegistry::isEmpty('unknown');
     }
 
-    public function testShouldGetAnUnknowVariableInKnownScope() {
+    public function testShouldGetAnUnknowVariableInKnownScope()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(VariableRegistry::INVALID_SCOPE);
 

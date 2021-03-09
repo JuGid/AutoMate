@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Scenario;
 
@@ -12,7 +12,8 @@ use Symfony\Component\Yaml\Exception\ParseException;
 /**
  * @covers \Automate\Scenario\Scenario
  */
-class ScenarioTest extends TestCase {
+class ScenarioTest extends TestCase
+{
     const SCENARIO = 'scenario-tests';
     const SCENARIO_NO_BROWSER = 'scenario-no-browser';
     const SCENARIO_NO_STEPS =  'scenario-no-steps';
@@ -32,7 +33,7 @@ class ScenarioTest extends TestCase {
                 1 =>[
                     'cookie'=> [
                         'name'=> "{{ scenario.name }}",
-                        'value'=> "{{ scenario.cookie }}" 
+                        'value'=> "{{ scenario.cookie }}"
                     ]
                 ]
             ]
@@ -42,24 +43,27 @@ class ScenarioTest extends TestCase {
     /**
      * @before
      */
-    public function setConfiguration() {
+    public function setConfiguration()
+    {
         Configuration::load(__DIR__.'/../files/config-test.yaml');
         Configuration::$config_array['scenario']['folder'] = __DIR__.'/../files/scenario';
         VariableRegistry::reset(Scope::SCENARIO);
     }
 
-    public function testShouldCreateNewScenarioObject() {
+    public function testShouldCreateNewScenarioObject()
+    {
         $scenario = new Scenario(self::SCENARIO);
         $this->assertSame(self::SCENARIO, $scenario->getName());
         $this->assertSame(self::SCENARIO_ARRAY, $scenario->getScenarioArray());
         $this->assertSame(['go'=>'{{ spec.url }}'], $scenario->current());
     }
 
-    public function testShouldTryEverySteps() {
+    public function testShouldTryEverySteps()
+    {
         $scenario = new Scenario(self::SCENARIO);
 
         $steps = self::SCENARIO_ARRAY['scenario']['steps'];
-        for($i = 0; $i < count($steps); $i++) {
+        for ($i = 0; $i < count($steps); $i++) {
             $this->assertSame($steps[$i], $scenario->current());
             $scenario->next();
         }
@@ -70,17 +74,18 @@ class ScenarioTest extends TestCase {
         $this->assertSame('go', $scenario->key());
     }
 
-    public function testShouldGetTheScenarioBrowser() {
+    public function testShouldGetTheScenarioBrowser()
+    {
         $scenario = new Scenario(self::SCENARIO);
 
         $this->assertSame('chrome', $scenario->getScenarioBrowser('chrome'));
         $this->assertSame('chrome', $scenario->getScenarioBrowser('firefox'));
         $this->assertSame('chrome', $scenario->getScenarioBrowser(''));
         $this->assertSame('chrome', $scenario->getScenarioBrowser(null));
-
     }
 
-    public function testShouldGetTheScenarioBrowserButScenarioBrowserNull() {
+    public function testShouldGetTheScenarioBrowserButScenarioBrowserNull()
+    {
         $scenario = new Scenario(self::SCENARIO_NO_BROWSER);
         Configuration::$config_array['browser']['default'] = 'firefox';
 
@@ -89,24 +94,26 @@ class ScenarioTest extends TestCase {
         $this->assertSame('chrome', $scenario->getScenarioBrowser('chrome'));
     }
 
-    public function testShouldGetScenarioVariables() {
+    public function testShouldGetScenarioVariables()
+    {
         $scenario = new Scenario(self::SCENARIO);
         
         $this->assertSame('bonjour', VariableRegistry::get(Scope::SCENARIO, 'name'));
         $this->assertSame('nouveau', VariableRegistry::get(Scope::SCENARIO, 'cookie'));
     }
 
-    public function testShouldThrowNoStepException() {
+    public function testShouldThrowNoStepException()
+    {
         $this->expectException(ScenarioException::class);
         $this->expectExceptionMessage('You must define steps in your scenario file');
 
         $scenario = new Scenario(self::SCENARIO_NO_STEPS);
     }
 
-    public function testShouldThrowParseException() {
+    public function testShouldThrowParseException()
+    {
         $this->expectException(ParseException::class);
 
         $scenario = new Scenario(self::SCENARIO_PARSE_ERROR);
     }
-
 }

@@ -1,12 +1,13 @@
-<?php 
+<?php
 
 namespace Automate\Handler;
 
 use PHPUnit\Framework\TestCase;
 
-class ErrorHandlerTest extends TestCase {
-
-    public function testShouldInstanciateAndGetProperties() {
+class ErrorHandlerTest extends TestCase
+{
+    public function testShouldInstanciateAndGetProperties()
+    {
         $errorHandler = new ErrorHandler();
 
         $this->assertSame(0, $errorHandler->countWins());
@@ -14,11 +15,12 @@ class ErrorHandlerTest extends TestCase {
         $this->assertFalse($errorHandler->getShouldStoreDataset());
     }
 
-    public function testShouldInstanciateAndWin() {
+    public function testShouldInstanciateAndWin()
+    {
         $errorHandler = new ErrorHandler();
 
         $wins = 5;
-        for($i = 0; $i<$wins; $i++) {
+        for ($i = 0; $i<$wins; $i++) {
             $errorHandler->win();
         }
 
@@ -27,27 +29,29 @@ class ErrorHandlerTest extends TestCase {
         $this->assertSame('Scenario with specification finished with Wins : 5 and Errors : 0', (string) $errorHandler);
     }
 
-    public function testShouldInstanciateAndErrorAndShouldNotStoreDataset() {
+    public function testShouldInstanciateAndErrorAndShouldNotStoreDataset()
+    {
         $errorHandler = new ErrorHandler();
 
         $errors = 5;
-        for($i = 0; $i<$errors; $i++) {
+        for ($i = 0; $i<$errors; $i++) {
             $errorHandler->error('type', ['one', 'two']);
         }
 
         $this->assertSame(5, $errorHandler->countErrors());
         $this->assertSame(5, $errorHandler->countErrorsType());
         $this->assertSame('red', $errorHandler->getBackgroundColor());
-        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', (string) $errorHandler );
+        $this->assertSame('Scenario with specification finished with Wins : 0 and Errors : 5', (string) $errorHandler);
     }
 
-    public function testShouldInstanciateAndErrorAndShouldStoreDataset() {
+    public function testShouldInstanciateAndErrorAndShouldStoreDataset()
+    {
         $errorHandler = new ErrorHandler();
         $errorHandler->shouldStoreDataset();
         $this->assertTrue($errorHandler->getShouldStoreDataset());
 
         $errors = 5;
-        for($i = 0; $i<$errors; $i++) {
+        for ($i = 0; $i<$errors; $i++) {
             $errorHandler->error('type', ['one', 'two']);
         }
 

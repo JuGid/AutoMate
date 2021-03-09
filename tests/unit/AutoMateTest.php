@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate;
 
@@ -8,16 +8,18 @@ use Automate\Transformer\GoTransformer;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class AutoMateTest extends TestCase {
-
-    public function testShouldInstanciateAutomate() {
+class AutoMateTest extends TestCase
+{
+    public function testShouldInstanciateAutomate()
+    {
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
 
         // Because AutoMate constructor load the configuration
         $this->assertSame('chrome', Configuration::get('browser.default'));
     }
 
-    public function testShouldSetADriverConfiguration() {
+    public function testShouldSetADriverConfiguration()
+    {
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
 
         $this->assertNull($automate->getDriverConfiguration());
@@ -31,7 +33,8 @@ class AutoMateTest extends TestCase {
         $this->assertSame('http://localhost:4444', $automate->getDriverConfiguration()->getServerUrl());
     }
 
-    public function testShouldResgisterANewPlugin() {
+    public function testShouldResgisterANewPlugin()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Event should comes from class AutoMateEvents constants');
 

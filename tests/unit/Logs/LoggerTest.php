@@ -1,27 +1,30 @@
-<?php 
+<?php
 
 namespace Automate\Logs;
 
 use Automate\Configuration\Configuration;
 use Automate\Exception\LogException;
 use PHPUnit\Framework\TestCase;
+
 /**
  * @covers \Automate\Logs\AbstractLogger
  * @covers \Automate\Logs\DefaultLogger
  */
-class LoggerTest extends TestCase {
-
+class LoggerTest extends TestCase
+{
     const SCENARIO = 'scenario-tests';
 
     /**
      * @before
      */
-    public function loadConfiguration() {
+    public function loadConfiguration()
+    {
         Configuration::load(__DIR__.'/../files/config-test.yaml');
         Configuration::$config_array['logs']['folder'] = __DIR__.'/../files/logs';
     }
 
-    public function testShouldConstructLogger() {
+    public function testShouldConstructLogger()
+    {
         $logger = new DefaultLogger(['url', 'cookie'], self::SCENARIO);
 
         $this->assertInstanceOf(AbstractLogger::class, $logger);
@@ -30,7 +33,8 @@ class LoggerTest extends TestCase {
         $this->assertSame(['url','cookie','message'], Configuration::get('logs.columns'));
     }
 
-    public function testShouldAddMessageGetMessageSeeMessageQueueIsEmpty() { 
+    public function testShouldAddMessageGetMessageSeeMessageQueueIsEmpty()
+    {
         $logger = new DefaultLogger(['url', 'cookie'], self::SCENARIO);
 
         $this->assertSame('', $logger->getMessages());
@@ -42,7 +46,8 @@ class LoggerTest extends TestCase {
         $this->assertSame('', $logger->getMessages());
     }
 
-    public function testShouldLogData() {
+    public function testShouldLogData()
+    {
         $logger = new DefaultLogger(['url', 'cookie'], self::SCENARIO);
 
         $data = [
@@ -67,7 +72,8 @@ class LoggerTest extends TestCase {
         fclose($file_e);
     }
 
-    public function testShouldTryToLogData() {
+    public function testShouldTryToLogData()
+    {
         $this->expectException(LogException::class);
         $this->expectExceptionMessage('AutoMate try to log data that does not exist in spec file');
 
@@ -81,10 +87,10 @@ class LoggerTest extends TestCase {
         $logger->log($data, LogType::LOG_WINS);
     }
 
-    public function testShouldEndLogger() {
+    public function testShouldEndLogger()
+    {
         $logger = new DefaultLogger(['url', 'cookie'], self::SCENARIO);
 
         $this->assertTrue($logger->end());
     }
-
 }

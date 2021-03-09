@@ -1,13 +1,14 @@
-<?php 
+<?php
 
 namespace Automate\Configuration;
 
 use Automate\Exception\ConfigurationException;
 use PHPUnit\Framework\TestCase;
 
-class ConfigurationTest extends TestCase {
-
-    public function testShouldLoadConfigurationFileAndgetValues() {
+class ConfigurationTest extends TestCase
+{
+    public function testShouldLoadConfigurationFileAndgetValues()
+    {
         Configuration::reset();
         $this->assertFalse(Configuration::isLoaded());
 
@@ -25,7 +26,8 @@ class ConfigurationTest extends TestCase {
         $this->assertSame(250, Configuration::get('wait.every'));
     }
 
-    public function testShouldAskForAnUnknownValueAndThrowException() {
+    public function testShouldAskForAnUnknownValueAndThrowException()
+    {
         $this->expectException(ConfigurationException::class);
         $this->expectExceptionMessage('The value asked foo.bar does not exist');
         
@@ -33,13 +35,14 @@ class ConfigurationTest extends TestCase {
         Configuration::get('foo.bar');
     }
 
-    public function testShouldGetAndSetLogsColumns() {
-       $this->assertFalse(Configuration::hasLogsExceptions());
+    public function testShouldGetAndSetLogsColumns()
+    {
+        $this->assertFalse(Configuration::hasLogsExceptions());
 
-       Configuration::logsColumns(['url', 'logs']);
+        Configuration::logsColumns(['url', 'logs']);
 
-       $this->assertTrue(Configuration::hasLogsExceptions());
+        $this->assertTrue(Configuration::hasLogsExceptions());
 
-       $this->assertSame(['url','logs'], Configuration::get('logs.columns'));
+        $this->assertSame(['url','logs'], Configuration::get('logs.columns'));
     }
 }

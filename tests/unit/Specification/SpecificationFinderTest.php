@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Specification;
 
@@ -8,17 +8,20 @@ use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use PHPUnit\Framework\TestCase;
 
-class SpecificationFinderTest extends TestCase {
+class SpecificationFinderTest extends TestCase
+{
 
     /**
      * @before
      */
-    public function loadConfig() {
+    public function loadConfig()
+    {
         Configuration::load(__DIR__.'/../files/config-test.yaml');
         Configuration::$config_array['specs']['folder'] = __DIR__.'/../files/specs';
     }
 
-    public function testShouldFindTheSpecificationInScenarioSpecFolder() {
+    public function testShouldFindTheSpecificationInScenarioSpecFolder()
+    {
         $finder = new SpecificationFinder();
         VariableRegistry::set(Scope::WORLD, 'scenario', 'scenario-tests');
 
@@ -28,7 +31,8 @@ class SpecificationFinderTest extends TestCase {
         $this->assertSame(['url','cookiename'], $specification->getColumnsHeader());
     }
 
-    public function testShouldFindTheSpecInSpecFolder() {
+    public function testShouldFindTheSpecInSpecFolder()
+    {
         $finder = new SpecificationFinder();
         VariableRegistry::set(Scope::WORLD, 'scenario', 'scenario-no-spec');
 
@@ -38,7 +42,8 @@ class SpecificationFinderTest extends TestCase {
         $this->assertSame(['nospec','cookiename'], $specification->getColumnsHeader());
     }
 
-    public function testShouldNotFindTheSpec() {
+    public function testShouldNotFindTheSpec()
+    {
         $this->expectException(SpecificationException::class);
         $this->expectExceptionMessage('The specification has not been found.');
 
@@ -49,8 +54,8 @@ class SpecificationFinderTest extends TestCase {
         $specification = $finder->find();
     }
 
-    public function testShouldWatchIfSpecIsProcessedAndCsv() {
-
+    public function testShouldWatchIfSpecIsProcessedAndCsv()
+    {
         $finder = new SpecificationFinder();
         $file = Configuration::get('specs.folder').'/spec_PROCESSED.csv';
         $this->assertTrue($finder->isProcessed($file));
@@ -60,5 +65,4 @@ class SpecificationFinderTest extends TestCase {
         $this->assertFalse($finder->isProcessed($file));
         $this->assertFalse($finder->isCsv($file));
     }
-
 }

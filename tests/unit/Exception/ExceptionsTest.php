@@ -1,12 +1,13 @@
-<?php 
+<?php
 
 namespace Automate\Exception;
 
 use PHPUnit\Framework\TestCase;
 
-class ExceptionsTest extends TestCase {
-
-    public function testShouldThrowBrowserException() {
+class ExceptionsTest extends TestCase
+{
+    public function testShouldThrowBrowserException()
+    {
         $this->expectException(BrowserException::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage('Browser exception');
@@ -14,7 +15,8 @@ class ExceptionsTest extends TestCase {
         throw new BrowserException('Browser exception', 0);
     }
 
-    public function testShouldThrowCommandException() {
+    public function testShouldThrowCommandException()
+    {
         $this->expectException(CommandException::class);
         $this->expectExceptionCode(1);
         $this->expectExceptionMessage('Command exception');
@@ -22,7 +24,8 @@ class ExceptionsTest extends TestCase {
         throw new CommandException('Command exception', 1);
     }
 
-    public function testShouldThrowConditionException() {
+    public function testShouldThrowConditionException()
+    {
         $this->expectException(ConditionException::class);
         $this->expectExceptionCode(2);
         $this->expectExceptionMessage('Condition exception');
@@ -30,7 +33,8 @@ class ExceptionsTest extends TestCase {
         throw new ConditionException('Condition exception', 2);
     }
 
-    public function testShouldThrowConfigurationException() {
+    public function testShouldThrowConfigurationException()
+    {
         $this->expectException(ConfigurationException::class);
         $this->expectExceptionCode(3);
         $this->expectExceptionMessage('Configuration exception');
@@ -38,7 +42,8 @@ class ExceptionsTest extends TestCase {
         throw new ConfigurationException('Configuration exception', 3);
     }
 
-    public function testShouldThrowDriverException() {
+    public function testShouldThrowDriverException()
+    {
         $this->expectException(DriverException::class);
         $this->expectExceptionCode(4);
         $this->expectExceptionMessage('Driver exception');
@@ -46,7 +51,8 @@ class ExceptionsTest extends TestCase {
         throw new DriverException('Driver exception', 4);
     }
 
-    public function testShouldThrowLogException() {
+    public function testShouldThrowLogException()
+    {
         $this->expectException(LogException::class);
         $this->expectExceptionCode(5);
         $this->expectExceptionMessage('Log exception');
@@ -54,7 +60,8 @@ class ExceptionsTest extends TestCase {
         throw new LogException('Log exception', 5);
     }
 
-    public function testShouldThrowNotImplementedException() {
+    public function testShouldThrowNotImplementedException()
+    {
         $this->expectException(NotImplementedException::class);
         $this->expectExceptionCode(6);
         $this->expectExceptionMessage('Not implemented exception');
@@ -62,7 +69,8 @@ class ExceptionsTest extends TestCase {
         throw new NotImplementedException('Not implemented exception', 6);
     }
 
-    public function testShouldThrowSpecificationException() {
+    public function testShouldThrowSpecificationException()
+    {
         $this->expectException(SpecificationException::class);
         $this->expectExceptionCode(7);
         $this->expectExceptionMessage('Specification exception');
@@ -70,7 +78,8 @@ class ExceptionsTest extends TestCase {
         throw new SpecificationException('Specification exception', 7);
     }
 
-    public function testShouldThrowVariableCallException() {
+    public function testShouldThrowVariableCallException()
+    {
         $this->expectException(VariableCallException::class);
         $this->expectExceptionCode(8);
         $this->expectExceptionMessage('Variable call exception');
@@ -78,7 +87,8 @@ class ExceptionsTest extends TestCase {
         throw new VariableCallException('Variable call exception', 8);
     }
 
-    public function testShouldThrowVariableException() {
+    public function testShouldThrowVariableException()
+    {
         $this->expectException(VariableException::class);
         $this->expectExceptionCode(9);
         $this->expectExceptionMessage('Variable exception');
@@ -86,21 +96,24 @@ class ExceptionsTest extends TestCase {
         throw new VariableException('Variable exception', 9);
     }
 
-    public function testShouldThrowExceptionWithouMessage() {
+    public function testShouldThrowExceptionWithouMessage()
+    {
         $this->expectException(VariableException::class);
         $this->expectExceptionMessage('Unknown Automate\Exception\VariableException');
 
         throw new VariableException();
     }
 
-    public function testShouldThrowScenarioExitException() {
+    public function testShouldThrowScenarioExitException()
+    {
         $this->expectException(ScenarioExitException::class);
         $this->expectExceptionMessage('The scenario exit with message : Test exception');
 
         throw new ScenarioExitException('Test exception');
     }
 
-    public function testShouldThrowTimeoutException() {
+    public function testShouldThrowTimeoutException()
+    {
         $this->expectException(TimeoutException::class);
         $this->expectExceptionMessage('Timeout exception');
 

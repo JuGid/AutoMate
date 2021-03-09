@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Transformer;
 
@@ -11,10 +11,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * This class assure that the pattern is as good as we want
  */
-class TransformersTest extends TestCase {
-    
-    public function testShouldSetVariables() {
-        
+class TransformersTest extends TestCase
+{
+    public function testShouldSetVariables()
+    {
         VariableRegistry::set(Scope::SCENARIO, 'var', 'scenario');
         VariableRegistry::set(Scope::SPEC, 'var', 'scenario');
         VariableRegistry::set(Scope::WORLD, 'var', 'scenario');
@@ -28,7 +28,7 @@ class TransformersTest extends TestCase {
         $afterSetting = ['go'=>'scenario'];
 
         $transformer = new GoTransformer();
-        foreach($scopes as $scope) {
+        foreach ($scopes as $scope) {
             $transformer->setStep($scope);
             $transformer->setVariables();
             $this->assertSame($afterSetting, $transformer->getStep());
@@ -38,7 +38,8 @@ class TransformersTest extends TestCase {
     /**
      * I put this test first as it may change more then others
      */
-    public function testConfigurationTransformer() {
+    public function testConfigurationTransformer()
+    {
         $transformer = new ConfigurationTransformer();
         $transformer->setStep(['configuration'=>[]]);
         $this->assertTrue($transformer->validate());
@@ -50,7 +51,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Configuration changed', (string) $transformer);
     }
 
-    public function testGoTransformerAndGetProperties() {
+    public function testGoTransformerAndGetProperties()
+    {
         $this->expectException(DataValueMatchedNoPattern::class);
 
         $transformer = new GoTransformer();
@@ -62,14 +64,15 @@ class TransformersTest extends TestCase {
         $transformer->validate();
     }
 
-    public function testAlertTransformerAndGetProperties() {
+    public function testAlertTransformerAndGetProperties()
+    {
         $this->expectException(DataValueMatchedNoPattern::class);
 
         $possibilities = ["accept","dismiss","isPresent"];
 
         $transformer = new AlertTransformer();
 
-        foreach($possibilities as $possibility) {
+        foreach ($possibilities as $possibility) {
             $transformer->setStep(['alert'=>$possibility]);
             $this->assertTrue($transformer->validate());
         }
@@ -80,14 +83,15 @@ class TransformersTest extends TestCase {
         $transformer->validate();
     }
 
-    public function testClickTransformerAndGetProperties() {
+    public function testClickTransformerAndGetProperties()
+    {
         $this->expectException(DataKeyMatchedNoPatternKey::class);
 
         $findingPossibilities = ["css","xpath","id","class","name","tag","linktext", "pltext"];
 
         $transformer = new ClickTransformer();
 
-        foreach($findingPossibilities as $possibility) {
+        foreach ($findingPossibilities as $possibility) {
             $transformer->setStep(['click'=>[$possibility =>'selector']]);
             $this->assertTrue($transformer->validate());
         }
@@ -98,7 +102,8 @@ class TransformersTest extends TestCase {
         $transformer->validate();
     }
 
-    public function testCookieTransformerAndGetProperties() {
+    public function testCookieTransformerAndGetProperties()
+    {
         $transformer = new CookieTransformer();
         $transformer->setStep(['cookie'=>['name'=>'foo', 'value'=>'bar']]);
         $this->assertTrue($transformer->validate());
@@ -106,14 +111,15 @@ class TransformersTest extends TestCase {
         $this->assertSame('Create a cookie with foo:bar', (string) $transformer);
     }
 
-    public function testCreateTransformerAndGetProperties() {
+    public function testCreateTransformerAndGetProperties()
+    {
         $this->expectException(DataValueMatchedNoPattern::class);
 
         $possibilities = ["tab","window"];
 
         $transformer = new CreateTransformer();
 
-        foreach($possibilities as $possibility) {
+        foreach ($possibilities as $possibility) {
             $transformer->setStep(['create'=>$possibility]);
             $this->assertTrue($transformer->validate());
         }
@@ -124,7 +130,8 @@ class TransformersTest extends TestCase {
         $transformer->validate();
     }
 
-    public function testDeselectTransformerAndGetProperties() {
+    public function testDeselectTransformerAndGetProperties()
+    {
         $transformer = new DeselectTransformer();
 
         $transformer->setStep([
@@ -139,7 +146,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Deselect in select id[selector] by index with value 0', (string) $transformer);
     }
 
-    public function testSelectTransformerAndGetProperties() {
+    public function testSelectTransformerAndGetProperties()
+    {
         $transformer = new SelectTransformer();
 
         $transformer->setStep([
@@ -154,7 +162,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Select in select id[selector] by text with value selectPoint', (string) $transformer);
     }
 
-    public function testFillTransformerAndGetProperties() {
+    public function testFillTransformerAndGetProperties()
+    {
         $transformer = new FillTransformer();
 
         $transformer->setStep(['fill'=>['id' =>'selector', 'with'=>'phpunit']]);
@@ -163,7 +172,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Fill element id[selector] with value phpunit', (string) $transformer);
     }
 
-    public function testImpltmTransformerAndGetProperties() {
+    public function testImpltmTransformerAndGetProperties()
+    {
         $this->expectException(DataValueMatchedNoPattern::class);
 
         $transformer = new ImpltmTransformer();
@@ -177,7 +187,8 @@ class TransformersTest extends TestCase {
         $this->assertTrue($transformer->validate());
     }
 
-    public function testIsClickableTransformerAndGetProperties() {
+    public function testIsClickableTransformerAndGetProperties()
+    {
         $transformer = new IsClickableTransformer();
 
         $transformer->setStep(['isClickable'=>['css' =>'selector']]);
@@ -186,7 +197,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if css[selector] is clickable', (string) $transformer);
     }
 
-    public function testIsNotSelectedTransformerAndGetProperties() {
+    public function testIsNotSelectedTransformerAndGetProperties()
+    {
         $transformer = new IsNotSelectedTransformer();
 
         $transformer->setStep(['isNotSelected'=>['css' =>'selector']]);
@@ -195,7 +207,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if element located by css[selector] is not selected', (string) $transformer);
     }
 
-    public function testIsSelectedTransformerAndGetProperties() {
+    public function testIsSelectedTransformerAndGetProperties()
+    {
         $transformer = new IsSelectedTransformer();
 
         $transformer->setStep(['isSelected'=>['xpath' =>'selector']]);
@@ -204,7 +217,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if element located by xpath[selector] is selected', (string) $transformer);
     }
 
-    public function testNumberOfWindowsTransformerAndGetProperties() {
+    public function testNumberOfWindowsTransformerAndGetProperties()
+    {
         $transformer = new NumberOfWindowsTransformer();
 
         $transformer->setStep(['numberOfWindows'=>'2']);
@@ -213,7 +227,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until number of windows is 2', (string) $transformer);
     }
 
-    public function testPresenceOfAllTransformerAndGetProperties() {
+    public function testPresenceOfAllTransformerAndGetProperties()
+    {
         $transformer = new PresenceOfAllTransformer();
 
         $transformer->setStep(['presenceOfAll'=>['tag' =>'selector']]);
@@ -222,7 +237,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking presence of all elements located by tag[selector]', (string) $transformer);
     }
 
-    public function testPresenceOfTransformerAndGetProperties() {
+    public function testPresenceOfTransformerAndGetProperties()
+    {
         $transformer = new PresenceOfTransformer();
 
         $transformer->setStep(['presenceOf'=>['pltext' =>'selector']]);
@@ -231,7 +247,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking presence of element located by pltext[selector]', (string) $transformer);
     }
 
-    public function testReloadTransformerAndGetProperties() {
+    public function testReloadTransformerAndGetProperties()
+    {
         $transformer = new ReloadTransformer();
 
         $transformer->setStep(['reload'=>'page']);
@@ -240,7 +257,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Reload the page', (string) $transformer);
     }
 
-    public function testTextContainsTransformerAndGetProperties() {
+    public function testTextContainsTransformerAndGetProperties()
+    {
         $transformer = new TextContainsTransformer();
 
         $transformer->setStep(['textContains'=>['value'=>'val', "class" =>'selector']]);
@@ -249,7 +267,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if text of element class[selector] contains val', (string) $transformer);
     }
 
-    public function testTextIsTransformerAndGetProperties() {
+    public function testTextIsTransformerAndGetProperties()
+    {
         $transformer = new TextIsTransformer();
 
         $transformer->setStep(['textIs'=>['value'=>'val', 'linktext' =>'selector']]);
@@ -258,7 +277,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if text of element linktext[selector] is val', (string) $transformer);
     }
 
-    public function testTextMatchesTransformerAndGetProperties() {
+    public function testTextMatchesTransformerAndGetProperties()
+    {
         $transformer = new TextMatchesTransformer();
 
         $transformer->setStep(['textMatches'=>['regexp'=>'val', 'name' =>'selector']]);
@@ -267,7 +287,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking if text of element name[selector] matches val', (string) $transformer);
     }
 
-    public function testTitleContainsTransformerAndGetProperties() {
+    public function testTitleContainsTransformerAndGetProperties()
+    {
         $transformer = new TitleContainsTransformer();
 
         $transformer->setStep(['titleContains'=>'page']);
@@ -276,7 +297,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until title contains page', (string) $transformer);
     }
 
-    public function testTitleIsTransformerAndGetProperties() {
+    public function testTitleIsTransformerAndGetProperties()
+    {
         $transformer = new TitleIsTransformer();
 
         $transformer->setStep(['titleIs'=>'page']);
@@ -285,7 +307,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until title is page', (string) $transformer);
     }
 
-    public function testTitleMatchesTransformerAndGetProperties() {
+    public function testTitleMatchesTransformerAndGetProperties()
+    {
         $transformer = new TitleMatchesTransformer();
 
         $transformer->setStep(['titleMatches'=>'page']);
@@ -294,7 +317,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until title matches regexp page', (string) $transformer);
     }
 
-    public function testUrlContainsTransformerAndGetProperties() {
+    public function testUrlContainsTransformerAndGetProperties()
+    {
         $transformer = new UrlContainsTransformer();
 
         $transformer->setStep(['urlContains'=>'page']);
@@ -303,7 +327,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until url contains page', (string) $transformer);
     }
 
-    public function testUrlIsTransformerAndGetProperties() {
+    public function testUrlIsTransformerAndGetProperties()
+    {
         $transformer = new UrlIsTransformer();
 
         $transformer->setStep(['urlIs'=>'page']);
@@ -312,7 +337,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until url is page', (string) $transformer);
     }
 
-    public function testUrlMatchesTransformerAndGetProperties() {
+    public function testUrlMatchesTransformerAndGetProperties()
+    {
         $transformer = new UrlMatchesTransformer();
 
         $transformer->setStep(['urlMatches'=>'page']);
@@ -321,7 +347,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Wait until url matches regexp page', (string) $transformer);
     }
 
-    public function testVilibilityOfAnyTransformerAndGetProperties() {
+    public function testVilibilityOfAnyTransformerAndGetProperties()
+    {
         $transformer = new VisibilityOfAnyTransformer();
 
         $transformer->setStep(['visibilityOfAny'=>['pltext'=>'selector']]);
@@ -330,7 +357,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking visibility of any elements located by pltext[selector]', (string) $transformer);
     }
 
-    public function testVilibilityOfTransformerAndGetProperties() {
+    public function testVilibilityOfTransformerAndGetProperties()
+    {
         $transformer = new VisibilityOfTransformer();
         $transformer->setStep(['visibilityOf'=>['id'=>'selector']]);
         
@@ -338,7 +366,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Checking visibility of element located by id[selector]', (string) $transformer);
     }
 
-    public function testGetTransformerAndGetProperties() {
+    public function testGetTransformerAndGetProperties()
+    {
         $transformer = new GetTransformer();
 
         $validPattern = [
@@ -365,10 +394,10 @@ class TransformersTest extends TestCase {
         $transformer->setStep($validPattern);
         $this->assertTrue($transformer->validate());
         $this->assertSame('Get text for element class[selector] ', (string) $transformer);
-        
     }
 
-    public function testFrameTransformerAndGetProperties() {
+    public function testFrameTransformerAndGetProperties()
+    {
         $transformer = new FrameTransformer();
 
         $validPattern = [
@@ -403,10 +432,10 @@ class TransformersTest extends TestCase {
         $transformer->setStep($validPattern);
         $this->assertTrue($transformer->validate());
         $this->assertSame('Frame to string', (string) $transformer);
-        
     }
 
-    public function testResizeTransformerAndGetProperties() {
+    public function testResizeTransformerAndGetProperties()
+    {
         $transformer = new ResizeTransformer();
 
         $validPattern = [
@@ -417,7 +446,7 @@ class TransformersTest extends TestCase {
 
         $transformer->setStep($validPattern);
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Resize the page [maximize] ',(string) $transformer );
+        $this->assertSame('Resize the page [maximize] ', (string) $transformer);
 
         $validPattern = [
             'resize'=> [
@@ -431,10 +460,11 @@ class TransformersTest extends TestCase {
 
         $transformer->setStep($validPattern);
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Resize the page [size] with 500px per 600px',(string) $transformer);        
+        $this->assertSame('Resize the page [size] with 500px per 600px', (string) $transformer);
     }
 
-    public function testScreenshotTransformerAndGetProperties() {
+    public function testScreenshotTransformerAndGetProperties()
+    {
         $transformer = new ScreenshotTransformer();
 
         $validPattern = [
@@ -457,11 +487,12 @@ class TransformersTest extends TestCase {
         ];
 
         $transformer->setStep($validPattern);
-        $this->assertTrue($transformer->validate());        
+        $this->assertTrue($transformer->validate());
         $this->assertSame('Cheeeeeese [myScreenshot]', (string) $transformer);
     }
 
-    public function testLoopTransformerAndGetProperties() {
+    public function testLoopTransformerAndGetProperties()
+    {
         $transformer = new LoopTransformer();
         $transformer->setStep([
             'loop'=> [
@@ -476,7 +507,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('> Loop ends after 5 times', (string) $transformer);
     }
 
-    public function testConditionTransformer() {
+    public function testConditionTransformer()
+    {
         $transformer = new ConditionTransformer();
         $transformer->setStep([
             'condition'=> [
@@ -504,7 +536,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Condition assessed 5 == 6 as false', (string) $transformer);
     }
 
-    public function testExitTransformer() {
+    public function testExitTransformer()
+    {
         $transformer = new ExitTransformer();
         $transformer->setStep(['exit'=>'For the example']);
 
@@ -512,7 +545,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('EXIT', (string) $transformer);
     }
 
-    public function testUseTransformer() {
+    public function testUseTransformer()
+    {
         $transformer = new UseTransformer();
         $transformer->setStep(['use'=>'main.name']);
         $this->assertTrue($transformer->validate());
@@ -524,12 +558,13 @@ class TransformersTest extends TestCase {
     /**
      * This test the validate/__toString() and the detection of ';' in Js script
      */
-    public function testScriptTransformer() {
+    public function testScriptTransformer()
+    {
         $transformer = new ScriptTransformer();
         
         $transformer->setStep(['script'=>'return jQuery.active === 0']);
 
-        if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
+        if (!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
 
@@ -538,7 +573,7 @@ class TransformersTest extends TestCase {
 
         $transformer->setStep(['script'=>'return jQuery.active === 0;']);
 
-        if(!substr(trim($transformer->getStep()['script']), -1) == ';') {
+        if (!substr(trim($transformer->getStep()['script']), -1) == ';') {
             $transformer->setStep(['script'=>$transformer->getStep()['script'].';']);
         }
 
@@ -546,12 +581,13 @@ class TransformersTest extends TestCase {
         $this->assertSame('Executing script return jQuery.active === 0;', (string) $transformer);
     }
 
-    public function testWajaxTransformer() {
+    public function testWajaxTransformer()
+    {
         $transformer = new WajaxTransformer();
         
         $transformer->setStep(['wajax'=>'return jQuery.active === 0']);
         
-        if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
+        if (!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
         
@@ -560,7 +596,7 @@ class TransformersTest extends TestCase {
 
         $transformer->setStep(['wajax'=>'return jQuery.active === 0;']);
 
-        if(!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
+        if (!substr(trim($transformer->getStep()['wajax']), -1) == ';') {
             $transformer->setStep(['wajax'=>$transformer->getStep()['wajax'].';']);
         }
 
@@ -568,7 +604,8 @@ class TransformersTest extends TestCase {
         $this->assertSame('Waiting with script return jQuery.active === 0;', (string) $transformer);
     }
 
-    public function testSubmitTransformerAndGetProperties() {
+    public function testSubmitTransformerAndGetProperties()
+    {
         $transformer = new SubmitTransformer();
 
         $transformer->setStep(['submit'=>['pltext'=>'selector', 'text'=>'jugid']]);
@@ -577,9 +614,10 @@ class TransformersTest extends TestCase {
         $this->assertSame('Submit jugid for element pltext[selector]', (string) $transformer);
     }
     
-    public function testKeyboardTransformerAndGetProperties() {
+    public function testKeyboardTransformerAndGetProperties()
+    {
         $transformer = new KeyboardTransformer();
-        $transformer->setStep(['keyboard' => 
+        $transformer->setStep(['keyboard' =>
             [
                 'event'=>'pressKey',
                 'keys'=> ['key1'=> 't', 'key2'=>'e']
@@ -590,9 +628,10 @@ class TransformersTest extends TestCase {
         $this->assertSame('Keyboard use on pressKey', (string) $transformer);
     }
 
-    public function testMouseTransformerAndGetProperties() {
+    public function testMouseTransformerAndGetProperties()
+    {
         $transformer = new MouseTransformer();
-        $transformer->setStep(['mouse' => 
+        $transformer->setStep(['mouse' =>
             [
                 'id'=>'selector',
                 'event'=> 'click'

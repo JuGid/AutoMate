@@ -5,8 +5,8 @@ use Automate\Registry\VariableRegistry;
 use Automate\Specification\Specification;
 use PHPUnit\Framework\TestCase;
 
-class SpecificationTest extends TestCase {
-
+class SpecificationTest extends TestCase
+{
     const SCENARIO = 'scenario-tests';
     const FILEPATH = __DIR__. '/../files/specs/'.self::SCENARIO.'/spec.csv';
     const FILEPATH_TO_RENAME = __DIR__. '/../files/specs/scenario-spec-processed/spec.csv';
@@ -14,11 +14,13 @@ class SpecificationTest extends TestCase {
     /**
      * @before
      */
-    public function purgeSpecVariables() {
+    public function purgeSpecVariables()
+    {
         VariableRegistry::reset(Scope::SPEC);
     }
 
-    public function testShouldCreateNewSpecificationAndGetProperties() {
+    public function testShouldCreateNewSpecificationAndGetProperties()
+    {
         $specification = new Specification(self::FILEPATH);
 
         $this->assertSame(self::FILEPATH, $specification->getFilepath());
@@ -30,7 +32,8 @@ class SpecificationTest extends TestCase {
         $this->assertSame(__DIR__. '/../files/specs/'.self::SCENARIO, $specification->getPath());
     }
 
-    public function testShouldTestForeachData() {
+    public function testShouldTestForeachData()
+    {
         $specification = new Specification(self::FILEPATH);
 
         $dataArray = [
@@ -48,7 +51,7 @@ class SpecificationTest extends TestCase {
             ]
         ];
 
-        for($i=0; $i < count($dataArray); $i++) {
+        for ($i=0; $i < count($dataArray); $i++) {
             $this->assertSame($dataArray[$i], $specification->current());
             $this->assertSame($i, $specification->key());
             $this->assertTrue($specification->valid());
@@ -59,7 +62,8 @@ class SpecificationTest extends TestCase {
         $this->assertSame($dataArray[0], $specification->current());
     }
 
-    public function testShouldSetSpecAsProcessed() {
+    public function testShouldSetSpecAsProcessed()
+    {
         $specification = new Specification(self::FILEPATH_TO_RENAME);
 
         $specification->setProcessed();
@@ -67,7 +71,6 @@ class SpecificationTest extends TestCase {
         $this->assertFalse(file_exists(self::FILEPATH_TO_RENAME));
         $this->assertTrue(file_exists(self::FILEPATH_RENAMED));
 
-        rename(self::FILEPATH_RENAMED,self::FILEPATH_TO_RENAME);
+        rename(self::FILEPATH_RENAMED, self::FILEPATH_TO_RENAME);
     }
-
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate;
 
@@ -6,9 +6,10 @@ use Automate\Transformer\GoTransformer;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class AutoMateDispatcherTest extends TestCase {
-
-    public function testShouldInstanciateDispatcher() {
+class AutoMateDispatcherTest extends TestCase
+{
+    public function testShouldInstanciateDispatcher()
+    {
         $dispatcher = new AutoMateDispatcher();
 
         $result = $dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_BEGIN, []);
@@ -17,7 +18,8 @@ class AutoMateDispatcherTest extends TestCase {
         $this->assertFalse($result);
     }
 
-    public function testShouldAttachListener() {
+    public function testShouldAttachListener()
+    {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Event should comes from class AutoMateEvents constants');
 

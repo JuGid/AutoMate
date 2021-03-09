@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Driver;
 
@@ -6,9 +6,10 @@ use Automate\Driver\Proxy\HttpProxy;
 use Facebook\WebDriver\Firefox\FirefoxProfile;
 use PHPUnit\Framework\TestCase;
 
-class DriverConfigurationTest extends TestCase{
-
-    public function testShouldSetAndGetProperties() {
+class DriverConfigurationTest extends TestCase
+{
+    public function testShouldSetAndGetProperties()
+    {
         $dc = new DriverConfiguration();
 
         $this->assertNull($dc->getHttpProxy());
