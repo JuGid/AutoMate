@@ -20,13 +20,16 @@ $scenariosTest = [
     'alert'
 ];
 
-$autoMate = new AutoMate($configFile);
+
 
 //Should set a different port since chromedriver runs on 9515
 //And run in headless mode
 $driverConfiguration = new DriverConfiguration();
 $driverConfiguration->setServerUrl('http://localhost:9515');
 $driverConfiguration->headlessMode();
+
+//Create AutoMate instance
+$autoMate = new AutoMate($configFile);
 $autoMate->setDriverConfiguration($driverConfiguration);
 
 //Begin

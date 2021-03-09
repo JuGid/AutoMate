@@ -27,11 +27,7 @@ $autoMate = new AutoMate($configFile);
  * @see https://github.com/php-webdriver/php-webdriver/wiki/FirefoxProfile
  * 
  * $driverConfiguration = new DriverConfiguration();
- * $driverConfiguration->setHttpProxy('0.0.0.0', 1234);
- * $driverConfiguration->setFirefoxProfile(new FirefoxProfile());
- * $driverConfiguration->setServerUrl('http://localhost:4444');
- * 
- * $autoMate->setDriverConfiguration($driverConfiguration)
+ * @see https://github.com/JuGid/AutoMate/wiki/Driver-configuration
  * 
  * You can also register a plugin to use it on some AutoMate events
  * For example, to register your custom Transformer
