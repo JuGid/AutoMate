@@ -16,7 +16,7 @@ scenario:
                 default: content
         ifFalse:
           steps:
-            - exit: 'Text is not what was xpected'
+            - exit: 'Text is not what was expected'
     - frame:
         id: other_iframe_content
     - click:

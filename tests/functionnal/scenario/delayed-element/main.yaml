@@ -1,0 +1,15 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go
+    - configuration:
+        wait:
+          for: 15
+          every: 500
+    - presenceOf:
+        id: delayed
+    - get:
+        id: delayed
+        what: text
+        varname: delayedText
+    - print: '{{ world.delayedText }}'

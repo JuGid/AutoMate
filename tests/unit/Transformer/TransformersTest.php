@@ -650,4 +650,13 @@ class TransformersTest extends TestCase
         $this->assertTrue($transformer->validate());
         $this->assertSame('Close window', (string) $transformer);
     }
+
+    public function testPrintTransformerAndGetProperties()
+    {
+        $transformer = new PrintTransformer();
+        $transformer->setStep(['print' => 'my text']);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Text printed', (string) $transformer);
+    }
 }

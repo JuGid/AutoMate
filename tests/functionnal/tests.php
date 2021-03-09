@@ -18,7 +18,10 @@ $results = [];
 $scenariosTest = [
     'tables', 
     'alert',
-    'frame'
+    'frame',
+    'delayed-element',
+    'slow-loading',
+    'form'
 ];
 
 //Should set a different port since chromedriver runs on 9515

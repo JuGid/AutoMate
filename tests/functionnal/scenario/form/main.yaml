@@ -1,0 +1,39 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go
+    - titleIs: php-webdriver form test page
+    - fill:
+        id: input-text
+        with: Test
+    - fill:
+        id: input-text-empty
+        with: Test empty
+    - fill:
+        id: textarea
+        with: Test long text to fill a textarea and watch if it's working
+    - select:
+        id: select
+        by: text
+        value: This is not second option
+    - select:
+        id: select
+        by: value
+        value: fifth
+    - select:
+        id: select
+        by: index
+        value: 4
+    - select:
+        id: select-multiple
+        by: index
+        value: 1
+    - select:
+        id: select-multiple
+        by: index
+        value: 4
+    - select:
+        id: select-multiple
+        by: index
+        value: 3
+    - exit: Should test checkboxes and radio buttons

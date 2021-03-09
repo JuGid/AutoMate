@@ -9,6 +9,7 @@ use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Driver\DriverConfiguration;
 use Automate\Driver\DriverManager;
+use Automate\Exception\CommandException;
 use Automate\Exception\LogException;
 use Automate\Handler\ErrorHandler;
 use Automate\Logs\AbstractLogger;
@@ -124,7 +125,11 @@ final class Runner
         try {
             foreach ($scenario as $step) {
                 $data = ['driver'=> $this->driver, 'step'=>$step];
-                $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
+                $received = $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
+
+                if(!$received) {
+                    throw new CommandException('The command '. array_keys($step)[0] . ' does not exist');
+                }
             }
 
             $this->errorHandler->win();

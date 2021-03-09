@@ -90,9 +90,15 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 
 - [x] Find a way to use keyboard (`Keyboard` command)
 - [x] Find a way to use the mouse (`Mouse` command)
-- [ ] New command to work with tables (Abandonned since xpath can make the job, but keep this idea if needed)
+- [ ] Add `Protect` command to protect steps from errors
+- [ ] Add checkboxes and radio button support
+- [ ] Add Alert send keys support
 - [x] Create your own commands (AbstractTransformer)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
+
+### Will not be implemented
+
+- [ ] New command to work with tables
 
 ## Contributing
 
