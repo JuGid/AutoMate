@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Mouse` command to simulate mouse
 - Chromedriver can run in headless mode. Geckodriver coming soon with php-driver update.
 - `Print` command to print a text in the console
+- On `FillTransformer`, new options before to clear the content
 
 ### Changed 
 

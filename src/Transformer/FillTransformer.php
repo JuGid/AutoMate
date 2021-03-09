@@ -15,7 +15,8 @@ class FillTransformer extends AbstractTransformer
         return [
             'fill' => [
                 ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
-                'with' => ':string'
+                'with' => ':string',
+                'before?' => ':string :in("clear")'
                 ]
             ];
     }
@@ -28,7 +29,13 @@ class FillTransformer extends AbstractTransformer
     protected function transform() : void
     {
         $webLocator = WebLocator::get(array_keys($this->step['fill'])[0], array_values($this->step['fill'])[0]);
-        $this->driver->findElement($webLocator)->sendKeys($this->step['fill']['with']);
+        $element = $this->driver->findElement($webLocator);
+
+        if(isset($this->step['fill']['before'])) {
+            $element->clear();
+        }
+
+        $element->sendKeys($this->step['fill']['with']);
     }
 
     /**

@@ -7,6 +7,10 @@ scenario:
         id: input-text
         with: Test
     - fill:
+        id: input-text
+        with: Test
+        before: clear
+    - fill:
         id: input-text-empty
         with: Test empty
     - fill:
