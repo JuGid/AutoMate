@@ -10,28 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `Submit` command to fill then submit an element
-- AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
 - `Keyboard` command to simulate keyboard
 - `Mouse` command to simulate mouse
-- Chromedriver can run in headless mode. Geckodriver coming soon with php-driver update.
 - `Print` command to print a text in the console
-- On `FillTransformer`, new options before to clear the content
+- AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
+- Chromedriver can run in headless mode. _Geckodriver coming soon with php-webdriver update._
+- New option _before_ to clear the content for `Fill` command
 
 ### Changed 
 
 - `Use` command does not detect loop anymore as a condition can make the scenario change
 - You can register plugins on multiple events `AutoMate::registerPlugin(array|string $event, AutoMateListener $listener)`
-- Wiki is not empty
-- If you call a non existent command, `Runner` throw a `CommandException`
+- If you call a non existent command, `Runner` throw a `CommandException`, AutoMate returns en error in handler.
+- Wiki is not empty anymore
 
 ### Fixed 
 
 - `Scenario` can now reset or not the scope. When using `use`, the Scenario variable scope is not reset.
 - When AutoMate runs, the World variable scope is reset.
+- `Frame` command can now return to default content
 - `Use` command now use the good scenario.
 - `textIs`, `textContains`, `textMatches` work now
 - Fixed a bug that throw an error when the `GetTransformer` set the World variable
-- `Frame` command can now return to default content when specified
 
 ## [0.4.1] - 28/02/2021
 
