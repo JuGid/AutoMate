@@ -641,4 +641,13 @@ class TransformersTest extends TestCase
         $this->assertTrue($transformer->validate());
         $this->assertSame('Click use on id[selector]', (string) $transformer);
     }
+
+    public function testCloseTransformerAndGetProperties()
+    {
+        $transformer = new CloseTransformer();
+        $transformer->setStep(['close' => 'window']);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Close window', (string) $transformer);
+    }
 }

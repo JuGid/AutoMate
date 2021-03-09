@@ -21,9 +21,8 @@ scenario:
         id: other_iframe_content
     - click:
         id: open-new-window
-    - keyboard:
-        event: sendKeys
-        keys: 
-          - "\xEE\x80\x89"
-          - w
-    - exit: Not a good test
+    - numberOfWindows: 2
+    - close: window
+    - numberOfWindows: 1
+    - exit: Test is not good because of close
+    - titleIs: php-webdriver test page
