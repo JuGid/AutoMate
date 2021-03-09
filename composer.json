@@ -37,6 +37,12 @@
         ],
         "tests": [
           "vendor/bin/phpunit --colors=always --testsuite tests --coverage-clover ./coverage.xml "
+        ],
+        "fix-source": [
+          "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src"
+        ],
+        "fix-tests": [
+          "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix tests"
         ]
       }
 }
