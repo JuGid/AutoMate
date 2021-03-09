@@ -23,6 +23,11 @@ class DriverConfiguration
      */
     private $serverUrl = 'http://localhost:4444';
 
+    /**
+     * @var bool
+     */
+    private $headless = false;
+
     public function __construct()
     {
     }
@@ -56,4 +61,12 @@ class DriverConfiguration
     {
         return $this->serverUrl;
     }
+
+    public function headlessMode() : void {
+        $this->headless = true;
+    }
+
+    public function shouldRunHeadless() : bool {
+        return $this->headless;
+    } 
 }

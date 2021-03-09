@@ -11,16 +11,30 @@ require __DIR__.'/../../vendor/autoload.php';
 
 use Automate\AutoMate;
 use Automate\Console\Console;
+use Automate\Driver\DriverConfiguration;
 
 $configFile = __DIR__.'/config/config.yaml';
 $results = [];
-$scenariosTest = ['tables', 'alert'];
+$scenariosTest = [
+    'tables', 
+    'alert'
+];
+
 $autoMate = new AutoMate($configFile);
 
+//Should set a different port since chromedriver runs on 9515
+//And run in headless mode
+$driverConfiguration = new DriverConfiguration();
+$driverConfiguration->setServerUrl('http://localhost:9515');
+$driverConfiguration->headlessMode();
+$autoMate->setDriverConfiguration($driverConfiguration);
+
+//Begin
 foreach ($scenariosTest as $scenario) {
     $results[$scenario] = $autoMate->run($scenario, false, true);
 }
 
+//Report every errors by scenario
 Console::report();
 Console::separator();
 foreach ($results as $scenario=>$errorHandler) {

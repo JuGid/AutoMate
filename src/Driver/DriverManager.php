@@ -5,7 +5,9 @@ namespace Automate\Driver;
 use Automate\Configuration\Configuration;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Automate\Exception\BrowserException;
+use Automate\Exception\NotImplementedException;
 use Automate\Handler\WindowHandler;
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Firefox\FirefoxDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -34,7 +36,11 @@ abstract class DriverManager
         $driver = null;
         $caps = null;
 
-        if ($driverConfiguration->getHttpProxy() == null && $browser == 'chrome') {
+        if ($driverConfiguration->getHttpProxy() == null && 
+            $browser == 'chrome' &&
+            !$driverConfiguration->shouldRunHeadless()
+           ) 
+        {
             putenv('WEBDRIVER_CHROME_DRIVER=' . $webdriverPath);
             $driver = ChromeDriver::start();
         } else {
@@ -52,6 +58,19 @@ abstract class DriverManager
                     WebDriverCapabilityType::PROXY,
                     $driverConfiguration->getHttpProxy()->getAsCapability()
                 );
+            }
+
+            //For chrome, set headless mode if needed
+            if($driverConfiguration->shouldRunHeadless()) {
+                switch($browser) {
+                    case 'chrome':
+                        $options = new ChromeOptions();
+                        $options->addArguments(['--headless']);
+                        $caps->setCapability(ChromeOptions::CAPABILITY_W3C, $options);
+                        break;
+                    default:
+                        throw new NotImplementedException($browser. ' cannot run in headless mode');
+                }
             }
 
             //Set firefox profile in browser capabilities

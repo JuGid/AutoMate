@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
 - `Keyboard` command to simulate keyboard
 - `Mouse` command to simulate mouse
+- Chromedriver can run in headless mode. Geckodriver coming soon with php-driver update.
 
 ### Changed 
 
