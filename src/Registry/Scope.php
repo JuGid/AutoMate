@@ -4,8 +4,8 @@ namespace Automate\Registry;
 
 abstract class Scope
 {
-    const SCENARIO = 'scenario';
-    const SPEC = 'spec';
-    const WORLD = 'world';
-    const TEST = 'test';
+    public const SCENARIO = 'scenario';
+    public const SPEC = 'spec';
+    public const WORLD = 'world';
+    public const TEST = 'test';
 }

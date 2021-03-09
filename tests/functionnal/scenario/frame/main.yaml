@@ -24,5 +24,4 @@ scenario:
     - numberOfWindows: 2
     - close: window
     - numberOfWindows: 1
-    - exit: Test is not good because of close
     - titleIs: php-webdriver test page

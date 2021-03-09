@@ -14,12 +14,11 @@ use Symfony\Component\Yaml\Exception\ParseException;
  */
 class ScenarioTest extends TestCase
 {
-    const SCENARIO = 'scenario-tests';
-    const SCENARIO_NO_BROWSER = 'scenario-no-browser';
-    const SCENARIO_NO_STEPS =  'scenario-no-steps';
-    const SCENARIO_PARSE_ERROR = 'scenario-parse-error';
-
-    const SCENARIO_ARRAY = [
+    private const SCENARIO = 'scenario-tests';
+    private const SCENARIO_NO_BROWSER = 'scenario-no-browser';
+    private const SCENARIO_NO_STEPS =  'scenario-no-steps';
+    private const SCENARIO_PARSE_ERROR = 'scenario-parse-error';
+    private const SCENARIO_ARRAY = [
         'browser'=> 'chrome',
         'variables' => [
             'name'=> 'bonjour',

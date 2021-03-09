@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 class LoggerTest extends TestCase
 {
-    const SCENARIO = 'scenario-tests';
+    private const SCENARIO = 'scenario-tests';
 
     /**
      * @before

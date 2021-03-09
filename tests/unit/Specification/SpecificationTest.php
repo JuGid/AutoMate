@@ -7,10 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 class SpecificationTest extends TestCase
 {
-    const SCENARIO = 'scenario-tests';
-    const FILEPATH = __DIR__. '/../files/specs/'.self::SCENARIO.'/spec.csv';
-    const FILEPATH_TO_RENAME = __DIR__. '/../files/specs/scenario-spec-processed/spec.csv';
-    const FILEPATH_RENAMED = __DIR__. '/../files/specs/scenario-spec-processed/spec_PROCESSED.csv';
+    private const SCENARIO = 'scenario-tests';
+    private const FILEPATH = __DIR__. '/../files/specs/'.self::SCENARIO.'/spec.csv';
+    private const FILEPATH_TO_RENAME = __DIR__. '/../files/specs/scenario-spec-processed/spec.csv';
+    private const FILEPATH_RENAMED = __DIR__. '/../files/specs/scenario-spec-processed/spec_PROCESSED.csv';
+    
     /**
      * @before
      */
