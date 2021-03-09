@@ -1,0 +1,29 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go
+    - frame: 
+        id: iframe_content
+    - get:
+        xpath: '//body//p'
+        what: text
+        varname: bodyText
+    - condition:
+        eval: "'{{ world.bodyText }}' == 'This is the content of the iFrame'"
+        ifTrue:
+          steps:
+            - frame:
+                default: content
+        ifFalse:
+          steps:
+            - exit: 'Text is not what was xpected'
+    - frame:
+        id: other_iframe_content
+    - click:
+        id: open-new-window
+    - keyboard:
+        event: sendKeys
+        keys: 
+          - "\xEE\x80\x89"
+          - w
+    - exit: Not a good test

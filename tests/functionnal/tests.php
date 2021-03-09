@@ -17,16 +17,15 @@ $configFile = __DIR__.'/config/config.yaml';
 $results = [];
 $scenariosTest = [
     'tables', 
-    'alert'
+    'alert',
+    'frame'
 ];
-
-
 
 //Should set a different port since chromedriver runs on 9515
 //And run in headless mode
 $driverConfiguration = new DriverConfiguration();
 $driverConfiguration->setServerUrl('http://localhost:9515');
-$driverConfiguration->headlessMode();
+//$driverConfiguration->headlessMode();
 
 //Create AutoMate instance
 $autoMate = new AutoMate($configFile);

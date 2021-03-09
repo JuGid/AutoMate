@@ -2,6 +2,8 @@
 
 namespace Automate\Transformer;
 
+use Facebook\WebDriver\WebDriverKeys;
+
 class KeyboardTransformer extends AbstractTransformer
 {
 
@@ -12,7 +14,7 @@ class KeyboardTransformer extends AbstractTransformer
     {
         return ['keyboard'=>[
             'event'=> ':string :in("releaseKey","pressKey", "sendKeys")',
-            'keys'=> [':string *' => ':string']
+            'keys'=> ':any'
         ]];
     }
 
@@ -23,14 +25,8 @@ class KeyboardTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        $keyboard = $this->driver->getKeyboard();
-        
         $event = $this->step['keyboard']['event'];
-
-        foreach ($this->step['keyboard']['keys'] as $k=>$keyToSend) {
-            $keyboard->{$event}($keyToSend);
-            //$keyboard->$event($keyToSend); this is not a pretty thing to do
-        }
+        $this->driver->getKeyboard()->{$event}($this->step['keyboard']['keys']);
     }
 
     /**

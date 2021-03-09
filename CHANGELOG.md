@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Use` command now use the good scenario.
 - `textIs`, `textContains`, `textMatches` work now
 - Fixed a bug that throw an error when the `GetTransformer` set the World variable
+- `Frame` command can now return to default content when specified
 
 ## [0.4.1] - 28/02/2021
 
