@@ -23,16 +23,14 @@ class CreateTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        // Coming with the new php-webdriver release
-        
+        WindowHandler::addPreviousWindow($this->driver->getWindowHandle());
+
         $array = $this->step['create'];
         if ($array == 'tab') {
             $this->driver->switchTo()->newWindow(WebDriverTargetLocator::WINDOW_TYPE_TAB);
         } elseif ($array == 'window') {
             $this->driver->switchTo()->newWindow(WebDriverTargetLocator::WINDOW_TYPE_WINDOW);
         }
-        
-        WindowHandler::setWindows($this->driver->getWindowHandles());
     }
 
     /**

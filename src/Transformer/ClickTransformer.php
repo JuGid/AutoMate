@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\Handler\WindowHandler;
 use Automate\Transformer\Helpers\WebLocator;
 
 class ClickTransformer extends AbstractTransformer
@@ -26,8 +27,12 @@ class ClickTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
+        WindowHandler::setWindows($this->driver->getWindowHandles());
+
         $webLocator = WebLocator::get(array_keys($this->step['click'])[0], array_values($this->step['click'])[0]);
         $this->driver->findElement($webLocator)->click();
+        
+        $this->switchToNewWindow();
     }
 
     /**

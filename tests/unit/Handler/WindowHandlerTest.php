@@ -22,4 +22,16 @@ class WindowHandlerTest extends TestCase
         WindowHandler::removeAll();
         $this->assertSame([], WindowHandler::getWindows());
     }
+
+    public function testShouldTestTheQueue() {
+        WindowHandler::removeAll();
+        WindowHandler::addPreviousWindow('win1');
+        WindowHandler::addPreviousWindow('win2');
+        WindowHandler::addPreviousWindow('win3');
+
+        $this->assertSame('win3', WindowHandler::getPreviousWindow());
+        $this->assertSame('win2', WindowHandler::getPreviousWindow());
+        $this->assertSame('win1', WindowHandler::getPreviousWindow());
+        $this->assertSame('win1', WindowHandler::getPreviousWindow());
+    }
 }

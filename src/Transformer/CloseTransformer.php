@@ -2,6 +2,8 @@
 
 namespace Automate\Transformer;
 
+use Automate\Handler\WindowHandler;
+
 class CloseTransformer extends AbstractTransformer
 {
 
@@ -21,6 +23,7 @@ class CloseTransformer extends AbstractTransformer
     protected function transform() : void
     {
         $this->driver->close();
+        $this->driver->switchTo()->window(WindowHandler::getPreviousWindow());
     }
 
     /**

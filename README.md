@@ -88,12 +88,10 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 ## Roadmap
 *See [Changelogs](CHANGELOG.md) for more information*
 
-- [x] Find a way to use keyboard (`Keyboard` command)
-- [x] Find a way to use the mouse (`Mouse` command)
 - [ ] Add `Protect` command to protect steps from errors
+- [ ] Add `Submit` command to submit forms
 - [ ] Add checkboxes and radio button support
 - [ ] Add Alert send keys support
-- [x] Create your own commands (AbstractTransformer)
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ### Will not be implemented

@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - You can register plugins on multiple events `AutoMate::registerPlugin(array|string $event, AutoMateListener $listener)`
 - If you call a non existent command, `Runner` throw a `CommandException`, AutoMate returns en error in handler.
 - Wiki is not empty anymore
+- The active window is always the last opened window. When closing window, the webdriver switch to the **last** window.
 
 ### Fixed 
 
@@ -32,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Use` command now use the good scenario.
 - `textIs`, `textContains`, `textMatches` work now
 - Fixed a bug that throw an error when the `GetTransformer` set the World variable
+- The webdriver always switch to the new window so you can click and create without getting errors.
 
 ## [0.4.1] - 28/02/2021
 

@@ -9,6 +9,7 @@ use Automate\Console\Console;
 use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
 use Automate\Exception\EventException;
+use Automate\Handler\WindowHandler;
 use Automate\Registry\VariableRegistry;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use PASVL\Validation\ValidatorBuilder;
@@ -129,6 +130,18 @@ abstract class AbstractTransformer implements AutoMateListener
     public function __toString()
     {
         return strtoupper(array_keys($this->step)[0]);
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    protected function switchToNewWindow() {
+        $windowHandlesAfter = $this->driver->getWindowHandles();
+        $newWindowHandle = array_diff($windowHandlesAfter, WindowHandler::getWindows());
+        if(!empty($newWindowHandle)) {
+            WindowHandler::addPreviousWindow($this->driver->getWindowHandle());
+            $this->driver->switchTo()->window(reset($newWindowHandle));
+        }
     }
 
     public function setStep(array $step)
