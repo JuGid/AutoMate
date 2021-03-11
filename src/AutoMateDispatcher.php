@@ -22,7 +22,6 @@ final class AutoMateDispatcher
     private $listeners = [];
 
     /**
-     * @param array|string $event
      * @param AutoMateListener $object
      */
     public function attach(AutoMateListener $object) : void

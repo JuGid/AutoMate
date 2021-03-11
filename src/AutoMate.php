@@ -88,9 +88,6 @@ final class AutoMate
         return $this->driverConfiguration;
     }
 
-    /**
-     * @param array|string $event Event or array of event to subsbribe on
-     */
     public function registerPlugin(AutoMateListener $listener)
     {
         $this->dispatcher->attach($listener);
