@@ -127,7 +127,7 @@ final class Runner
                 $data = ['driver'=> $this->driver, 'step'=>$step];
                 $received = $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
 
-                if(!$received) {
+                if (!$received) {
                     throw new CommandException('The command '. array_keys($step)[0] . ' does not exist');
                 }
             }

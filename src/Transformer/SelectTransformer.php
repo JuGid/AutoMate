@@ -37,8 +37,9 @@ class SelectTransformer extends AbstractTransformer
         $byElementValue = array_values($this->step['select'])[0];
 
         $element = $this->driver->findElement(WebLocator::get($byElement, $byElementValue));
-
-        switch($this->step['select']['type']) {
+        $typedElement = null;
+        
+        switch ($this->step['select']['type']) {
             case "checkbox":
                 $typedElement = new WebDriverCheckboxes($element);
                 echo "By checkbox \n";
@@ -54,9 +55,9 @@ class SelectTransformer extends AbstractTransformer
         }
         
         $value = $this->step['select']['value'];
-        switch($this->step['select']['by']) {
+        switch ($this->step['select']['by']) {
             case 'index':
-                if(!is_numeric($value)) {
+                if (!is_numeric($value)) {
                     throw new CommandException('Select by index should use an index represented by an integer');
                 }
                 $typedElement->selectByIndex(intval($value));

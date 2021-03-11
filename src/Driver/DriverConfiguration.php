@@ -62,11 +62,13 @@ class DriverConfiguration
         return $this->serverUrl;
     }
 
-    public function headlessMode() : void {
+    public function headlessMode() : void
+    {
         $this->headless = true;
     }
 
-    public function shouldRunHeadless() : bool {
+    public function shouldRunHeadless() : bool
+    {
         return $this->headless;
-    } 
+    }
 }

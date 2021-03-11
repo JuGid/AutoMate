@@ -31,10 +31,9 @@ class FrameTransformer extends AbstractTransformer
 
         if ($keys[0] == 'index') {
             $this->driver->switchTo()->frame($this->step['frame']['index']);
-        } elseif($keys[0] == 'default') {
+        } elseif ($keys[0] == 'default') {
             $this->driver->switchTo()->defaultContent();
-        }
-        else {
+        } else {
             $element = $this->driver->findElement(WebLocator::get($keys[0], $values[0]));
             $this->driver->switchTo()->frame($element);
         }

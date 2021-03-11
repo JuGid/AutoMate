@@ -36,11 +36,10 @@ abstract class DriverManager
         $driver = null;
         $caps = null;
 
-        if ($driverConfiguration->getHttpProxy() == null && 
+        if ($driverConfiguration->getHttpProxy() == null &&
             $browser == 'chrome' &&
             !$driverConfiguration->shouldRunHeadless()
-           ) 
-        {
+           ) {
             putenv('WEBDRIVER_CHROME_DRIVER=' . $webdriverPath);
             $driver = ChromeDriver::start();
         } else {
@@ -61,8 +60,8 @@ abstract class DriverManager
             }
 
             //Set headless mode if needed
-            if($driverConfiguration->shouldRunHeadless()) {
-                switch($browser) {
+            if ($driverConfiguration->shouldRunHeadless()) {
+                switch ($browser) {
                     case 'chrome':
                         $options = new ChromeOptions();
                         $options->addArguments(['--headless']);

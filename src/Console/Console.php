@@ -67,7 +67,8 @@ class Console
         self::separator('=');
     }
 
-    public static function report() {
+    public static function report()
+    {
         self::writeln("_____                       _   ");
         self::writeln("|  __ \                     | |  ");
         self::writeln("| |__) |___ _ __   ___  _ __| |_ ");

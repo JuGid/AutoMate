@@ -28,7 +28,7 @@ final class AutoMateDispatcher
     public function attach(AutoMateListener $object) : void
     {
         if (is_array($object->onEvent())) {
-            foreach($object->onEvent() as $event) {
+            foreach ($object->onEvent() as $event) {
                 $this->listeners[$object->onEvent()][] = $object;
             }
             return;

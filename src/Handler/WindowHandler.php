@@ -10,7 +10,7 @@ class WindowHandler
     public static $actual_windows = [];
 
     /**
-     * @var array 
+     * @var array
      */
     public static $previous_window_queue = [];
 
@@ -24,12 +24,14 @@ class WindowHandler
         self::$actual_windows = $windows;
     }
 
-    public static function addPreviousWindow(string $previous_window) : void {
+    public static function addPreviousWindow(string $previous_window) : void
+    {
         self::$previous_window_queue[] = $previous_window;
     }
 
-    public static function getPreviousWindow() : string {
-        if(count(self::$previous_window_queue) == 1) {
+    public static function getPreviousWindow() : string
+    {
+        if (count(self::$previous_window_queue) == 1) {
             return self::$previous_window_queue[0];
         }
         

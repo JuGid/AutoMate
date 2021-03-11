@@ -37,8 +37,9 @@ class DeselectTransformer extends AbstractTransformer
         $byElementValue = array_values($this->step['deselect'])[0];
 
         $element = $this->driver->findElement(WebLocator::get($byElement, $byElementValue));
-
-        switch($this->step['deselect']['type']) {
+        $typedElement = null;
+        
+        switch ($this->step['deselect']['type']) {
             case "checkbox":
                 $typedElement = new WebDriverCheckboxes($element);
                 break;
@@ -52,14 +53,14 @@ class DeselectTransformer extends AbstractTransformer
         
         $value = $this->step['deselect']['value'];
 
-        if($value == 'all') {
+        if ($value == 'all') {
             $typedElement->deselectAll();
             return;
         }
 
-        switch($this->step['deselect']['by']) {
+        switch ($this->step['deselect']['by']) {
             case 'index':
-                if(!is_numeric($value)) {
+                if (!is_numeric($value)) {
                     throw new CommandException('Deselect by index should use an index represented by an integer');
                 }
                 $typedElement->deselectByIndex(intval($value));

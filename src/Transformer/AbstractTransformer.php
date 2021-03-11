@@ -36,13 +36,14 @@ abstract class AbstractTransformer implements AutoMateListener
     /**
      * {@inheritdoc}
      */
-    public function onEvent() {
+    public function onEvent()
+    {
         return AutoMateEvents::STEP_TRANSFORM;
     }
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @codeCoverageIgnore
      */
     public function notify(string $event, $data) : int
@@ -95,20 +96,20 @@ abstract class AbstractTransformer implements AutoMateListener
         array_walk_recursive(
             $this->step,
             function (&$item, $key) {
-            preg_match_all("/{{([^{]*)}}/", $item, $matches);
-            $variables = $matches[1];
-            array_walk($variables, function (&$variable) {
-                $variableExploded = explode('.', trim($variable));
-                $variable = VariableRegistry::get($variableExploded[0], $variableExploded[1]);
-            });
+                preg_match_all("/{{([^{]*)}}/", $item, $matches);
+                $variables = $matches[1];
+                array_walk($variables, function (&$variable) {
+                    $variableExploded = explode('.', trim($variable));
+                    $variable = VariableRegistry::get($variableExploded[0], $variableExploded[1]);
+                });
 
-            $index = 0;
-            $item = preg_replace_callback("/{{([^{]*)}}/", function ($matches) use ($variables, &$index) {
-                $str = str_replace($matches[$index], $variables[$index], $matches[$index]);
-                $index++;
-                return $str;
-            }, $item);
-        }
+                $index = 0;
+                $item = preg_replace_callback("/{{([^{]*)}}/", function ($matches) use ($variables, &$index) {
+                    $str = str_replace($matches[$index], $variables[$index], $matches[$index]);
+                    $index++;
+                    return $str;
+                }, $item);
+            }
         );
     }
 
@@ -141,10 +142,11 @@ abstract class AbstractTransformer implements AutoMateListener
     /**
      * @codeCoverageIgnore
      */
-    protected function switchToNewWindow() {
+    protected function switchToNewWindow()
+    {
         $windowHandlesAfter = $this->driver->getWindowHandles();
         $newWindowHandle = array_diff($windowHandlesAfter, WindowHandler::getWindows());
-        if(!empty($newWindowHandle)) {
+        if (!empty($newWindowHandle)) {
             WindowHandler::addPreviousWindow($this->driver->getWindowHandle());
             $this->driver->switchTo()->window(reset($newWindowHandle));
         }

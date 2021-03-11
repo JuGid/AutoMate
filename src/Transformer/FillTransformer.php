@@ -31,7 +31,7 @@ class FillTransformer extends AbstractTransformer
         $webLocator = WebLocator::get(array_keys($this->step['fill'])[0], array_values($this->step['fill'])[0]);
         $element = $this->driver->findElement($webLocator);
 
-        if(isset($this->step['fill']['before'])) {
+        if (isset($this->step['fill']['before'])) {
             $element->clear();
         }
 
