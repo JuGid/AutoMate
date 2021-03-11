@@ -88,9 +88,8 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 ## Roadmap
 *See [Changelogs](CHANGELOG.md) for more information*
 
-- [ ] Add `Submit` command to submit forms
-- [x] Add checkboxes and radio button support
-- [x] Add Alert send keys support
+- [ ] Finish functionnal tests
+- [ ] Harmonize patterns
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ### Will not be implemented

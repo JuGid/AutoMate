@@ -27,7 +27,7 @@ class AlertTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        switch($this->step['alert']['type']){
+        switch ($this->step['alert']['type']) {
             case 'accept':
                 $this->driver->switchTo()->alert()->accept();
                 break;
@@ -39,12 +39,12 @@ class AlertTransformer extends AbstractTransformer
                              ->until(WebDriverExpectedCondition::alertIsPresent(), 'Alert is not present');
                 break;
             case 'sendKeys':
-                if(!isset($this->step['alert']['value'])) {
+                if (!isset($this->step['alert']['value'])) {
                     throw new CommandException('Should define a value when using sendKeys');
                 }
                 $this->driver->switchTo()->alert()->sendKeys($this->step['alert']['value']);
                 break;
-        } 
+        }
     }
 
     /**

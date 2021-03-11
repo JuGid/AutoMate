@@ -16,7 +16,7 @@ use Automate\Driver\DriverConfiguration;
 $configFile = __DIR__.'/config/config.yaml';
 $results = [];
 $scenariosTest = [
-    'tables', 
+    'tables',
     'alert',
     'frame',
     'delayed-element',

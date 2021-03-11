@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Keyboard` command to simulate keyboard
 - `Mouse` command to simulate mouse
 - `Print` command to print a text in the console
+- `Form` command to make actions on forms
 - AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
 - Chromedriver can run in headless mode. _Geckodriver coming soon with php-webdriver update._
 - New option _before_ to clear the content for `Fill` command
