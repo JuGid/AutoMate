@@ -4,18 +4,31 @@ scenario:
     - use: sub.go
     - click:
         id: open-alert-delayed
-    - alert: isPresent
-    - alert: accept
+    - alert: 
+        type: isPresent
+    - alert: 
+        type: accept
     - click:
         id: open-confirm
-    - alert: isPresent
-    - alert: accept
+    - alert: 
+        type: isPresent
+    - alert: 
+        type: accept
     - click:
         id: open-confirm
-    - alert: dismiss
+    - alert: 
+        type: dismiss
     - click:
         id: open-alert
-    - alert: isPresent
-    - alert: accept
-    - exit: Should test alert prompt and add the possibility to write text in alert
+    - alert: 
+        type: isPresent
+    - alert: 
+        type: accept
+    - click:
+        id: open-prompt
+    - alert: 
+        type: sendKeys
+        value: prompt to alert
+    - alert:
+        type: accept
     
