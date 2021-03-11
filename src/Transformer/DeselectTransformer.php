@@ -4,6 +4,8 @@ namespace Automate\Transformer;
 
 use Automate\Exception\CommandException;
 use Automate\Transformer\Helpers\WebLocator;
+use Facebook\WebDriver\WebDriverCheckboxes;
+use Facebook\WebDriver\WebDriverRadios;
 use Facebook\WebDriver\WebDriverSelect;
 
 class DeselectTransformer extends AbstractTransformer
@@ -17,6 +19,7 @@ class DeselectTransformer extends AbstractTransformer
         return ['deselect'=>
             [
                 ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+                'type'=>':string :in("checkbox", "radio", "select")',
                 'by'=>':string :in("value","index","text","pltext")',
                 'value'=>':string or (:number :int)'
             ]
@@ -30,30 +33,46 @@ class DeselectTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        $element = $this->driver->findElement(WebLocator::get(array_keys($this->step['deselect'])[0], array_values($this->step['deselect'])[0]));
-        $select = new WebDriverSelect($element);
-        $deselectArray = $this->step['deselect'];
+        $byElement = array_keys($this->step['deselect'])[0];
+        $byElementValue = array_values($this->step['deselect'])[0];
 
-        if (is_string($deselectArray['value'])) {
-            switch ($deselectArray['by']) {
-                case 'value':
-                    if ($deselectArray['value'] == 'all') {
-                        $select->deselectAll();
-                    } else {
-                        $select->selectByValue($deselectArray['value']);
-                    }
-                    break;
-                case 'text':
-                    $select->deselectByVisibleText($deselectArray['value']);
-                    break;
-                case 'pltext':
-                    $select->deselectByVisiblePartialText($deselectArray['value']);
-                    break;
-            }
-        } elseif (is_numeric($deselectArray['value']) && $deselectArray['by'] == 'index') {
-            $select->deselectByIndex($deselectArray['value']);
-        } else {
-            throw new CommandException('The deselect value has to be of type string/text or numeric for deselect by index');
+        $element = $this->driver->findElement(WebLocator::get($byElement, $byElementValue));
+
+        switch($this->step['deselect']['type']) {
+            case "checkbox":
+                $typedElement = new WebDriverCheckboxes($element);
+                break;
+            case "radio":
+                $typedElement = new WebDriverRadios($element);
+                break;
+            case "select":
+                $typedElement = new WebDriverSelect($element);
+                break;
+        }
+        
+        $value = $this->step['deselect']['value'];
+
+        if($value == 'all') {
+            $typedElement->deselectAll();
+            return;
+        }
+
+        switch($this->step['deselect']['by']) {
+            case 'index':
+                if(!is_numeric($value)) {
+                    throw new CommandException('Deselect by index should use an index represented by an integer');
+                }
+                $typedElement->deselectByIndex(intval($value));
+                break;
+            case 'value':
+                $typedElement->deselectByValue($value);
+                break;
+            case 'text':
+                $typedElement->deselectByVisibleText($value);
+                break;
+            case 'pltext':
+                $typedElement->deselectByVisiblePartialText($value);
+                break;
         }
     }
 

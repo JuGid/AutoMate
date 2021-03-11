@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AutoMate now use an EventDispatcher that trigger some events [See here](https://github.com/JuGid/AutoMate/wiki/Events)
 - Chromedriver can run in headless mode. _Geckodriver coming soon with php-webdriver update._
 - New option _before_ to clear the content for `Fill` command
+- Checkboxes and Radios support in `Select` command
 
 ### Changed 
 
@@ -23,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - You can register plugins on multiple events `AutoMate::registerPlugin(array|string $event, AutoMateListener $listener)`
 - If you call a non existent command, `Runner` throw a `CommandException`, AutoMate returns en error in handler.
 - Wiki is not empty anymore
-- The active window is always the last opened window. When closing window, the webdriver switch to the **last** window.
+- The active window is always the last opened window. When closing window, the webdriver switch to the **last** window using the `WindowHandler` previous windows queue.
 
 ### Fixed 
 

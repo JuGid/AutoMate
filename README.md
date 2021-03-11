@@ -90,7 +90,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 
 - [ ] Add `Protect` command to protect steps from errors
 - [ ] Add `Submit` command to submit forms
-- [ ] Add checkboxes and radio button support
+- [x] Add checkboxes and radio button support
 - [ ] Add Alert send keys support
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 

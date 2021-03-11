@@ -18,26 +18,47 @@ scenario:
         with: Test long text to fill a textarea and watch if it's working
     - select:
         id: select
+        type: select
         by: text
         value: This is not second option
     - select:
         id: select
+        type: select
         by: value
         value: fifth
     - select:
         id: select
+        type: select
         by: index
         value: 4
     - select:
         id: select-multiple
+        type: select
         by: index
         value: 1
     - select:
         id: select-multiple
+        type: select
         by: index
         value: 4
     - select:
         id: select-multiple
+        type: select
         by: index
         value: 3
-    - exit: Should test checkboxes and radio buttons
+    - select:
+        xpath: '//input[@type="checkbox"]'
+        type: checkbox
+        by: index
+        value: 0
+    - select:
+        xpath: '//input[@type="checkbox"]'
+        type: checkbox
+        by: value
+        value: fourth
+    - select:
+        xpath: '//input[@type="radio"]'
+        type: radio
+        by: value
+        value: third
+    - titleIs: bonjour
