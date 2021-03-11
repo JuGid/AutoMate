@@ -3,6 +3,7 @@
 namespace Automate\Transformer;
 
 use Automate\Configuration\Configuration;
+use Automate\Exception\CommandException;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class AlertTransformer extends AbstractTransformer
@@ -13,7 +14,10 @@ class AlertTransformer extends AbstractTransformer
      */
     protected function getPattern() : array
     {
-        return ['alert' => ':string :in("accept", "dismiss", "isPresent")'];
+        return ['alert' => [
+                    'type'=>':string :in("accept", "dismiss", "isPresent", "sendKeys")',
+                    'value?'=>':string'
+                ]];
     }
 
     /**
@@ -23,15 +27,24 @@ class AlertTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        $array = $this->step['alert'];
-        if ($array == 'accept') {
-            $this->driver->switchTo()->alert()->accept();
-        } elseif ($array == 'dismiss') {
-            $this->driver->switchTo()->alert()->dismiss();
-        } elseif ($array == 'isPresent') {
-            $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
-                         ->until(WebDriverExpectedCondition::alertIsPresent(), 'Alert is not present');
-        }
+        switch($this->step['alert']['type']){
+            case 'accept':
+                $this->driver->switchTo()->alert()->accept();
+                break;
+            case 'dismiss':
+                $this->driver->switchTo()->alert()->dismiss();
+                break;
+            case 'isPresent':
+                $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
+                             ->until(WebDriverExpectedCondition::alertIsPresent(), 'Alert is not present');
+                break;
+            case 'sendKeys':
+                if(!isset($this->step['alert']['value'])) {
+                    throw new CommandException('Should define a value when using sendKeys');
+                }
+                $this->driver->switchTo()->alert()->sendKeys($this->step['alert']['value']);
+                break;
+        } 
     }
 
     /**
@@ -39,6 +52,6 @@ class AlertTransformer extends AbstractTransformer
      */
     public function __toString()
     {
-        return sprintf('On alert : %s', $this->step['alert']);
+        return sprintf('On alert : %s', $this->step['alert']['type']);
     }
 }

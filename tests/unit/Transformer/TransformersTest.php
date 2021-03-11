@@ -74,14 +74,17 @@ class TransformersTest extends TestCase
 
         $transformer = new AlertTransformer();
 
-        foreach ($possibilities as $possibility) {
-            $transformer->setStep(['alert'=>$possibility]);
-            $this->assertTrue($transformer->validate());
-        }
+        $pattern = ['alert' => ['type'=>'accept']];
+        $transformer->setStep($pattern);
+        $this->assertTrue($transformer->validate());
 
-        $this->assertSame('On alert : isPresent', (string) $transformer);
+        $pattern = ['alert' => ['type'=>'sendKeys', 'value'=>'hi']];
+        $transformer->setStep($pattern);
+        $this->assertTrue($transformer->validate());
 
-        $transformer->setStep(['alert'=>'foo']);
+        $this->assertSame('On alert : sendKeys', (string) $transformer);
+
+        $transformer->setStep(['alert'=>['type'=>'foo']]);
         $transformer->validate();
     }
 

@@ -21,10 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 
 - `Use` command does not detect loop anymore as a condition can make the scenario change
-- You can register plugins on multiple events `AutoMate::registerPlugin(array|string $event, AutoMateListener $listener)`
+- You can register plugins on multiple events `AutoMate::registerPlugin(AutoMateListener $listener)` if your listener implements AutoMateListener::onEvent() and return an array.
 - If you call a non existent command, `Runner` throw a `CommandException`, AutoMate returns en error in handler.
 - Wiki is not empty anymore
 - The active window is always the last opened window. When closing window, the webdriver switch to the **last** window using the `WindowHandler` previous windows queue.
+- `Alert` new pattern to support sendKeys type
 
 ### Fixed 
 
