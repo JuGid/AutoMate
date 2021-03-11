@@ -20,16 +20,11 @@ class AutoMateDispatcherTest extends TestCase
 
     public function testShouldAttachListener()
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Event should comes from class AutoMateEvents constants');
-
         $dispatcher = new AutoMateDispatcher();
-        $dispatcher->attach(AutoMateEvents::STEP_TRANSFORM, new GoTransformer());
+        $dispatcher->attach(new GoTransformer());
         $this->assertEquals(1, $dispatcher->countListeners());
 
-        $dispatcher->attach([AutoMateEvents::RUNNER_ENDS_ERROR, AutoMateEvents::RUNNER_ERROR], new GoTransformer());
-        $this->assertEquals(3, $dispatcher->countListeners());
-
-        $dispatcher->attach(4, new GoTransformer());
+        $dispatcher->attach(new GoTransformer());
+        $this->assertEquals(2, $dispatcher->countListeners());
     }
 }

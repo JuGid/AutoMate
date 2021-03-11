@@ -2,6 +2,7 @@
 
 namespace Automate\Transformer;
 
+use Automate\AutoMateEvents;
 use Automate\Registry\Scope;
 use Automate\Registry\VariableRegistry;
 use PASVL\Validation\Problems\DataKeyMatchedNoPatternKey;
@@ -49,6 +50,7 @@ class TransformersTest extends TestCase
         $this->assertTrue($transformer->validate());
 
         $this->assertSame('Configuration changed', (string) $transformer);
+        $this->assertSame(AutoMateEvents::STEP_TRANSFORM, $transformer->onEvent());
     }
 
     public function testGoTransformerAndGetProperties()
@@ -137,13 +139,14 @@ class TransformersTest extends TestCase
         $transformer->setStep([
             'deselect'=> [
                 'id' => 'selector',
+                'type'=>'checkbox',
                 'by'=> 'index',
                 'value' => '0'
             ]
         ]);
 
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Deselect in select id[selector] by index with value 0', (string) $transformer);
+        $this->assertSame('Deselect in checkbox id[selector] by index with value 0', (string) $transformer);
     }
 
     public function testSelectTransformerAndGetProperties()
@@ -153,13 +156,14 @@ class TransformersTest extends TestCase
         $transformer->setStep([
             'select'=> [
                 'id' => 'selector',
+                'type'=>'radio',
                 'by'=> 'text',
                 'value' => 'selectPoint'
             ]
         ]);
 
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Select in select id[selector] by text with value selectPoint', (string) $transformer);
+        $this->assertSame('Select in radio id[selector] by text with value selectPoint', (string) $transformer);
     }
 
     public function testFillTransformerAndGetProperties()

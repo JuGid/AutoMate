@@ -5,6 +5,7 @@ namespace Automate\Transformer;
 use Automate\AutoMateDispatcher;
 use Automate\AutoMateEvents;
 use Automate\AutoMateListener;
+use Automate\AutoMateTest;
 use Automate\Console\Console;
 use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
@@ -33,14 +34,19 @@ abstract class AbstractTransformer implements AutoMateListener
     protected $dispatcher = null;
 
     /**
+     * {@inheritdoc}
+     */
+    public function onEvent() {
+        return AutoMateEvents::STEP_TRANSFORM;
+    }
+
+    /**
+     * {@inheritdoc}
+     * 
      * @codeCoverageIgnore
      */
     public function notify(string $event, $data) : int
     {
-        if ($event != AutoMateEvents::STEP_TRANSFORM) {
-            return AutoMateListener::STATE_REJECTED;
-        }
-
         if (!isset($data['step']) && !isset($data['driver'])) {
             throw new EventException('For event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step and driver data');
         }

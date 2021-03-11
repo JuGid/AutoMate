@@ -25,19 +25,20 @@ final class AutoMateDispatcher
      * @param array|string $event
      * @param AutoMateListener $object
      */
-    public function attach($event, AutoMateListener $object) : void
+    public function attach(AutoMateListener $object) : void
     {
-        if (is_array($event)) {
-            array_map(function ($item) use ($object) {
-                $this->attach($item, $object);
-            }, $event);
+        if (is_array($object->onEvent())) {
+            foreach($object->onEvent() as $event) {
+                $this->listeners[$object->onEvent()][] = $object;
+            }
+            return;
         }
 
-        if (!is_string($event)) {
+        if (!is_string($object->onEvent())) {
             throw new InvalidArgumentException('Event should comes from class AutoMateEvents constants');
         }
 
-        $this->listeners[$event][] = $object;
+        $this->listeners[$object->onEvent()][] = $object;
     }
 
     public function notify(string $event, $data) : bool
@@ -76,11 +77,11 @@ final class AutoMateDispatcher
                 $params['last']
             );
 
-            $this->instanciateClassFromMapAndAttach($event, $map);
+            $this->instanciateClassFromMapAndAttach($map);
         }
     }
 
-    private function instanciateClassFromMapAndAttach($event, $map)
+    private function instanciateClassFromMapAndAttach($map)
     {
         foreach ($map as $transformerClass) {
             $instance = (new ReflectionClass($transformerClass))->newInstance();
@@ -93,7 +94,7 @@ final class AutoMateDispatcher
                 $instance->setDispatcher($this);
             }
 
-            $this->attach($event, $instance);
+            $this->attach($instance);
         }
     }
 }

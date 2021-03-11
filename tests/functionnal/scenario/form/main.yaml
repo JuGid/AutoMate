@@ -61,4 +61,3 @@ scenario:
         type: radio
         by: value
         value: third
-    - titleIs: bonjour
