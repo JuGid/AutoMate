@@ -30,13 +30,17 @@
     "scripts": {
         "all": [
           "@phpstan",
-          "@tests"
+          "@tests",
+          "@functionnal-tests"
         ],
         "phpstan": [
           "vendor/bin/phpstan analyse -c phpstan.neon"
         ],
-        "tests": [
+        "unit-tests": [
           "vendor/bin/phpunit --colors=always --testsuite tests --coverage-clover ./coverage.xml "
+        ],
+        "functionnal-tests": [
+          "php tests/functionnal/tests.php"
         ],
         "fix-source": [
           "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src"

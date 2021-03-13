@@ -1,10 +1,7 @@
 variables:
   adresse: http://wikipedia.fr
-  subScenario: create-cookie
+  message: create-cookie
 scenario:
   steps:
     - go: "{{ scenario.adresse }}"
-    - cookie:
-        name: 'cookieName'
-        value: 'cookieValue'
-    - exit: 'Simple scenario just go and exit'
+    - print: "{{ scenario.message }}"

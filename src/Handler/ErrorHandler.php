@@ -3,6 +3,7 @@
 namespace Automate\Handler;
 
 use Automate\Console\Console;
+use Automate\AutoMateError;
 
 final class ErrorHandler
 {
@@ -22,10 +23,6 @@ final class ErrorHandler
      */
     private $shouldStoreDataset = false;
 
-    public function __construct()
-    {
-    }
-
     public function win() : void
     {
         $this->wins++;
@@ -33,11 +30,7 @@ final class ErrorHandler
 
     public function error(string $type, array $dataset = []) : void
     {
-        if ($this->shouldStoreDataset) {
-            $this->errors[$type][] = implode(",", $dataset);
-        } else {
-            $this->errors[] = $type;
-        }
+        $this->errors[] = new AutoMateError($type, $dataset);
     }
 
     public function countWins() : int
@@ -47,15 +40,12 @@ final class ErrorHandler
 
     public function countErrors() : int
     {
-        if ($this->shouldStoreDataset) {
-            return count($this->errors, COUNT_RECURSIVE) - $this->countErrorsType();
-        }
-        return $this->countErrorsType();
+        return count($this->errors, COUNT_NORMAL);
     }
 
     public function countErrorsType() : int
     {
-        return count($this->errors, COUNT_NORMAL);
+        return count($this->getUniqueTypes(), COUNT_NORMAL);
     }
 
     public function getBackgroundColor() : string
@@ -66,6 +56,26 @@ final class ErrorHandler
     public function getShouldStoreDataset() : bool
     {
         return $this->shouldStoreDataset;
+    }
+
+    public function getUniqueTypes() : array
+    {
+        $uniqueErrorTypes = [];
+        foreach ($this->errors as $error) {
+            if (!in_array($error->getType(), $uniqueErrorTypes)) {
+                $uniqueErrorTypes[] = $error->getType();
+            }
+        }
+        return $uniqueErrorTypes;
+    }
+
+    public function getErrorsTypesWithDataset() : array
+    {
+        $errorsByType = [];
+        foreach ($this->errors as $error) {
+            $errorsByType[$error->getType()][] = $error->getDatasetAsString();
+        }
+        return $errorsByType;
     }
 
     public function shouldStoreDataset() : void
@@ -90,8 +100,6 @@ final class ErrorHandler
     /**
      * @codeCoverageIgnore
      *
-     * @todo In future version, this should use an ErrorPrinter
-     * @todo Should print dataset like [0] - dataset / [1] - dataset
      */
     public function printErrors() : void
     {
@@ -112,7 +120,7 @@ final class ErrorHandler
      */
     public function printErrorsTypeOnly() : void
     {
-        foreach ($this->errors as $key=>$type) {
+        foreach ($this->getUniqueTypes() as $key=>$type) {
             Console::writeln(sprintf("[%d] %s", $key, $type), 'red');
         }
     }
@@ -122,7 +130,9 @@ final class ErrorHandler
      */
     public function printErrorsTypeWithDataset() : void
     {
-        foreach ($this->errors as $type=>$datasets) {
+        $errorsDataset = $this->getErrorsTypesWithDataset();
+
+        foreach ($errorsDataset as $type=>$datasets) {
             Console::writeln($type, 'red');
             Console::separator('-');
             foreach ($datasets as $dataset) {
