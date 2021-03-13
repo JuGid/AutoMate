@@ -2,6 +2,7 @@
 
 namespace Automate\Handler;
 
+use Automate\AutoMateError;
 use PHPUnit\Framework\TestCase;
 
 class ErrorHandlerTest extends TestCase
@@ -57,8 +58,20 @@ class ErrorHandlerTest extends TestCase
 
         $errorsFromHandler = $errorHandler->getErrors();
         $this->assertSame('one,two', reset($errorsFromHandler)->getDatasetAsString());
+        $this->assertSame(['one','two'], reset($errorsFromHandler)->getDataset());
         $this->assertSame(5, $errorHandler->countErrors());
         $this->assertSame(1, $errorHandler->countErrorsType());
         $this->assertSame('red', $errorHandler->getBackgroundColor());
+    }
+
+    public function testShouldCompareErrors() 
+    {
+        $error1 = new AutoMateError('aaa', []);
+        $error2 = new AutoMateError('bbb', []);
+        $error3 = new AutoMateError('aaa', []);
+
+        $this->assertEquals(-1, AutoMateError::compare($error1, $error2));
+        $this->assertEquals(1, AutoMateError::compare($error2, $error1));
+        $this->assertEquals(0, AutoMateError::compare($error1, $error3));
     }
 }
