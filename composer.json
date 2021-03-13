@@ -30,7 +30,7 @@
     "scripts": {
         "all": [
           "@phpstan",
-          "@tests",
+          "@unit-tests",
           "@functionnal-tests"
         ],
         "phpstan": [
