@@ -7,6 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 use Automate\Exception\ConfigurationException;
+use Automate\Scenario\Runner;
 
 final class Configuration implements ConfigurationInterface
 {
@@ -76,6 +77,7 @@ final class Configuration implements ConfigurationInterface
             self::$config_array = $processor->processConfiguration(new Configuration(), $config);
             self::$config_array['wait']['for'] = 30;
             self::$config_array['wait']['every'] = 250;
+            self::$config_array['verbose'] = Runner::VERBOSE_ALL;
             self::$isLoaded = true;
             return;
         }

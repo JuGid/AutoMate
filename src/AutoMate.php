@@ -14,7 +14,6 @@ use Automate\Handler\ErrorHandler;
 
 final class AutoMate
 {
-
     /**
      * @var DriverConfiguration
      */
@@ -42,13 +41,11 @@ final class AutoMate
         string $scenario_name, 
         bool $withSpec = false, 
         bool $testMode = false, 
-        string $onBrowser = '', 
-        bool $verbose = true
+        string $onBrowser = ''
     )
     {
         VariableRegistry::reset(Scope::WORLD);
         VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
-        Console::setVerbose($verbose);
         
         $scenario = null;
         $specification = null;
@@ -94,5 +91,13 @@ final class AutoMate
     public function registerPlugin(AutoMateListener $listener)
     {
         $this->dispatcher->attach($listener);
+    }
+
+    public function printReportOnly() : void {
+        Configuration::$config_array['verbose'] = Runner::VERBOSE_REPORT_ONLY;
+    }
+
+    public function doNotPrint() : void {
+        Configuration::$config_array['verbose'] = Runner::VERBOSE_NONE;
     }
 }

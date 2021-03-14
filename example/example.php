@@ -35,7 +35,8 @@ $autoMate = new AutoMate($configFile);
  * $autoMate->registerPlugin(new MyTransformer());
  */
  
-$autoMate->run('simple', false, true, '', false);
+//$autoMate->run('simple', false, true, '', false);
+$autoMate->run('withspec', true, true);
 
 /**
  * 

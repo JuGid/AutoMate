@@ -107,14 +107,6 @@ final class ErrorHandler
      */
     public function printErrors() : void
     {
-        $actualVerbose = Console::isVerbose();
-
-        if (!$actualVerbose) {
-            Console::setVerbose(true);
-            Console::report();
-            Console::separator();
-        }
-
         if ($this->countErrors() == 0) {
             Console::writeln('NO ERROR', 'green');
             return;
@@ -126,7 +118,6 @@ final class ErrorHandler
             $this->printErrorsTypeOnly();
         }
 
-        Console::setVerbose($actualVerbose);
     }
 
     /**

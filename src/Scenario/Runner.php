@@ -6,7 +6,6 @@ use Automate\AutoMateDispatcher;
 use Automate\AutoMateEvents;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Automate\Configuration\Configuration;
-use Automate\Console\Console;
 use Automate\Driver\DriverConfiguration;
 use Automate\Driver\DriverManager;
 use Automate\Exception\CommandException;
@@ -22,6 +21,9 @@ use Automate\Specification\Specification;
  */
 final class Runner
 {
+    public const VERBOSE_ALL = 2;
+    public const VERBOSE_REPORT_ONLY = 1;
+    public const VERBOSE_NONE = 0;
 
     /**
      * @var AutoMateDispatcher
@@ -60,6 +62,11 @@ final class Runner
      */
     private $errorHandler = null;
 
+    /**
+     * @var int
+     */
+    private $verboseMode = self::VERBOSE_ALL;
+
     public function __construct(
         string $browser,
         bool $testMode = false,
@@ -92,8 +99,11 @@ final class Runner
         }
         
         foreach ($specification as $line) {
-            Console::writeBeginingLine($specification->key() + 1, $specification->getRowNumber() - 1, $line);
-            
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_LINE, [
+                'currentRow'=>$specification->key() + 1,
+                'totalRow' => $specification->getRowNumber() - 1,
+                'line' => $line
+            ]);
             $this->currentDataset = $line;
             $this->runSimpleScenario($scenario);
         }
@@ -104,13 +114,13 @@ final class Runner
             $specification->setProcessed();
         }
             
-        Console::endSpecification(
-            $this->errorHandler,
-            $this->logger->getFilepath(LogType::LOG_WINS),
-            $this->logger->getFilepath(LogType::LOG_ERRORS),
-            $this->testMode
-        );
-        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_END, []);
+        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_END, [
+            'errorHandler' => $this->getErrorHandler(),
+            'winFilepath' => $this->logger->getFilepath(LogType::LOG_WINS),
+            'errorFilepath' => $this->logger->getFilepath(LogType::LOG_ERRORS),
+            'testMode' => $this->testMode
+        ]);
+
         $this->driver->quit();
     }
 
@@ -122,7 +132,6 @@ final class Runner
     {
         if (!$this->runWithSpecification()) {
             $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_BEGIN, []);
-            Console::writeBegining();
         }
 
         try {
@@ -152,12 +161,13 @@ final class Runner
                 $this->logger->addMessage($e->getMessage());
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_ERRORS);
             }
-            Console::writeEx($e);
         }
 
         if (!$this->runWithSpecification()) {
-            Console::endSimple($this->errorHandler, $this->testMode);
-            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_END, []);
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_END, [
+                'errorHandler'=> $this->getErrorHandler(),
+                'testMode'=>$this->testMode
+            ]);
             $this->driver->quit();
         }
     }

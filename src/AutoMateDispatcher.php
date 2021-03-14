@@ -3,6 +3,7 @@
 namespace Automate;
 
 use Automate\Exception\EventException;
+use Automate\Listener\PrintListener;
 use Automate\Mapper\ClassMapper;
 use Automate\Transformer\AbstractTransformer;
 use InvalidArgumentException;
@@ -10,7 +11,7 @@ use ReflectionClass;
 
 final class AutoMateDispatcher
 {
-    const CORE_LISTENERS =  [
+    const TRANSFORM_LISTENERS =  [
         AutoMateEvents::STEP_TRANSFORM => [
             'directory'=> __DIR__.'/Transformer',
             'except'=> 'AbstractTransformer',
@@ -28,7 +29,7 @@ final class AutoMateDispatcher
     {
         if (is_array($object->onEvent())) {
             foreach ($object->onEvent() as $event) {
-                $this->listeners[$object->onEvent()][] = $object;
+                $this->listeners[$event][] = $object;
             }
             return;
         }
@@ -68,7 +69,7 @@ final class AutoMateDispatcher
     {
         $mapper = new ClassMapper();
 
-        foreach (self::CORE_LISTENERS as $event=>$params) {
+        foreach (self::TRANSFORM_LISTENERS as $event=>$params) {
             $map = $mapper->getClassMap(
                 $params['directory'],
                 $params['except'],
@@ -78,6 +79,9 @@ final class AutoMateDispatcher
 
             $this->instanciateClassFromMapAndAttach($map);
         }
+
+        $this->attach(new PrintListener());
+
     }
 
     private function instanciateClassFromMapAndAttach($map)

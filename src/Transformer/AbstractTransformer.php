@@ -85,7 +85,7 @@ abstract class AbstractTransformer implements AutoMateListener
             throw new CommandException('The command ' . array_keys($this->step)[0] . ' is not valid');
         }
 
-        Console::writeln((string) $this);
+        $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM_ENDS, ['transformer' =>(string) $this]);
     }
 
     /**

@@ -11,8 +11,6 @@ use Automate\Handler\ErrorHandler;
  */
 class Console
 {
-    public static $verbose = true;
-
     public static function writeBeginingLine(int $current, int $on, array $dataset)
     {
         self::separator();
@@ -39,7 +37,7 @@ class Console
             self::separator('=');
         }
         self::writeln("Logs can be found at :");
-        self::writeln("* LOGS_WIN : " . $logfileWins);
+        self::writeln("* LOGS_WINS : " . $logfileWins);
         self::writeln("* LOGS_ERRORS : " . $logfileErrors);
         self::separator('=');
     }
@@ -91,22 +89,11 @@ class Console
 
     public static function writeln(string $str, string $foreground = null, string $background = null)
     {
-        if(self::isVerbose()) {
             echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
-        }
-        
     }
 
     public static function writeEx(\Exception $e)
     {
-        self::writeln($e->getMessage());
-    }
-
-    public static function setVerbose(bool $verbose) : void {
-        self::$verbose = $verbose;
-    }
-
-    public static function isVerbose() : bool {
-        return self::$verbose;
+        self::writeln($e->getMessage(), 'red');
     }
 }
