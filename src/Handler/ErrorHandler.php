@@ -30,7 +30,11 @@ final class ErrorHandler
 
     public function error(string $type, array $dataset = []) : void
     {
-        $this->errors[] = new AutoMateError($type, $dataset);
+        $error = new AutoMateError($type);
+        if($this->shouldStoreDataset) {
+            $error->setDataset($dataset);
+        }
+        $this->errors[] = $error;
     }
 
     public function countWins() : int

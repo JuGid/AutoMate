@@ -8,7 +8,7 @@ class AutoMateError
 
     private $dataset = [];
 
-    public function __construct(string $type, array $dataset)
+    public function __construct(string $type, array $dataset = [])
     {
         $this->type = $type;
         $this->dataset = $dataset;
@@ -22,6 +22,10 @@ class AutoMateError
     public function getDataset() : array
     {
         return $this->dataset;
+    }
+
+    public function setDataset(array $dataset) : void {
+        $this->dataset = $dataset;
     }
 
     public function getDatasetAsString() : string

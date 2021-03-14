@@ -86,8 +86,8 @@ final class Runner
             try {
                 $this->logger = new DefaultLogger($specification->getColumnsHeader(), $scenario->getName());
             } catch (LogException $e) {
-                Console::writeEx($e);
                 $this->driver->quit();
+                throw $e;
             }
         }
         
@@ -142,6 +142,7 @@ final class Runner
             if ($this->runWithSpecification()) {
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
             }
+            
         } catch (\Exception $e) {
             $this->errorHandler->error($e->getMessage(), $this->getCurrentDataset());
 
