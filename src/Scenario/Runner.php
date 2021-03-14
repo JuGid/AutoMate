@@ -62,11 +62,6 @@ final class Runner
      */
     private $errorHandler = null;
 
-    /**
-     * @var int
-     */
-    private $verboseMode = self::VERBOSE_ALL;
-
     public function __construct(
         string $browser,
         bool $testMode = false,
@@ -99,11 +94,13 @@ final class Runner
         }
         
         foreach ($specification as $line) {
-            $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_LINE, [
+            $spec_line_data = [
                 'currentRow'=>$specification->key() + 1,
                 'totalRow' => $specification->getRowNumber() - 1,
                 'line' => $line
-            ]);
+            ];
+
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_LINE, $spec_line_data);
             $this->currentDataset = $line;
             $this->runSimpleScenario($scenario);
         }
@@ -113,13 +110,15 @@ final class Runner
         if (!$this->testMode) {
             $specification->setProcessed();
         }
-            
-        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_END, [
+        
+        $spec_end_data = [
             'errorHandler' => $this->getErrorHandler(),
             'winFilepath' => $this->logger->getFilepath(LogType::LOG_WINS),
             'errorFilepath' => $this->logger->getFilepath(LogType::LOG_ERRORS),
             'testMode' => $this->testMode
-        ]);
+        ];
+
+        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_END, $spec_end_data);
 
         $this->driver->quit();
     }
@@ -164,10 +163,8 @@ final class Runner
         }
 
         if (!$this->runWithSpecification()) {
-            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_END, [
-                'errorHandler'=> $this->getErrorHandler(),
-                'testMode'=>$this->testMode
-            ]);
+            $simple_end_data =  ['errorHandler'=> $this->getErrorHandler(),'testMode'=>$this->testMode];
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_END, $simple_end_data);
             $this->driver->quit();
         }
     }

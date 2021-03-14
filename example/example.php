@@ -35,8 +35,7 @@ $autoMate = new AutoMate($configFile);
  * $autoMate->registerPlugin(new MyTransformer());
  */
  
-//$autoMate->run('simple', false, true, '', false);
-$autoMate->run('withspec', true, true);
+$autoMate->run('simple', false, true);
 
 /**
  * 
@@ -52,9 +51,6 @@ $autoMate->run('withspec', true, true);
  * Run the condition scenario to show how a condition works
  * $autoMate->run('condition');
  * 
- * Run the spec scenario and only print the error report
- * $autoMate->run('withspec', true, true, '', false);
- * $autoMate->run('simple', false, true, '', false);
  */
 
 
