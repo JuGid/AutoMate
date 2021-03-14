@@ -11,6 +11,8 @@ use Automate\Handler\ErrorHandler;
  */
 class Console
 {
+    public static $verbose = true;
+
     public static function writeBeginingLine(int $current, int $on, array $dataset)
     {
         self::separator();
@@ -63,13 +65,16 @@ class Console
     public static function end()
     {
         self::separator('=');
-        echo "___ _  _ ___  \n| __| \| |   \ \n| _|| .` | |) |\n|___|_|\_|___/    \n";
+        self::writeln(" ___ _  _ ___");
+        self::writeln("| __| \| |   \ ");
+        self::writeln("| _|| .` | |) |");
+        self::writeln("|___|_|\_|___/");
         self::separator('=');
     }
 
     public static function report()
     {
-        self::writeln("_____                       _   ");
+        self::writeln(" _____                       _   ");
         self::writeln("|  __ \                     | |  ");
         self::writeln("| |__) |___ _ __   ___  _ __| |_ ");
         self::writeln("|  _  // _ \ '_ \ / _ \| '__| __|");
@@ -86,11 +91,22 @@ class Console
 
     public static function writeln(string $str, string $foreground = null, string $background = null)
     {
-        echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
+        if(self::isVerbose()) {
+            echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
+        }
+        
     }
 
     public static function writeEx(\Exception $e)
     {
         self::writeln($e->getMessage());
+    }
+
+    public static function setVerbose(bool $verbose) : void {
+        self::$verbose = $verbose;
+    }
+
+    public static function isVerbose() : bool {
+        return self::$verbose;
     }
 }

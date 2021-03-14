@@ -103,6 +103,14 @@ final class ErrorHandler
      */
     public function printErrors() : void
     {
+        $actualVerbose = Console::isVerbose();
+
+        if (!$actualVerbose) {
+            Console::setVerbose(true);
+            Console::report();
+            Console::separator();
+        }
+
         if ($this->countErrors() == 0) {
             Console::writeln('NO ERROR', 'green');
             return;
@@ -113,6 +121,8 @@ final class ErrorHandler
         } else {
             $this->printErrorsTypeOnly();
         }
+
+        Console::setVerbose($actualVerbose);
     }
 
     /**
@@ -135,9 +145,11 @@ final class ErrorHandler
         foreach ($errorsDataset as $type=>$datasets) {
             Console::writeln($type, 'red');
             Console::separator('-');
+            Console::writeln('Concerned dataset(s) : ');
             foreach ($datasets as $dataset) {
                 Console::writeln("\t".$dataset);
             }
+            Console::writeln('');
         }
     }
 }

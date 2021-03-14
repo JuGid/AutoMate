@@ -10,7 +10,7 @@ scenario:
         value: "{{ scenario.cookie }}" 
     - configuration:
         wait:
-          for: 10
+          for: 2
           every: 100
     - urlIs: https://www.youtube.com/
 

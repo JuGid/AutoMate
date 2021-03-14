@@ -38,10 +38,18 @@ final class AutoMate
      *
      * @return ErrorHandler|bool If the scenario has errors
      */
-    public function run(string $scenario_name, bool $withSpec = false, bool $testMode = false, string $onBrowser = '')
+    public function run(
+        string $scenario_name, 
+        bool $withSpec = false, 
+        bool $testMode = false, 
+        string $onBrowser = '', 
+        bool $verbose = true
+    )
     {
         VariableRegistry::reset(Scope::WORLD);
         VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
+        Console::setVerbose($verbose);
+        
         $scenario = null;
         $specification = null;
         $scenarioBrowser = '';
@@ -51,9 +59,6 @@ final class AutoMate
             $scenario = new Scenario($scenario_name);
             $scenarioBrowser = $scenario->getScenarioBrowser($onBrowser);
             $runner = new Runner($scenarioBrowser, $testMode, $this->driverConfiguration, $this->dispatcher);
-            
-            $eventBegin = $withSpec ? AutoMateEvents::RUNNER_SPEC_BEGIN : AutoMateEvents::RUNNER_SIMPLE_BEGIN;
-            $this->dispatcher->notify($eventBegin, []);
 
             if ($withSpec) {
                 $specification = (new SpecificationFinder())->find();
@@ -62,14 +67,12 @@ final class AutoMate
                 $runner->runSimpleScenario($scenario);
             }
 
-            $eventEnd = $withSpec ? AutoMateEvents::RUNNER_SPEC_END : AutoMateEvents::RUNNER_SIMPLE_END;
-            $this->dispatcher->notify($eventEnd, []);
-
             if ($runner->getErrorHandler()->countErrors() > 0) {
                 $this->dispatcher->notify(AutoMateEvents::RUNNER_ENDS_ERROR, [
                     'errors'=> $runner->getErrorHandler()->getErrors()
                 ]);
             }
+
         } catch (\Exception $e) {
             Console::writeEx($e);
             return false;

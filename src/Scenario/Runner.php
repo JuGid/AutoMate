@@ -77,9 +77,11 @@ final class Runner
      */
     public function runSpecification(Scenario $scenario, Specification $specification) : void
     {
+        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_BEGIN, []);
+
         $this->runningWithSpec = true;
         $this->errorHandler->shouldStoreDataset();
-
+        
         if (Configuration::get('logs.enable') === true) {
             try {
                 $this->logger = new DefaultLogger($specification->getColumnsHeader(), $scenario->getName());
@@ -108,7 +110,7 @@ final class Runner
             $this->logger->getFilepath(LogType::LOG_ERRORS),
             $this->testMode
         );
-        
+        $this->dispatcher->notify(AutoMateEvents::RUNNER_SPEC_END, []);
         $this->driver->quit();
     }
 
@@ -119,6 +121,7 @@ final class Runner
     public function runSimpleScenario(Scenario $scenario) : void
     {
         if (!$this->runWithSpecification()) {
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_BEGIN, []);
             Console::writeBegining();
         }
 
@@ -153,7 +156,7 @@ final class Runner
 
         if (!$this->runWithSpecification()) {
             Console::endSimple($this->errorHandler, $this->testMode);
-
+            $this->dispatcher->notify(AutoMateEvents::RUNNER_SIMPLE_END, []);
             $this->driver->quit();
         }
     }
