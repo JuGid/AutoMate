@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New verbose mode true/false. Tell automate if Console could write text or not. If in test mode, the report is always printed.
+- New event `AutoMateEvents::STEP_TRANSFORM_END`
+
+### Changed 
+
+- PrintListener is use to conditionnally use Console class
 
 ### Fixed
 
