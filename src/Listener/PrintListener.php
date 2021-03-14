@@ -22,7 +22,7 @@ class PrintListener implements AutoMateListener {
     }
 
     public function notify(string $event, $data) : int {
-        $verboseMode = Configuration::get('verbose');
+        $verboseMode = (int) Configuration::get('verbose');
 
         switch($event) {
             case AutoMateEvents::RUNNER_SPEC_LINE:
