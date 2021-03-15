@@ -4,6 +4,7 @@ namespace Automate;
 
 use Automate\Configuration\Configuration;
 use Automate\Driver\DriverConfiguration;
+use Automate\Scenario\Runner;
 use Automate\Transformer\GoTransformer;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -41,5 +42,21 @@ class AutoMateTest extends TestCase
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
 
         $automate->registerPlugin(new GoTransformer());
+    }
+
+    public function testShouldSetVerboseToReportOnly() 
+    {
+        $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
+        $automate->printReportOnly();
+
+        $this->assertSame(Runner::VERBOSE_REPORT_ONLY, Configuration::get('verbose'));
+    }
+
+    public function testShouldSetVerboseToDoNotPrint() 
+    {
+        $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
+        $automate->doNotPrint();
+
+        $this->assertSame(Runner::VERBOSE_NONE, Configuration::get('verbose'));
     }
 }
