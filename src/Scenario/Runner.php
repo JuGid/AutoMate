@@ -150,9 +150,8 @@ final class Runner
             if ($this->runWithSpecification()) {
                 $this->logger->log($this->getCurrentDataset(), LogType::LOG_WINS);
             }
-            
         } catch (\Exception $e) {
-            $this->errorHandler->error($e->getMessage(), $this->getCurrentDataset());
+            $this->errorHandler->error($e->getMessage(), get_class($e), $this->getCurrentDataset());
 
             $this->dispatcher->notify(AutoMateEvents::RUNNER_ERROR, ['exception'=>$e]);
 

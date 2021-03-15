@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Listener;
 
@@ -8,9 +8,10 @@ use Automate\Configuration\Configuration;
 use Automate\Console\Console;
 use Automate\Scenario\Runner;
 
-class PrintListener implements AutoMateListener {
-
-    public function onEvent() {
+class PrintListener implements AutoMateListener
+{
+    public function onEvent()
+    {
         return [
             AutoMateEvents::RUNNER_SPEC_LINE,
             AutoMateEvents::RUNNER_SPEC_END,
@@ -21,17 +22,18 @@ class PrintListener implements AutoMateListener {
         ];
     }
 
-    public function notify(string $event, $data) : int {
+    public function notify(string $event, $data) : int
+    {
         $verboseMode = (int) Configuration::get('verbose');
 
-        switch($event) {
+        switch ($event) {
             case AutoMateEvents::RUNNER_SPEC_LINE:
-                if($verboseMode == Runner::VERBOSE_ALL) {
+                if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeBeginingLine($data['currentRow'], $data['totalRow'], $data['line']);
                 }
                 break;
             case AutoMateEvents::RUNNER_SPEC_END:
-                if($verboseMode == Runner::VERBOSE_ALL || $verboseMode == Runner::VERBOSE_REPORT_ONLY) {
+                if ($verboseMode == Runner::VERBOSE_ALL || $verboseMode == Runner::VERBOSE_REPORT_ONLY) {
                     Console::endSpecification(
                         $data['errorHandler'],
                         $data['winFilepath'],
@@ -41,22 +43,22 @@ class PrintListener implements AutoMateListener {
                 }
                 break;
             case AutoMateEvents::RUNNER_SIMPLE_BEGIN:
-                if($verboseMode == Runner::VERBOSE_ALL) {
+                if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeBegining();
                 }
                 break;
             case AutoMateEvents::RUNNER_SIMPLE_END:
-                if($verboseMode == Runner::VERBOSE_ALL || $verboseMode == Runner::VERBOSE_REPORT_ONLY) {
+                if ($verboseMode == Runner::VERBOSE_ALL || $verboseMode == Runner::VERBOSE_REPORT_ONLY) {
                     Console::endSimple($data['errorHandler'], $data['testMode']);
                 }
                 break;
             case AutoMateEvents::RUNNER_ERROR:
-                if($verboseMode == Runner::VERBOSE_ALL) {
+                if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeEx($data['exception']);
                 }
                 break;
             case AutoMateEvents::STEP_TRANSFORM_ENDS:
-                if($verboseMode == Runner::VERBOSE_ALL) {
+                if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeln($data['transformer']);
                 }
         }

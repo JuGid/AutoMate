@@ -89,7 +89,7 @@ class Console
 
     public static function writeln(string $str, string $foreground = null, string $background = null)
     {
-            echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
+        echo sprintf("%s\n", (new Colors())->getColoredString($str, $foreground, $background));
     }
 
     public static function writeEx(\Exception $e)

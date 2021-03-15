@@ -38,12 +38,11 @@ final class AutoMate
      * @return ErrorHandler|bool If the scenario has errors
      */
     public function run(
-        string $scenario_name, 
-        bool $withSpec = false, 
-        bool $testMode = false, 
+        string $scenario_name,
+        bool $withSpec = false,
+        bool $testMode = false,
         string $onBrowser = ''
-    )
-    {
+    ) {
         VariableRegistry::reset(Scope::WORLD);
         VariableRegistry::set(Scope::WORLD, 'scenario', $scenario_name);
         
@@ -69,7 +68,6 @@ final class AutoMate
                     'errors'=> $runner->getErrorHandler()->getErrors()
                 ]);
             }
-
         } catch (\Exception $e) {
             Console::writeEx($e);
             return false;
@@ -93,11 +91,13 @@ final class AutoMate
         $this->dispatcher->attach($listener);
     }
 
-    public function printReportOnly() : void {
+    public function printReportOnly() : void
+    {
         Configuration::$config_array['verbose'] = Runner::VERBOSE_REPORT_ONLY;
     }
 
-    public function doNotPrint() : void {
+    public function doNotPrint() : void
+    {
         Configuration::$config_array['verbose'] = Runner::VERBOSE_NONE;
     }
 }

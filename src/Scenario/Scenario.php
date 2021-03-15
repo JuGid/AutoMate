@@ -32,11 +32,11 @@ final class Scenario implements Iterator
     {
         $this->scenario = $this->parseScenarioFile(
             sprintf(
-            '%s/%s/%s.yaml',
-            Configuration::get('scenario.folder'),
-            $name,
-            $sub
-        )
+                '%s/%s/%s.yaml',
+                Configuration::get('scenario.folder'),
+                $name,
+                $sub
+            )
         );
         $this->step = 0;
         $this->name = $name;

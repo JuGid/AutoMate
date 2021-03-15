@@ -36,7 +36,7 @@ class ErrorHandlerTest extends TestCase
 
         $errors = 5;
         for ($i = 0; $i<$errors; $i++) {
-            $errorHandler->error('type', ['one', 'two']);
+            $errorHandler->error('type', 'Exception' ,['one', 'two']);
         }
 
         $this->assertSame(5, $errorHandler->countErrors());
@@ -53,7 +53,7 @@ class ErrorHandlerTest extends TestCase
 
         $errors = 5;
         for ($i = 0; $i<$errors; $i++) {
-            $errorHandler->error('type', ['one', 'two']);
+            $errorHandler->error('type', 'AutoMate\Exception\TimeoutException' ,['one', 'two']);
         }
 
         $errorsFromHandler = $errorHandler->getErrors();
@@ -64,11 +64,11 @@ class ErrorHandlerTest extends TestCase
         $this->assertSame('red', $errorHandler->getBackgroundColor());
     }
 
-    public function testShouldCompareErrors() 
+    public function testShouldCompareErrors()
     {
-        $error1 = new AutoMateError('aaa', []);
-        $error2 = new AutoMateError('bbb', []);
-        $error3 = new AutoMateError('aaa', []);
+        $error1 = new AutoMateError('aaa', 'Exception', []);
+        $error2 = new AutoMateError('bbb', 'Exception', []);
+        $error3 = new AutoMateError('aaa', 'Exception', []);
 
         $this->assertEquals(-1, AutoMateError::compare($error1, $error2));
         $this->assertEquals(1, AutoMateError::compare($error2, $error1));

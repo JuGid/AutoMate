@@ -28,10 +28,10 @@ final class ErrorHandler
         $this->wins++;
     }
 
-    public function error(string $type, array $dataset = []) : void
+    public function error(string $type, string $exceptionClass, array $dataset = []) : void
     {
-        $error = new AutoMateError($type);
-        if($this->shouldStoreDataset) {
+        $error = new AutoMateError($type, $exceptionClass);
+        if ($this->shouldStoreDataset) {
             $error->setDataset($dataset);
         }
         $this->errors[] = $error;
@@ -117,7 +117,6 @@ final class ErrorHandler
         } else {
             $this->printErrorsTypeOnly();
         }
-
     }
 
     /**

@@ -4,9 +4,10 @@ namespace Automate\Listener;
 
 use PHPUnit\Framework\TestCase;
 
-class PrintListenerTest extends TestCase {
-
-    public function testShouldSeeIfEventsReturnedAreGood() {
+class PrintListenerTest extends TestCase
+{
+    public function testShouldSeeIfEventsReturnedAreGood()
+    {
         $eventsShouldBe = [
             'core:runner:spec:line',
             'core:runner:spec:end',
@@ -19,6 +20,4 @@ class PrintListenerTest extends TestCase {
         $printListener = new PrintListener();
         $this->assertSame($printListener->onEvent(), $eventsShouldBe);
     }
-
-    
 }

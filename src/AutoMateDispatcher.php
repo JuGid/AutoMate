@@ -81,7 +81,6 @@ final class AutoMateDispatcher
         }
 
         $this->attach(new PrintListener());
-
     }
 
     private function instanciateClassFromMapAndAttach($map)

@@ -44,7 +44,7 @@ class AutoMateTest extends TestCase
         $automate->registerPlugin(new GoTransformer());
     }
 
-    public function testShouldSetVerboseToReportOnly() 
+    public function testShouldSetVerboseToReportOnly()
     {
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
         $automate->printReportOnly();
@@ -52,7 +52,7 @@ class AutoMateTest extends TestCase
         $this->assertSame(Runner::VERBOSE_REPORT_ONLY, Configuration::get('verbose'));
     }
 
-    public function testShouldSetVerboseToDoNotPrint() 
+    public function testShouldSetVerboseToDoNotPrint()
     {
         $automate = new AutoMate(__DIR__.'/files/config-test.yaml');
         $automate->doNotPrint();

@@ -8,9 +8,12 @@ class AutoMateError
 
     private $dataset = [];
 
-    public function __construct(string $type, array $dataset = [])
+    private $exceptionClass = 'Exception';
+
+    public function __construct(string $type, string $exceptionClass, array $dataset = [])
     {
         $this->type = $type;
+        $this->exceptionClass = $exceptionClass;
         $this->dataset = $dataset;
     }
 
@@ -19,12 +22,18 @@ class AutoMateError
         return $this->type;
     }
 
+    public function getExceptionClass() : string
+    {
+        return $this->exceptionClass;
+    }
+
     public function getDataset() : array
     {
         return $this->dataset;
     }
 
-    public function setDataset(array $dataset) : void {
+    public function setDataset(array $dataset) : void
+    {
         $this->dataset = $dataset;
     }
 
