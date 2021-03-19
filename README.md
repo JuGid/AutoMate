@@ -48,7 +48,7 @@ To use AutoMate, you first need to :
 3. Create some folders corresponding to the scenario
 4. Maybe create a specification csv file
 
-**:arrow_right: Create you yaml configuration file**
+**:arrow_right: Create your yaml configuration file**
 
 Your configuration file should looks like [this](config/default-config.yaml). You MUST prefer using absolute path.
 
