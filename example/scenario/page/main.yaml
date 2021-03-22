@@ -1,0 +1,11 @@
+browser: chrome
+variables:
+  adresse: http://wikipedia.fr
+scenario:
+  steps:
+    - go: "{{ scenario.adresse }}"
+    - print: This scenario use a page
+    - page: wikipedia.index
+    - click:
+        pageElement: search-bar
+    
