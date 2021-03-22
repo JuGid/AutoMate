@@ -9,5 +9,4 @@ scenario:
     - fill:
         pageElement: search-bar
         with: 'PHP'
-    - titleIs: BONJOUR
     
