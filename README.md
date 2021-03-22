@@ -89,8 +89,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 *See [Changelogs](CHANGELOG.md) for more information*
 
 - [ ] Finish functionnal tests
-- [ ] Create the possibility to define pages
-- [ ] Possibility to set any variable for world scope
+- [x] Create the possibility to define pages
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ### Will not be implemented
