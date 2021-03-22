@@ -148,6 +148,14 @@ final class Configuration implements ConfigurationInterface
                 ->end()
               ->end()
             ->end()
+            ->arrayNode('pages')
+              ->children()
+                ->scalarNode('folder')
+                  ->isRequired()
+                  ->cannotBeEmpty()
+                ->end()
+              ->end()
+            ->end()
           ->end();
         return $nodes;
     }

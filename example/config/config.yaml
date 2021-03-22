@@ -13,3 +13,5 @@ automate:
   logs:
     enable: false
     folder: '/.../logs'
+  pages:
+    folder: '/.../pages'
