@@ -16,8 +16,8 @@ class TextIsTransformer extends AbstractTransformer
     {
         return ['textIs'=>
                     [
-                        'value'=>':string',
-                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string'
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
+                        'value'=>':string'
                     ]
                 ];
     }

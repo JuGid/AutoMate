@@ -16,7 +16,7 @@ class PresenceOfTransformer extends AbstractTransformer
     {
         return ['presenceOf'=>
                     [
-                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string'
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string'
                     ]
                 ];
     }

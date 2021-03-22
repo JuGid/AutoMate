@@ -13,7 +13,7 @@ class MouseTransformer extends AbstractTransformer
     protected function getPattern() : array
     {
         return ['mouse'=>[
-            ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+            ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
             'event'=> ':string :in("click","doubleClick","mouseDown","mouseUp","mouseMove")'
         ]];
     }

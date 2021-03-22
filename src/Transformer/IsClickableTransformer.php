@@ -16,7 +16,7 @@ class IsClickableTransformer extends AbstractTransformer
     {
         return ['isClickable'=>
                     [
-                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string'
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string'
                     ]
                 ];
     }

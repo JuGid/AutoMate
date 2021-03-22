@@ -13,7 +13,7 @@ class SubmitTransformer extends AbstractTransformer
     protected function getPattern() : array
     {
         return ['submit'=>[
-            ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+            ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
             'text'=>':string'
         ]];
     }

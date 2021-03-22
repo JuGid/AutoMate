@@ -17,7 +17,7 @@ class GetTransformer extends AbstractTransformer
     {
         return ['get' =>
                     [
-                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext")'=>':string',
+                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
                         'what'=>':string :in("text","attribute")',
                         'attribute?'=>':string',
                         'varname'=>':string'
