@@ -31,11 +31,11 @@ abstract class PageHandler {
 
     public static function get(string $element) {
         $elements = array_values(self::$pageElements)[0];
-
+        
         if(!isset($elements[$element])) {
             throw new InvalidArgumentException('Element '.$element.' does not exist in page ' . self::$pageName);
         }
-        
+
         return $elements[$element];
     }
 }

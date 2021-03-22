@@ -3,6 +3,7 @@
 namespace Automate\Transformer\Helpers;
 
 use Automate\Exception\CommandException;
+use Automate\Handler\PageHandler;
 use Facebook\WebDriver\WebDriverBy;
 
 /**
@@ -48,6 +49,9 @@ final class WebLocator
                 return WebDriverBy::linkText($element);
             case "pltext":
                 return WebDriverBy::partialLinkText($element);
+            case "pageElement":
+                $locators = PageHandler::get($element);
+                return self::get(array_keys($locators)[0], array_values($locators)[0]);
             default:
                 throw new CommandException('Find an element with '. $type . ' is not allowed');
         }
