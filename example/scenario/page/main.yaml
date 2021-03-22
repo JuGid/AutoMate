@@ -6,6 +6,8 @@ scenario:
     - go: "{{ scenario.adresse }}"
     - print: This scenario use a page
     - page: wikipedia.index
-    - click:
+    - fill:
         pageElement: search-bar
+        with: 'PHP'
+    - titleIs: BONJOUR
     
