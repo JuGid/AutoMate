@@ -3,6 +3,7 @@
 
 # AutoMate - Yaml automation library
 *Release 0.6.1 see the [Changelogs](CHANGELOG.md)*
+*You can get help on the [Wiki](https://github.com/JuGid/AutoMate/wiki)*
 
 ## Why AutoMate ?
 
@@ -15,7 +16,7 @@ With AutoMate you can :
 - Get logs from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
 - Add your own commands and plugins thanks to the event system
-- You can create test case with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests)
+- You can create test cases with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests) (under development)
 
 ## Getting started
 
