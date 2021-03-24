@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php 
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Automate\Console\Commands\RunAutomateCommand;
+
+if (version_compare('7.4.0', PHP_VERSION, '>')) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'This version of AutoMate requires PHP >= 7.4.' . PHP_EOL .
+            'You are using PHP %s (%s).' . PHP_EOL,
+            PHP_VERSION,
+            PHP_BINARY
+        )
+    );
+
+    die(1);
+}
+
+$application = new Application();
+$application->add(new RunAutomateCommand());
+
+$application->run();

@@ -10,10 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Possibility to create pages to reuse any element you defined
+- `PageHandler` to handle page elements
+- `Page` command to load the page in pageHandler
+- New `PrintListener` catch events to print what is needed
 
 ### Changed
 
-- Patterns are in harmony (syntax respect some standards)
+- Patterns are in harmony (syntax respects some standards)
+- Verbose mode is now in three possibilities VERBOSE_ALL, VERBOSE_REPORT_ONLY, VERBOSE_NONE;
 
 ## [0.6.1] - 15/03/2021
 
