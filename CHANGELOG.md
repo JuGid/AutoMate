@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PageHandler` to handle page elements
 - `Page` command to load the page in pageHandler
 - New `PrintListener` catch events to print what is needed
+- Run AutoMate with a full option console command
 
 ### Changed
 

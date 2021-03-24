@@ -25,7 +25,7 @@ With AutoMate you can :
 **:arrow_right: Install AutoMate with composer**
 
 ```sh
-composer install jugid/auto-mate
+composer require jugid/auto-mate
 ```
 
 **:arrow_right: Get a Webdriver**
