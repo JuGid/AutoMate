@@ -9,7 +9,6 @@
 ## Readme summary
 - [Why AutoMate ?](https://github.com/JuGid/AutoMate#why-automate-)
 - [Getting started](https://github.com/JuGid/AutoMate#getting-started)
-- [Run AutoMate]()
 - [Visual](https://github.com/JuGid/AutoMate#visual)
 - [Support](https://github.com/JuGid/AutoMate#support)
 - [Roadmap](https://github.com/JuGid/AutoMate#roadmap)
