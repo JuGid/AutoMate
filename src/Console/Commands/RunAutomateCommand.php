@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RunAutomateCommand extends Command {
 
-    protected static $defaultName = 'app:create-user';
+    protected static $defaultName = 'run';
 
     protected function configure()
     {
