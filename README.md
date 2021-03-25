@@ -6,6 +6,17 @@
 
 *You can get help on the [Wiki](https://github.com/JuGid/AutoMate/wiki)*
 
+## Readme summary
+- [Why AutoMate ?](https://github.com/JuGid/AutoMate#why-automate-)
+- [Getting started](https://github.com/JuGid/AutoMate#getting-started)
+- [Run AutoMate]()
+- [Visual](https://github.com/JuGid/AutoMate#visual)
+- [Support](https://github.com/JuGid/AutoMate#support)
+- [Roadmap](https://github.com/JuGid/AutoMate#roadmap)
+- [Contributing](https://github.com/JuGid/AutoMate#contributing)
+- [License](https://github.com/JuGid/AutoMate#license)
+- [Thanks](https://github.com/JuGid/AutoMate#thanks)
+
 ## Why AutoMate ?
 
 At work, we need to make a lot of management acts. There is already a homemade framework which works well for this kind of actions. The thing is that it takes a long time to develop and create new scenarios. With AutoMate, I tried reducing this wasted time.
@@ -13,7 +24,7 @@ At work, we need to make a lot of management acts. There is already a homemade f
 With AutoMate you can :
 - Create multiple scenarios
 - Run them on different browsers
-- Inject data into them to use variable in the scenario and repeat the scenario for each dataset
+- Inject data into them to use variables in the scenario and repeat the scenario for each dataset
 - Get logs from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
 - Add your own commands and plugins thanks to the event system
@@ -49,6 +60,7 @@ To use AutoMate, you first need to :
 2. Create your scenario file with yaml
 3. Create some folders corresponding to the scenario
 4. Maybe create a specification csv file
+5. Run AutoMate
 
 **:arrow_right: Create your yaml configuration file**
 
@@ -77,6 +89,21 @@ Your specification files need to be saved in specs_folder/scenario_name/my_spec.
 
 > You can create the number of specification you want. If AutoMate does not run in Test mode, the spec is renamed with the suffix `_PROCESSED` when the scenario run ends. The specification cannot be detected if it has `_PROCESSED` in its name.
 
+**:arrow_right: Run AutoMate**
+
+To run AutoMate, you can use the CLI launcher defined as :
+
+```bash
+php bin/automate --scenario=scenario --config=/../config.yaml [--browser=NAME] [--headless] [--server=HTTP_ADRESSE] [--testMode] [--specMode]
+```
+or in a shorter way :
+
+```bash 
+php bin/automate --s scenario -c /../config.yaml [-b NAME] [-h] [-sv HTTP_ADRESSE] [-t] [-sm]
+```
+
+You can also use the more php way as defined [in this example](https://github.com/JuGid/AutoMate/blob/master/example/example.php)
+
 ## Visual
 
 This is what AutoMate looks like :
@@ -91,7 +118,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 *See [Changelogs](CHANGELOG.md) for more information*
 
 - [ ] Finish functionnal tests
-- [x] Create the possibility to define pages
+- [ ] Possibility to use personnal class for complex business logic
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ### Will not be implemented
