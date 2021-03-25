@@ -24,3 +24,36 @@ $application = new Application();
 $application->add(new RunAutomateCommand());
 
 $application->run();
+
+/**
+ * To read the process output from https://stackoverflow.com/questions/1345880/php-read-console-output
+ */
+
+ /*
+$pipes = array();
+$pipe_descriptions = array(
+   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+   2 => array("file", "/tmp/error-output.txt", "a") // stderr is a file to write to
+);
+
+$cmd = "php bin/automate -s=simple -c=config.yaml -b=chrome -h=true";
+
+$proc_handle = proc_open($cmd, $pipe_descriptions, $pipes);
+
+$lastLineRead = '';
+if(is_resource($proc_handle))
+{
+    while()
+
+    //https://www.php.net/manual/fr/function.stream-select.php
+    //also see https://stackoverflow.com/questions/21353611/how-to-wait-for-a-process-executed-by-proc-open-in-php
+    
+   // Your process is running. You may now read it's output with fread($pipes[1]) and fread($pipes[2])
+   // Send input to your program with fwrite($pipes[0])
+   // remember to fclose() all pipes and fclose() the process when you're done!
+}
+
+foreach($pipes as $pipe) {
+    fclose($pipe);
+}
