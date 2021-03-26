@@ -680,4 +680,14 @@ class TransformersTest extends TestCase
         $this->assertTrue($transformer->validate());
         $this->assertSame('Form id[selector] submit', (string) $transformer);
     }
+
+    public function testPageTransformerAndGetProperties()
+    {
+        $transformer = new PageTransformer();
+        $transformer->setStep(['page' => 'test.page']);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Page test.page loaded', (string) $transformer);
+    }
+
 }
