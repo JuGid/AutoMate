@@ -135,7 +135,7 @@ final class Runner
 
         try {
             foreach ($scenario as $step) {
-                $data = ['driver'=> $this->driver, 'step'=>$step];
+                $data = ['driver' => $this->driver, 'step' => $step, 'logger' => $this->logger];
                 $received = $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, $data);
 
                 if (!$received) {

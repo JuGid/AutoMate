@@ -5,8 +5,6 @@ namespace Automate\Transformer;
 use Automate\AutoMateDispatcher;
 use Automate\AutoMateEvents;
 use Automate\AutoMateListener;
-use Automate\AutoMateTest;
-use Automate\Console\Console;
 use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
 use Automate\Exception\EventException;
@@ -17,7 +15,6 @@ use PASVL\Validation\ValidatorBuilder;
 
 abstract class AbstractTransformer implements AutoMateListener
 {
-
     /**
      * @var RemoteWebDriver
      */
@@ -160,6 +157,15 @@ abstract class AbstractTransformer implements AutoMateListener
     public function getStep() : array
     {
         return $this->step;
+    }
+
+    /**
+     * @return array|string
+     */
+    public function getStepData()
+    {
+        $step = array_keys($this->getStep())[0];
+        return $this->step[$step];
     }
 
     /**

@@ -520,12 +520,12 @@ class TransformersTest extends TestCase
         $transformer->setStep([
             'condition'=> [
                 'eval'=>'5 == 6',
-                'ifTrue'=> [
+                'correct'=> [
                     'steps'=>[
                         ['go'=>'http://github.com']
                     ]
                 ],
-                'ifFalse'=> [
+                'incorrect'=> [
                     'steps'=>[
                         ['go'=> 'http://youtube.com'],
                         ['reload'=>'page']

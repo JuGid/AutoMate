@@ -18,7 +18,8 @@ class PrintListener implements AutoMateListener
             AutoMateEvents::RUNNER_SIMPLE_BEGIN,
             AutoMateEvents::RUNNER_SIMPLE_END,
             AutoMateEvents::RUNNER_ERROR,
-            AutoMateEvents::STEP_TRANSFORM_ENDS
+            AutoMateEvents::STEP_TRANSFORM_ENDS,
+            AutoMateEvents::LOGIC_EXCEPTION
         ];
     }
 
@@ -60,6 +61,16 @@ class PrintListener implements AutoMateListener
             case AutoMateEvents::STEP_TRANSFORM_ENDS:
                 if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeln($data['transformer']);
+                }
+                // no break
+            case AutoMateEvents::LOGIC_EXCEPTION:
+                if ($verboseMode == Runner::VERBOSE_ALL) {
+                    $message = sprintf(
+                        "Logic class threw an exception %s. Value at exception : %s",
+                        get_class($data['exception']),
+                        Configuration::get('logics.valueAtException')
+                    );
+                    Console::writeln($message);
                 }
         }
         return AutoMateListener::STATE_RECEIVED;

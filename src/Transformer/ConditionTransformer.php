@@ -14,9 +14,9 @@ class ConditionTransformer extends AbstractTransformer
     protected function getPattern() : array
     {
         return ['condition'=> [
-                        'eval'=>':string',
-                        'ifTrue'=>['steps'=>':array'],
-                        'ifFalse'=>['steps'=>':array']
+                        ':string :in("eval","logic")'=>':string',
+                        'correct'=>['steps'=>':array'],
+                        'incorrect'=>['steps'=>':array']
                     ]];
     }
 
@@ -29,10 +29,20 @@ class ConditionTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        $result = eval(sprintf('return %s;', $this->step['condition']['eval']));
+        switch (array_keys($this->getStepData())[0]) {
+            case 'eval':
+                $result = eval(sprintf('return %s;', $this->step['condition']['eval']));
+                break;
+            case 'logic':
+                $result = false;
+                break;
+            default:
+                $result = false;
+        }
+
         $this->step['condition']['result'] = $result ? 'true':'false';
 
-        $steps = $result ? $this->step['condition']['ifTrue']['steps'] : $this->step['condition']['ifFalse']['steps'];
+        $steps = $result ? $this->getStepData()['correct']['steps'] : $this->getStepData()['incorrect']['steps'];
         
         foreach ($steps as $step) {
             $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
@@ -49,8 +59,8 @@ class ConditionTransformer extends AbstractTransformer
     {
         return sprintf(
             'Condition assessed %s as %s',
-            $this->step['condition']['eval'],
-            $this->step['condition']['result']
+            $this->getStepData()['eval'],
+            $this->getStepData()['result']
         );
     }
 }

@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - COMING
+
+### Added
+
+- User can log any message in log files with command `log`
+- `Logic` class to create some external business logic when you use AutoMate for repetitive tasks
+- `LogicExecutor` to execute and get the answer of the logic (this is what the `LogicTansformer` use)
+
+### Changed
+
+- When dispatcher notify for STEP_TRANSFORM event, it now sends the logger.
+- `condition` pattern. IfTrue, IfFalse => correct, incorrect
+- Configuration for logics namespaces and valueAtException (false as default value). 
+
 ## [0.7.0] - 25/03/2021
 
 ### Added

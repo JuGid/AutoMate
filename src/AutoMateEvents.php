@@ -14,4 +14,5 @@ class AutoMateEvents
     public const RUNNER_ENDS_ERROR = 'core:runner:end:error';
     public const STEP_TRANSFORM = 'core:step:transform';
     public const STEP_TRANSFORM_ENDS = 'core:step:transform:end';
+    public const LOGIC_EXCEPTION = 'core:logic:exception';
 }

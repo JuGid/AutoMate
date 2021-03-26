@@ -36,7 +36,7 @@ class ErrorHandlerTest extends TestCase
 
         $errors = 5;
         for ($i = 0; $i<$errors; $i++) {
-            $errorHandler->error('type', 'Exception' ,['one', 'two']);
+            $errorHandler->error('type', 'Exception', ['one', 'two']);
         }
 
         $this->assertSame(5, $errorHandler->countErrors());
@@ -53,7 +53,7 @@ class ErrorHandlerTest extends TestCase
 
         $errors = 5;
         for ($i = 0; $i<$errors; $i++) {
-            $errorHandler->error('type', 'AutoMate\Exception\TimeoutException' ,['one', 'two']);
+            $errorHandler->error('type', 'AutoMate\Exception\TimeoutException', ['one', 'two']);
         }
 
         $errorsFromHandler = $errorHandler->getErrors();

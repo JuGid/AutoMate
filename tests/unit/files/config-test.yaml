@@ -13,3 +13,10 @@ automate:
   logs:
     enable: true
     folder: '/../logs'
+  pages:
+    folder: '/../pages'
+  logics:
+    namespaces:
+      personnal: 'Automate\Transformer\Logic'
+      other: 'Automate\Other'
+    valueAtException: false

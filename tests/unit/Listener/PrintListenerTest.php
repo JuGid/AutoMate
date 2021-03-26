@@ -14,7 +14,8 @@ class PrintListenerTest extends TestCase
             'core:runner:simple:begin',
             'core:runner:simple:end',
             'core:runner:error',
-            'core:step:transform:end'
+            'core:step:transform:end',
+            'core:logic:exception'
         ];
 
         $printListener = new PrintListener();

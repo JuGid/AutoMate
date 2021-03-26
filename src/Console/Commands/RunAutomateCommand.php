@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Automate\Console\Commands;
 
@@ -12,21 +12,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @codeCoverageIgnore
  */
-class RunAutomateCommand extends Command {
-
+class RunAutomateCommand extends Command
+{
     protected static $defaultName = 'run';
 
     protected function configure()
     {
         $this->setDescription('Run AutoMate')
              ->setHelp("This command allow you to run AutoMate with simple options like server url or test mode")
-             ->addOption('scenario', 's',InputOption::VALUE_REQUIRED, 'Scenario name')
-             ->addOption('config', 'c',InputOption::VALUE_REQUIRED, 'Configuration file path')
-             ->addOption('browser', 'b',InputOption::VALUE_OPTIONAL, 'Browser to run the scenario', '')
-             ->addOption('headless', 'h',InputOption::VALUE_NONE, 'Enable running the browser driver in headless mode', false)
-             ->addOption('server', 'sv',InputOption::VALUE_OPTIONAL, 'Change the server url to run AutoMate')
-             ->addOption('testMode', 't',InputOption::VALUE_NONE, 'Enable running AutoMate with testMode', false)
-             ->addOption('specMode', 'sm',InputOption::VALUE_NONE, 'Enable running AutoMate with specification', false);
+             ->addOption('scenario', 's', InputOption::VALUE_REQUIRED, 'Scenario name')
+             ->addOption('config', 'c', InputOption::VALUE_REQUIRED, 'Configuration file path')
+             ->addOption('browser', 'b', InputOption::VALUE_OPTIONAL, 'Browser to run the scenario', '')
+             ->addOption('headless', 'h', InputOption::VALUE_NONE, 'Enable running the browser driver in headless mode', false)
+             ->addOption('server', 'sv', InputOption::VALUE_OPTIONAL, 'Change the server url to run AutoMate')
+             ->addOption('testMode', 't', InputOption::VALUE_NONE, 'Enable running AutoMate with testMode', false)
+             ->addOption('specMode', 'sm', InputOption::VALUE_NONE, 'Enable running AutoMate with specification', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -36,27 +36,27 @@ class RunAutomateCommand extends Command {
         $dv = new DriverConfiguration();
 
         $browser = $input->getOption('browser');
-        if(null === $browser) {
+        if (null === $browser) {
             $browser = '';
         }
 
         $headless = $input->getOption('headless');
-        if(null === $headless || true === $headless) {
+        if (null === $headless || true === $headless) {
             $dv->headlessMode();
         }
 
         $server = $input->getOption('server');
-        if($server !== null && is_string($server)) {
+        if ($server !== null && is_string($server)) {
             $dv->setServerUrl($input->getOption('server'));
         }
 
         $testMode = $input->getOption('testMode');
-        if(null === $testMode) {
+        if (null === $testMode) {
             $testMode = true;
         }
 
         $specMode = $input->getOption('specMode');
-        if(null === $specMode) {
+        if (null === $specMode) {
             $specMode = true;
         }
         
@@ -64,5 +64,4 @@ class RunAutomateCommand extends Command {
         $automate->run($input->getOption('scenario'), $specMode, $testMode, $browser);
         return Command::SUCCESS;
     }
-
 }

@@ -118,6 +118,7 @@ First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). 
 
 - [ ] Finish functionnal tests
 - [ ] Possibility to use personnal class for complex business logic
+- [ ] User can add message to log files
 - [ ] **Tell us your ideas ! You can directly send a PR or open an issue**
 
 ### Will not be implemented
