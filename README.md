@@ -21,12 +21,14 @@
 At work, we need to make a lot of management acts. There is already a homemade framework which works well for this kind of actions. The thing is that it takes a long time to develop and create new scenarios. With AutoMate, I tried reducing this wasted time.
 
 With AutoMate you can :
-- Create multiple scenarios
+- Create multiple [scenarios](https://github.com/JuGid/AutoMate/wiki/Scenario)
 - Run them on different browsers
-- Inject data into them to use variables in the scenario and repeat the scenario for each dataset
-- Get logs from files to know which data was used when the scenario failed/successed
+- [Configure](https://github.com/JuGid/AutoMate/wiki/Driver-configuration) it as you need
+- Inject [data](https://github.com/JuGid/AutoMate/wiki/Specifications) into them to use [variables](https://github.com/JuGid/AutoMate/wiki/Variables-scopes) in the scenario and repeat the scenario for each dataset
+- Get [logs](https://github.com/JuGid/AutoMate/wiki/Logs) from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
-- Add your own commands and plugins thanks to the event system
+- Add your own commands and plugins thanks to the [event system](https://github.com/JuGid/AutoMate/wiki/Events)
+- Use your own business logic using the [logics](https://github.com/JuGid/AutoMate/wiki/Logics)
 - You can create test cases with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests) (under development)
 
 ## Getting started
