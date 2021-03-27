@@ -4,6 +4,7 @@ namespace Automate\Transformer;
 
 use Automate\AutoMateEvents;
 use Automate\Exception\NotImplementedException;
+use Automate\Transformer\Logic\LogicExecutor;
 
 class ConditionTransformer extends AbstractTransformer
 {
@@ -31,10 +32,13 @@ class ConditionTransformer extends AbstractTransformer
     {
         switch (array_keys($this->getStepData())[0]) {
             case 'eval':
-                $result = eval(sprintf('return %s;', $this->step['condition']['eval']));
+                $result = eval(sprintf('return %s;', $this->getStepData()['eval']));
                 break;
             case 'logic':
-                $result = false;
+                $logicExecutor = new LogicExecutor();
+                $result = $logicExecutor->for($this->getStepData()['logic'])
+                                        ->execute()
+                                        ->getAnswser();
                 break;
             default:
                 $result = false;
