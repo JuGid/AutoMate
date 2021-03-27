@@ -21,7 +21,7 @@
 At work, we need to make a lot of management acts. There is already a homemade framework which works well for this kind of actions. The thing is that it takes a long time to develop and create new scenarios. With AutoMate, I tried reducing this wasted time.
 
 With AutoMate you can :
-- Create multiple [scenarios](https://github.com/JuGid/AutoMate/wiki/Scenario)
+- Create multiple [scenarios](https://github.com/JuGid/AutoMate/wiki/Scenario) with multiple [commands](https://github.com/JuGid/AutoMate/wiki/Commands)
 - Run them on different browsers
 - [Configure](https://github.com/JuGid/AutoMate/wiki/Driver-configuration) it as you need
 - Inject [data](https://github.com/JuGid/AutoMate/wiki/Specifications) into them to use [variables](https://github.com/JuGid/AutoMate/wiki/Variables-scopes) in the scenario and repeat the scenario for each dataset
