@@ -36,6 +36,7 @@ class ConditionTransformer extends AbstractTransformer
                 break;
             case 'logic':
                 $logicExecutor = new LogicExecutor();
+                $logicExecutor->setEventDispatcher($this->dispatcher);
                 $result = $logicExecutor->for($this->getStepData()['logic'])
                                         ->execute()
                                         ->getAnswser();

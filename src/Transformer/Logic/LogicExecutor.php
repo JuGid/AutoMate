@@ -16,7 +16,7 @@ class LogicExecutor
 
     private $valueAtException = false;
 
-    private $eventDispatcher;
+    private $eventDispatcher = null;
 
     private $class = null;
 
@@ -95,7 +95,9 @@ class LogicExecutor
         try {
             $this->answer = $logic->answeredBy();
         } catch (\Exception $e) {
-            $this->eventDispatcher->notify(AutoMateEvents::LOGIC_EXCEPTION, ['exception' => $e]);
+            if(null !== $this->eventDispatcher) {
+                $this->eventDispatcher->notify(AutoMateEvents::LOGIC_EXCEPTION, ['exception' => $e]);
+            }
             $this->answer = $this->valueAtException;
         }
         
