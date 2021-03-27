@@ -2,10 +2,22 @@
 
 namespace Automate\Listener;
 
+use Automate\AutoMateEvents;
+use Automate\Configuration\Configuration;
 use PHPUnit\Framework\TestCase;
 
 class PrintListenerTest extends TestCase
 {
+    
+    /*
+    //Must add @before annotation
+    public function loadConfiguration() {
+        Configuration::reset();
+        Configuration::load(__DIR__.'/../files/config-test.yaml');
+        //Default value of verbose is VERBOSE_ALL
+    }
+    */
+
     public function testShouldSeeIfEventsReturnedAreGood()
     {
         $eventsShouldBe = [
