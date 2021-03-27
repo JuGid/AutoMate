@@ -24,7 +24,7 @@ With AutoMate you can :
 - Create multiple [scenarios](https://github.com/JuGid/AutoMate/wiki/Scenario) with multiple [commands](https://github.com/JuGid/AutoMate/wiki/Commands)
 - Run them on different browsers
 - [Configure](https://github.com/JuGid/AutoMate/wiki/Driver-configuration) it as you need
-- Inject [data](https://github.com/JuGid/AutoMate/wiki/Specifications) into them to use [variables](https://github.com/JuGid/AutoMate/wiki/Variables-scopes) in the scenario and repeat the scenario for each dataset
+- Inject [data](https://github.com/JuGid/AutoMate/wiki/Specifications) into your scenario to use [variables](https://github.com/JuGid/AutoMate/wiki/Variables-scopes) in it and repeat the scenario for each dataset
 - Get [logs](https://github.com/JuGid/AutoMate/wiki/Logs) from files to know which data was used when the scenario failed/successed
 - Have a step by step description written on console
 - Add your own commands and plugins thanks to the [event system](https://github.com/JuGid/AutoMate/wiki/Events)
