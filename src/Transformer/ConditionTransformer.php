@@ -42,6 +42,7 @@ class ConditionTransformer extends AbstractTransformer
                 break;
             default:
                 $result = false;
+                break;
         }
 
         $this->step['condition']['result'] = $result ? 'true':'false';
