@@ -1,0 +1,5 @@
+tests:
+  body:
+    xpath: '//body'
+  random:
+    css: 'random'

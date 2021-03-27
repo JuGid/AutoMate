@@ -15,12 +15,16 @@ abstract class PageHandler
      * @param string $pageName Is the pageName in yaml format like wikipedia.index
      * where wikipedia is the folder and index the file
      */
-    public static function load(string $pageName)
+    public static function load(string $pageName, string $absolutePath = '')
     {
         self::$pageName = $pageName;
 
         $pagesPath = Configuration::get('pages.folder');
         
+        if(!empty($absolutePath)) {
+            $pagesPath = $absolutePath;
+        }
+
         $pageNameSplit = explode(".", $pageName);
 
         foreach ($pageNameSplit as $path) {
