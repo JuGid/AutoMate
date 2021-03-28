@@ -52,6 +52,10 @@ function addToArray(array $step, array &$array, int &$numberCommands) {
     }
 }
 
+$loopSteps = [];
+$correctSteps = [];
+$incorrectSteps = [];
+
 //WOW, Beautiful !!!!!
 foreach ($regex as $file) {
     $scenarioFile = Yaml::parseFile($file[0]);
@@ -76,7 +80,7 @@ foreach ($regex as $file) {
 
             $incorrectSteps = $step['condition']['incorrect']['steps'];
             foreach($incorrectSteps as $incorrectConditionStep) {
-                addToArray($correctConditionStep, $usedCommands, $numberOfCommandsUsed);
+                addToArray($incorrectConditionStep, $usedCommands, $numberOfCommandsUsed);
             } 
         } 
     }
