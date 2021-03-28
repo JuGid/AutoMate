@@ -93,6 +93,7 @@ Your specification files need to be saved in specs_folder/scenario_name/my_spec.
 **:arrow_right: Run AutoMate**
 
 To run AutoMate, you can use the CLI launcher defined as :
+
 _For the moment, the CLI is not 'completely'. Prefer the use of PHP_
 
 ```bash
