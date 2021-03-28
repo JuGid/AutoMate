@@ -62,7 +62,7 @@ class PrintListener implements AutoMateListener
                 if ($verboseMode == Runner::VERBOSE_ALL) {
                     Console::writeln($data['transformer']);
                 }
-                // no break
+                break;
             case AutoMateEvents::LOGIC_EXCEPTION:
                 if ($verboseMode == Runner::VERBOSE_ALL) {
                     $message = sprintf(
@@ -72,6 +72,7 @@ class PrintListener implements AutoMateListener
                     );
                     Console::writeln($message);
                 }
+                break;
         }
         return AutoMateListener::STATE_RECEIVED;
     }

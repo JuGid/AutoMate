@@ -23,10 +23,10 @@ class RunAutomateCommand extends Command
              ->addOption('scenario', 's', InputOption::VALUE_REQUIRED, 'Scenario name')
              ->addOption('config', 'c', InputOption::VALUE_REQUIRED, 'Configuration file path')
              ->addOption('browser', 'b', InputOption::VALUE_OPTIONAL, 'Browser to run the scenario', '')
-             ->addOption('headless', 'h', InputOption::VALUE_NONE, 'Enable running the browser driver in headless mode', false)
-             ->addOption('server', 'sv', InputOption::VALUE_OPTIONAL, 'Change the server url to run AutoMate')
-             ->addOption('testMode', 't', InputOption::VALUE_NONE, 'Enable running AutoMate with testMode', false)
-             ->addOption('specMode', 'sm', InputOption::VALUE_NONE, 'Enable running AutoMate with specification', false);
+             ->addOption('headless', 'l', InputOption::VALUE_OPTIONAL, 'Enable running the browser driver in headless mode', false)
+             ->addOption('server', 'a', InputOption::VALUE_OPTIONAL, 'Change the server url to run AutoMate')
+             ->addOption('testMode', 't', InputOption::VALUE_OPTIONAL, 'Enable running AutoMate with testMode', false)
+             ->addOption('specMode', 'm', InputOption::VALUE_OPTIONAL, 'Enable running AutoMate with specification', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

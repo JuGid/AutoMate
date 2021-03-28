@@ -72,7 +72,7 @@ abstract class AbstractTransformer implements AutoMateListener
      *
      * @param array $step
      */
-    public function process(RemoteWebDriver $driver, array $step, AbstractLogger $logger)
+    public function process(RemoteWebDriver $driver, array $step, ?AbstractLogger $logger)
     {
         if ($driver == null) {
             throw new DriverException('No driver provided');
