@@ -94,8 +94,6 @@ Your specification files need to be saved in specs_folder/scenario_name/my_spec.
 
 To run AutoMate, you can use the CLI launcher defined as :
 
-_For the moment, the CLI is not 'completely'. Prefer the use of PHP_
-
 ```bash
 php bin/automate run --scenario=scenario --config=/../config.yaml [--browser=NAME] [--headless] [--server=HTTP_ADRESSE] [--testMode] [--specMode]
 ```

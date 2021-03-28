@@ -10,11 +10,11 @@ scenario:
         varname: bodyText
     - condition:
         eval: "'{{ world.bodyText }}' == 'This is the content of the iFrame'"
-        ifTrue:
+        correct:
           steps:
             - frame:
                 default: content
-        ifFalse:
+        incorrect:
           steps:
             - exit: 'Text is not what was expected'
     - frame:
