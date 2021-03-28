@@ -100,7 +100,7 @@ php bin/automate run --scenario=scenario --config=/../config.yaml [--browser=NAM
 or in a shorter way :
 
 ```bash 
-php bin/automate run --s scenario -c /../config.yaml [-b NAME] [-h] [-sv HTTP_ADRESSE] [-t] [-sm]
+php bin/automate run -s scenario -c /../config.yaml [-b NAME] [-h] [-a HTTP_ADRESSE] [-t] [-m]
 ```
 
 You can also use the more php way as defined [in this example](https://github.com/JuGid/AutoMate/blob/master/example/example.php)
