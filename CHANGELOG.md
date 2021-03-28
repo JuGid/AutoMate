@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `condition` pattern. IfTrue, IfFalse => correct, incorrect
 - Configuration for `logics` namespaces and valueAtException (false as default value). 
 
+### Fixed
+
+Work now :
+- `resize` 
+- `textContains`
+- `textIs`
+- `textMatches`
+
 ## [0.7.0] - 25/03/2021
 
 ### Added

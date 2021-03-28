@@ -45,15 +45,40 @@ $usedCommands = [];
 $numberOfCommands = 45;
 $numberOfCommandsUsed = 0;
 
+function addToArray(array $step, array &$array, int &$numberCommands) {
+    if(!in_array(array_keys($step)[0], $array)) {
+        $array[] = array_keys($step)[0];
+        $numberCommands += 1;
+    }
+}
+
+//WOW, Beautiful !!!!!
 foreach ($regex as $file) {
     $scenarioFile = Yaml::parseFile($file[0]);
     $steps = $scenarioFile['scenario']['steps'];
 
     foreach($steps as $step) {
-        if(!in_array(array_keys($step)[0], $usedCommands)) {
-            $usedCommands[] = array_keys($step)[0];
-            $numberOfCommandsUsed += 1;
-        }
+        addToArray($step, $usedCommands, $numberOfCommandsUsed);
+
+        if(array_keys($step)[0] == 'loop') {
+            $loopSteps = $step['loop']['steps'];
+            foreach($loopSteps as $loopStep) {
+                addToArray($loopStep, $usedCommands, $numberOfCommandsUsed);
+                $numberOfCommandsUsed += 1;
+            } 
+        } 
+        
+        if(array_keys($step)[0] == 'condition') {
+            $correctSteps = $step['condition']['correct']['steps'];
+            foreach($correctSteps as $correctConditionStep) {
+                addToArray($correctConditionStep, $usedCommands, $numberOfCommandsUsed);
+            } 
+
+            $incorrectSteps = $step['condition']['incorrect']['steps'];
+            foreach($incorrectSteps as $incorrectConditionStep) {
+                addToArray($correctConditionStep, $usedCommands, $numberOfCommandsUsed);
+            } 
+        } 
     }
 }
 

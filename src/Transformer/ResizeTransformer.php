@@ -14,14 +14,14 @@ class ResizeTransformer extends AbstractTransformer
     protected function getPattern() : array
     {
         return ['resize'=>[
-                            'type'=>':string :in("maximize","fullscreen","size")',
-                            'size?'=> [
-                                'width'=>':number',
-                                'height'=>':number'
-                            ]
-                            
-                        ]
-                ];
+                    'type'=>':string :in("maximize","fullscreen","size")',
+                    'size?'=> [
+                        'width'=>':number',
+                        'height'=>':number'
+                    ]
+                    
+                ]
+        ];
     }
 
     /**
@@ -37,8 +37,10 @@ class ResizeTransformer extends AbstractTransformer
         } elseif ($array['type'] == 'fullscreen') {
             $this->driver->manage()->window()->fullscreen();
         } elseif ($array['type'] == 'size') {
-            if (isset($array['width']) && isset($array['height'])) {
-                $this->driver->manage()->window()->setSize(new WebDriverDimension(800, 600));
+            if (isset($array['size']['width']) && isset($array['size']['height'])) {
+                $width = intval($array['size']['width']);
+                $height = intval($array['size']['height']);
+                $this->driver->manage()->window()->setSize(new WebDriverDimension($width, $height));
             } else {
                 throw new CommandException('In resize command, if you use size. Tell width and height.');
             }

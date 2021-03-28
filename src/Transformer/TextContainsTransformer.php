@@ -29,10 +29,10 @@ class TextContainsTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        $keyLocator = array_keys($this->step['textContains'])[1];
+        $keyLocator = array_keys($this->step['textContains'])[0];
         $errorMessage = sprintf('%s[%s] text does not contains %s', $keyLocator, $this->step['textContains'][$keyLocator], $this->step['textContains']['value']);
         $this->driver->wait(Configuration::get('wait.for'), Configuration::get('wait.every'))
-                     ->until(WebDriverExpectedCondition::elementTextIs(
+                     ->until(WebDriverExpectedCondition::elementTextContains(
                          WebLocator::get($keyLocator, $this->step['textContains'][$keyLocator]),
                          $this->step['textContains']['value']
                      ), $errorMessage);

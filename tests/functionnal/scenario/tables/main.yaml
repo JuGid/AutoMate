@@ -8,6 +8,6 @@ scenario:
         what: text
         varname: textInTable
     - textContains:
-        value: '{{ world.textInTable }}'
         xpath: '//div[@id="table"]//table//tbody//tr//td[2]'
+        value: '{{ world.textInTable }}'
     

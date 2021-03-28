@@ -2,3 +2,35 @@ browser: chrome
 scenario:
   steps:
     - use: sub.go
+    - loop:
+        repeat: 3
+        steps:
+          - isClickable:
+              id: a-form
+    - numberOfWindows: 1
+    - textContains:
+        id: text-simple
+        value: Foo
+    - textIs:
+        id: text-simple
+        value: Foo bar text
+    - reload: page
+    - resize:
+        type: size
+        size:
+          width: 500
+          height: 400
+    - resize:
+        type: maximize
+    - urlContains: html/index.html
+    - impltm: 40
+    - get: 
+        id: text-simple
+        what: text
+        varname: testText
+    - print: '{{ world.testText }}'
+    - create: window
+    - close: window
+
+
+    
