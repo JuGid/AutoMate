@@ -42,15 +42,12 @@ class SelectTransformer extends AbstractTransformer
         switch ($this->step['select']['type']) {
             case "checkbox":
                 $typedElement = new WebDriverCheckboxes($element);
-                echo "By checkbox \n";
                 break;
             case "radio":
                 $typedElement = new WebDriverRadios($element);
-                echo "By radio \n";
                 break;
             case "select":
                 $typedElement = new WebDriverSelect($element);
-                echo "By select \n";
                 break;
         }
         
@@ -61,19 +58,15 @@ class SelectTransformer extends AbstractTransformer
                     throw new CommandException('Select by index should use an index represented by an integer');
                 }
                 $typedElement->selectByIndex(intval($value));
-                echo "By index \n";
                 break;
             case 'value':
                 $typedElement->selectByValue($value);
-                echo "By value \n";
                 break;
             case 'text':
                 $typedElement->selectByVisibleText($value);
-                echo "By visible text \n";
                 break;
             case 'pltext':
                 $typedElement->selectByVisiblePartialText($value);
-                echo "By partial text \n";
                 break;
         }
     }

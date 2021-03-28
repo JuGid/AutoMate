@@ -1,0 +1,4 @@
+browser: chrome
+scenario:
+  steps:
+    - use: sub.go

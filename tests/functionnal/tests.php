@@ -23,7 +23,8 @@ $scenariosTest = [
     'frame',
     'delayed-element',
     'slow-loading',
-    'form'
+    'form',
+    'general'
 ];
 
 //Should set a different port since chromedriver runs on 9515
