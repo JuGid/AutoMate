@@ -12,12 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - User can log any message in log files with command `log`
 - `Logic` class to create some external business logic when you use AutoMate for repetitive tasks
 - `LogicExecutor` to execute and get the answer of the logic (this is what the `LogicTansformer` use)
+- `log` command to add message to log files
 
 ### Changed
 
-- When dispatcher notify for STEP_TRANSFORM event, it now sends the logger.
+- When dispatcher notify for `STEP_TRANSFORM` event, it now sends the logger.
 - `condition` pattern. IfTrue, IfFalse => correct, incorrect
-- Configuration for logics namespaces and valueAtException (false as default value). 
+- Configuration for `logics` namespaces and valueAtException (false as default value). 
 
 ## [0.7.0] - 25/03/2021
 

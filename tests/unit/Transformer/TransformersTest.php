@@ -690,4 +690,13 @@ class TransformersTest extends TestCase
         $this->assertSame('Page test.page loaded', (string) $transformer);
     }
 
+    public function testLogTransformerAndGetProperties()
+    {
+        $transformer = new LogTransformer();
+        $transformer->setStep(['log' => 'this is a test']);
+        
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Add message to log file : this is a test', (string) $transformer);
+    }
+
 }

@@ -9,6 +9,7 @@ use Automate\Exception\DriverException;
 use Automate\Exception\CommandException;
 use Automate\Exception\EventException;
 use Automate\Handler\WindowHandler;
+use Automate\Logs\AbstractLogger;
 use Automate\Registry\VariableRegistry;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use PASVL\Validation\ValidatorBuilder;
@@ -31,6 +32,11 @@ abstract class AbstractTransformer implements AutoMateListener
     protected $dispatcher = null;
 
     /**
+     * @var AbstractLogger
+     */
+    protected $logger = null;
+
+    /**
      * {@inheritdoc}
      */
     public function onEvent()
@@ -45,15 +51,15 @@ abstract class AbstractTransformer implements AutoMateListener
      */
     public function notify(string $event, $data) : int
     {
-        if (!isset($data['step']) && !isset($data['driver'])) {
-            throw new EventException('For event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step and driver data');
+        if (!isset($data['step']) && !isset($data['driver']) && !isset($data['logger'])) {
+            throw new EventException('For event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step, driver and logger data');
         }
 
         if (array_keys($data['step'])[0] !== array_keys($this->getPattern())[0]) {
             return AutoMateListener::STATE_REJECTED;
         }
 
-        $this->process($data['driver'], $data['step']);
+        $this->process($data['driver'], $data['step'], $data['logger']);
 
         return AutoMateListener::STATE_RECEIVED;
     }
@@ -66,7 +72,7 @@ abstract class AbstractTransformer implements AutoMateListener
      *
      * @param array $step
      */
-    public function process(RemoteWebDriver $driver, array $step)
+    public function process(RemoteWebDriver $driver, array $step, AbstractLogger $logger)
     {
         if ($driver == null) {
             throw new DriverException('No driver provided');
@@ -74,6 +80,8 @@ abstract class AbstractTransformer implements AutoMateListener
 
         $this->driver = $driver;
         $this->step = $step;
+        $this->logger = $logger;
+        
         $this->setVariables();
 
         if ($this->validate()) {
