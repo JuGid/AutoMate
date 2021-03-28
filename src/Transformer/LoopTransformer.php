@@ -34,9 +34,10 @@ class LoopTransformer extends AbstractTransformer
 
         for ($i = 0; $i<$runFor; $i++) {
             foreach ($this->step['loop']['steps'] as $step) {
-                $this->getDispatcher()->notify(AutoMateEvents::STEP_TRANSFORM, [
+                $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
                     'driver'=> $this->driver,
-                    'step'=>$step
+                    'step'=>$step,
+                    'logger'=>$this->logger
                 ]);
             }
             Console::separator('.', 3);

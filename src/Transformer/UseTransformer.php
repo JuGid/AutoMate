@@ -46,7 +46,8 @@ class UseTransformer extends AbstractTransformer
         foreach ($scenario as $step) {
             $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
                 'driver'=> $this->driver,
-                'step'=>$step
+                'step'=>$step,
+                'logger'=>$this->logger
             ]);
         }
     }

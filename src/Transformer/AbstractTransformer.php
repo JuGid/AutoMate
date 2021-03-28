@@ -52,7 +52,7 @@ abstract class AbstractTransformer implements AutoMateListener
     public function notify(string $event, $data) : int
     {
         if (!isset($data['step']) && !isset($data['driver']) && !isset($data['logger'])) {
-            throw new EventException('For event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step, driver and logger data');
+            throw new EventException('To send event '. AutoMateEvents::STEP_TRANSFORM . ' you should set step, driver and logger data');
         }
 
         if (array_keys($data['step'])[0] !== array_keys($this->getPattern())[0]) {

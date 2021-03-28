@@ -41,6 +41,11 @@ scenario:
         type: select
         by: index
         value: 4
+    - deselect:
+        id: select-multiple
+        type: select
+        by: text
+        value: This is not second option
     - select:
         id: select-multiple
         type: select

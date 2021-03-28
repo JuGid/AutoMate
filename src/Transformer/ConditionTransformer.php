@@ -53,7 +53,8 @@ class ConditionTransformer extends AbstractTransformer
         foreach ($steps as $step) {
             $this->dispatcher->notify(AutoMateEvents::STEP_TRANSFORM, [
                 'driver'=> $this->driver,
-                'step'=>$step
+                'step'=>$step,
+                'logger'=>$this->logger
             ]);
         }
     }
