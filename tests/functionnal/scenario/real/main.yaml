@@ -1,11 +1,25 @@
 browser: chrome
 variables:
   searchText: PHP
-  wikipedia: http://wikipedia.fr
+  wikipedia: https://wikipedia.fr
 scenario:
   steps:
     - go: '{{ scenario.wikipedia }}'
+    - urlContains: wikipedia
+    - urlMatches: '#https://.*#'
+    - cookie:
+        name: wiki
+        value: theValue
     - page: wikipedia.index
+    - impltm: 10
+    - visibilityOf:
+        pageElement: inputSearch
+    - visibilityOfAny:
+        pageElement: inputSearch
+    - presenceOf:
+        pageElement: inputSearch
+    - presenceOfAll:
+        pageElement: inputSearch
     - fill:
         pageElement: inputSearch
         with: '{{ scenario.searchText }}'
@@ -26,6 +40,9 @@ scenario:
         what: text
         varname: phpLabelVersion
     - print: 'Version of php : {{ world.phpLabelVersion }}'
+    - textMatches:
+        pageElement: versionText
+        regexp: '/{{ world.phpLabelVersion }}/'
     - condition:
         eval: "'Version 7.3' === '{{ world.phpLabelVersion }}';" #Prefer using Logics instead of eval
         correct:

@@ -41,6 +41,10 @@ scenario:
         type: select
         by: index
         value: 4
+    - isSelected:
+        xpath: //select[@id="select-multiple"]//option[@value="second"]
+    - isNotSelected:
+        xpath: //select[@id="select-multiple"]//option[@value="first"]
     - deselect:
         id: select-multiple
         type: select

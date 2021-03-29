@@ -12,7 +12,6 @@ require __DIR__.'/../../vendor/autoload.php';
 use Automate\AutoMate;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
-use Automate\Driver\DriverConfiguration;
 use Symfony\Component\Yaml\Yaml;
 
 $configFile = __DIR__.'/config/config.yaml';
@@ -28,15 +27,8 @@ $scenariosTest = [
     'real'
 ];
 
-//Should set a different port since chromedriver runs on 9515
-//And run in headless mode
-$driverConfiguration = new DriverConfiguration();
-$driverConfiguration->setServerUrl('http://localhost:9515');
-//$driverConfiguration->headlessMode();
-
 //Create AutoMate instance
 $autoMate = new AutoMate($configFile);
-$autoMate->setDriverConfiguration($driverConfiguration);
 
 //BEGIN PER CENT
 $scenarioFolder = Configuration::get('scenario.folder');
@@ -53,12 +45,7 @@ function addToArray($elem, array &$array, int &$numberCommands) {
             $numberCommands += 1;
         }
     }
-    
 }
-
-$loopSteps = [];
-$correctSteps = [];
-$incorrectSteps = [];
 
 //WOW, Beautiful !!!!!
 foreach ($regex as $file) {
