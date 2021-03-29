@@ -19,7 +19,7 @@ scenario:
     - presenceOf:
         pageElement: inputSearch
     - presenceOfAll:
-        pageElement: inputSearch
+        pageElement: inputSearch 
     - fill:
         pageElement: inputSearch
         with: '{{ scenario.searchText }}'
