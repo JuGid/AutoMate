@@ -1,0 +1,7 @@
+wikipedia:
+  versionText:
+    xpath: "/html/body//a[contains(@href,'#Version_7.3')]//span[contains(@class,'toctext')]"
+  versionLink:
+    xpath: "/html/body//a[contains(@href,'#Version_7.3')]"
+
+  

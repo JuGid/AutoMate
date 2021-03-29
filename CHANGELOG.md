@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - When dispatcher notify for `STEP_TRANSFORM` event, it now sends the logger.
 - `condition` pattern. IfTrue, IfFalse => correct, incorrect
 - Configuration for `logics` namespaces and valueAtException (false as default value). 
+- `VariableRegistry` now precise in the error message that the variable can be not set.
+- `print` nom only print only the text and not 'Text printed' after the print
 
 ### Fixed
 

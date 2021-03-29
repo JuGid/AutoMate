@@ -1,0 +1,39 @@
+browser: chrome
+variables:
+  searchText: PHP
+  wikipedia: http://wikipedia.fr
+scenario:
+  steps:
+    - go: '{{ scenario.wikipedia }}'
+    - page: wikipedia.index
+    - fill:
+        pageElement: inputSearch
+        with: '{{ scenario.searchText }}'
+    - click:
+        pageElement: iconSearch
+    - titleContains: '{{ scenario.searchText }}'
+    - create: tab
+    - go: '{{ scenario.wikipedia }}'
+    - fill:
+        id: search
+        with: 'java'
+    - click:
+        pageElement: iconSearch
+    - close: window
+    - page: wikipedia.php
+    - get: 
+        pageElement: versionText
+        what: text
+        varname: phpLabelVersion
+    - print: 'Version of php : {{ world.phpLabelVersion }}'
+    - condition:
+        eval: "'Version 7.3' === '{{ world.phpLabelVersion }}';" #Prefer using Logics instead of eval
+        correct:
+          steps:
+            - print: Version is good enought
+            - click:
+                pageElement: versionLink
+        incorrect:
+          steps:
+            - exit: Version should be >= 7.3
+    - print: Continue on version 7.3

@@ -15,14 +15,12 @@ class GetTransformer extends AbstractTransformer
      */
     protected function getPattern() : array
     {
-        return ['get' =>
-                    [
-                        ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
-                        'what'=>':string :in("text","attribute")',
-                        'attribute?'=>':string',
-                        'varname'=>':string'
-                    ]
-                ];
+        return ['get' =>[
+                    ':string :in("css","xpath","id","class","name","tag","linktext", "pltext", "pageElement")'=>':string',
+                    'what'=>':string :in("text","attribute")',
+                    'attribute?'=>':string',
+                    'varname'=>':string'
+                ]];
     }
 
     /**

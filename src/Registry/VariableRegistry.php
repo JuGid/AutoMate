@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 abstract class VariableRegistry
 {
-    public const INVALID_SCOPE = 'Only scopes world, spec and scenario are possible.';
+    public const INVALID_SCOPE = 'Only scopes world, spec and scenario are possible. Maybe the variable is not set.';
 
     /**
      * @var array

@@ -1,0 +1,5 @@
+wikipedia:
+  inputSearch:
+    id: search
+  iconSearch:
+    id: search-icon

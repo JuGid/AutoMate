@@ -22,7 +22,7 @@ class PrintTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        Console::writeln(sprintf('Print : %s', $this->step['print']));
+        //NOTHING
     }
 
     /**
@@ -30,6 +30,6 @@ class PrintTransformer extends AbstractTransformer
      */
     public function __toString()
     {
-        return sprintf('Text printed');
+        return sprintf('Print : %s', $this->step['print']);
     }
 }

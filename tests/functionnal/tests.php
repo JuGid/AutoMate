@@ -24,7 +24,8 @@ $scenariosTest = [
     'delayed-element',
     'slow-loading',
     'form',
-    'general'
+    'general',
+    'real'
 ];
 
 //Should set a different port since chromedriver runs on 9515
@@ -42,14 +43,17 @@ $scenarioFolder = Configuration::get('scenario.folder');
 $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($scenarioFolder));
 $regex = new RegexIterator($iterator, '/^.+\.yaml$/i', RecursiveRegexIterator::GET_MATCH);
 $usedCommands = [];
-$numberOfCommands = 45;
+$numberOfCommands = 46;
 $numberOfCommandsUsed = 0;
 
-function addToArray(array $step, array &$array, int &$numberCommands) {
-    if(!in_array(array_keys($step)[0], $array)) {
-        $array[] = array_keys($step)[0];
-        $numberCommands += 1;
+function addToArray($elem, array &$array, int &$numberCommands) {
+    foreach($elem as $stp) {
+        if(!in_array(array_keys($stp)[0], $array)) {
+            $array[] = array_keys($stp)[0];
+            $numberCommands += 1;
+        }
     }
+    
 }
 
 $loopSteps = [];
@@ -62,26 +66,18 @@ foreach ($regex as $file) {
     $steps = $scenarioFile['scenario']['steps'];
 
     foreach($steps as $step) {
-        addToArray($step, $usedCommands, $numberOfCommandsUsed);
+        if(!in_array(array_keys($step)[0], $usedCommands)) {
+            $usedCommands[] = array_keys($step)[0];
+            $numberOfCommandsUsed += 1;
+        }
 
         if(array_keys($step)[0] == 'loop') {
-            $loopSteps = $step['loop']['steps'];
-            foreach($loopSteps as $loopStep) {
-                addToArray($loopStep, $usedCommands, $numberOfCommandsUsed);
-                $numberOfCommandsUsed += 1;
-            } 
+            addToArray($step['loop']['steps'], $usedCommands, $numberOfCommandsUsed);
         } 
         
         if(array_keys($step)[0] == 'condition') {
-            $correctSteps = $step['condition']['correct']['steps'];
-            foreach($correctSteps as $correctConditionStep) {
-                addToArray($correctConditionStep, $usedCommands, $numberOfCommandsUsed);
-            } 
-
-            $incorrectSteps = $step['condition']['incorrect']['steps'];
-            foreach($incorrectSteps as $incorrectConditionStep) {
-                addToArray($incorrectConditionStep, $usedCommands, $numberOfCommandsUsed);
-            } 
+            addToArray($step['condition']['correct']['steps'], $usedCommands, $numberOfCommandsUsed);
+            addToArray($step['condition']['incorrect']['steps'], $usedCommands, $numberOfCommandsUsed);
         } 
     }
 }
