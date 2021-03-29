@@ -664,7 +664,7 @@ class TransformersTest extends TestCase
         $transformer->setStep(['print' => 'my text']);
         
         $this->assertTrue($transformer->validate());
-        $this->assertSame('Text printed', (string) $transformer);
+        $this->assertSame('Print : my text', (string) $transformer);
     }
 
     public function testFormTransformerAndGetProperties()
