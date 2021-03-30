@@ -38,9 +38,10 @@ $usedCommands = [];
 $numberOfCommands = 46;
 $numberOfCommandsUsed = 0;
 
-function addToArray($elem, array &$array, int &$numberCommands) {
-    foreach($elem as $stp) {
-        if(!in_array(array_keys($stp)[0], $array)) {
+function addToArray($elem, array &$array, int &$numberCommands)
+{
+    foreach ($elem as $stp) {
+        if (!in_array(array_keys($stp)[0], $array)) {
             $array[] = array_keys($stp)[0];
             $numberCommands += 1;
         }
@@ -52,30 +53,31 @@ foreach ($regex as $file) {
     $scenarioFile = Yaml::parseFile($file[0]);
     $steps = $scenarioFile['scenario']['steps'];
 
-    foreach($steps as $step) {
-        if(!in_array(array_keys($step)[0], $usedCommands)) {
+    foreach ($steps as $step) {
+        if (!in_array(array_keys($step)[0], $usedCommands)) {
             $usedCommands[] = array_keys($step)[0];
             $numberOfCommandsUsed += 1;
         }
 
-        if(array_keys($step)[0] == 'loop') {
+        if (array_keys($step)[0] == 'loop') {
             addToArray($step['loop']['steps'], $usedCommands, $numberOfCommandsUsed);
-        } 
+        }
         
-        if(array_keys($step)[0] == 'condition') {
+        if (array_keys($step)[0] == 'condition') {
             addToArray($step['condition']['correct']['steps'], $usedCommands, $numberOfCommandsUsed);
             addToArray($step['condition']['incorrect']['steps'], $usedCommands, $numberOfCommandsUsed);
-        } 
+        }
     }
 }
 
 sort($usedCommands);
 $percent = ($numberOfCommandsUsed * 100) / $numberOfCommands;
-$messageCommands = sprintf('Commands used : %d/%d (%.2f%%)',
-                    $numberOfCommandsUsed,
-                    $numberOfCommands,
-                    $percent
-                );
+$messageCommands = sprintf(
+    'Commands used : %d/%d (%.2f%%)',
+    $numberOfCommandsUsed,
+    $numberOfCommands,
+    $percent
+);
 // END OF PERCENT
 
 //BEGINNING TESTS

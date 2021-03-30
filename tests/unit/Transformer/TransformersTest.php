@@ -699,4 +699,14 @@ class TransformersTest extends TestCase
         $this->assertSame('Add message to log file : this is a test', (string) $transformer);
     }
 
+    public function testSetTransformerAndGetProperties()
+    {
+        $transformer = new SetTransformer();
+        $transformer->setStep(['set' => ['varname'=>'test', 'value'=>'1']]);
+        $this->assertTrue($transformer->validate());
+        $this->assertSame('Set test with value 1', (string) $transformer);
+
+        $transformer->setStep(['set' => ['varname'=>'test', 'value'=>1]]);
+        $this->assertTrue($transformer->validate());
+    }
 }

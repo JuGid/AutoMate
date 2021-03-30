@@ -21,7 +21,7 @@ abstract class PageHandler
 
         $pagesPath = Configuration::get('pages.folder');
         
-        if(!empty($absolutePath)) {
+        if (!empty($absolutePath)) {
             $pagesPath = $absolutePath;
         }
 

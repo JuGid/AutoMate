@@ -26,6 +26,5 @@ class LogicExecutorTest extends TestCase
         $this->assertSame(Configuration::get('logics.valueAtException'), $executor->getAnswser());
         $this->assertTrue($executor->for('personnal.MyLogic')->execute()->getAnswser());
         $this->assertFalse($executor->for('MyLogicWithException')->execute()->getAnswser());
-
     }
 }

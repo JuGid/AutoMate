@@ -20,7 +20,7 @@ class LogTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        if(null !== $this->logger) {
+        if (null !== $this->logger) {
             $this->logger->addMessage($this->getStepData());
         }
     }

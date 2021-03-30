@@ -11,10 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- User can log any message in log files with command `log`
 - `Logic` class to create some external business logic when you use AutoMate for repetitive tasks
 - `LogicExecutor` to execute and get the answer of the logic (this is what the `LogicTansformer` use)
 - `log` command to add message to log files
+- `set` command to use variables
 
 ### Changed
 
@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `condition` pattern. IfTrue, IfFalse => correct, incorrect
 - Configuration for `logics` namespaces and valueAtException (false as default value). 
 - `VariableRegistry` now precise in the error message that the variable can be not set.
-- `print` nom only print only the text and not 'Text printed' after the print
+- `print` now only print the text and not 'Text printed' after the print
 
 ### Fixed
 
