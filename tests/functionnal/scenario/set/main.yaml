@@ -1,0 +1,18 @@
+browser: chrome
+scenario:
+  steps:
+    - go: http://google.fr
+    - set:
+        varname: myValue
+        value: 0
+    - print: 'Value : {{ world.myValue }}'
+    - set:
+        varname: myValue
+        value: '{{ world.myValue }}'
+        add: 1
+    - print: 'Value +1 : {{ world.myValue }}'
+    - set:
+        varname: myValue
+        value: '{{ world.myValue }}'
+        substract: 1
+    - print: 'Value -1 : {{ world.myValue }}'

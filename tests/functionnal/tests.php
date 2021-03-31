@@ -12,6 +12,7 @@ require __DIR__.'/../../vendor/autoload.php';
 use Automate\AutoMate;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
+use Automate\Handler\ErrorHandler;
 use Symfony\Component\Yaml\Yaml;
 
 $configFile = __DIR__.'/config/config.yaml';
@@ -24,7 +25,8 @@ $scenariosTest = [
     'slow-loading',
     'form',
     'general',
-    'real'
+    'real',
+    'set'
 ];
 
 //Create AutoMate instance
@@ -94,6 +96,10 @@ Console::writeln(implode(',', $usedCommands));
 Console::separator();
 foreach ($results as $scenario=>$errorHandler) {
     Console::writeln('For scenario '.$scenario);
-    $errorHandler->printErrors();
+    if($errorHandler instanceof ErrorHandler) {
+        $errorHandler->printErrors();
+    } else {
+        echo 'General error returned. AutoMate returned : ', $errorHandler, "\n";
+    }
 }
 //END REPORT
