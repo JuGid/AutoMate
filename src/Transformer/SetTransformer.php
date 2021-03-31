@@ -15,7 +15,8 @@ class SetTransformer extends AbstractTransformer
     {
         return ['set'=>[
             'varname' => ':any',
-            'value' => ':any'
+            'value' => ':any',
+            ':string :in("add", "substract") ?' => ':number'
         ]];
     }
 
@@ -26,7 +27,22 @@ class SetTransformer extends AbstractTransformer
      */
     protected function transform() : void
     {
-        VariableRegistry::set(Scope::WORLD, $this->getStepData()['varname'], $this->getStepData()['value']);
+        $value = $this->getStepData()['value'];
+        $keys = array_keys($this->getStepData());
+
+        if(isset($keys[2])) {
+            $valueToOperate = intval($this->getStepData()[$keys[2]]);
+            switch($keys[2]) {
+                case 'add':
+                    $value += $valueToOperate;
+                    break;
+                case 'substract':
+                    $value -= $valueToOperate;
+                    break;
+            }
+        }
+
+        VariableRegistry::set(Scope::WORLD, $this->getStepData()['varname'], $value);
     }
 
     /**
