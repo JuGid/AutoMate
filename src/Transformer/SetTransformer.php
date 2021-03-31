@@ -30,7 +30,7 @@ class SetTransformer extends AbstractTransformer
         $value = $this->getStepData()['value'];
         $keys = array_keys($this->getStepData());
 
-        if(isset($keys[2])) {
+        if (isset($keys[2])) {
             $valueToOperate = intval($this->getStepData()[$keys[2]]);
             switch($keys[2]) {
                 case 'add':

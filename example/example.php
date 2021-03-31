@@ -9,16 +9,7 @@ use Automate\Driver\DriverConfiguration;
 use Automate\Driver\Proxy\HttpProxy;
 use Facebook\WebDriver\Firefox\FirefoxProfile;
 
-/**
- * First you have to create your configuration file or replace
- * the path in config.yaml example with ABSOLUTE path (for reliability)
- * then write
- * 
- * $configFile = __DIR__.'/config/config.yaml';
- */
-$configFile = __DIR__.'/config/config-test.yaml';
-
-$autoMate = new AutoMate($configFile);
+$autoMate = new AutoMate(__DIR__.'/config/config-test.yaml');
 
 /**
  * This configuration part is optionnal and helps you to customize AutoMate
