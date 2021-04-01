@@ -2,7 +2,7 @@
 
 namespace Automate;
 
-class AutoMateEvents
+abstract class AutoMateEvents
 {
     public const RUNNER_SIMPLE_BEGIN = 'core:runner:simple:begin';
     public const RUNNER_SIMPLE_END = 'core:runner:simple:end';
