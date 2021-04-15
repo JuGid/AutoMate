@@ -2,7 +2,7 @@
 
 
 # AutoMate - Yaml automation library
-*Release 0.7.0 see the [Changelogs](CHANGELOG.md)*
+*Release 0.8.0 see the [Changelogs](CHANGELOG.md)*
 
 *You can get help on the [Wiki](https://github.com/JuGid/AutoMate/wiki)*
 
@@ -112,6 +112,8 @@ This is what AutoMate looks like :
 ![AutoMate Screenshot](.github/images/screen_automate.png)
 
 ## Support
+
+> If the website has a robot control, AutoMate cannot be used. If you find a trick, please send a PR.
 
 First, you can find help on the [Wiki](https://github.com/JuGid/AutoMate/wiki). Then if you don't find what you want, you can contact us.
 
