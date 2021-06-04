@@ -2,35 +2,21 @@
 <?php
 
 /**
- * Self made tests to make functionnal tests
+ * Self made tests to make functionnal tests for AutoMate
  * This can help to follow the basic behaviour of scenarios.
  * This is really basic and ugly but it reports what its needed
  */
 
 require __DIR__.'/../../vendor/autoload.php';
 
-use Automate\AutoMate;
 use Automate\Configuration\Configuration;
 use Automate\Console\Console;
-use Automate\Handler\ErrorHandler;
 use Symfony\Component\Yaml\Yaml;
+use Automate\Launcher\Launcher;
 
 $configFile = __DIR__.'/config/config.yaml';
-$results = [];
-$scenariosTest = [
-    'tables',
-    'alert',
-    'frame',
-    'delayed-element',
-    'slow-loading',
-    'form',
-    'general',
-    'real',
-    'set'
-];
+$reportFile = __DIR__ . '/reports/report_' . (new DateTime())->format('dmY_His') . '.txt';
 
-//Create AutoMate instance
-$autoMate = new AutoMate($configFile);
 
 //BEGIN PER CENT
 $scenarioFolder = Configuration::get('scenario.folder');
@@ -82,24 +68,17 @@ $messageCommands = sprintf(
 );
 // END OF PERCENT
 
-//BEGINNING TESTS
-foreach ($scenariosTest as $scenario) {
-    $results[$scenario] = $autoMate->run($scenario, false, true);
-}
-//END TESTS
-
-//BEGIN REPORT
-Console::report();
-Console::separator();
+$launcher = new Launcher($configFile);
+$launcher->add('tables')
+         ->add('alert')
+         ->add('frame')
+         ->add('delayed-element')
+         ->add('slow-loading')
+         ->add('form')
+         ->add('general')
+         ->add('real')
+         ->add('set');
+$launcher->run();
+$launcher->printReport();
 Console::writeln($messageCommands, $percent > 80 ? 'green' : 'red');
 Console::writeln(implode(',', $usedCommands));
-Console::separator();
-foreach ($results as $scenario=>$errorHandler) {
-    Console::writeln('For scenario '.$scenario);
-    if($errorHandler instanceof ErrorHandler) {
-        $errorHandler->printErrors();
-    } else {
-        echo 'General error returned. AutoMate returned : ', $errorHandler, "\n";
-    }
-}
-//END REPORT
