@@ -2,7 +2,7 @@
 
 
 # AutoMate - Yaml automation library
-*Release 0.8.0 see the [Changelogs](CHANGELOG.md)*
+*Release 0.9.0 see the [Changelogs](CHANGELOG.md)*
 
 *You can get help on the [Wiki](https://github.com/JuGid/AutoMate/wiki)*
 
