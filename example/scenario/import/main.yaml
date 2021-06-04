@@ -1,9 +1,0 @@
-browser: chrome
-variables:
-  name: 'bonjour'
-  cookie: 'nouveau'
-scenario:
-  steps:
-    - go: http://youtube.fr
-    - use: main.simple
-    - use: sub.simple

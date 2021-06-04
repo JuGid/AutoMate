@@ -1,7 +1,0 @@
-wikipedia:
-  search-bar:
-    id: search
-  search-icon:
-    id: search-icon
-  body:
-    css: body
