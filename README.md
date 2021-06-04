@@ -29,7 +29,7 @@ With AutoMate you can :
 - Have a step by step description written on console
 - Add your own commands and plugins thanks to the [event system](https://github.com/JuGid/AutoMate/wiki/Events)
 - Use your own business logic using the [logics](https://github.com/JuGid/AutoMate/wiki/Logics)
-- You can create test cases with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests) (under development)
+- You can create test cases with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests) (under development) or use the Launcher class for simple tests and reports.
 
 ## Getting started
 

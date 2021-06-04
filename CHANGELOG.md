@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **These are technical changelogs.**
 
+## [0.9.0] - 05/06/2021
+
+### Added
+
+- `Launcher` added to run tests with AutoMate.
+
 ## [0.8.0] - 01/04/2021
 
 ### Added
