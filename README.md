@@ -29,7 +29,7 @@ With AutoMate you can :
 - Have a step by step description written on console
 - Add your own commands and plugins thanks to the [event system](https://github.com/JuGid/AutoMate/wiki/Events)
 - Use your own business logic using the [logics](https://github.com/JuGid/AutoMate/wiki/Logics)
-- You can create test cases with [JuGid/AutoMate-tests](https://github.com/JuGid/AutoMate-tests) (under development) or use the Launcher class for simple tests and reports.
+- You can use the Launcher class for simple tests and reports.
 
 ## Getting started
 
@@ -65,11 +65,11 @@ To use AutoMate, you first need to :
 
 **:arrow_right: Create your yaml configuration file**
 
-Your configuration file should looks like [this](config/default-config.yaml). You MUST prefer using absolute path.
+Your configuration file should looks like [this](https://github.com/JuGid/AutoMate-demo/blob/master/config/your-config.yaml). You MUST prefer using absolute path.
 
 **:arrow_right: Create your scenario file with yaml**
 
-A scenario is a list of steps that have to be executed by AutoMate. You also can declare variables and the browser to use for this specific scenario. You can find an example [here](example/scenario)
+A scenario is a list of steps that have to be executed by AutoMate. You also can declare variables and the browser to use for this specific scenario. You can find an example [here](https://github.com/JuGid/AutoMate-demo/blob/master/scenarios)
 
 > Your scenario needs to be named `main.yaml` and saved in `scenario_folder/scenario_name/`
 
@@ -103,7 +103,7 @@ or in a shorter way :
 php bin/automate run -s scenario -c /../config.yaml [-b NAME] [-h] [-a HTTP_ADRESSE] [-t] [-m]
 ```
 
-You can also use the more php way as defined [in this example](https://github.com/JuGid/AutoMate/blob/master/example/example.php)
+You can also use the more php way as defined [in this example](https://github.com/JuGid/AutoMate-demo/blob/master/run.php)
 
 ## Visual
 
